@@ -1,1091 +1,813 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#020706">
-<meta name="description" content="METIZ PROJECT — печать и плоттерная резка под ваши задачи.">
-<title>METIZ PROJECT — Печатаем и режем под ваши задачи</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>METIZ PROJECT | Печать и резка</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* ================= BASE VARIABLES ================= */
+        :root {
+            --bg-color: #020706;
+            --tiffany: #4CD5D3;
+            --tiffany-glow: rgba(76, 213, 211, 0.4);
+            --tiffany-light: rgba(76, 213, 211, 0.1);
+            --text-main: #ffffff;
+            --text-muted: rgba(255, 255, 255, 0.6);
+            --glass-bg: rgba(255, 255, 255, 0.02);
+            --glass-border: rgba(76, 213, 211, 0.15);
+            --font-family: 'Montserrat', sans-serif;
+        }
 
-<style>
-:root{
-  --bg:#020706;
-  --bg-soft:#06100f;
-  --tiffany:#4CD5D3;
-  --white:#f4fbfa;
-  --muted:#8fa5a3;
-  --line:rgba(76,213,211,.16);
-  --glass:rgba(8,20,19,.58);
-  --glass-strong:rgba(8,20,19,.78);
-  --shadow:0 24px 80px rgba(0,0,0,.42);
-  --radius:28px;
-  --ease:cubic-bezier(.22,1,.36,1);
-}
+        /* ================= RESET & SETUP ================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: none !important; /* Custom cursor everywhere */
+        }
 
-*{box-sizing:border-box}
-html{
-  scroll-behavior:smooth;
-  background:var(--bg);
-}
-body{
-  margin:0;
-  min-width:0;
-  overflow-x:hidden;
-  color:var(--white);
-  background:
-    radial-gradient(circle at 50% -10%, rgba(76,213,211,.11), transparent 34rem),
-    radial-gradient(circle at 0% 55%, rgba(76,213,211,.055), transparent 28rem),
-    var(--bg);
-  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  -webkit-font-smoothing:antialiased;
-}
-a{color:inherit;text-decoration:none}
-button{font:inherit}
-::selection{background:var(--tiffany);color:#02100f}
+        @media (hover: none) and (pointer: coarse) {
+            * { cursor: auto !important; } /* Restore cursor on touch devices */
+        }
 
-/* ---------- INTRO ---------- */
-.intro{
-  position:fixed;
-  inset:0;
-  z-index:1000;
-  display:grid;
-  place-items:center;
-  background:#020706;
-  transition:opacity 1s var(--ease),visibility 1s;
-}
-.intro.is-done{
-  opacity:0;
-  visibility:hidden;
-  pointer-events:none;
-}
-.intro-logo{
-  width:min(62vw,560px);
-  height:auto;
-  opacity:0;
-  transform:scale(.86);
-  filter:drop-shadow(0 0 0 rgba(76,213,211,0));
-  animation:introLogo 1.5s var(--ease) .15s forwards;
-}
-.intro-ring{
-  position:absolute;
-  width:min(78vw,760px);
-  aspect-ratio:1;
-  border:1px solid rgba(76,213,211,.12);
-  border-radius:50%;
-  opacity:0;
-  animation:ringIn 1.6s var(--ease) .35s forwards;
-}
-.intro-caption{
-  position:absolute;
-  bottom:9vh;
-  color:rgba(244,251,250,.38);
-  font-size:10px;
-  letter-spacing:.35em;
-  text-transform:uppercase;
-  opacity:0;
-  animation:captionIn .9s var(--ease) 1.15s forwards;
-}
-@keyframes introLogo{
-  0%{opacity:0;transform:scale(.86);filter:drop-shadow(0 0 0 rgba(76,213,211,0))}
-  55%{opacity:1}
-  100%{opacity:1;transform:scale(1);filter:drop-shadow(0 0 32px rgba(76,213,211,.24))}
-}
-@keyframes ringIn{
-  from{opacity:0;transform:scale(.8)}
-  to{opacity:1;transform:scale(1)}
-}
-@keyframes captionIn{to{opacity:1}}
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-family);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            min-height: 100vh;
+        }
 
-/* ---------- AMBIENCE ---------- */
-#particleCanvas{
-  position:fixed;
-  inset:0;
-  z-index:0;
-  width:100%;
-  height:100%;
-  pointer-events:none;
-  opacity:.62;
-}
-.grid{
-  position:fixed;
-  inset:0;
-  z-index:0;
-  pointer-events:none;
-  opacity:.22;
-  background-image:
-    linear-gradient(rgba(76,213,211,.045) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(76,213,211,.045) 1px,transparent 1px);
-  background-size:72px 72px;
-  mask-image:radial-gradient(circle at center,black,transparent 82%);
-}
-.cursor-light{
-  position:fixed;
-  z-index:2;
-  width:340px;
-  height:340px;
-  border-radius:50%;
-  pointer-events:none;
-  background:radial-gradient(circle,rgba(76,213,211,.09),transparent 68%);
-  transform:translate(-50%,-50%);
-  mix-blend-mode:screen;
-}
-.orb{
-  position:absolute;
-  width:28rem;
-  height:28rem;
-  border-radius:50%;
-  background:radial-gradient(circle,rgba(76,213,211,.09),transparent 66%);
-  filter:blur(20px);
-  pointer-events:none;
-  animation:float 12s ease-in-out infinite;
-}
-.orb.one{top:8%;right:-13rem}
-.orb.two{top:58%;left:-15rem;animation-delay:-5s}
-@keyframes float{
-  0%,100%{transform:translate3d(0,0,0)}
-  50%{transform:translate3d(0,35px,0)}
-}
+        ::selection {
+            background: var(--tiffany);
+            color: var(--bg-color);
+        }
 
-main,header,footer{position:relative;z-index:3}
-.container{
-  width:min(1180px,calc(100% - 40px));
-  margin-inline:auto;
-}
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
 
-/* ---------- HEADER ---------- */
-.site-header{
-  position:fixed;
-  top:0;
-  left:0;
-  right:0;
-  z-index:50;
-  padding:18px 0;
-  transition:background .4s,backdrop-filter .4s,border-color .4s;
-}
-.site-header.scrolled{
-  background:rgba(2,7,6,.72);
-  backdrop-filter:blur(18px);
-  border-bottom:1px solid rgba(76,213,211,.08);
-}
-.header-inner{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:24px;
-}
-.header-logo{
-  display:block;
-  width:150px;
-  height:auto;
-  transition:transform .4s var(--ease),filter .4s;
-}
-.header-logo:hover{
-  transform:translateY(-2px);
-  filter:drop-shadow(0 0 15px rgba(76,213,211,.28));
-}
-.header-status{
-  display:flex;
-  align-items:center;
-  gap:9px;
-  color:rgba(244,251,250,.62);
-  font-size:10px;
-  font-weight:700;
-  letter-spacing:.22em;
-  text-transform:uppercase;
-}
-.status-dot{
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:var(--tiffany);
-  box-shadow:0 0 14px rgba(76,213,211,.8);
-  animation:pulse 2s ease-in-out infinite;
-}
-@keyframes pulse{50%{opacity:.35;box-shadow:0 0 5px rgba(76,213,211,.3)}}
+        /* ================= CUSTOM CURSOR ================= */
+        .cursor-light {
+            position: fixed;
+            top: 0; left: 0;
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, var(--tiffany-glow) 0%, transparent 60%);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            mix-blend-mode: screen;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            will-change: transform;
+        }
+        .cursor-dot {
+            position: fixed;
+            top: 0; left: 0;
+            width: 8px; height: 8px;
+            background: var(--tiffany);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 10000;
+            box-shadow: 0 0 10px var(--tiffany);
+            opacity: 0;
+            transition: opacity 0.3s ease, transform 0.1s ease-out;
+            will-change: transform;
+        }
+        @media (hover: none) {
+            .cursor-light, .cursor-dot { display: none !important; }
+        }
 
-/* ---------- HERO ---------- */
-.hero{
-  min-height:100svh;
-  display:flex;
-  align-items:center;
-  padding:140px 0 90px;
-}
-.hero-inner{max-width:900px}
-.eyebrow,.section-kicker{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  color:var(--tiffany);
-  font-size:11px;
-  font-weight:800;
-  letter-spacing:.25em;
-  text-transform:uppercase;
-}
-.eyebrow::before,.section-kicker::before{
-  content:"";
-  width:26px;
-  height:1px;
-  background:currentColor;
-  box-shadow:0 0 10px rgba(76,213,211,.6);
-}
-.hero h1{
-  margin:22px 0 0;
-  max-width:900px;
-  font-size:clamp(48px,8vw,106px);
-  line-height:.91;
-  letter-spacing:-.065em;
-  font-weight:800;
-}
-.hero h1 span{color:var(--tiffany)}
-.hero-sub{
-  margin:30px 0 0;
-  max-width:670px;
-  font-size:clamp(18px,2.1vw,23px);
-  line-height:1.55;
-  color:rgba(244,251,250,.66);
-}
-.hero-location{
-  margin-top:30px;
-  display:flex;
-  align-items:center;
-  gap:12px;
-  color:rgba(244,251,250,.52);
-  font-size:11px;
-  font-weight:800;
-  letter-spacing:.23em;
-}
-.hero-location::before{
-  content:"";
-  width:7px;height:7px;border-radius:50%;
-  background:var(--tiffany);
-  box-shadow:0 0 16px rgba(76,213,211,.8);
-}
-.actions{
-  display:flex;
-  flex-wrap:wrap;
-  gap:12px;
-  margin-top:38px;
-}
-.btn{
-  position:relative;
-  isolation:isolate;
-  min-height:52px;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:11px;
-  padding:0 20px;
-  border:1px solid rgba(76,213,211,.22);
-  border-radius:16px;
-  overflow:hidden;
-  background:linear-gradient(145deg,rgba(76,213,211,.13),rgba(255,255,255,.025));
-  box-shadow:0 10px 35px rgba(0,0,0,.25),inset 0 1px rgba(255,255,255,.08);
-  color:var(--white);
-  font-size:12px;
-  font-weight:800;
-  letter-spacing:.08em;
-  transition:transform .45s var(--ease),border-color .45s,box-shadow .45s,background .45s;
-}
-.btn::before{
-  content:"";
-  position:absolute;
-  z-index:-1;
-  inset:-80% -30%;
-  background:linear-gradient(105deg,transparent 38%,rgba(255,255,255,.23) 49%,transparent 60%);
-  transform:translateX(-65%) rotate(7deg);
-  transition:transform .75s var(--ease);
-}
-.btn:hover{
-  transform:translateY(-4px);
-  border-color:rgba(76,213,211,.55);
-  box-shadow:0 18px 48px rgba(0,0,0,.35),0 0 35px rgba(76,213,211,.10),inset 0 1px rgba(255,255,255,.1);
-}
-.btn:hover::before{transform:translateX(65%) rotate(7deg)}
-.btn.primary{
-  background:var(--tiffany);
-  color:#03100f;
-  border-color:var(--tiffany);
-  box-shadow:0 12px 40px rgba(76,213,211,.18);
-}
-.btn svg{width:18px;height:18px;flex:0 0 auto}
-.hero-meta{
-  margin-top:72px;
-  display:flex;
-  align-items:center;
-  gap:28px;
-  color:rgba(244,251,250,.35);
-  font-size:10px;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-}
-.hero-meta::after{
-  content:"";
-  height:1px;
-  flex:1;
-  max-width:250px;
-  background:linear-gradient(90deg,rgba(76,213,211,.25),transparent);
-}
+        /* ================= BACKGROUND PARTICLES ================= */
+        #particles-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
 
-/* ---------- REVEAL ---------- */
-.reveal{
-  opacity:0;
-  transform:translateY(34px) scale(.985);
-  filter:blur(7px);
-  transition:
-    opacity .9s var(--ease),
-    transform .9s var(--ease),
-    filter .9s var(--ease);
-}
-.reveal.visible{
-  opacity:1;
-  transform:none;
-  filter:none;
-}
-.stagger > *{
-  opacity:0;
-  transform:translateY(22px);
-  transition:opacity .75s var(--ease),transform .75s var(--ease);
-}
-.stagger.visible > *{opacity:1;transform:none}
-.stagger.visible > *:nth-child(1){transition-delay:.04s}
-.stagger.visible > *:nth-child(2){transition-delay:.10s}
-.stagger.visible > *:nth-child(3){transition-delay:.16s}
-.stagger.visible > *:nth-child(4){transition-delay:.22s}
-.stagger.visible > *:nth-child(5){transition-delay:.28s}
-.stagger.visible > *:nth-child(6){transition-delay:.34s}
-.stagger.visible > *:nth-child(7){transition-delay:.40s}
-.stagger.visible > *:nth-child(8){transition-delay:.46s}
+        /* ================= INTRO LOGO ================= */
+        .main-logo {
+            position: fixed;
+            top: 50vh; left: 50vw;
+            transform: translate(-50%, -50%) scale(1.1);
+            opacity: 0;
+            z-index: 1000;
+            width: clamp(240px, 40vw, 400px);
+            filter: drop-shadow(0 0 0px transparent);
+            /* Cinematic easing for intro */
+            transition: 
+                opacity 1.5s cubic-bezier(0.25, 1, 0.5, 1),
+                filter 1.5s ease-in-out,
+                top 1.8s cubic-bezier(0.76, 0, 0.24, 1),
+                transform 1.8s cubic-bezier(0.76, 0, 0.24, 1);
+            will-change: top, transform, opacity, filter;
+            pointer-events: none;
+        }
+        .main-logo.visible {
+            opacity: 1;
+            filter: drop-shadow(0 0 25px var(--tiffany-glow));
+        }
+        .main-logo.header-pos {
+            top: clamp(20px, 4vh, 40px);
+            transform: translate(-50%, 0) scale(0.6);
+            filter: drop-shadow(0 0 10px var(--tiffany-light));
+        }
+        
+        /* Mobile adjustment for logo placement */
+        @media (max-width: 768px) {
+            .main-logo.header-pos {
+                top: 15px;
+                transform: translate(-50%, 0) scale(0.5);
+            }
+        }
 
-/* ---------- MARQUEE ---------- */
-.marquee{
-  position:relative;
-  z-index:4;
-  overflow:hidden;
-  border-top:1px solid rgba(76,213,211,.10);
-  border-bottom:1px solid rgba(76,213,211,.10);
-  background:rgba(2,7,6,.54);
-  backdrop-filter:blur(10px);
-}
-.marquee-track{
-  width:max-content;
-  display:flex;
-  animation:marquee 30s linear infinite;
-}
-.marquee-group{
-  display:flex;
-  align-items:center;
-  gap:34px;
-  padding:17px 17px;
-}
-.marquee-item{
-  display:flex;
-  align-items:center;
-  gap:34px;
-  white-space:nowrap;
-  color:rgba(244,251,250,.57);
-  font-size:11px;
-  font-weight:800;
-  letter-spacing:.22em;
-}
-.marquee-item::after{
-  content:"";
-  width:5px;height:5px;border-radius:50%;
-  background:var(--tiffany);
-  box-shadow:0 0 12px rgba(76,213,211,.7);
-}
-@keyframes marquee{to{transform:translateX(-50%)}}
+        /* ================= MAIN CONTENT WRAPPER ================= */
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+            opacity: 0;
+            visibility: hidden;
+            padding-top: 180px; /* Space for fixed logo */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .content-wrapper.revealed {
+            visibility: visible;
+            animation: contentReveal 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+        @keyframes contentReveal {
+            0% { opacity: 0; transform: translateY(40px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
 
-/* ---------- SECTIONS ---------- */
-.section{
-  padding:150px 0;
-}
-.section-head{
-  display:grid;
-  grid-template-columns:1fr 1.15fr;
-  gap:60px;
-  align-items:end;
-  margin-bottom:58px;
-}
-.section h2{
-  margin:15px 0 0;
-  font-size:clamp(36px,5.2vw,70px);
-  line-height:.98;
-  letter-spacing:-.055em;
-}
-.section-lead{
-  max-width:560px;
-  margin:0 0 5px;
-  color:rgba(244,251,250,.52);
-  line-height:1.7;
-  font-size:16px;
-}
+        /* Container sizes */
+        .container {
+            width: 100%;
+            max-width: 1440px;
+            padding: 0 5%;
+            margin: 0 auto;
+        }
 
-/* ---------- CARDS ---------- */
-.cards{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:14px;
-}
-.card{
-  position:relative;
-  min-height:260px;
-  padding:28px;
-  overflow:hidden;
-  border:1px solid rgba(76,213,211,.11);
-  border-radius:var(--radius);
-  background:
-    radial-gradient(circle at var(--mx,50%) var(--my,20%),rgba(76,213,211,.10),transparent 36%),
-    linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.012));
-  box-shadow:var(--shadow),inset 0 1px rgba(255,255,255,.055);
-  backdrop-filter:blur(16px);
-  transform-style:preserve-3d;
-  transition:transform .18s ease,border-color .35s,box-shadow .35s;
-}
-.card::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(120deg,transparent 25%,rgba(255,255,255,.045) 50%,transparent 75%);
-  transform:translateX(-120%);
-  transition:transform .9s var(--ease);
-}
-.card:hover{
-  border-color:rgba(76,213,211,.34);
-  box-shadow:0 30px 90px rgba(0,0,0,.5),0 0 45px rgba(76,213,211,.06);
-}
-.card:hover::before{transform:translateX(120%)}
-.card-number{
-  position:absolute;
-  top:24px;right:25px;
-  color:rgba(76,213,211,.42);
-  font-size:10px;
-  letter-spacing:.18em;
-  font-weight:800;
-}
-.card-icon{
-  width:54px;height:54px;
-  display:grid;place-items:center;
-  margin-bottom:60px;
-  border:1px solid rgba(76,213,211,.18);
-  border-radius:16px;
-  color:var(--tiffany);
-  background:rgba(76,213,211,.045);
-  box-shadow:inset 0 1px rgba(255,255,255,.05),0 0 25px rgba(76,213,211,.05);
-}
-.card-icon svg{width:25px;height:25px}
-.card h3{
-  margin:0;
-  font-size:20px;
-  letter-spacing:-.025em;
-}
-.card p{
-  margin:10px 0 0;
-  color:rgba(244,251,250,.44);
-  font-size:13px;
-  line-height:1.6;
-}
+        /* ================= HERO SECTION ================= */
+        .hero {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        .hero-subtitle {
+            font-size: clamp(0.7rem, 2vw, 0.9rem);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease 0.2s;
+        }
+        .hero-title {
+            font-size: clamp(2.5rem, 6vw, 5.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            letter-spacing: -0.02em;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease 0.4s;
+        }
+        .hero-title .tiffany-text {
+            color: var(--tiffany);
+            text-shadow: 0 0 30px var(--tiffany-glow);
+            display: block;
+        }
+        .hero-desc {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            font-weight: 300;
+            line-height: 1.6;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 50px auto;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease 0.6s;
+        }
+        
+        .revealed .hero-subtitle,
+        .revealed .hero-title,
+        .revealed .hero-desc,
+        .revealed .buttons-grid {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-/* ---------- FEATURE BAND ---------- */
-.feature{
-  position:relative;
-  min-height:480px;
-  display:grid;
-  grid-template-columns:1.1fr .9fr;
-  gap:50px;
-  align-items:center;
-  padding:55px;
-  overflow:hidden;
-  border:1px solid rgba(76,213,211,.12);
-  border-radius:36px;
-  background:
-    radial-gradient(circle at 82% 50%,rgba(76,213,211,.13),transparent 32%),
-    linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.01));
-  box-shadow:0 35px 100px rgba(0,0,0,.42),inset 0 1px rgba(255,255,255,.06);
-}
-.feature::before{
-  content:"";
-  position:absolute;
-  width:360px;height:360px;
-  right:4%;top:50%;
-  transform:translateY(-50%);
-  border:1px solid rgba(76,213,211,.12);
-  border-radius:50%;
-  box-shadow:0 0 70px rgba(76,213,211,.06),inset 0 0 70px rgba(76,213,211,.035);
-}
-.feature::after{
-  content:"";
-  position:absolute;
-  width:510px;height:1px;
-  right:-4%;top:50%;
-  background:linear-gradient(90deg,transparent,rgba(76,213,211,.3),transparent);
-  transform:rotate(-24deg);
-}
-.feature-copy{position:relative;z-index:2}
-.feature h2{max-width:650px}
-.feature p{
-  max-width:620px;
-  color:rgba(244,251,250,.52);
-  line-height:1.7;
-}
-.specs{
-  position:relative;
-  z-index:2;
-  display:grid;
-  gap:10px;
-}
-.spec{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:20px;
-  padding:17px 18px;
-  border:1px solid rgba(76,213,211,.09);
-  border-radius:15px;
-  background:rgba(2,7,6,.48);
-  color:rgba(244,251,250,.55);
-  font-size:12px;
-}
-.spec strong{color:var(--white);font-size:13px}
+        /* ================= BUTTONS ================= */
+        .buttons-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            max-width: 900px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease 0.8s;
+        }
+        .btn {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 28px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: var(--text-main);
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        /* Shine effect */
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(76, 213, 211, 0.2), transparent);
+            transform: skewX(-20deg);
+            transition: 0.5s;
+        }
+        .btn:hover {
+            border-color: var(--tiffany);
+            box-shadow: 0 10px 30px -10px var(--tiffany-glow), inset 0 0 15px -5px var(--tiffany-glow);
+            transform: translateY(-3px);
+            color: #fff;
+        }
+        .btn:hover::before {
+            left: 150%;
+            transition: 0.7s;
+        }
+        .btn svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+            transition: fill 0.3s ease;
+        }
+        .btn:hover svg {
+            fill: var(--tiffany);
+            filter: drop-shadow(0 0 5px var(--tiffany));
+        }
+        
+        @media (max-width: 768px) {
+            .buttons-grid { flex-direction: column; width: 100%; padding: 0 10%; }
+            .btn { width: 100%; justify-content: center; padding: 18px 20px; }
+            .btn:hover { transform: none; /* Disable shift on mobile for stability */ }
+        }
 
-/* ---------- CONTACT ---------- */
-.contact{
-  text-align:center;
-  padding-bottom:120px;
-}
-.contact-box{
-  max-width:880px;
-  margin:auto;
-  padding:70px 35px;
-  border:1px solid rgba(76,213,211,.13);
-  border-radius:36px;
-  background:
-    radial-gradient(circle at 50% 0,rgba(76,213,211,.10),transparent 45%),
-    rgba(255,255,255,.025);
-  box-shadow:0 30px 100px rgba(0,0,0,.38),inset 0 1px rgba(255,255,255,.05);
-}
-.contact h2{margin-top:14px}
-.contact p{
-  max-width:590px;
-  margin:25px auto 0;
-  color:rgba(244,251,250,.48);
-  line-height:1.7;
-}
-.contact .actions{justify-content:center}
+        /* ================= MARQUEE ================= */
+        .marquee-section {
+            width: 100vw;
+            padding: 40px 0;
+            background: linear-gradient(90deg, transparent, rgba(76, 213, 211, 0.03), transparent);
+            border-top: 1px solid var(--glass-border);
+            border-bottom: 1px solid var(--glass-border);
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+            margin: 60px 0;
+        }
+        .marquee-container {
+            display: inline-block;
+            animation: marquee 25s linear infinite;
+        }
+        .marquee-content {
+            display: inline-flex;
+            align-items: center;
+        }
+        .marquee-item {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            color: transparent;
+            -webkit-text-stroke: 1px var(--text-muted);
+            margin: 0 30px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+        .marquee-item:hover {
+            -webkit-text-stroke: 1px var(--tiffany);
+            color: var(--tiffany);
+            text-shadow: 0 0 20px var(--tiffany-glow);
+        }
+        .marquee-dot {
+            width: 6px; height: 6px;
+            background: var(--tiffany);
+            border-radius: 50%;
+            margin: 0 15px;
+            box-shadow: 0 0 10px var(--tiffany);
+        }
+        @keyframes marquee {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-50%, 0, 0); } /* -50% because we duplicate content */
+        }
 
-/* ---------- FOOTER ---------- */
-footer{
-  padding:32px 0 38px;
-  border-top:1px solid rgba(76,213,211,.08);
-}
-.footer-inner{
-  display:flex;
-  align-items:flex-end;
-  justify-content:space-between;
-  gap:35px;
-}
-.footer-logo{width:165px;height:auto;display:block}
-.footer-right{text-align:right}
-.footer-name{
-  color:rgba(244,251,250,.62);
-  font-size:11px;
-  letter-spacing:.2em;
-  font-weight:800;
-}
-.footer-copy{
-  margin-top:8px;
-  color:rgba(244,251,250,.28);
-  font-size:10px;
-  letter-spacing:.12em;
-}
-.footer-online{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  margin-top:15px;
-  color:rgba(244,251,250,.45);
-  font-size:10px;
-  letter-spacing:.2em;
-}
-.footer-online .status-dot{width:5px;height:5px}
+        /* ================= CARDS SECTION ================= */
+        .cards-section {
+            padding: 60px 0 120px 0;
+            perspective: 1000px;
+        }
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        .card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 40px 30px;
+            position: relative;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transform-style: preserve-3d;
+            transition: border-color 0.4s, box-shadow 0.4s;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        /* Scroll reveal class */
+        .card.scrolled-in {
+            animation: cardReveal 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+        @keyframes cardReveal {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            border-radius: 20px;
+            background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(76, 213, 211, 0.08), transparent 40%);
+            opacity: 0;
+            transition: opacity 0.4s;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .card:hover::before { opacity: 1; }
+        .card:hover {
+            border-color: rgba(76, 213, 211, 0.4);
+            box-shadow: 0 15px 40px -10px rgba(0,0,0,0.5), inset 0 0 20px -10px var(--tiffany-glow);
+            z-index: 2;
+        }
+        
+        .card-icon {
+            width: 40px; height: 40px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            background: rgba(76, 213, 211, 0.1);
+            display: flex; align-items: center; justify-content: center;
+            border: 1px solid var(--tiffany-glow);
+            color: var(--tiffany);
+            transform: translateZ(30px); /* 3D depth */
+        }
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transform: translateZ(20px);
+        }
+        .card-line {
+            width: 30px; height: 2px;
+            background: var(--tiffany);
+            margin-bottom: 15px;
+            box-shadow: 0 0 8px var(--tiffany);
+            transition: width 0.3s ease;
+            transform: translateZ(15px);
+        }
+        .card:hover .card-line { width: 60px; }
 
-/* ---------- INTRO CONTENT ANIMATION ---------- */
-.page-content{
-  opacity:0;
-  transform:translateY(18px);
-  transition:opacity 1s var(--ease),transform 1s var(--ease);
-}
-body.ready .page-content{opacity:1;transform:none}
-body.ready .hero .eyebrow{animation:contentIn .8s var(--ease) .05s both}
-body.ready .hero h1{animation:contentIn 1s var(--ease) .15s both}
-body.ready .hero-sub{animation:contentIn .9s var(--ease) .27s both}
-body.ready .hero-location{animation:contentIn .9s var(--ease) .36s both}
-body.ready .actions{animation:contentIn .9s var(--ease) .45s both}
-body.ready .hero-meta{animation:contentIn .9s var(--ease) .62s both}
-@keyframes contentIn{
-  from{opacity:0;transform:translateY(24px);filter:blur(5px)}
-  to{opacity:1;transform:none;filter:none}
-}
+        @media (max-width: 768px) {
+            .cards-grid { grid-template-columns: 1fr; gap: 20px; }
+            .card { transform: none !important; /* Disable 3D tilt on mobile */ }
+        }
 
-/* ---------- RESPONSIVE ---------- */
-@media (max-width:900px){
-  .container{width:min(100% - 32px,700px)}
-  .section{padding:105px 0}
-  .section-head{grid-template-columns:1fr;gap:18px}
-  .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .feature{grid-template-columns:1fr;padding:38px}
-  .feature::before{right:-8rem;opacity:.7}
-  .specs{max-width:520px}
-}
-@media (max-width:620px){
-  .container{width:calc(100% - 24px)}
-  .site-header{padding:14px 0}
-  .header-logo{width:125px}
-  .header-status{font-size:9px;letter-spacing:.16em}
-  .hero{
-    min-height:100svh;
-    padding:125px 0 65px;
-  }
-  .hero h1{font-size:clamp(45px,13.5vw,70px)}
-  .hero-sub{font-size:16px;line-height:1.55;margin-top:24px}
-  .hero-location{margin-top:23px;font-size:9px}
-  .actions{display:grid;grid-template-columns:1fr;margin-top:30px}
-  .btn{width:100%;min-height:54px}
-  .hero-meta{margin-top:42px;font-size:8px;gap:16px}
-  .cards{grid-template-columns:1fr;gap:10px}
-  .card{min-height:220px;padding:24px}
-  .card-icon{margin-bottom:48px}
-  .feature{
-    min-height:0;
-    padding:28px 22px;
-    border-radius:26px;
-  }
-  .feature::before{width:260px;height:260px;right:-100px}
-  .section h2{font-size:clamp(35px,10.5vw,54px)}
-  .contact-box{padding:50px 20px;border-radius:26px}
-  .footer-inner{align-items:flex-start;flex-direction:column}
-  .footer-right{text-align:left}
-  .footer-logo{width:145px}
-  .cursor-light,.grid{display:none}
-}
-@media (pointer:coarse){
-  .cursor-light{display:none}
-}
-@media (prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  *,*::before,*::after{
-    animation-duration:.01ms!important;
-    animation-iteration-count:1!important;
-    transition-duration:.01ms!important;
-  }
-}
+        /* ================= FOOTER ================= */
+        footer {
+            border-top: 1px solid var(--glass-border);
+            padding: 40px 0;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            background: linear-gradient(0deg, #010403 0%, transparent 100%);
+        }
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        .footer-logo {
+            width: 150px;
+            opacity: 0.5;
+            filter: grayscale(100%);
+            transition: all 0.3s;
+        }
+        .footer-logo:hover {
+            opacity: 1;
+            filter: grayscale(0%) drop-shadow(0 0 10px var(--tiffany-glow));
+        }
+        .footer-text {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+        }
+        .online-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            color: var(--tiffany);
+            background: rgba(76, 213, 211, 0.05);
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+        }
+        .dot {
+            width: 8px; height: 8px;
+            background: var(--tiffany);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--tiffany);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(76, 213, 211, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(76, 213, 211, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(76, 213, 211, 0); }
+        }
 
-/* ---------- VERY SMALL PHONES ---------- */
-@media (max-width:360px){
-  .hero h1{font-size:43px}
-  .hero-meta{display:none}
-  .section{padding:82px 0}
-}
-</style>
+    </style>
 </head>
-
 <body>
-<div class="intro" id="intro" aria-hidden="true">
-  <div class="intro-ring"></div>
-  <img class="intro-logo" src="metiz-project-logo.png" alt="METIZ PROJECT">
-  <div class="intro-caption">печатаем и режем под ваши задачи</div>
-</div>
 
-<canvas id="particleCanvas"></canvas>
-<div class="grid"></div>
-<div class="cursor-light" id="cursorLight"></div>
-<div class="orb one"></div>
-<div class="orb two"></div>
+    <!-- CUSTOM CURSOR -->
+    <div class="cursor-light" id="cursor-light"></div>
+    <div class="cursor-dot" id="cursor-dot"></div>
 
-<header class="site-header" id="siteHeader">
-  <div class="container header-inner">
-    <a href="#top" aria-label="METIZ PROJECT — наверх">
-      <img class="header-logo" src="metiz-project-logo.png" alt="METIZ PROJECT">
-    </a>
-    <div class="header-status"><span class="status-dot"></span>ONLINE</div>
-  </div>
-</header>
+    <!-- PARTICLES BACKGROUND -->
+    <canvas id="particles-canvas"></canvas>
 
-<main class="page-content" id="top">
-  <section class="hero">
-    <div class="container">
-      <div class="hero-inner">
-        <div class="eyebrow">METIZ PROJECT</div>
-        <h1>ПЕЧАТАЕМ И РЕЖЕМ<br><span>ПОД ВАШИ ЗАДАЧИ</span></h1>
-        <p class="hero-sub">
-          Наклейки для автомобилей, бизнеса и рекламы.<br>
-          Плоттерная резка, печать на холсте, оформление витрин и стекла.
-        </p>
-        <div class="hero-location">САНКТ-ПЕТЕРБУРГ</div>
+    <!-- MAIN LOGO (Animates from center to top) -->
+    <img src="metiz-project-logo.png" alt="METIZ PROJECT" class="main-logo" id="main-logo">
 
-        <div class="actions">
-          <a class="btn primary" data-link="vk" href="#" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.1 17.4h1.35s.41-.05.62-.27c.19-.2.18-.57.18-.57s-.03-1.74.78-2c.8-.26 1.84 1.68 2.94 2.42.83.56 1.46.44 1.46.44l2.93-.04s1.53-.09.8-1.3c-.06-.1-.43-.9-2.2-2.55-1.85-1.72-1.6-1.44.63-4.42 1.36-1.82 1.9-2.94 1.73-3.42-.17-.45-1.23-.33-1.23-.33l-3.3.02s-.24-.03-.42.08c-.17.11-.28.36-.28.36s-.52 1.39-1.21 2.57c-1.47 2.5-2.06 2.63-2.3 2.47-.56-.36-.42-1.44-.42-2.2 0-2.4.36-3.4-.7-3.66-.35-.09-.61-.15-1.52-.16-1.16-.01-2.14 0-2.7.28-.37.18-.65.59-.48.61.21.03.7.13.96.48.34.47.33 1.54.33 1.54s.2 2.94-.46 3.3c-.45.24-1.06-.25-2.38-2.52-.67-1.16-1.18-2.44-1.18-2.44s-.1-.24-.27-.37c-.21-.16-.5-.21-.5-.21l-3.14.02s-.47.01-.64.22c-.15.19-.01.58-.01.58s2.46 5.75 5.25 8.64c2.56 2.65 5.46 2.47 5.46 2.47Z"/></svg>
-            Группа ВКонтакте
-          </a>
+    <!-- MAIN CONTENT -->
+    <div class="content-wrapper" id="content">
+        
+        <!-- HERO -->
+        <section class="hero container">
+            <div class="hero-subtitle">Санкт-Петербург</div>
+            <h1 class="hero-title">
+                Печатаем и режем<br>
+                <span class="tiffany-text">Под ваши задачи</span>
+            </h1>
+            <p class="hero-desc">
+                Наклейки для автомобилей, бизнеса и рекламы. Плоттерная резка, печать на холсте, оформление витрин и стекла.
+            </p>
 
-          <a class="btn" data-link="vk" href="#" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Zm4.7 12.16c-.22.31-.74.42-1.13.28-1.05-.38-2.42-1.47-3.36-2.55-.33-.38-.62-.76-.87-1.12-.16-.22-.24-.17-.24.08v2.68c0 .31-.08.5-.64.5H9.3c-.85 0-2.48-.84-3.76-2.58C3.72 10.12 3 7.76 3 7.76s-.07-.3.01-.45c.09-.16.34-.2.7-.2h1.14c.35 0 .48.16.61.47.52 1.2 1.19 2.28 2.02 3.2.34.38.51.34.51-.2V8.3c-.03-.66-.2-.72-.2-.72-.14-.22.1-.47.39-.47h2.19c.3 0 .4.14.4.48v3.06c0 .2.08.28.19.28.13 0 .27-.08.53-.34 1.02-1.15 1.76-2.92 1.76-2.92.09-.2.24-.56.67-.56h1.14c.43 0 .52.22.43.55-.17.8-1.8 3.07-1.8 3.07-.14.19-.12.34 0 .5.1.14.48.52.77.8.45.43.84.79 1.08 1.18.2.3.17.56.04.75Z"/></svg>
-            Написать ВКонтакте
-          </a>
+            <!-- BUTTONS -->
+            <div class="buttons-grid">
+                <a href="#" class="btn" data-link-key="vk">
+                    <svg viewBox="0 0 24 24"><path d="M15.07 2H8.93C3.33 2 2 3.33 2 8.93v6.14C2 20.67 3.33 22 8.93 22h6.14C20.67 22 22 20.67 22 15.07V8.93C22 3.33 20.67 2 15.07 2zm3.33 11.77l-1.39 1.48c-.46.49-.6.71-.6 1.13v.8c0 .89-.28 1.15-1.12 1.15H14c-2.47 0-4.88-1.55-6.22-4.14-1.63-3.08-2-4.81-2-5.46 0-.39.11-.6.54-.6h1.9c.47 0 .66.25.82.72.67 2.14 1.83 4.14 2.68 4.14.3 0 .44-.13.44-.81V9.43c-.04-1.14-.68-1.25-.68-1.66 0-.21.17-.44.48-.44h2.51c.38 0 .54.19.54.62v2.85c0 .54.23.66.41.66.33 0 .56-.23.94-.64 1-1.13 1.76-2.83 2.13-4.14.15-.46.36-.66.86-.66h1.97c.59 0 .73.3.62.74-.21.84-1.57 2.76-2.22 3.52-.39.46-.51.64 0 1.15l1.64 1.69c.55.53.85.86 1.05 1.34.19.46-.02.88-.63.88h-1.92c-.52 0-.82-.24-1.14-.58z"/></svg>
+                    Группа ВКонтакте
+                </a>
+                <a href="#" class="btn" data-link-key="vk_msg">
+                    <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    Написать ВКонтакте
+                </a>
+                <a href="#" class="btn" data-link-key="telegram">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.19-.08-.05-.19-.02-.27 0-.12.03-1.96 1.25-5.54 3.67-.52.36-.99.54-1.41.53-.46-.01-1.35-.26-2.01-.48-.81-.27-1.46-.42-1.4-.88.03-.24.34-.48.94-.74 3.69-1.61 6.16-2.67 7.4-3.18 3.52-1.46 4.25-1.72 4.73-1.73.11 0 .34.03.48.14.12.09.15.22.16.32-.01.07-.01.16-.02.24z"/></svg>
+                    Написать в Telegram
+                </a>
+                <a href="#" class="btn" data-link-key="whatsapp">
+                    <svg viewBox="0 0 24 24"><path d="M16.75 13.96c-.25-.13-1.5-.74-1.73-.82-.23-.08-.41-.13-.58.13-.18.25-.66.82-.81.99-.15.18-.3.2-.55.08-.25-.13-1.07-.39-2.04-1.26-.75-.68-1.26-1.52-1.41-1.77-.15-.25-.02-.39.11-.51.11-.11.25-.3.38-.45.13-.15.17-.25.25-.42.08-.17.04-.32-.02-.45-.06-.13-.58-1.4-.8-1.91-.21-.5-.42-.43-.58-.44h-.5c-.17 0-.46.06-.7.32-.24.26-.92.9-.92 2.19s.94 2.54 1.07 2.71c.13.18 1.85 2.82 4.48 3.95.63.27 1.12.43 1.5.55.63.2 1.2.17 1.65.1.5-.08 1.5-.61 1.71-1.2.21-.59.21-1.1.15-1.2-.06-.09-.23-.15-.48-.28zM12.01 2.01c-5.51 0-9.99 4.48-9.99 9.99 0 1.76.46 3.48 1.34 4.99L2 22l5.16-1.35c1.47.8 3.14 1.22 4.85 1.22 5.51 0 9.99-4.48 9.99-9.99 0-5.51-4.48-9.99-9.99-9.99zm0 18.27c-1.49 0-2.95-.4-4.23-1.16l-.3-.18-3.14.82.83-3.06-.2-.32c-.83-1.33-1.27-2.87-1.27-4.46 0-4.57 3.72-8.29 8.31-8.29 4.58 0 8.31 3.72 8.31 8.29 0 4.57-3.73 8.29-8.31 8.29z"/></svg>
+                    Написать в WhatsApp
+                </a>
+                <a href="#" class="btn" data-link-key="test">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                    Тестовая кнопка
+                </a>
+                <a href="#" class="btn" data-link-key="pickup">
+                    <svg viewBox="0 0 24 24"><path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z"/></svg>
+                    Самовывоз
+                </a>
+            </div>
+        </section>
 
-          <a class="btn" data-link="telegram" href="#" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21.7 4.4 18.6 19c-.24 1.03-.84 1.29-1.7.8l-4.7-3.47-2.27 2.18c-.25.25-.46.46-.94.46l.34-4.8 8.73-7.89c.38-.34-.08-.53-.59-.19L6.67 12.84 2.04 11.39c-1.01-.31-1.03-1.01.21-1.5L20.36 2.9c.84-.31 1.57.19 1.34 1.5Z"/></svg>
-            Написать в Telegram
-          </a>
+        <!-- MARQUEE -->
+        <section class="marquee-section">
+            <div class="marquee-container" id="marquee">
+                <!-- Content injected via JS for infinite loop -->
+            </div>
+        </section>
 
-          <a class="btn" data-link="whatsapp" href="#" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.52 3.48A11.85 11.85 0 0 0 12.07 0C5.52 0 .2 5.32.2 11.87c0 2.09.55 4.13 1.59 5.93L.1 24l6.34-1.66a11.86 11.86 0 0 0 5.63 1.43h.01c6.55 0 11.87-5.32 11.87-11.87 0-3.17-1.23-6.15-3.43-8.42Zm-8.45 18.26h-.01a9.83 9.83 0 0 1-5.01-1.37l-.36-.21-3.76.99 1-3.66-.23-.38a9.82 9.82 0 0 1-1.51-5.24c0-5.43 4.42-9.85 9.86-9.85a9.8 9.8 0 0 1 6.97 2.89 9.81 9.81 0 0 1 2.89 6.98c0 5.44-4.42 9.85-9.84 9.85Zm5.4-7.38c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.46-.89-.79-1.49-1.76-1.67-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.1 3.2 5.09 4.49.71.31 1.26.5 1.69.64.71.23 1.36.2 1.87.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35Z"/></svg>
-            Написать в WhatsApp
-          </a>
+        <!-- CARDS -->
+        <section class="cards-section container">
+            <div class="cards-grid">
+                <!-- Card 1 -->
+                <div class="card reveal-elem">
+                    <div class="card-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 10h14l-2 10H7L5 10zM12 10V4m-4 0h8"/></svg>
+                    </div>
+                    <div class="card-title">Наклейки на авто</div>
+                    <div class="card-line"></div>
+                    <p class="hero-desc" style="font-size: 0.9rem; margin:0; text-align: left; max-width: 100%;">
+                        Премиальные материалы, устойчивые к мойкам и погоде. От малых логотипов до полной оклейки.
+                    </p>
+                </div>
+                <!-- Card 2 -->
+                <div class="card reveal-elem">
+                    <div class="card-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/></svg>
+                    </div>
+                    <div class="card-title">Реклама на стекле</div>
+                    <div class="card-line"></div>
+                    <p class="hero-desc" style="font-size: 0.9rem; margin:0; text-align: left; max-width: 100%;">
+                        Перфорированная пленка, аппликации и витражи. Привлекайте внимание прохожих 24/7.
+                    </p>
+                </div>
+                <!-- Card 3 -->
+                <div class="card reveal-elem">
+                    <div class="card-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3zM12 8v8m-4-4h8"/></svg>
+                    </div>
+                    <div class="card-title">Оформление витрин</div>
+                    <div class="card-line"></div>
+                    <p class="hero-desc" style="font-size: 0.9rem; margin:0; text-align: left; max-width: 100%;">
+                        Комплексное брендирование торговых точек. Сезонные акции и постоянное оформление.
+                    </p>
+                </div>
+                <!-- Card 4 -->
+                <div class="card reveal-elem">
+                    <div class="card-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                    </div>
+                    <div class="card-title">Плоттерная резка</div>
+                    <div class="card-line"></div>
+                    <p class="hero-desc" style="font-size: 0.9rem; margin:0; text-align: left; max-width: 100%;">
+                        Высокоточная контурная резка пленки любого цвета. Создание сложных логотипов и текстов.
+                    </p>
+                </div>
+                <!-- Card 5 -->
+                <div class="card reveal-elem">
+                    <div class="card-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                    </div>
+                    <div class="card-title">Печать на холсте</div>
+                    <div class="card-line"></div>
+                    <p class="hero-desc" style="font-size: 0.9rem; margin:0; text-align: left; max-width: 100%;">
+                        Интерьерная печать высокого разрешения. Галерейная натяжка на подрамник.
+                    </p>
+                </div>
+                <!-- Card 6 -->
+                <div class="card reveal-elem">
+                    <div class="card-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                    <div class="card-title">Изготовление под задачу</div>
+                    <div class="card-line"></div>
+                    <p class="hero-desc" style="font-size: 0.9rem; margin:0; text-align: left; max-width: 100%;">
+                        Уникальные решения для вашего бизнеса. От идеи до полного воплощения в материале.
+                    </p>
+                </div>
+            </div>
+        </section>
 
-          <a class="btn" data-link="test" href="#" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.7" d="M4 7.5 12 3l8 4.5v9L12 21l-8-4.5v-9Z"/><path fill="none" stroke="currentColor" stroke-width="1.7" d="m4 7.5 8 4.6 8-4.6M12 12.1V21"/></svg>
-            ТЕСТОВАЯ КНОПКА
-          </a>
-
-          <a class="btn" data-link="pickup" href="#" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.7" d="M3.5 7.5h11v9h-11zM14.5 10h3l3 3v3.5h-6z"/><circle cx="7" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg>
-            САМОВЫВОЗ
-          </a>
-        </div>
-
-        <div class="hero-meta">наклейки · стекло · витрины · печать · резка</div>
-      </div>
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-content container">
+                <img src="metiz-project-logo.png" alt="METIZ PROJECT" class="footer-logo">
+                <div class="online-indicator">
+                    <div class="dot"></div>
+                    ONLINE
+                </div>
+                <div class="footer-text">
+                    &copy; METIZ PROJECT 2010&ndash;2026<br>
+                    ALEXANDER METIZ
+                </div>
+            </div>
+        </footer>
     </div>
-  </section>
 
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee-track">
-      <div class="marquee-group">
-        <div class="marquee-item">НАКЛЕЙКИ НА АВТО</div>
-        <div class="marquee-item">РЕКЛАМА НА СТЕКЛЕ</div>
-        <div class="marquee-item">ВИТРИНЫ</div>
-        <div class="marquee-item">ПЛОТТЕРНАЯ РЕЗКА</div>
-        <div class="marquee-item">ПЕЧАТЬ НА ХОЛСТЕ</div>
-        <div class="marquee-item">ВАШИ ИДЕИ</div>
-        <div class="marquee-item">АВТОМОБИЛИ</div>
-      </div>
-      <div class="marquee-group">
-        <div class="marquee-item">НАКЛЕЙКИ НА АВТО</div>
-        <div class="marquee-item">РЕКЛАМА НА СТЕКЛЕ</div>
-        <div class="marquee-item">ВИТРИНЫ</div>
-        <div class="marquee-item">ПЛОТТЕРНАЯ РЕЗКА</div>
-        <div class="marquee-item">ПЕЧАТЬ НА ХОЛСТЕ</div>
-        <div class="marquee-item">ВАШИ ИДЕИ</div>
-        <div class="marquee-item">АВТОМОБИЛИ</div>
-      </div>
-    </div>
-  </div>
+    <!-- SCRIPTS -->
+    <script>
+        // ================= CONFIGURATION =================
+        const LINKS = {
+            vk: "https://vk.ru/metiz_project",
+            vk_msg: "https://vk.me/metiz_project", // Or adjust as needed
+            telegram: "https://t.me/your_telegram_link", // ЗАМЕНИТЕ НА ВАШУ
+            whatsapp: "https://wa.me/79650050990",
+            test: "https://example.com/test", // ТЕСТОВАЯ ССЫЛКА
+            pickup: "https://yandex.ru/maps/-/pickup_link" // ССЫЛКА НА КАРТУ/САМОВЫВОЗ
+        };
 
-  <section class="section">
-    <div class="container">
-      <div class="section-head reveal">
-        <div>
-          <div class="section-kicker">Направления</div>
-          <h2>Делаем под<br><span style="color:var(--tiffany)">задачу.</span></h2>
-        </div>
-        <p class="section-lead">
-          От одной детали до полноценного оформления. Сочетаем точную резку,
-          качественную печать и аккуратную подачу результата.
-        </p>
-      </div>
+        const MARQUEE_TEXTS = [
+            "НАКЛЕЙКИ НА АВТО", "РЕКЛАМА НА СТЕКЛЕ", "ВИТРИНЫ",
+            "ПЛОТТЕРНАЯ РЕЗКА", "ПЕЧАТЬ НА ХОЛСТЕ", "ВАШИ ИДЕИ", "АВТОМОБИЛИ"
+        ];
 
-      <div class="cards stagger reveal" id="serviceCards">
-        <article class="card tilt">
-          <span class="card-number">01</span>
-          <div class="card-icon"><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M3 7h18v10H3z"/><path fill="none" stroke="currentColor" stroke-width="1.6" d="m7 17 2.5-4 2 2 2.5-3 3 5"/></svg></div>
-          <h3>Наклейки на автомобили</h3>
-          <p>Графика, надписи, элементы брендинга и акценты для кузова.</p>
-        </article>
+        // ================= UTILS & STATE =================
+        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        
+        // Setup Links
+        document.querySelectorAll('.btn[data-link-key]').forEach(btn => {
+            const key = btn.getAttribute('data-link-key');
+            if(LINKS[key]) {
+                btn.href = LINKS[key];
+                btn.target = "_blank"; // Open in new tab
+            }
+        });
 
-        <article class="card tilt">
-          <span class="card-number">02</span>
-          <div class="card-icon"><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M4 4h16v16H4z"/><path fill="none" stroke="currentColor" stroke-width="1.6" d="M8 8h8v8H8z"/></svg></div>
-          <h3>Реклама на стекле</h3>
-          <p>Наклейки и графика для стеклянных поверхностей и интерьеров.</p>
-        </article>
+        // Generate Marquee Content
+        const marqueeContainer = document.getElementById('marquee');
+        const createMarqueeContent = () => {
+            let html = '<div class="marquee-content">';
+            MARQUEE_TEXTS.forEach(text => {
+                html += `<span class="marquee-item">${text}</span><div class="marquee-dot"></div>`;
+            });
+            html += '</div>';
+            return html;
+        };
+        // Duplicate content for infinite seamless scroll
+        marqueeContainer.innerHTML = createMarqueeContent() + createMarqueeContent() + createMarqueeContent();
 
-        <article class="card tilt">
-          <span class="card-number">03</span>
-          <div class="card-icon"><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M3 6h18v13H3z"/><path fill="none" stroke="currentColor" stroke-width="1.6" d="M6 9h12M6 12h8"/></svg></div>
-          <h3>Оформление витрин</h3>
-          <p>Чистая рекламная графика, которая работает на расстоянии и вблизи.</p>
-        </article>
+        // ================= INTRO ANIMATION =================
+        window.addEventListener('load', () => {
+            const logo = document.getElementById('main-logo');
+            const content = document.getElementById('content');
+            
+            // Phase 1: Appear in center
+            setTimeout(() => {
+                logo.classList.add('visible');
+            }, 100);
 
-        <article class="card tilt">
-          <span class="card-number">04</span>
-          <div class="card-icon"><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M4 5h16v14H4z"/><path fill="none" stroke="currentColor" stroke-width="1.6" d="m7 15 3-4 2 2 2-3 3 5"/></svg></div>
-          <h3>Плоттерная резка</h3>
-          <p>Точная контурная резка для букв, логотипов, форм и сложной графики.</p>
-        </article>
+            // Phase 2: Move up and reveal content
+            setTimeout(() => {
+                logo.classList.add('header-pos');
+                setTimeout(() => {
+                    content.classList.add('revealed');
+                }, 600); // Wait for logo to start moving
+            }, 1800); // Pause in center
+        });
 
-        <article class="card tilt">
-          <span class="card-number">05</span>
-          <div class="card-icon"><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M5 5h14v14H5z"/><path fill="none" stroke="currentColor" stroke-width="1.6" d="M8 16V8h8v8z"/></svg></div>
-          <h3>Печать на холсте</h3>
-          <p>Изображения и визуальные решения для пространства, бизнеса и дома.</p>
-        </article>
+        // ================= CUSTOM CURSOR =================
+        if (!isTouchDevice) {
+            const cursorLight = document.getElementById('cursor-light');
+            const cursorDot = document.getElementById('cursor-dot');
+            let mouseX = window.innerWidth / 2;
+            let mouseY = window.innerHeight / 2;
 
-        <article class="card tilt">
-          <span class="card-number">06</span>
-          <div class="card-icon"><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M4 7.5 12 3l8 4.5v9L12 21l-8-4.5z"/><path fill="none" stroke="currentColor" stroke-width="1.6" d="M8 10.5h8M8 13.5h5"/></svg></div>
-          <h3>Наклейки для бизнеса</h3>
-          <p>Фирменные элементы, маркировка и рекламные материалы в одном стиле.</p>
-        </article>
+            // Track mouse
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                cursorLight.style.opacity = '1';
+                cursorDot.style.opacity = '1';
+            });
+            document.addEventListener('mouseleave', () => {
+                cursorLight.style.opacity = '0';
+                cursorDot.style.opacity = '0';
+            });
 
-        <article class="card tilt">
-          <span class="card-number">07</span>
-          <div class="card-icon"><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M4 5h16v14H4z"/><path fill="none" stroke="currentColor" stroke-width="1.6" d="M7 16V8l10 8V8"/></svg></div>
-          <h3>Рекламная продукция</h3>
-          <p>Визуальные носители, которые помогают бренду быть заметнее.</p>
-        </article>
+            // Smooth render loop for cursor
+            const renderCursor = () => {
+                cursorLight.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+                cursorDot.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+                requestAnimationFrame(renderCursor);
+            };
+            requestAnimationFrame(renderCursor);
+        }
 
-        <article class="card tilt">
-          <span class="card-number">08</span>
-          <div class="card-icon"><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M4 12h16M12 4v16"/><circle cx="12" cy="12" r="8"/></svg></div>
-          <h3>Изготовление под задачу</h3>
-          <p>Если готового формата нет — собираем решение под конкретную идею.</p>
-        </article>
-      </div>
-    </div>
-  </section>
+        // ================= PARTICLES BACKGROUND =================
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let numParticles = isTouchDevice ? 30 : 80;
 
-  <section class="section">
-    <div class="container">
-      <div class="feature reveal">
-        <div class="feature-copy">
-          <div class="section-kicker">METIZ PROJECT</div>
-          <h2>Не просто печать.<br><span style="color:var(--tiffany)">Точное попадание</span> в идею.</h2>
-          <p>
-            Материал, размер, форма и визуальная подача подбираются под конкретную
-            поверхность и задачу. Минимализм снаружи — внимание к деталям внутри.
-          </p>
-        </div>
-        <div class="specs stagger">
-          <div class="spec"><span>Формат</span><strong>под задачу</strong></div>
-          <div class="spec"><span>Резка</span><strong>контурная</strong></div>
-          <div class="spec"><span>Поверхности</span><strong>авто · стекло · витрины</strong></div>
-          <div class="spec"><span>Производство</span><strong>Санкт-Петербург</strong></div>
-        </div>
-      </div>
-    </div>
-  </section>
+        const resizeCanvas = () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        };
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
 
-  <section class="section contact">
-    <div class="container">
-      <div class="contact-box reveal">
-        <div class="section-kicker">Связь</div>
-        <h2>Есть задача?<br><span style="color:var(--tiffany)">Сделаем.</span></h2>
-        <p>Выберите удобный способ связи или используйте отдельную тестовую ссылку.</p>
-        <div class="actions">
-          <a class="btn primary" data-link="telegram" href="#" target="_blank" rel="noopener">Написать в Telegram</a>
-          <a class="btn" data-link="whatsapp" href="#" target="_blank" rel="noopener">Написать в WhatsApp</a>
-          <a class="btn" data-link="vk" href="#" target="_blank" rel="noopener">Написать ВКонтакте</a>
-        </div>
-      </div>
-    </div>
-  </section>
-</main>
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 0.3;
+                this.vy = (Math.random() - 0.5) * 0.3;
+                this.radius = Math.random() * 1.5 + 0.5;
+                this.alpha = Math.random() * 0.5 + 0.1;
+                this.baseAlpha = this.alpha;
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                
+                // Wrap around edges
+                if (this.x < 0) this.x = canvas.width;
+                if (this.x > canvas.width) this.x = 0;
+                if (this.y < 0) this.y = canvas.height;
+                if (this.y > canvas.height) this.y = 0;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(76, 213, 211, ${this.alpha})`;
+                ctx.fill();
+            }
+        }
 
-<footer>
-  <div class="container footer-inner">
-    <img class="footer-logo" src="metiz-project-logo.png" alt="METIZ PROJECT">
-    <div class="footer-right">
-      <div class="footer-name">ALEXANDER METIZ</div>
-      <div class="footer-copy">© METIZ PROJECT 2010–2026</div>
-      <div class="footer-online"><span class="status-dot"></span>ONLINE</div>
-    </div>
-  </div>
-</footer>
+        for (let i = 0; i < numParticles; i++) {
+            particles.push(new Particle());
+        }
 
-<script>
-/* =========================================================
-   ССЫЛКИ — МЕНЯТЬ ТОЛЬКО ЗДЕСЬ
-   ========================================================= */
-const LINKS = {
-  vk: "https://vk.ru/metiz_project",
-  telegram: "https://t.me/",
-  whatsapp: "https://wa.me/79650050990",
-  test: "https://example.com/",
-  pickup: "https://example.com/"
-};
+        const animateParticles = () => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        };
+        requestAnimationFrame(animateParticles);
 
-/* Применяем ссылки ко всем кнопкам автоматически */
-document.querySelectorAll("[data-link]").forEach((el) => {
-  const key = el.dataset.link;
-  if (LINKS[key]) el.href = LINKS[key];
-});
+        // ================= 3D CARDS & INTERACTION =================
+        const cards = document.querySelectorAll('.card');
+        
+        if (!isTouchDevice) {
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    // Mouse coordinates for background radial gradient
+                    card.style.setProperty('--mouse-x', `${x}px`);
+                    card.style.setProperty('--mouse-y', `${y}px`);
+                    
+                    // 3D Tilt calculations
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = ((y - centerY) / centerY) * -8; // Max 8 deg
+                    const rotateY = ((x - centerX) / centerX) * 8;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+                });
+            });
+        }
 
-/* ---------- PREMIUM INTRO ---------- */
-const intro = document.getElementById("intro");
-const startSite = () => {
-  document.body.classList.add("ready");
-  setTimeout(() => intro.classList.add("is-done"), 2300);
-};
-window.addEventListener("load", () => setTimeout(startSite, 1500));
+        // ================= SCROLL REVEAL (Intersection Observer) =================
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
 
-/* ---------- HEADER ---------- */
-const header = document.getElementById("siteHeader");
-const onScroll = () => header.classList.toggle("scrolled", window.scrollY > 30);
-window.addEventListener("scroll", onScroll, {passive:true});
-onScroll();
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('scrolled-in');
+                    observer.unobserve(entry.target); // Reveal only once
+                }
+            });
+        }, observerOptions);
 
-/* ---------- SCROLL REVEAL ---------- */
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("visible");
-      revealObserver.unobserve(entry.target);
-    }
-  });
-}, {threshold:.12, rootMargin:"0px 0px -40px 0px"});
+        document.querySelectorAll('.reveal-elem').forEach((elem, index) => {
+            // Add a slight staggered delay based on index
+            elem.style.animationDelay = `${index * 0.1}s`;
+            observer.observe(elem);
+        });
 
-document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
-
-/* ---------- MOUSE LIGHT ---------- */
-const cursorLight = document.getElementById("cursorLight");
-const finePointer = matchMedia("(pointer:fine)").matches;
-
-if (finePointer) {
-  let cx = innerWidth / 2, cy = innerHeight / 2;
-  let tx = cx, ty = cy;
-
-  window.addEventListener("pointermove", e => {
-    tx = e.clientX;
-    ty = e.clientY;
-  }, {passive:true});
-
-  const moveLight = () => {
-    cx += (tx - cx) * .085;
-    cy += (ty - cy) * .085;
-    cursorLight.style.left = cx + "px";
-    cursorLight.style.top = cy + "px";
-    requestAnimationFrame(moveLight);
-  };
-  moveLight();
-}
-
-/* ---------- CARD 3D TILT ---------- */
-if (finePointer) {
-  document.querySelectorAll(".tilt").forEach(card => {
-    card.addEventListener("pointermove", e => {
-      const r = card.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width;
-      const y = (e.clientY - r.top) / r.height;
-      const rx = (0.5 - y) * 5;
-      const ry = (x - 0.5) * 5;
-
-      card.style.setProperty("--mx", `${x * 100}%`);
-      card.style.setProperty("--my", `${y * 100}%`);
-      card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(3px)`;
-    });
-    card.addEventListener("pointerleave", () => {
-      card.style.transform = "";
-    });
-  });
-}
-
-/* ---------- PARTICLES ---------- */
-const canvas = document.getElementById("particleCanvas");
-const ctx = canvas.getContext("2d", {alpha:true});
-const reduced = matchMedia("(prefers-reduced-motion:reduce)").matches;
-const touch = matchMedia("(pointer:coarse)").matches;
-let particles = [];
-let mouse = {x:-9999,y:-9999};
-
-function resizeCanvas(){
-  const dpr = Math.min(devicePixelRatio || 1, 1.7);
-  canvas.width = innerWidth * dpr;
-  canvas.height = innerHeight * dpr;
-  canvas.style.width = innerWidth + "px";
-  canvas.style.height = innerHeight + "px";
-  ctx.setTransform(dpr,0,0,dpr,0,0);
-}
-resizeCanvas();
-addEventListener("resize", resizeCanvas);
-
-if (finePointer) {
-  addEventListener("pointermove", e => {
-    mouse.x = e.clientX;
-    mouse.y = e.clientY;
-  }, {passive:true});
-  addEventListener("pointerleave", () => {
-    mouse.x = mouse.y = -9999;
-  });
-}
-
-function createParticles(){
-  const count = reduced ? 0 : (touch ? 28 : Math.min(62, Math.floor(innerWidth / 23)));
-  particles = Array.from({length:count}, () => ({
-    x:Math.random()*innerWidth,
-    y:Math.random()*innerHeight,
-    r:Math.random()*1.35+.25,
-    vx:(Math.random()-.5)*.12,
-    vy:(Math.random()-.5)*.12,
-    a:Math.random()*.5+.12,
-    phase:Math.random()*Math.PI*2
-  }));
-}
-createParticles();
-
-let last = 0;
-function drawParticles(time){
-  const dt = Math.min(32, time-last || 16);
-  last = time;
-  ctx.clearRect(0,0,innerWidth,innerHeight);
-
-  for(const p of particles){
-    p.x += p.vx * dt;
-    p.y += p.vy * dt;
-    p.phase += .006 * dt;
-
-    if(p.x < -20) p.x = innerWidth + 20;
-    if(p.x > innerWidth + 20) p.x = -20;
-    if(p.y < -20) p.y = innerHeight + 20;
-    if(p.y > innerHeight + 20) p.y = -20;
-
-    let alpha = p.a + Math.sin(p.phase) * .08;
-
-    if(finePointer){
-      const dx = p.x - mouse.x;
-      const dy = p.y - mouse.y;
-      const dist = Math.hypot(dx,dy);
-      if(dist < 150){
-        p.x += dx / Math.max(dist,1) * .12;
-        p.y += dy / Math.max(dist,1) * .12;
-        alpha += (1-dist/150)*.25;
-      }
-    }
-
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fillStyle = `rgba(76,213,211,${Math.max(0,Math.min(.9,alpha))})`;
-    ctx.fill();
-  }
-  requestAnimationFrame(drawParticles);
-}
-if(!reduced) requestAnimationFrame(drawParticles);
-
-/* ---------- STAGGER GROUPS INSIDE FEATURE ---------- */
-const groupObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting){
-      entry.target.classList.add("visible");
-      groupObserver.unobserve(entry.target);
-    }
-  });
-},{threshold:.15});
-
-document.querySelectorAll(".stagger").forEach(el => groupObserver.observe(el));
-
-/* ---------- SAFETY: NO HORIZONTAL OVERFLOW ---------- */
-document.documentElement.style.overflowX = "hidden";
-document.body.style.overflowX = "hidden";
-</script>
+    </script>
 </body>
 </html>
