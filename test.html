@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>METIZ PROJECT — Тестовая страница</title>
+<meta name="description" content="Тестовая страница METIZ PROJECT.">
+<style>
+:root {
+    --tiffany: #4cd5d3;
+    --background: #050707;
+    --background-2: #0b0f0e;
+    --text: #ffffff;
+    --muted: #9ca7a4;
+    --button-dark: rgba(255,255,255,0.06);
+    --border: rgba(255,255,255,0.12);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at 50% 35%, rgba(67,218,193,0.12), transparent 32%),
+        linear-gradient(145deg, var(--background), var(--background-2));
+    color: var(--text);
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
+}
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.22;
+    background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 55px 55px;
+    mask-image: linear-gradient(to bottom, black, transparent 90%);
+    z-index: -3;
+}
+.glow {
+    position: fixed;
+    width: 420px;
+    height: 420px;
+    left: 50%;
+    top: 35%;
+    transform: translate(-50%, -50%);
+    background: var(--tiffany);
+    filter: blur(180px);
+    opacity: 0.07;
+    pointer-events: none;
+    animation: glowMove 8s ease-in-out infinite alternate;
+    z-index: -2;
+}
+@keyframes glowMove {
+    from { transform: translate(-50%, -50%) scale(0.9); }
+    to { transform: translate(-48%, -53%) scale(1.15); }
+}
+.card {
+    width: min(520px, calc(100% - 28px));
+    min-height: 100vh;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 35px 0;
+}
+.logo {
+    width: min(270px, 70vw);
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 0 18px rgba(67,218,193,0.12));
+}
+.line {
+    width: 45px;
+    height: 2px;
+    margin: 25px 0 20px;
+    background: var(--tiffany);
+    box-shadow: 0 0 14px rgba(67,218,193,.5);
+}
+.title {
+    font-size: clamp(25px, 7vw, 38px);
+    line-height: 1.05;
+    font-weight: 800;
+    letter-spacing: -.045em;
+}
+.title span { color: var(--tiffany); }
+.subtitle {
+    margin-top: 13px;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.5;
+    max-width: 380px;
+}
+.info {
+    width: 100%;
+    margin-top: 30px;
+    padding: 24px 22px;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    background: var(--button-dark);
+    backdrop-filter: blur(12px);
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.6;
+}
+.info strong { color: white; }
+.buttons {
+    width: 100%;
+    margin-top: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.button {
+    width: 100%;
+    min-height: 58px;
+    padding: 0 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    border: 1px solid var(--border);
+    background: var(--button-dark);
+    backdrop-filter: blur(12px);
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform .25s ease, border-color .25s ease, background .25s ease, box-shadow .25s ease;
+}
+.button:hover {
+    transform: translateY(-2px);
+    border-color: var(--tiffany);
+    box-shadow: 0 8px 25px rgba(67,218,193,.10);
+}
+.button.primary {
+    background: var(--tiffany);
+    color: #03100d;
+    border-color: var(--tiffany);
+    box-shadow: 0 8px 30px rgba(67,218,193,.12);
+}
+.button.primary:hover {
+    background: #00eaff;
+    box-shadow: 0 10px 35px rgba(67,218,193,.22);
+}
+.back { margin-top: 18px; }
+.footer {
+    margin-top: auto;
+    padding-top: 35px;
+    color: #464f4d;
+    font-size: 9px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+}
+@media (max-width: 500px) {
+    .card { width: calc(100% - 30px); padding: 28px 0; }
+    .logo { width: 230px; }
+    .title { font-size: 27px; }
+    .subtitle { font-size: 13px; }
+    .button { min-height: 56px; border-radius: 14px; }
+}
+</style>
+</head>
+<body>
+<div class="glow"></div>
+<main class="card">
+
+    <img src="metiz-project-logo.png" alt="METIZ PROJECT" class="logo">
+
+    <div class="line"></div>
+
+    <h1 class="title">
+        Тестовая <span>страница</span>
+    </h1>
+
+    <p class="subtitle">
+        Здесь будет информация о вашем проекте
+    </p>
+
+    <section class="info">
+        <strong>Информационный блок</strong><br>
+        Здесь можно разместить описание, условия работы,
+        примеры услуг, цены или любую другую необходимую информацию.
+        Этот текст пока является заглушкой.
+    </section>
+
+    <div class="buttons">
+        <a href="https://vk.ru/metiz_project" target="_blank" rel="noopener noreferrer" class="button primary">Мы ВКонтакте</a>
+        <a href="https://vk.ru/im?sel=-10150150" target="_blank" rel="noopener noreferrer" class="button primary">Написать ВКонтакте</a>
+        <a href="https://t.me/metizproject" target="_blank" rel="noopener noreferrer" class="button primary">Написать в Telegram</a>
+        <a href="https://wa.me/message/RDHE3F4PU2D3L1" target="_blank" rel="noopener noreferrer" class="button primary">Написать в WhatsApp</a>
+    </div>
+
+    <a href="index.html" class="button back">← Вернуться на главную</a>
+
+    <div class="footer">© METIZ PROJECT 2010-2026</div>
+</main>
+</body>
+</html>
