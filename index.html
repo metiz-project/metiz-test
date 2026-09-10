@@ -99,7 +99,7 @@
         }
 
         .intro-logo {
-            width: min(300px, 75vw);
+            width: min(320px, 80vw);
             height: auto;
             filter: drop-shadow(0 0 25px var(--tiffany-glow));
         }
@@ -153,43 +153,31 @@
         }
 
         /* =========================================================
-           HEADER & NAV
+           HEADER & NAV (Centered Logo Layout)
            ========================================================= */
         .header {
             position: sticky;
             top: 0;
             z-index: 100;
-            padding: 16px 0;
+            padding: 12px 0;
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            background: rgba(3, 6, 5, 0.75);
+            background: rgba(3, 6, 5, 0.82);
             border-bottom: 1px solid var(--border-light);
             transition: all 0.3s ease;
         }
 
         .nav-wrapper {
-            display: flex;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
             align-items: center;
-            justify-content: space-between;
-        }
-
-        .brand-logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-        }
-
-        .brand-logo img {
-            height: 42px;
-            width: auto;
-            filter: drop-shadow(0 0 12px rgba(76,213,211,0.3));
+            gap: 20px;
         }
 
         .nav-menu {
             display: flex;
             align-items: center;
-            gap: 32px;
+            gap: 28px;
             list-style: none;
         }
 
@@ -222,34 +210,29 @@
             width: 100%;
         }
 
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        /* Увеличенный логотип */
+        .brand-logo img {
+            height: 68px;
+            width: auto;
+            filter: drop-shadow(0 0 16px rgba(76,213,211,0.35));
+            transition: transform 0.3s var(--ease);
+        }
+
+        .brand-logo:hover img {
+            transform: scale(1.05);
+        }
+
         .header-actions {
             display: flex;
             align-items: center;
-            gap: 16px;
-        }
-
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 6px 14px;
-            border-radius: 30px;
-            background: rgba(77, 255, 41, 0.08);
-            border: 1px solid rgba(77, 255, 41, 0.25);
-            color: #63ff3f;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-        }
-
-        .status-dot {
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: #4dff29;
-            box-shadow: 0 0 10px #4dff29;
-            animation: pulse 1.8s infinite;
+            justify-content: flex-end;
         }
 
         /* =========================================================
@@ -301,17 +284,11 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        .btn-icon svg {
-            width: 18px;
-            height: 18px;
-            fill: currentColor;
-        }
-
         /* =========================================================
            HERO SECTION
            ========================================================= */
         .hero {
-            padding: 90px 0 60px;
+            padding: 80px 0 60px;
             text-align: center;
             position: relative;
         }
@@ -658,7 +635,7 @@
             color: var(--soft-white);
         }
 
-        .form-select, .form-input, .form-textarea {
+        .form-select, .form-input {
             width: 100%;
             padding: 14px 18px;
             border-radius: var(--radius-sm);
@@ -671,7 +648,7 @@
             transition: border-color 0.3s ease;
         }
 
-        .form-select:focus, .form-input:focus, .form-textarea:focus {
+        .form-select:focus, .form-input:focus {
             border-color: var(--tiffany);
             background: rgba(76, 213, 211, 0.05);
         }
@@ -778,6 +755,10 @@
            ========================================================= */
         @media (max-width: 900px) {
             .nav-menu { display: none; }
+            .nav-wrapper {
+                grid-template-columns: 1fr auto;
+            }
+            .brand-logo img { height: 50px; }
             .calc-grid { grid-template-columns: 1fr; gap: 24px; }
             .calc-box { padding: 28px 20px; }
             .hero { padding: 60px 0 40px; }
@@ -795,7 +776,7 @@
 <body>
 
     <!-- =========================================================
-         INTRO SCREEN (Preserved & Enhanced)
+         INTRO SCREEN
          ========================================================= -->
     <div class="intro" id="intro">
         <div class="intro-content">
@@ -812,28 +793,26 @@
     <canvas id="particles"></canvas>
 
     <!-- =========================================================
-         HEADER / NAVIGATION
+         HEADER / NAVIGATION (Centered Logo & Direct Contact Scroll)
          ========================================================= -->
     <header class="header">
         <div class="container nav-wrapper">
+            <!-- Left Navigation Menu -->
+            <ul class="nav-menu">
+                <li><a href="#services" class="nav-link">Услуги</a></li>
+                <li><a href="#advantages" class="nav-link">Преимущества</a></li>
+                <li><a href="#calculator" class="nav-link">Расчет</a></li>
+            </ul>
+
+            <!-- Center Big Logo -->
             <a href="#" class="brand-logo">
                 <img src="metiz-project-logo.png" alt="METIZ PROJECT">
             </a>
 
-            <ul class="nav-menu">
-                <li><a href="#services" class="nav-link">Услуги</a></li>
-                <li><a href="#advantages" class="nav-link">Преимущества</a></li>
-                <li><a href="#calculator" class="nav-link">Расчет стоимости</a></li>
-                <li><a href="#contacts" class="nav-link">Контакты</a></li>
-            </ul>
-
+            <!-- Right Action Button -->
             <div class="header-actions">
-                <div class="status-badge">
-                    <span class="status-dot"></span>
-                    В сети • СПб
-                </div>
-                <a href="https://t.me/metizproject" target="_blank" class="btn btn-tiffany btn-icon" style="padding: 10px 18px; font-size: 13px;">
-                    Написать в Telegram
+                <a href="#contacts" class="btn btn-tiffany" style="padding: 10px 22px; font-size: 13px;">
+                    Контакты
                 </a>
             </div>
         </div>
