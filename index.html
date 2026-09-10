@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
 
     <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+          content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 
     <meta name="theme-color" content="#080b0d">
-    <meta name="color-scheme" content="dark">
 
     <meta name="description"
           content="Изготовление наклеек на заказ и печать изображений на холсте. Печатаем и режем под ваши задачи.">
@@ -15,108 +14,97 @@
     <meta name="keywords"
           content="наклейки, изготовление наклеек, печать наклеек, печать на холсте, Санкт-Петербург">
 
-    <meta property="og:title"
-          content="Печатаем и режем под ваши задачи">
+    <meta name="robots" content="index, follow">
 
-    <meta property="og:description"
-          content="Изготовление наклеек на заказ и печать на холсте.">
+    <title>Изготовление наклеек и печать на холсте</title>
 
-    <meta property="og:type"
-          content="website">
-
-    <title>Печатаем и режем под ваши задачи</title>
-
+    <!-- =========================================================
+         FAVICON
+         ========================================================= -->
     <link rel="icon" type="image/png" href="metiz-project-logo.png">
 
     <!-- =========================================================
          ШРИФТЫ
-    ========================================================== -->
+         ========================================================= -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap"
           rel="stylesheet">
 
     <style>
 
         /* =========================================================
            ОСНОВНЫЕ ПЕРЕМЕННЫЕ
-        ========================================================== */
+           ========================================================= */
 
         :root {
             --tiffany: #4CD5D3;
-            --tiffany-light: #72e9e6;
-            --tiffany-dark: #26b8b6;
+            --tiffany-rgb: 76, 213, 211;
 
-            --bg: #070a0c;
-            --bg-2: #0a0e10;
-            --bg-3: #0d1214;
+            --bg: #07090b;
+            --bg-soft: #0b0f12;
+            --bg-card: rgba(18, 23, 26, 0.72);
 
-            --surface: rgba(255,255,255,0.045);
-            --surface-strong: rgba(255,255,255,0.07);
-
-            --white: #ffffff;
-            --text: #f2f6f6;
-            --text-soft: #aab7b8;
-            --text-muted: #687577;
+            --white: #f5f7f7;
+            --white-soft: #c9d0d0;
+            --muted: #7f898b;
 
             --border: rgba(255,255,255,0.09);
-            --border-tiffany: rgba(76,213,211,0.35);
+            --border-tiffany: rgba(76,213,211,0.28);
 
-            --shadow:
-                0 25px 80px rgba(0,0,0,0.42);
-
-            --shadow-tiffany:
-                0 0 45px rgba(76,213,211,0.16);
+            --yellow: #ffd21f;
+            --yellow-dark: #f0b900;
 
             --radius-xl: 32px;
             --radius-lg: 24px;
             --radius-md: 18px;
 
-            --container: 1240px;
+            --shadow:
+                0 30px 80px rgba(0,0,0,0.45);
+
+            --shadow-tiffany:
+                0 20px 70px rgba(76,213,211,0.16);
+
+            --max-width: 1240px;
+
+            --header-height: 82px;
 
             --ease:
-                cubic-bezier(.22,1,.36,1);
+                cubic-bezier(.22, .61, .36, 1);
         }
 
 
         /* =========================================================
            RESET
-        ========================================================== */
+           ========================================================= */
 
-        *,
-        *::before,
-        *::after {
+        * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
         }
 
         html {
             scroll-behavior: smooth;
-            scroll-padding-top: 100px;
+            background: var(--bg);
         }
 
         body {
-            margin: 0;
             min-height: 100vh;
+            overflow-x: hidden;
 
             background:
                 radial-gradient(
-                    circle at 50% -10%,
-                    rgba(76,213,211,0.075),
+                    circle at 50% -20%,
+                    rgba(76,213,211,0.08),
                     transparent 38%
                 ),
                 var(--bg);
 
-            color: var(--text);
+            color: var(--white);
 
-            font-family:
-                "Manrope",
-                -apple-system,
-                BlinkMacSystemFont,
-                "Segoe UI",
-                sans-serif;
-
-            overflow-x: hidden;
+            font-family: "Inter", Arial, sans-serif;
 
             -webkit-font-smoothing: antialiased;
             text-rendering: optimizeLegibility;
@@ -126,43 +114,72 @@
             overflow: hidden;
         }
 
-        img {
-            display: block;
-            max-width: 100%;
-        }
-
-        button,
-        a {
-            font: inherit;
-        }
-
-        button {
-            border: 0;
-        }
-
         a {
             color: inherit;
             text-decoration: none;
         }
 
+        button,
+        a {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        button {
+            font: inherit;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
         ::selection {
             background: var(--tiffany);
-            color: #061011;
+            color: #071011;
         }
 
 
         /* =========================================================
-           BACKGROUND PARTICLES
-        ========================================================== */
+           BACKGROUND
+           ========================================================= */
 
-        .particles {
+        .background {
             position: fixed;
             inset: 0;
-            z-index: 0;
 
-            overflow: hidden;
+            z-index: -10;
 
             pointer-events: none;
+
+            overflow: hidden;
+        }
+
+        .background-glow {
+            position: absolute;
+
+            width: 700px;
+            height: 700px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(76,213,211,0.055),
+                    transparent 68%
+                );
+
+            filter: blur(15px);
+
+            transform: translate(-50%, -50%);
+
+            transition:
+                transform 1.5s var(--ease);
+        }
+
+        .particles {
+            position: absolute;
+            inset: 0;
         }
 
         .particle {
@@ -181,8 +198,8 @@
             opacity: var(--opacity);
 
             box-shadow:
-                0 0 12px rgba(76,213,211,0.65),
-                0 0 35px rgba(76,213,211,0.22);
+                0 0 14px rgba(76,213,211,0.35),
+                0 0 30px rgba(76,213,211,0.14);
 
             animation:
                 particleFloat var(--duration) ease-in-out infinite alternate;
@@ -194,539 +211,613 @@
 
             0% {
                 transform:
-                    translate3d(0,0,0)
+                    translate3d(
+                        0,
+                        0,
+                        0
+                    )
                     scale(1);
             }
 
             100% {
                 transform:
-                    translate3d(var(--move-x),var(--move-y),0)
-                    scale(1.25);
+                    translate3d(
+                        var(--move-x),
+                        var(--move-y),
+                        0
+                    )
+                    scale(1.2);
             }
         }
 
 
         /* =========================================================
-           AMBIENT LIGHT
-        ========================================================== */
-
-        .ambient {
-            position: fixed;
-            z-index: 0;
-
-            width: 520px;
-            height: 520px;
-
-            border-radius: 50%;
-
-            background:
-                radial-gradient(
-                    circle,
-                    rgba(76,213,211,0.055),
-                    transparent 68%
-                );
-
-            filter: blur(20px);
-
-            pointer-events: none;
-
-            transform: translate(-50%, -50%);
-        }
-
-
-        /* =========================================================
-           LAYOUT
-        ========================================================== */
-
-        .page {
-            position: relative;
-            z-index: 1;
-        }
+           CONTAINER
+           ========================================================= */
 
         .container {
             width: min(
-                calc(100% - 48px),
-                var(--container)
+                calc(100% - 40px),
+                var(--max-width)
             );
 
-            margin: 0 auto;
+            margin-inline: auto;
         }
 
 
         /* =========================================================
-           HEADER / NAVIGATION
-        ========================================================== */
+           HEADER
+           ========================================================= */
 
-        .site-header {
+        .header {
             position: fixed;
 
-            top: 18px;
-            left: 50%;
+            top: 0;
+            left: 0;
+            right: 0;
 
-            z-index: 1000;
+            height: var(--header-height);
 
-            width: min(
-                calc(100% - 32px),
-                1180px
-            );
+            z-index: 100;
 
-            transform: translateX(-50%);
+            background:
+                linear-gradient(
+                    to bottom,
+                    rgba(7,9,11,0.88),
+                    rgba(7,9,11,0.55)
+                );
+
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            border-bottom:
+                1px solid rgba(255,255,255,0.045);
 
             transition:
-                transform .45s var(--ease),
-                background .45s ease,
-                border-color .45s ease,
-                box-shadow .45s ease;
+                background .4s ease,
+                border-color .4s ease;
+        }
+
+        .header.scrolled {
+            background:
+                rgba(7,9,11,0.88);
+
+            border-bottom-color:
+                rgba(76,213,211,0.12);
+        }
+
+        .header-inner {
+            height: 100%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+
+            font-family: "Manrope", sans-serif;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            letter-spacing: .13em;
+            text-transform: uppercase;
+        }
+
+        .header-brand-dot {
+            width: 8px;
+            height: 8px;
+
+            border-radius: 50%;
+
+            background: var(--tiffany);
+
+            box-shadow:
+                0 0 14px rgba(76,213,211,.8);
         }
 
         .nav {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-
-            min-height: 64px;
-
-            padding: 8px 10px 8px 20px;
-
-            background:
-                rgba(9,13,15,0.70);
-
-            border:
-                1px solid rgba(255,255,255,0.08);
-
-            border-radius: 22px;
-
-            backdrop-filter: blur(22px);
-            -webkit-backdrop-filter: blur(22px);
-
-            box-shadow:
-                0 15px 45px rgba(0,0,0,0.25);
+            gap: 8px;
         }
 
-        .site-header.scrolled .nav {
-            background:
-                rgba(8,12,14,0.88);
-
-            border-color:
-                rgba(76,213,211,0.18);
-
-            box-shadow:
-                0 15px 55px rgba(0,0,0,0.38),
-                0 0 35px rgba(76,213,211,0.035);
-        }
-
-        .nav-brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-
-            color: var(--white);
-
-            font-size: 13px;
-            font-weight: 800;
-            letter-spacing: .08em;
-            text-transform: uppercase;
-
-            white-space: nowrap;
-        }
-
-        .brand-dot {
-            width: 9px;
-            height: 9px;
-
-            border-radius: 50%;
-
-            background: var(--tiffany);
-
-            box-shadow:
-                0 0 15px rgba(76,213,211,0.8);
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .nav-link {
+        .nav a {
             position: relative;
 
-            padding: 11px 14px;
+            padding: 11px 15px;
 
-            color: #aeb9ba;
+            border-radius: 12px;
 
-            font-size: 12px;
-            font-weight: 700;
+            color: var(--white-soft);
 
-            border-radius: 13px;
+            font-size: 13px;
+            font-weight: 600;
 
             transition:
                 color .3s ease,
-                background .3s ease,
-                transform .3s var(--ease);
+                background .3s ease;
         }
 
-        .nav-link::after {
+        .nav a::after {
             content: "";
 
             position: absolute;
 
-            left: 50%;
-            bottom: 5px;
+            left: 15px;
+            right: 15px;
+            bottom: 6px;
 
-            width: 0;
             height: 1px;
 
             background: var(--tiffany);
 
-            transform: translateX(-50%);
+            transform:
+                scaleX(0);
 
-            transition: width .3s var(--ease);
+            transform-origin: center;
+
+            transition:
+                transform .35s var(--ease);
         }
 
-        .nav-link:hover,
-        .nav-link.active {
+        .nav a:hover {
             color: var(--white);
 
             background:
-                rgba(76,213,211,0.06);
+                rgba(255,255,255,.035);
         }
 
-        .nav-link:hover::after,
-        .nav-link.active::after {
-            width: 18px;
+        .nav a:hover::after {
+            transform:
+                scaleX(1);
         }
 
-        .mobile-toggle {
+
+        /* =========================================================
+           MOBILE MENU BUTTON
+           ========================================================= */
+
+        .menu-toggle {
             display: none;
 
             width: 46px;
             height: 46px;
 
-            align-items: center;
-            justify-content: center;
-
-            flex-direction: column;
-            gap: 5px;
-
-            background:
-                rgba(255,255,255,0.055);
-
             border:
-                1px solid rgba(255,255,255,0.08);
+                1px solid var(--border);
 
             border-radius: 14px;
 
+            background:
+                rgba(255,255,255,.035);
+
             cursor: pointer;
+
+            position: relative;
         }
 
-        .mobile-toggle span {
-            width: 18px;
+        .menu-toggle span {
+            position: absolute;
+
+            width: 20px;
             height: 1.5px;
+
+            left: 50%;
 
             background: var(--white);
 
+            transform:
+                translateX(-50%);
+
             transition:
-                transform .35s var(--ease),
+                transform .35s ease,
+                top .35s ease,
                 opacity .25s ease;
         }
 
-        .mobile-toggle.active span:first-child {
-            transform: translateY(3.25px) rotate(45deg);
+        .menu-toggle span:nth-child(1) {
+            top: 17px;
         }
 
-        .mobile-toggle.active span:last-child {
-            transform: translateY(-3.25px) rotate(-45deg);
+        .menu-toggle span:nth-child(2) {
+            top: 23px;
+        }
+
+        .menu-toggle span:nth-child(3) {
+            top: 29px;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            top: 23px;
+
+            transform:
+                translateX(-50%)
+                rotate(45deg);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            top: 23px;
+
+            transform:
+                translateX(-50%)
+                rotate(-45deg);
+        }
+
+
+        /* =========================================================
+           MOBILE NAV
+           ========================================================= */
+
+        .mobile-nav {
+            position: fixed;
+
+            inset: var(--header-height) 0 0;
+
+            z-index: 99;
+
+            display: flex;
+            flex-direction: column;
+
+            padding: 30px 20px;
+
+            background:
+                rgba(7,9,11,.97);
+
+            backdrop-filter: blur(25px);
+
+            transform:
+                translateY(-15px);
+
+            opacity: 0;
+            visibility: hidden;
+
+            transition:
+                opacity .35s ease,
+                transform .45s var(--ease),
+                visibility .35s ease;
+        }
+
+        .mobile-nav.active {
+            opacity: 1;
+            visibility: visible;
+
+            transform:
+                translateY(0);
+        }
+
+        .mobile-nav a {
+            padding: 20px 10px;
+
+            border-bottom:
+                1px solid rgba(255,255,255,.07);
+
+            color: var(--white);
+
+            font-family: "Manrope", sans-serif;
+
+            font-size: 22px;
+            font-weight: 700;
+
+            transition:
+                color .3s ease,
+                padding-left .3s ease;
+        }
+
+        .mobile-nav a:hover {
+            color: var(--tiffany);
+
+            padding-left: 18px;
         }
 
 
         /* =========================================================
            HERO
-        ========================================================== */
+           ========================================================= */
 
         .hero {
-            position: relative;
-
             min-height: 100svh;
+
+            position: relative;
 
             display: flex;
             align-items: center;
             justify-content: center;
 
             padding:
-                145px 0
-                80px;
+                calc(var(--header-height) + 60px)
+                0
+                70px;
 
             text-align: center;
         }
 
-        .hero::before {
+        .hero-content {
+            width: 100%;
+            max-width: 1000px;
+
+            margin-inline: auto;
+        }
+
+        .logo-wrap {
+            position: relative;
+
+            width: min(430px, 72vw);
+
+            margin:
+                0 auto 20px;
+        }
+
+        .logo-wrap::before {
             content: "";
 
             position: absolute;
 
-            top: 15%;
+            width: 65%;
+            height: 65%;
+
+            top: 50%;
             left: 50%;
-
-            width: 680px;
-            height: 680px;
-
-            border-radius: 50%;
-
-            background:
-                radial-gradient(
-                    circle,
-                    rgba(76,213,211,0.085),
-                    transparent 67%
-                );
 
             transform:
                 translate(-50%, -50%);
 
-            filter: blur(15px);
-
-            pointer-events: none;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-
-            width: 100%;
-        }
-
-        .hero-logo-wrap {
-            position: relative;
-
-            display: inline-flex;
-            justify-content: center;
-
-            margin-bottom: 24px;
-        }
-
-        .hero-logo-glow {
-            position: absolute;
-            inset: 18% 10%;
-
             background:
-                radial-gradient(
-                    ellipse,
-                    rgba(76,213,211,0.23),
-                    transparent 70%
-                );
+                rgba(76,213,211,.10);
 
-            filter: blur(28px);
+            filter: blur(50px);
 
-            animation: logoGlow 4s ease-in-out infinite alternate;
+            border-radius: 50%;
 
-            pointer-events: none;
+            z-index: -1;
+
+            animation:
+                logoGlow 4s ease-in-out infinite alternate;
         }
 
         @keyframes logoGlow {
 
             from {
-                opacity: .55;
-                transform: scale(.94);
+                opacity: .4;
+                transform:
+                    translate(-50%, -50%)
+                    scale(.9);
             }
 
             to {
-                opacity: 1;
-                transform: scale(1.08);
+                opacity: .85;
+                transform:
+                    translate(-50%, -50%)
+                    scale(1.12);
             }
         }
 
-        .hero-logo {
-            position: relative;
-            z-index: 2;
-
-            width: min(410px, 72vw);
+        .main-logo {
+            width: 100%;
             height: auto;
 
             object-fit: contain;
 
             filter:
-                drop-shadow(0 0 15px rgba(76,213,211,0.10))
-                drop-shadow(0 0 35px rgba(76,213,211,0.07));
+                drop-shadow(
+                    0 0 22px rgba(76,213,211,.15)
+                );
 
             animation:
-                logoBreath 5s ease-in-out infinite alternate;
+                logoReveal 1.2s var(--ease) both;
         }
 
-        @keyframes logoBreath {
+        @keyframes logoReveal {
 
             from {
-                filter:
-                    drop-shadow(0 0 12px rgba(76,213,211,0.08))
-                    drop-shadow(0 0 25px rgba(76,213,211,0.04));
+                opacity: 0;
+                transform:
+                    translateY(18px)
+                    scale(.96);
             }
 
             to {
-                filter:
-                    drop-shadow(0 0 18px rgba(76,213,211,0.20))
-                    drop-shadow(0 0 48px rgba(76,213,211,0.10));
+                opacity: 1;
+                transform:
+                    translateY(0)
+                    scale(1);
             }
         }
 
-        .location {
-            margin-top: 2px;
+        .city {
+            display: inline-block;
+
             margin-bottom: 27px;
 
-            font-size: clamp(13px, 1.4vw, 16px);
+            font-family: "Manrope", sans-serif;
+
+            font-size: 14px;
             font-weight: 700;
 
-            letter-spacing: .25em;
+            letter-spacing: .22em;
             text-transform: uppercase;
 
-            color: var(--white);
+            color: #fff;
 
+            animation:
+                fadeUp .9s .15s var(--ease) both;
+        }
+
+        .city span {
             background:
                 linear-gradient(
                     90deg,
-                    #ffffff 0%,
-                    var(--tiffany) 50%,
-                    #ffffff 100%
+                    #fff 0%,
+                    var(--tiffany) 40%,
+                    #fff 70%,
+                    var(--tiffany) 100%
                 );
 
-            background-size: 200% auto;
+            background-size: 220% auto;
 
             -webkit-background-clip: text;
             background-clip: text;
-            -webkit-text-fill-color: transparent;
+
+            color: transparent;
 
             animation:
-                locationShimmer 4s linear infinite;
+                shimmer 5s linear infinite;
         }
 
-        @keyframes locationShimmer {
-
+        @keyframes shimmer {
             to {
-                background-position: 200% center;
+                background-position:
+                    220% center;
             }
         }
 
-        .eyebrow {
-            display: inline-flex;
-            align-items: center;
-            gap: 9px;
-
-            margin-bottom: 20px;
-
-            color: var(--tiffany);
-
-            font-size: 11px;
-            font-weight: 800;
-
-            letter-spacing: .2em;
-            text-transform: uppercase;
-        }
-
-        .eyebrow-line {
-            width: 28px;
-            height: 1px;
-
-            background: var(--tiffany);
-
-            box-shadow:
-                0 0 10px rgba(76,213,211,0.6);
-        }
-
         .hero-title {
-            max-width: 980px;
+            max-width: 900px;
 
             margin:
-                0 auto
-                20px;
+                0 auto 20px;
+
+            font-family: "Manrope", sans-serif;
 
             font-size:
                 clamp(
-                    36px,
-                    6.2vw,
-                    82px
+                    32px,
+                    5vw,
+                    70px
                 );
 
-            line-height: .98;
+            line-height: 1.02;
 
-            letter-spacing: -.055em;
+            letter-spacing:
+                -.045em;
 
             font-weight: 800;
 
-            text-transform: uppercase;
+            animation:
+                fadeUp 1s .25s var(--ease) both;
         }
 
-        .hero-title span {
+        .hero-title .accent {
             color: var(--tiffany);
+
+            text-shadow:
+                0 0 40px rgba(76,213,211,.18);
         }
 
-        .hero-description {
-            max-width: 640px;
+        .hero-subtitle {
+            max-width: 600px;
 
             margin:
-                0 auto
-                44px;
+                0 auto 45px;
 
-            color: var(--text-soft);
+            color: var(--muted);
 
             font-size:
-                clamp(14px, 1.6vw, 17px);
+                clamp(14px, 1.5vw, 17px);
 
-            line-height: 1.75;
+            line-height: 1.7;
+
+            animation:
+                fadeUp 1s .35s var(--ease) both;
+        }
+
+        @keyframes fadeUp {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(22px);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
         }
 
 
         /* =========================================================
-           MAIN SERVICE CARDS
-        ========================================================== */
+           MAIN SERVICE BUTTONS
+           ========================================================= */
 
-        .service-grid {
+        .service-buttons {
+            width: 100%;
+
             display: grid;
 
             grid-template-columns:
-                repeat(2, minmax(0,1fr));
+                repeat(2, minmax(0, 1fr));
 
             gap: 18px;
 
-            width: min(940px,100%);
-            margin: 0 auto;
+            animation:
+                fadeUp 1s .45s var(--ease) both;
         }
 
-        .service-card {
+        .service-button {
             position: relative;
 
-            min-height: 235px;
+            min-height: 110px;
 
             display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            align-items: center;
+            justify-content: center;
 
-            padding: 30px;
-
-            text-align: left;
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(255,255,255,0.075),
-                    rgba(255,255,255,0.025)
-                );
-
-            border:
-                1px solid rgba(255,255,255,0.10);
-
-            border-radius: var(--radius-lg);
+            padding: 24px;
 
             overflow: hidden;
 
+            border:
+                1px solid
+                rgba(76,213,211,.30);
+
+            border-radius:
+                var(--radius-lg);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(76,213,211,.13),
+                    rgba(76,213,211,.035)
+                );
+
+            color: var(--white);
+
+            font-family: "Manrope", sans-serif;
+
+            font-size:
+                clamp(13px, 1.4vw, 17px);
+
+            font-weight: 800;
+
+            letter-spacing: .05em;
+
+            text-align: center;
+
+            cursor: pointer;
+
             box-shadow:
-                0 20px 60px rgba(0,0,0,0.20);
+                0 15px 50px rgba(0,0,0,.25);
 
             transition:
-                transform .5s var(--ease),
-                border-color .5s ease,
-                box-shadow .5s ease,
-                background .5s ease;
+                transform .45s var(--ease),
+                border-color .4s ease,
+                background .4s ease,
+                box-shadow .45s ease;
         }
 
-        .service-card::before {
+        .service-button::before {
             content: "";
 
             position: absolute;
@@ -734,878 +825,805 @@
             inset: 0;
 
             background:
-                radial-gradient(
-                    circle at 100% 0%,
-                    rgba(76,213,211,0.17),
-                    transparent 42%
+                linear-gradient(
+                    120deg,
+                    transparent 25%,
+                    rgba(255,255,255,.13) 50%,
+                    transparent 75%
                 );
 
-            opacity: .5;
+            transform:
+                translateX(-120%);
 
-            transition: opacity .5s ease;
-
-            pointer-events: none;
+            transition:
+                transform .8s var(--ease);
         }
 
-        .service-card::after {
+        .service-button::after {
             content: "";
 
             position: absolute;
 
-            left: 30px;
-            right: 30px;
-            bottom: 0;
-
-            height: 1px;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    transparent,
-                    var(--tiffany),
-                    transparent
-                );
-
-            opacity: 0;
-
-            transform: scaleX(.3);
-
-            transition:
-                opacity .5s ease,
-                transform .5s var(--ease);
-        }
-
-        .service-card:hover {
-            transform:
-                translateY(-7px);
-
-            border-color:
-                rgba(76,213,211,0.35);
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(76,213,211,0.075),
-                    rgba(255,255,255,0.035)
-                );
-
-            box-shadow:
-                0 30px 75px rgba(0,0,0,0.34),
-                0 0 50px rgba(76,213,211,0.07);
-        }
-
-        .service-card:hover::before {
-            opacity: 1;
-        }
-
-        .service-card:hover::after {
-            opacity: 1;
-            transform: scaleX(1);
-        }
-
-        .service-number {
-            position: relative;
-            z-index: 1;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            margin-bottom: 25px;
-
-            color: var(--tiffany);
-
-            font-size: 11px;
-            font-weight: 800;
-
-            letter-spacing: .18em;
-        }
-
-        .service-arrow {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            width: 42px;
-            height: 42px;
-
-            border:
-                1px solid rgba(76,213,211,0.20);
+            width: 150px;
+            height: 150px;
 
             border-radius: 50%;
 
-            color: var(--tiffany);
+            background:
+                rgba(76,213,211,.14);
+
+            filter: blur(35px);
+
+            right: -70px;
+            bottom: -80px;
 
             transition:
-                transform .45s var(--ease),
-                background .35s ease;
+                transform .5s var(--ease);
         }
 
-        .service-card:hover .service-arrow {
+        .service-button:hover {
             transform:
-                translate(4px,-4px)
-                rotate(0deg);
+                translateY(-7px)
+                scale(1.015);
+
+            border-color:
+                rgba(76,213,211,.75);
 
             background:
-                rgba(76,213,211,0.10);
+                linear-gradient(
+                    135deg,
+                    rgba(76,213,211,.22),
+                    rgba(76,213,211,.065)
+                );
+
+            box-shadow:
+                var(--shadow-tiffany);
         }
 
-        .service-card-content {
-            position: relative;
-            z-index: 1;
+        .service-button:hover::before {
+            transform:
+                translateX(120%);
         }
 
-        .service-card h2 {
-            margin: 0 0 11px;
-
-            font-size:
-                clamp(23px, 3vw, 34px);
-
-            line-height: 1.05;
-
-            letter-spacing: -.04em;
+        .service-button:hover::after {
+            transform:
+                scale(1.5);
         }
 
-        .service-card p {
-            margin: 0;
-
-            color: var(--text-soft);
-
-            font-size: 13px;
-            line-height: 1.6;
-        }
-
-
-        /* =========================================================
-           SCROLL INDICATOR
-        ========================================================== */
-
-        .scroll-hint {
-            position: absolute;
-
-            bottom: 28px;
-            left: 50%;
-
-            display: flex;
-            align-items: center;
-            gap: 10px;
-
-            color: var(--text-muted);
-
-            font-size: 9px;
-            font-weight: 800;
-
-            letter-spacing: .2em;
-            text-transform: uppercase;
-
-            transform: translateX(-50%);
-        }
-
-        .scroll-mouse {
-            width: 19px;
-            height: 29px;
-
-            border:
-                1px solid rgba(255,255,255,0.25);
-
-            border-radius: 20px;
-
-            position: relative;
-        }
-
-        .scroll-mouse::after {
-            content: "";
-
-            position: absolute;
-
-            top: 6px;
-            left: 50%;
-
-            width: 2px;
-            height: 5px;
-
-            border-radius: 2px;
-
-            background: var(--tiffany);
-
-            transform: translateX(-50%);
-
-            animation:
-                scrollDot 1.8s ease-in-out infinite;
-        }
-
-        @keyframes scrollDot {
-
-            0%,100% {
-                opacity: .3;
-                transform:
-                    translate(-50%,0);
-            }
-
-            50% {
-                opacity: 1;
-                transform:
-                    translate(-50%,7px);
-            }
+        .service-button:active {
+            transform:
+                translateY(-2px)
+                scale(.985);
         }
 
 
         /* =========================================================
-           SECTIONS
-        ========================================================== */
+           SECTION
+           ========================================================= */
+
+        section {
+            position: relative;
+
+            scroll-margin-top:
+                calc(var(--header-height) + 30px);
+        }
 
         .section {
-            position: relative;
-
             padding:
-                130px 0;
-        }
-
-        .section-header {
-            max-width: 780px;
-
-            margin-bottom: 58px;
+                120px 0;
         }
 
         .section-label {
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            gap: 11px;
+            gap: 10px;
 
-            margin-bottom: 19px;
+            margin-bottom: 22px;
 
             color: var(--tiffany);
 
-            font-size: 10px;
+            font-family: "Manrope", sans-serif;
+
+            font-size: 12px;
             font-weight: 800;
 
-            letter-spacing: .22em;
+            letter-spacing: .2em;
             text-transform: uppercase;
         }
 
         .section-label::before {
             content: "";
 
-            width: 32px;
+            width: 28px;
             height: 1px;
 
             background: var(--tiffany);
 
             box-shadow:
-                0 0 12px rgba(76,213,211,0.5);
+                0 0 10px rgba(76,213,211,.6);
         }
 
         .section-title {
-            margin: 0 0 18px;
+            max-width: 850px;
+
+            margin-bottom: 22px;
+
+            font-family: "Manrope", sans-serif;
 
             font-size:
-                clamp(35px, 5vw, 65px);
+                clamp(
+                    32px,
+                    5vw,
+                    58px
+                );
 
-            line-height: 1;
+            line-height: 1.03;
 
-            letter-spacing: -.055em;
+            letter-spacing:
+                -.045em;
+
+            font-weight: 800;
         }
 
-        .section-lead {
-            max-width: 680px;
+        .section-description {
+            max-width: 780px;
 
-            margin: 0;
+            color: var(--white-soft);
 
-            color: var(--text-soft);
+            font-size:
+                clamp(15px, 1.5vw, 18px);
 
-            font-size: 16px;
-            line-height: 1.8;
+            line-height: 1.85;
+        }
+
+        .section-description p + p {
+            margin-top: 14px;
         }
 
 
         /* =========================================================
-           SERVICE DETAIL
-        ========================================================== */
+           SERVICE SECTION CARD
+           ========================================================= */
 
         .service-section {
-            border-top:
-                1px solid rgba(255,255,255,0.045);
+            padding-top: 70px;
         }
 
-        .service-layout {
+        .service-header {
             display: grid;
 
             grid-template-columns:
-                minmax(0,.8fr)
-                minmax(0,1.2fr);
+                1fr .75fr;
 
-            gap: 70px;
+            gap: 60px;
 
-            align-items: start;
+            align-items: end;
+
+            margin-bottom: 60px;
         }
 
         .service-intro {
-            position: sticky;
-            top: 120px;
+            padding-bottom: 4px;
         }
 
-        .service-intro h3 {
-            margin: 0 0 16px;
+        .service-badge {
+            justify-self: end;
 
-            font-size:
-                clamp(24px,3vw,38px);
+            width: 180px;
+            height: 180px;
 
-            line-height: 1.05;
-
-            letter-spacing: -.04em;
-        }
-
-        .service-intro p {
-            margin: 0;
-
-            color: var(--text-soft);
-
-            font-size: 14px;
-            line-height: 1.8;
-        }
-
-        .service-info {
             display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-
-
-        /* =========================================================
-           EDITABLE TEXT CARD
-        ========================================================== */
-
-        .text-card {
-            padding: 30px;
-
-            background:
-                rgba(255,255,255,0.035);
+            align-items: center;
+            justify-content: center;
 
             border:
-                1px solid var(--border);
-
-            border-radius: var(--radius-lg);
-
-            box-shadow:
-                var(--shadow);
-        }
-
-        .text-card p {
-            margin: 0;
-
-            color: #c2cbcc;
-
-            font-size: 14px;
-            line-height: 1.9;
-        }
-
-        .text-card p + p {
-            margin-top: 16px;
-        }
-
-
-        /* =========================================================
-           ORDER STEPS
-        ========================================================== */
-
-        .steps-title {
-            margin: 12px 0 0;
-
-            font-size: 12px;
-            font-weight: 800;
-
-            letter-spacing: .16em;
-            text-transform: uppercase;
-
-            color: var(--white);
-        }
-
-        .steps {
-            display: grid;
-
-            grid-template-columns:
-                repeat(5,minmax(0,1fr));
-
-            gap: 10px;
-        }
-
-        .step {
-            position: relative;
-
-            min-height: 150px;
-
-            padding: 22px 18px;
-
-            background:
-                rgba(255,255,255,0.025);
-
-            border:
-                1px solid rgba(255,255,255,0.075);
-
-            border-radius: 18px;
-
-            transition:
-                transform .4s var(--ease),
-                border-color .4s ease,
-                background .4s ease;
-        }
-
-        .step:hover {
-            transform: translateY(-5px);
-
-            border-color:
-                rgba(76,213,211,0.28);
-
-            background:
-                rgba(76,213,211,0.045);
-        }
-
-        .step-number {
-            margin-bottom: 30px;
-
-            color: var(--tiffany);
-
-            font-size: 11px;
-            font-weight: 800;
-
-            letter-spacing: .15em;
-        }
-
-        .step p {
-            margin: 0;
-
-            color: #d5dddd;
-
-            font-size: 13px;
-            line-height: 1.55;
-        }
-
-
-        /* =========================================================
-           CTA
-        ========================================================== */
-
-        .order-card {
-            position: relative;
-
-            padding: 42px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(76,213,211,0.09),
-                    rgba(255,255,255,0.035)
-                );
-
-            border:
-                1px solid rgba(76,213,211,0.20);
-
-            border-radius: var(--radius-xl);
-
-            overflow: hidden;
-
-            box-shadow:
-                var(--shadow),
-                var(--shadow-tiffany);
-        }
-
-        .order-card::before {
-            content: "";
-
-            position: absolute;
-
-            top: -120px;
-            right: -120px;
-
-            width: 320px;
-            height: 320px;
+                1px solid
+                var(--border-tiffany);
 
             border-radius: 50%;
 
             background:
                 radial-gradient(
                     circle,
-                    rgba(76,213,211,0.15),
-                    transparent 68%
+                    rgba(76,213,211,.11),
+                    transparent 65%
                 );
 
-            pointer-events: none;
-        }
-
-        .order-card-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .order-card h3 {
-            margin: 0 0 10px;
-
-            font-size:
-                clamp(25px,3vw,39px);
-
-            line-height: 1;
-
-            letter-spacing: -.04em;
-        }
-
-        .order-card-description {
-            margin: 0 0 28px;
-
-            color: var(--text-soft);
-
-            font-size: 14px;
-            line-height: 1.7;
-        }
-
-
-        /* =========================================================
-           BUTTONS
-        ========================================================== */
-
-        .button-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .button {
-            position: relative;
-
-            min-height: 52px;
-
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-
-            padding:
-                0 21px;
-
-            border-radius: 14px;
-
-            cursor: pointer;
-
-            font-size: 11px;
-            font-weight: 800;
-
-            letter-spacing: .04em;
-            text-transform: uppercase;
-
-            transition:
-                transform .35s var(--ease),
-                box-shadow .35s ease,
-                background .35s ease,
-                border-color .35s ease,
-                color .35s ease;
-
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        .button-primary {
-            background: var(--tiffany);
-
-            color: #061011;
-
             box-shadow:
-                0 12px 35px rgba(76,213,211,0.17);
-        }
+                inset 0 0 50px rgba(76,213,211,.035);
 
-        .button-primary:hover {
-            transform:
-                translateY(-3px);
+            color: var(--tiffany);
 
-            box-shadow:
-                0 18px 42px rgba(76,213,211,0.28),
-                0 0 30px rgba(76,213,211,0.12);
-        }
-
-        .button-primary:active {
-            transform:
-                translateY(0)
-                scale(.98);
-        }
-
-        .button-secondary {
-            color: #dce5e5;
-
-            background:
-                rgba(255,255,255,0.045);
-
-            border:
-                1px solid rgba(255,255,255,0.10);
-        }
-
-        .button-secondary:hover {
-            color: var(--white);
-
-            border-color:
-                rgba(76,213,211,0.30);
-
-            background:
-                rgba(76,213,211,0.065);
-
-            transform:
-                translateY(-3px);
-        }
-
-        .button-social {
-            min-height: 48px;
-
-            padding:
-                0 16px;
-
-            color: #cbd4d4;
-
-            background:
-                rgba(0,0,0,0.17);
-
-            border:
-                1px solid rgba(255,255,255,0.09);
-
-            text-transform: none;
-
-            letter-spacing: 0;
+            font-family: "Manrope", sans-serif;
 
             font-size: 12px;
+            font-weight: 800;
+
+            letter-spacing: .15em;
+            text-align: center;
+
+            text-transform: uppercase;
+
+            animation:
+                slowRotate 15s linear infinite;
         }
 
-        .button-social:hover {
-            color: var(--white);
+        @keyframes slowRotate {
+            from {
+                transform: rotate(0deg);
+            }
 
-            border-color:
-                rgba(76,213,211,0.30);
-
-            transform:
-                translateY(-3px);
-        }
-
-        .social-icon {
-            width: 19px;
-            height: 19px;
-
-            flex: 0 0 19px;
-        }
-
-        .button-route {
-            min-height: 56px;
-
-            padding:
-                0 24px;
-
-            background:
-                rgba(255,255,255,0.055);
-
-            border:
-                1px solid rgba(255,255,255,0.12);
-
-            color: white;
-        }
-
-        .button-route:hover {
-            background:
-                rgba(255,255,255,0.09);
-
-            border-color:
-                rgba(76,213,211,0.38);
-
-            transform:
-                translateY(-3px);
+            to {
+                transform: rotate(360deg);
+            }
         }
 
 
         /* =========================================================
-           SOCIAL AREA
-        ========================================================== */
+           PROCESS
+           ========================================================= */
 
-        .social-grid {
+        .process {
             display: grid;
 
             grid-template-columns:
-                repeat(4,minmax(0,1fr));
+                repeat(5, minmax(0, 1fr));
 
-            gap: 9px;
+            gap: 12px;
+
+            margin-top: 60px;
+        }
+
+        .process-card {
+            min-height: 210px;
+
+            position: relative;
+
+            padding: 28px 22px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                var(--radius-md);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,.045),
+                    rgba(255,255,255,.018)
+                );
+
+            overflow: hidden;
+
+            transition:
+                transform .45s var(--ease),
+                border-color .4s ease,
+                background .4s ease;
+        }
+
+        .process-card::after {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            bottom: 0;
+
+            width: 0;
+            height: 2px;
+
+            background:
+                var(--tiffany);
+
+            box-shadow:
+                0 0 16px rgba(76,213,211,.6);
+
+            transition:
+                width .5s var(--ease);
+        }
+
+        .process-card:hover {
+            transform:
+                translateY(-8px);
+
+            border-color:
+                rgba(76,213,211,.3);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(76,213,211,.07),
+                    rgba(255,255,255,.018)
+                );
+        }
+
+        .process-card:hover::after {
+            width: 100%;
+        }
+
+        .process-number {
+            margin-bottom: 50px;
+
+            color: var(--tiffany);
+
+            font-family: "Manrope", sans-serif;
+
+            font-size: 12px;
+            font-weight: 800;
+
+            letter-spacing: .13em;
+        }
+
+        .process-title {
+            color: var(--white);
+
+            font-family: "Manrope", sans-serif;
+
+            font-size: 15px;
+            font-weight: 700;
+
+            line-height: 1.4;
+        }
+
+
+        /* =========================================================
+           ORDER AREA
+           ========================================================= */
+
+        .order-area {
+            position: relative;
+
+            margin-top: 50px;
+
+            padding: 45px;
+
+            border:
+                1px solid
+                var(--border-tiffany);
+
+            border-radius:
+                var(--radius-xl);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(76,213,211,.09),
+                    rgba(255,255,255,.025)
+                );
+
+            overflow: hidden;
+        }
+
+        .order-area::before {
+            content: "";
+
+            position: absolute;
+
+            width: 320px;
+            height: 320px;
+
+            right: -150px;
+            top: -170px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(76,213,211,.10);
+
+            filter: blur(50px);
+        }
+
+        .order-area h3 {
+            position: relative;
+
+            margin-bottom: 28px;
+
+            font-family: "Manrope", sans-serif;
+
+            font-size:
+                clamp(24px, 3vw, 38px);
+
+            letter-spacing:
+                -.035em;
+        }
+
+
+        /* =========================================================
+           SOCIAL BUTTONS
+           ========================================================= */
+
+        .social-grid {
+            position: relative;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: 12px;
+        }
+
+        .social-button {
+            min-height: 58px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 11px;
+
+            padding: 14px 18px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.10);
+
+            border-radius: 15px;
+
+            background:
+                rgba(0,0,0,.20);
+
+            color: var(--white);
+
+            font-size: 13px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                transform .35s var(--ease),
+                border-color .3s ease,
+                background .3s ease,
+                color .3s ease;
+        }
+
+        .social-button:hover {
+            transform:
+                translateY(-4px);
+
+            border-color:
+                rgba(76,213,211,.5);
+
+            background:
+                rgba(76,213,211,.09);
+
+            color: var(--tiffany);
+        }
+
+        .social-icon {
+            width: 21px;
+            height: 21px;
+
+            flex:
+                0 0 21px;
+        }
+
+
+        /* =========================================================
+           DIVIDER
+           ========================================================= */
+
+        .section-divider {
+            width: 100%;
+            height: 1px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(76,213,211,.25),
+                    transparent
+                );
         }
 
 
         /* =========================================================
            PICKUP
-        ========================================================== */
+           ========================================================= */
 
         .pickup-section {
             padding:
-                90px 0 130px;
+                110px 0 90px;
         }
 
         .pickup-card {
             position: relative;
 
-            display: grid;
+            padding:
+                clamp(35px, 6vw, 70px);
 
-            grid-template-columns:
-                1fr
-                auto;
+            border:
+                1px solid
+                rgba(255,210,31,.18);
 
-            gap: 40px;
-
-            align-items: center;
-
-            padding: 48px;
+            border-radius:
+                var(--radius-xl);
 
             background:
                 linear-gradient(
-                    130deg,
-                    rgba(255,255,255,0.055),
-                    rgba(76,213,211,0.035)
+                    135deg,
+                    rgba(255,210,31,.07),
+                    rgba(255,255,255,.025)
                 );
 
-            border:
-                1px solid rgba(76,213,211,0.20);
-
-            border-radius: var(--radius-xl);
-
             overflow: hidden;
-
-            box-shadow:
-                var(--shadow);
         }
 
-        .pickup-card::after {
+        .pickup-card::before {
             content: "";
 
             position: absolute;
 
-            right: -120px;
-            bottom: -180px;
+            width: 500px;
+            height: 500px;
 
-            width: 420px;
-            height: 420px;
+            right: -280px;
+            top: -250px;
 
             border-radius: 50%;
 
             background:
-                radial-gradient(
-                    circle,
-                    rgba(76,213,211,0.12),
-                    transparent 67%
-                );
+                rgba(255,210,31,.08);
 
-            pointer-events: none;
-        }
-
-        .pickup-content {
-            position: relative;
-            z-index: 1;
+            filter: blur(60px);
         }
 
         .pickup-label {
-            margin-bottom: 12px;
+            position: relative;
 
-            color: var(--tiffany);
+            display: inline-block;
 
-            font-size: 10px;
+            margin-bottom: 20px;
+
+            color: var(--yellow);
+
+            font-family: "Manrope", sans-serif;
+
+            font-size: 12px;
             font-weight: 800;
 
-            letter-spacing: .2em;
+            letter-spacing: .18em;
+
             text-transform: uppercase;
         }
 
         .pickup-title {
-            margin: 0 0 12px;
+            position: relative;
+
+            margin-bottom: 10px;
+
+            font-family: "Manrope", sans-serif;
 
             font-size:
-                clamp(30px,4vw,53px);
+                clamp(32px, 5vw, 60px);
 
             line-height: 1;
 
-            letter-spacing: -.05em;
+            letter-spacing:
+                -.045em;
+
+            font-weight: 800;
         }
 
-        .pickup-description {
-            max-width: 620px;
+        .pickup-main {
+            position: relative;
 
-            margin: 0;
+            margin-bottom: 25px;
 
-            color: var(--text-soft);
+            font-family: "Manrope", sans-serif;
+
+            font-size:
+                clamp(20px, 2.5vw, 30px);
+
+            font-weight: 700;
+        }
+
+        .pickup-address {
+            position: relative;
+
+            max-width: 750px;
+
+            margin-bottom: 35px;
+
+            color: var(--white-soft);
+
+            font-size: 16px;
+
+            line-height: 1.75;
+        }
+
+        .route-button {
+            position: relative;
+
+            min-height: 66px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 13px;
+
+            padding:
+                0 30px;
+
+            border: 0;
+
+            border-radius: 16px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--yellow),
+                    #ffb700
+                );
+
+            color: #151100;
+
+            font-family: "Manrope", sans-serif;
 
             font-size: 14px;
-            line-height: 1.8;
+            font-weight: 800;
+
+            letter-spacing: .04em;
+
+            box-shadow:
+                0 18px 50px rgba(255,210,31,.13);
+
+            cursor: pointer;
+
+            transition:
+                transform .4s var(--ease),
+                box-shadow .4s ease,
+                filter .3s ease;
         }
 
-        .pickup-action {
-            position: relative;
-            z-index: 2;
+        .route-button:hover {
+            transform:
+                translateY(-5px)
+                scale(1.02);
+
+            box-shadow:
+                0 25px 70px rgba(255,210,31,.22);
+
+            filter:
+                brightness(1.05);
+        }
+
+        .route-button:active {
+            transform:
+                translateY(-1px)
+                scale(.98);
         }
 
         .route-icon {
-            width: 23px;
-            height: 23px;
+            width: 27px;
+            height: 27px;
         }
 
 
         /* =========================================================
            FOOTER
-        ========================================================== */
+           ========================================================= */
 
-        footer {
+        .footer {
             padding:
                 55px 0 30px;
 
             border-top:
-                1px solid rgba(255,255,255,0.055);
-        }
-
-        .footer-main {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+                1px solid
+                rgba(255,255,255,.06);
 
             text-align: center;
         }
 
-        .footer-company {
-            margin-bottom: 25px;
+        .footer-actions {
+            display: flex;
 
-            font-size: 18px;
-            font-weight: 800;
+            justify-content: center;
+            align-items: center;
 
-            letter-spacing: -.02em;
+            flex-wrap: wrap;
+
+            gap: 12px;
+
+            margin-bottom: 32px;
         }
 
-        .footer-buttons {
-            display: flex;
-            flex-wrap: wrap;
+        .footer-button {
+            min-height: 48px;
+
+            display: inline-flex;
+            align-items: center;
             justify-content: center;
 
             gap: 9px;
 
-            margin-bottom: 28px;
+            padding:
+                0 19px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.10);
+
+            border-radius: 13px;
+
+            background:
+                rgba(255,255,255,.035);
+
+            color: var(--white-soft);
+
+            font-size: 12px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                transform .3s ease,
+                color .3s ease,
+                border-color .3s ease,
+                background .3s ease;
         }
 
-        .footer-info {
-            color: var(--text-muted);
+        .footer-button:hover {
+            transform:
+                translateY(-3px);
+
+            color: var(--white);
+
+            border-color:
+                rgba(76,213,211,.35);
+
+            background:
+                rgba(76,213,211,.06);
+        }
+
+        .footer-button.share {
+            border-color:
+                rgba(54,190,82,.32);
+
+            background:
+                rgba(54,190,82,.09);
+
+            color:
+                #6ee984;
+        }
+
+        .footer-button.share:hover {
+            border-color:
+                rgba(54,190,82,.65);
+
+            background:
+                rgba(54,190,82,.14);
+        }
+
+        .footer-company {
+            margin-bottom: 10px;
+
+            color: var(--white);
+
+            font-family: "Manrope", sans-serif;
+
+            font-size: 14px;
+            font-weight: 800;
+
+            letter-spacing: .12em;
+
+            text-transform: uppercase;
+        }
+
+        .copyright {
+            color: #5d6668;
 
             font-size: 11px;
-            line-height: 1.7;
-        }
 
-        .footer-copyright {
-            margin-top: 30px;
-            padding-top: 22px;
-
-            width: 100%;
-
-            border-top:
-                1px solid rgba(255,255,255,0.045);
-
-            color: #4f5b5d;
-
-            font-size: 10px;
+            line-height: 1.6;
         }
 
 
         /* =========================================================
-           REVEAL ANIMATIONS
-        ========================================================== */
+           REVEAL ANIMATION
+           ========================================================= */
 
         .reveal {
             opacity: 0;
@@ -1614,7 +1632,7 @@
                 translateY(35px);
 
             transition:
-                opacity .8s ease,
+                opacity .9s var(--ease),
                 transform .9s var(--ease);
         }
 
@@ -1625,373 +1643,264 @@
                 translateY(0);
         }
 
-        .reveal-delay-1 {
-            transition-delay: .08s;
-        }
-
-        .reveal-delay-2 {
-            transition-delay: .16s;
-        }
-
-        .reveal-delay-3 {
-            transition-delay: .24s;
-        }
-
-
-        /* =========================================================
-           MOBILE NAV
-        ========================================================== */
-
-        .mobile-menu {
-            position: fixed;
-
-            top: 92px;
-            left: 16px;
-            right: 16px;
-
-            z-index: 999;
-
-            padding: 10px;
-
-            background:
-                rgba(8,12,14,0.96);
-
-            border:
-                1px solid rgba(76,213,211,0.16);
-
-            border-radius: 22px;
-
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-
-            box-shadow:
-                0 30px 70px rgba(0,0,0,0.45);
-
-            opacity: 0;
-            visibility: hidden;
-
-            transform:
-                translateY(-15px)
-                scale(.98);
-
-            transition:
-                opacity .35s ease,
-                visibility .35s ease,
-                transform .4s var(--ease);
-        }
-
-        .mobile-menu.active {
-            opacity: 1;
-            visibility: visible;
-
-            transform:
-                translateY(0)
-                scale(1);
-        }
-
-        .mobile-menu a {
-            display: flex;
-            align-items: center;
-
-            min-height: 52px;
-
-            padding:
-                0 16px;
-
-            border-radius: 14px;
-
-            color: #cbd4d4;
-
-            font-size: 13px;
-            font-weight: 700;
-
-            transition:
-                background .25s ease,
-                color .25s ease;
-        }
-
-        .mobile-menu a:hover {
-            color: var(--white);
-
-            background:
-                rgba(76,213,211,0.07);
-        }
-
 
         /* =========================================================
            RESPONSIVE
-        ========================================================== */
+           ========================================================= */
 
-        @media (max-width: 1000px) {
+        @media (max-width: 1050px) {
 
-            .nav-links {
+            .nav {
                 display: none;
             }
 
-            .mobile-toggle {
-                display: flex;
+            .menu-toggle {
+                display: block;
             }
 
-            .service-layout {
+            .service-header {
                 grid-template-columns: 1fr;
-                gap: 40px;
+                gap: 30px;
             }
 
-            .service-intro {
-                position: static;
+            .service-badge {
+                justify-self: start;
+
+                width: 130px;
+                height: 130px;
             }
 
-            .steps {
+            .process {
                 grid-template-columns:
-                    repeat(3,minmax(0,1fr));
+                    repeat(3, minmax(0, 1fr));
             }
 
             .social-grid {
                 grid-template-columns:
-                    repeat(2,minmax(0,1fr));
-            }
-
-            .pickup-card {
-                grid-template-columns: 1fr;
+                    repeat(2, minmax(0, 1fr));
             }
         }
 
 
-        @media (max-width: 720px) {
+        @media (max-width: 700px) {
+
+            :root {
+                --header-height: 70px;
+            }
 
             .container {
                 width:
                     min(
                         calc(100% - 28px),
-                        var(--container)
+                        var(--max-width)
                     );
             }
 
-            .site-header {
-                top: 10px;
-
-                width:
-                    calc(100% - 20px);
-            }
-
-            .nav {
-                min-height: 58px;
-
-                padding-left: 15px;
-            }
-
-            .nav-brand {
+            .header-brand {
                 font-size: 11px;
             }
 
             .hero {
-                min-height: auto;
-
                 padding:
-                    125px 0
-                    90px;
+                    calc(var(--header-height) + 35px)
+                    0
+                    50px;
             }
 
-            .hero::before {
-                width: 430px;
-                height: 430px;
+            .logo-wrap {
+                width: min(340px, 76vw);
             }
 
-            .hero-logo {
-                width: min(340px,82vw);
+            .city {
+                font-size: 11px;
+
+                margin-bottom: 22px;
             }
 
             .hero-title {
                 font-size:
                     clamp(
-                        32px,
-                        10vw,
-                        55px
+                        28px,
+                        9vw,
+                        46px
                     );
             }
 
-            .hero-description {
-                margin-bottom: 32px;
+            .hero-subtitle {
+                margin-bottom: 30px;
+
+                font-size: 13px;
             }
 
             /*
-             * На мобильном две главные кнопки остаются
-             * горизонтально, как указано в ТЗ.
+             * ВАЖНО:
+             * На мобильном две основные кнопки остаются
+             * горизонтально, согласно финальному требованию.
              */
-            .service-grid {
+            .service-buttons {
                 grid-template-columns:
-                    repeat(2,minmax(0,1fr));
+                    repeat(2, minmax(0, 1fr));
 
                 gap: 9px;
             }
 
-            .service-card {
-                min-height: 190px;
+            .service-button {
+                min-height: 88px;
 
-                padding: 18px 15px;
+                padding: 14px 8px;
 
-                border-radius: 18px;
-            }
+                border-radius: 15px;
 
-            .service-card h2 {
-                font-size: 17px;
-                line-height: 1.08;
-            }
+                font-size:
+                    clamp(10px, 2.7vw, 13px);
 
-            .service-card p {
-                display: none;
-            }
-
-            .service-number {
-                margin-bottom: 15px;
-
-                font-size: 9px;
-            }
-
-            .service-arrow {
-                width: 34px;
-                height: 34px;
+                letter-spacing: .025em;
             }
 
             .section {
                 padding:
-                    85px 0;
+                    75px 0;
             }
 
-            .section-header {
-                margin-bottom: 38px;
+            .service-section {
+                padding-top: 50px;
             }
 
             .section-title {
                 font-size:
-                    clamp(34px,11vw,52px);
+                    clamp(30px, 10vw, 44px);
             }
 
-            .section-lead {
+            .section-description {
                 font-size: 14px;
+
+                line-height: 1.75;
             }
 
-            .text-card {
-                padding: 23px 20px;
-            }
-
-            .steps {
+            .process {
                 grid-template-columns:
-                    repeat(2,minmax(0,1fr));
+                    repeat(2, minmax(0, 1fr));
 
-                gap: 8px;
+                gap: 9px;
+
+                margin-top: 40px;
             }
 
-            .step {
-                min-height: 130px;
+            .process-card {
+                min-height: 175px;
 
-                padding: 17px 15px;
+                padding: 20px 16px;
             }
 
-            .step-number {
-                margin-bottom: 22px;
+            .process-number {
+                margin-bottom: 35px;
+
+                font-size: 10px;
             }
 
-            .step p {
-                font-size: 12px;
+            .process-title {
+                font-size: 13px;
             }
 
-            .order-card {
-                padding: 26px 20px;
+            .order-area {
+                margin-top: 35px;
 
-                border-radius: 23px;
+                padding: 25px 18px;
+
+                border-radius: 22px;
+            }
+
+            .order-area h3 {
+                font-size: 25px;
             }
 
             .social-grid {
                 grid-template-columns:
-                    repeat(2,minmax(0,1fr));
+                    1fr;
             }
 
-            .button-social {
-                min-height: 48px;
-
-                padding:
-                    0 11px;
-
-                font-size: 11px;
+            .social-button {
+                min-height: 55px;
             }
 
             .pickup-section {
                 padding:
-                    60px 0 90px;
+                    70px 0 60px;
             }
 
             .pickup-card {
-                padding: 28px 21px;
+                padding: 30px 20px;
 
-                border-radius: 24px;
+                border-radius: 22px;
             }
 
-            .pickup-action,
-            .button-route {
+            .pickup-title {
+                font-size:
+                    clamp(34px, 12vw, 50px);
+            }
+
+            .pickup-main {
+                font-size: 21px;
+            }
+
+            .pickup-address {
+                font-size: 14px;
+            }
+
+            .route-button {
                 width: 100%;
             }
 
-            .footer-buttons {
+            .footer-actions {
+                flex-direction: column;
+
+                align-items: stretch;
+            }
+
+            .footer-button {
                 width: 100%;
             }
 
-            .footer-buttons .button {
-                width: 100%;
-            }
-
-            .scroll-hint {
-                display: none;
+            .footer {
+                padding-top: 40px;
             }
         }
 
 
-        @media (max-width: 390px) {
+        @media (max-width: 380px) {
 
-            .service-card {
-                min-height: 175px;
+            .container {
+                width:
+                    calc(100% - 22px);
             }
 
-            .service-card h2 {
-                font-size: 15px;
+            .service-button {
+                min-height: 82px;
+
+                font-size: 9px;
             }
 
-            .service-number {
-                font-size: 8px;
-            }
-
-            .service-arrow {
-                width: 31px;
-                height: 31px;
-            }
-
-            .social-grid {
-                grid-template-columns: 1fr;
+            .process-title {
+                font-size: 12px;
             }
         }
 
 
         /* =========================================================
-           ACCESSIBILITY / REDUCED MOTION
-        ========================================================== */
+           REDUCE MOTION
+           ========================================================= */
 
         @media (prefers-reduced-motion: reduce) {
-
-            html {
-                scroll-behavior: auto;
-            }
 
             *,
             *::before,
             *::after {
                 animation-duration: .01ms !important;
                 animation-iteration-count: 1 !important;
-                transition-duration: .01ms !important;
-            }
 
-            .reveal {
-                opacity: 1;
-                transform: none;
+                scroll-behavior: auto !important;
+
+                transition-duration: .01ms !important;
             }
         }
 
@@ -2003,1092 +1912,1047 @@
 
     <!-- =========================================================
          BACKGROUND
-    ========================================================== -->
+         ========================================================= -->
 
-    <div class="particles" id="particles"></div>
+    <div class="background" aria-hidden="true">
 
-    <div class="ambient" id="ambient"></div>
+        <div class="background-glow" id="backgroundGlow"></div>
+
+        <div class="particles" id="particles"></div>
+
+    </div>
 
 
     <!-- =========================================================
-         PAGE
-    ========================================================== -->
+         HEADER
+         ========================================================= -->
 
-    <div class="page">
+    <header class="header" id="header">
+
+        <div class="container header-inner">
+
+            <a href="#top"
+               class="header-brand"
+               aria-label="На главную">
+
+                <span class="header-brand-dot"></span>
+
+                <span id="headerBrand">
+                    БРЕНД
+                </span>
+
+            </a>
 
 
-        <!-- =====================================================
-             HEADER
-        ====================================================== -->
+            <nav class="nav"
+                 aria-label="Основная навигация">
 
-        <header class="site-header" id="siteHeader">
-
-            <nav class="nav">
-
-                <a
-                    href="#top"
-                    class="nav-brand"
-                    aria-label="На главную"
-                >
-                    <span class="brand-dot"></span>
-                    <span id="navCompanyName">METIZ PROJECT</span>
+                <a href="#stickers">
+                    Наклейки
                 </a>
 
+                <a href="#canvas">
+                    Холсты
+                </a>
 
-                <div class="nav-links">
+                <a href="#order">
+                    Как заказать
+                </a>
 
-                    <a
-                        href="#stickers"
-                        class="nav-link"
-                        data-nav-target="stickers"
-                    >
-                        Наклейки
-                    </a>
+                <a href="#pickup">
+                    Самовывоз
+                </a>
 
-                    <a
-                        href="#canvas"
-                        class="nav-link"
-                        data-nav-target="canvas"
-                    >
-                        Холсты
-                    </a>
-
-                    <a
-                        href="#how-to-order"
-                        class="nav-link"
-                        data-nav-target="how-to-order"
-                    >
-                        Как заказать
-                    </a>
-
-                    <a
-                        href="#pickup"
-                        class="nav-link"
-                        data-nav-target="pickup"
-                    >
-                        Самовывоз
-                    </a>
-
-                    <a
-                        href="#contacts"
-                        class="nav-link"
-                        data-nav-target="contacts"
-                    >
-                        Контакты
-                    </a>
-
-                </div>
-
-
-                <button
-                    class="mobile-toggle"
-                    id="mobileToggle"
-                    type="button"
-                    aria-label="Открыть меню"
-                    aria-expanded="false"
-                >
-                    <span></span>
-                    <span></span>
-                </button>
+                <a href="#contacts">
+                    Контакты
+                </a>
 
             </nav>
 
-        </header>
 
+            <button class="menu-toggle"
+                    id="menuToggle"
+                    type="button"
+                    aria-label="Открыть меню"
+                    aria-expanded="false">
 
-        <!-- =====================================================
-             MOBILE MENU
-        ====================================================== -->
+                <span></span>
+                <span></span>
+                <span></span>
 
-        <div class="mobile-menu" id="mobileMenu">
-
-            <a href="#stickers">
-                Наклейки
-            </a>
-
-            <a href="#canvas">
-                Холсты
-            </a>
-
-            <a href="#how-to-order">
-                Как заказать
-            </a>
-
-            <a href="#pickup">
-                Самовывоз
-            </a>
-
-            <a href="#contacts">
-                Контакты
-            </a>
+            </button>
 
         </div>
+
+    </header>
+
+
+    <!-- =========================================================
+         MOBILE NAV
+         ========================================================= -->
+
+    <nav class="mobile-nav"
+         id="mobileNav"
+         aria-label="Мобильная навигация">
+
+        <a href="#stickers">
+            Наклейки
+        </a>
+
+        <a href="#canvas">
+            Холсты
+        </a>
+
+        <a href="#order">
+            Как заказать
+        </a>
+
+        <a href="#pickup">
+            Самовывоз
+        </a>
+
+        <a href="#contacts">
+            Контакты
+        </a>
+
+    </nav>
+
+
+    <!-- =========================================================
+         MAIN
+         ========================================================= -->
+
+    <main id="top">
 
 
         <!-- =====================================================
              HERO
-        ====================================================== -->
+             ===================================================== -->
 
-        <main id="top">
+        <section class="hero">
 
-            <section class="hero">
+            <div class="container">
 
-                <div class="container">
+                <div class="hero-content">
 
-                    <div class="hero-content">
+                    <div class="logo-wrap">
 
-
-                        <div class="hero-logo-wrap reveal">
-
-                            <div class="hero-logo-glow"></div>
-
-                            <img
-                                id="mainLogo"
-                                class="hero-logo"
-                                src="metiz-project-logo.png"
-                                alt="Логотип компании"
-                            >
-
-                        </div>
-
-
-                        <div
-                            class="location reveal reveal-delay-1"
-                            id="locationText"
+                        <img
+                            id="mainLogo"
+                            class="main-logo"
+                            src="metiz-project-logo.png"
+                            alt="Логотип компании"
                         >
+
+                    </div>
+
+
+                    <div class="city">
+                        <span id="cityText">
                             Санкт-Петербург
-                        </div>
+                        </span>
+                    </div>
 
 
-                        <div class="eyebrow reveal reveal-delay-1">
+                    <h1 class="hero-title">
 
-                            <span class="eyebrow-line"></span>
-
-                            <span>Изготовление под заказ</span>
-
-                            <span class="eyebrow-line"></span>
-
-                        </div>
-
-
-                        <h1
-                            class="hero-title reveal reveal-delay-2"
-                            id="heroTitle"
-                        >
+                        <span id="heroTitle">
                             ПЕЧАТАЕМ И РЕЖЕМ
-                            <span>ПОД ВАШИ ЗАДАЧИ</span>
-                        </h1>
+                        </span>
+
+                        <br>
+
+                        <span class="accent"
+                              id="heroTitleAccent">
+                            ПОД ВАШИ ЗАДАЧИ
+                        </span>
+
+                    </h1>
 
 
-                        <p
-                            class="hero-description reveal reveal-delay-3"
-                            id="heroSubtitle"
-                        >
-                            Наклейки и печать на холсте — создаём именно то,
-                            что нужно для вашей задачи.
-                        </p>
+                    <p class="hero-subtitle"
+                       id="heroSubtitle">
+
+                        Изготавливаем наклейки и печатаем изображения
+                        на холсте под задачи наших клиентов.
+
+                    </p>
 
 
-                        <div class="service-grid reveal reveal-delay-3">
+                    <div class="service-buttons">
+
+                        <a href="#stickers"
+                           class="service-button">
+
+                            <span id="stickersButtonText">
+                                ИЗГОТОВЛЕНИЕ НАКЛЕЕК
+                            </span>
+
+                        </a>
 
 
-                            <!-- НАКЛЕЙКИ -->
+                        <a href="#canvas"
+                           class="service-button">
 
-                            <a
-                                href="#stickers"
-                                class="service-card"
-                                data-scroll
-                            >
+                            <span id="canvasButtonText">
+                                ПЕЧАТЬ НА ХОЛСТЕ
+                            </span>
 
-                                <div class="service-number">
-
-                                    <span>01 / УСЛУГА</span>
-
-                                    <span class="service-arrow">
-                                        ↗
-                                    </span>
-
-                                </div>
-
-                                <div class="service-card-content">
-
-                                    <h2>
-                                        ИЗГОТОВЛЕНИЕ
-                                        НАКЛЕЕК
-                                    </h2>
-
-                                    <p>
-                                        Печатаем и режем под ваши задачи.
-                                    </p>
-
-                                </div>
-
-                            </a>
-
-
-                            <!-- ХОЛСТ -->
-
-                            <a
-                                href="#canvas"
-                                class="service-card"
-                                data-scroll
-                            >
-
-                                <div class="service-number">
-
-                                    <span>02 / УСЛУГА</span>
-
-                                    <span class="service-arrow">
-                                        ↗
-                                    </span>
-
-                                </div>
-
-                                <div class="service-card-content">
-
-                                    <h2>
-                                        ПЕЧАТЬ
-                                        НА ХОЛСТЕ
-                                    </h2>
-
-                                    <p>
-                                        Фотографии и изображения на холсте.
-                                    </p>
-
-                                </div>
-
-                            </a>
-
-                        </div>
+                        </a>
 
                     </div>
 
                 </div>
 
+            </div>
 
-                <div class="scroll-hint">
-
-                    <span class="scroll-mouse"></span>
-
-                    <span>Scroll</span>
-
-                </div>
-
-            </section>
+        </section>
 
 
+        <!-- =====================================================
+             STICKERS
+             ===================================================== -->
 
-            <!-- =================================================
-                 НАКЛЕЙКИ
-            ================================================== -->
+        <section class="section service-section"
+                 id="stickers">
 
-            <section
-                class="section service-section"
-                id="stickers"
-                data-section="stickers"
-            >
+            <div class="container">
 
-                <div class="container">
+                <div class="service-header reveal">
 
-                    <div class="section-header reveal">
+                    <div class="service-intro">
 
                         <div class="section-label">
                             Направление 01
                         </div>
 
                         <h2 class="section-title">
-                            Изготовление
+                            Изготовление<br>
                             наклеек
                         </h2>
 
-                        <p class="section-lead">
-                            Наклейки на заказ по вашему макету,
-                            эскизу или примеру. Печатаем и режем
-                            под конкретные задачи.
-                        </p>
+                        <div class="section-description"
+                             id="stickersDescription">
 
-                    </div>
+                            <p>
+                                Здесь размещается описание услуги
+                                по изготовлению наклеек.
+                            </p>
 
-
-                    <div class="service-layout">
-
-
-                        <div class="service-intro reveal">
-
-                            <h3>
-                                Наклейки
-                                под вашу задачу
-                            </h3>
-
-                            <p id="stickersIntro">
-                                Закажите изготовление наклеек,
-                                подготовив собственный макет
-                                или описав, что необходимо изготовить.
+                            <p>
+                                Вы можете самостоятельно заменить
+                                этот текст в блоке настроек сайта.
                             </p>
 
                         </div>
 
+                    </div>
 
-                        <div class="service-info">
 
+                    <div class="service-badge"
+                         aria-hidden="true">
 
-                            <!-- РЕДАКТИРУЕМЫЙ ТЕКСТ -->
-
-                            <div class="text-card reveal">
-
-                                <p id="stickersText">
-                                    Здесь размещается описание услуги
-                                    изготовления наклеек. Вы можете
-                                    самостоятельно заменить этот текст
-                                    в настройках сайта.
-                                </p>
-
-                                <p>
-                                    Можно указать здесь дополнительную
-                                    информацию о подготовке макета,
-                                    особенностях заказа и порядке
-                                    согласования.
-                                </p>
-
-                            </div>
-
-
-                            <!-- КАК ЗАКАЗАТЬ -->
-
-                            <div
-                                id="how-to-order"
-                                class="steps-title reveal"
-                            >
-                                КАК ЗАКАЗАТЬ
-                            </div>
-
-                            <div class="steps">
-
-
-                                <div class="step reveal">
-
-                                    <div class="step-number">
-                                        01
-                                    </div>
-
-                                    <p>
-                                        Отправьте макет или напишите,
-                                        что нужно изготовить.
-                                    </p>
-
-                                </div>
-
-
-                                <div class="step reveal reveal-delay-1">
-
-                                    <div class="step-number">
-                                        02
-                                    </div>
-
-                                    <p>
-                                        Мы уточним детали заказа.
-                                    </p>
-
-                                </div>
-
-
-                                <div class="step reveal reveal-delay-2">
-
-                                    <div class="step-number">
-                                        03
-                                    </div>
-
-                                    <p>
-                                        Согласуем изготовление.
-                                    </p>
-
-                                </div>
-
-
-                                <div class="step reveal reveal-delay-3">
-
-                                    <div class="step-number">
-                                        04
-                                    </div>
-
-                                    <p>
-                                        Изготавливаем заказ.
-                                    </p>
-
-                                </div>
-
-
-                                <div class="step reveal">
-
-                                    <div class="step-number">
-                                        05
-                                    </div>
-
-                                    <p>
-                                        Вы забираете готовый заказ.
-                                    </p>
-
-                                </div>
-
-                            </div>
-
-
-                            <!-- CTA -->
-
-                            <div
-                                class="order-card reveal"
-                                id="contacts"
-                            >
-
-                                <div class="order-card-content">
-
-                                    <h3>
-                                        ЗАКАЗАТЬ
-                                        НАКЛЕЙКИ
-                                    </h3>
-
-                                    <p class="order-card-description">
-                                        Выберите удобный способ связи
-                                        и отправьте макет или расскажите,
-                                        что необходимо изготовить.
-                                    </p>
-
-
-                                    <div class="social-grid">
-
-
-                                        <!-- VK -->
-
-                                        <a
-                                            href="#"
-                                            class="button button-social"
-                                            data-link="VK_LINK"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                        >
-
-                                            <svg
-                                                class="social-icon"
-                                                viewBox="0 0 24 24"
-                                                fill="currentColor"
-                                                aria-hidden="true"
-                                            >
-                                                <path d="M13.08 17.13c-5.45 0-8.56-3.74-8.69-9.96h2.73c.09 4.56 2.1 6.49 3.69 6.89V7.17h2.57v3.94c1.98-.21 3.53-1.97 4.23-3.94h2.57c-.43 2.45-2.12 4.21-3.25 4.93 1.13.6 3.03 2.13 3.79 5.03h-2.83c-.75-2.1-2.12-3.73-4.51-3.98v3.98h-.3z"/>
-                                            </svg>
-
-                                            <span>
-                                                Написать во ВКонтакте
-                                            </span>
-
-                                        </a>
-
-
-                                        <!-- TELEGRAM -->
-
-                                        <a
-                                            href="#"
-                                            class="button button-social"
-                                            data-link="TELEGRAM_LINK"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                        >
-
-                                            <svg
-                                                class="social-icon"
-                                                viewBox="0 0 24 24"
-                                                fill="currentColor"
-                                                aria-hidden="true"
-                                            >
-                                                <path d="M21.8 4.4 18.5 20c-.25 1.1-.9 1.37-1.82.86l-5.02-3.7-2.42 2.33c-.27.27-.5.5-1.02.5l.36-5.11 9.3-8.4c.4-.36-.09-.56-.62-.2L5.77 13.2.82 11.65c-1.08-.34-1.1-1.08.23-1.6L20.4 2.9c.9-.33 1.69.2 1.4 1.5z"/>
-                                            </svg>
-
-                                            <span>
-                                                Написать в Telegram
-                                            </span>
-
-                                        </a>
-
-
-                                        <!-- WHATSAPP -->
-
-                                        <a
-                                            href="#"
-                                            class="button button-social"
-                                            data-link="WHATSAPP_LINK"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                        >
-
-                                            <svg
-                                                class="social-icon"
-                                                viewBox="0 0 24 24"
-                                                fill="currentColor"
-                                                aria-hidden="true"
-                                            >
-                                                <path d="M20.5 3.5A11.8 11.8 0 0 0 12.08 0C5.54 0 .22 5.32.22 11.86c0 2.09.55 4.13 1.59 5.93L.12 24l6.35-1.66a11.86 11.86 0 0 0 5.61 1.43h.01c6.54 0 11.86-5.32 11.86-11.86a11.8 11.8 0 0 0-3.45-8.41ZM12.09 21.8a9.85 9.85 0 0 1-5.03-1.38l-.36-.22-3.77.99 1.01-3.67-.24-.38a9.84 9.84 0 1 1 8.39 4.66Zm5.4-7.37c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.95 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.47-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.1 3.2 5.09 4.49.71.31 1.27.5 1.7.64.71.23 1.35.2 1.86.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35Z"/>
-                                            </svg>
-
-                                            <span>
-                                                Написать в WhatsApp
-                                            </span>
-
-                                        </a>
-
-
-                                        <!-- VK GROUP -->
-
-                                        <a
-                                            href="#"
-                                            class="button button-social"
-                                            data-link="VK_GROUP_LINK"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                        >
-
-                                            <svg
-                                                class="social-icon"
-                                                viewBox="0 0 24 24"
-                                                fill="currentColor"
-                                                aria-hidden="true"
-                                            >
-                                                <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm5.18 14.5h-1.45c-.55 0-.72-.43-1.72-1.42-.87-.83-1.26-.94-1.48-.94-.3 0-.39.08-.39.5v1.3c0 .35-.11.56-1.02.56a5.56 5.56 0 0 1-4.35-2.34C4.99 12.86 4.2 10.3 4.2 9.76c0-.24.08-.46.5-.46h1.45c.37 0 .51.17.66.58.72 2.09 1.93 3.91 2.43 3.91.19 0 .28-.09.28-.58v-2.12c-.06-.97-.57-1.05-.57-1.4 0-.17.14-.35.37-.35h2.28c.31 0 .42.17.42.55v2.86c0 .31.13.42.22.42.2 0 .37-.11.72-.46 1.11-1.24 1.89-3.15 1.89-3.15.1-.24.29-.46.66-.46h1.45c.44 0 .54.22.44.53-.18.83-1.92 3.28-1.92 3.28-.16.27-.22.39 0 .68.16.22.7.67 1.07 1.08.66.74 1.17 1.36 1.17 1.36.22.37.11.67-.36.67Z"/>
-                                            </svg>
-
-                                            <span>
-                                                Вступить в группу ВК
-                                            </span>
-
-                                        </a>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
+                        STICKERS
 
                     </div>
 
                 </div>
 
-            </section>
+
+                <!-- PROCESS -->
+
+                <div class="process reveal"
+                     id="stickerProcess">
+
+                    <article class="process-card">
+
+                        <div class="process-number">
+                            01
+                        </div>
+
+                        <div class="process-title">
+                            Отправьте макет или напишите,
+                            что нужно изготовить
+                        </div>
+
+                    </article>
 
 
+                    <article class="process-card">
 
-            <!-- =================================================
-                 ХОЛСТ
-            ================================================== -->
+                        <div class="process-number">
+                            02
+                        </div>
 
-            <section
-                class="section service-section"
-                id="canvas"
-                data-section="canvas"
-            >
+                        <div class="process-title">
+                            Мы уточним детали заказа
+                        </div>
 
-                <div class="container">
+                    </article>
 
-                    <div class="section-header reveal">
+
+                    <article class="process-card">
+
+                        <div class="process-number">
+                            03
+                        </div>
+
+                        <div class="process-title">
+                            Согласуем изготовление
+                        </div>
+
+                    </article>
+
+
+                    <article class="process-card">
+
+                        <div class="process-number">
+                            04
+                        </div>
+
+                        <div class="process-title">
+                            Изготавливаем заказ
+                        </div>
+
+                    </article>
+
+
+                    <article class="process-card">
+
+                        <div class="process-number">
+                            05
+                        </div>
+
+                        <div class="process-title">
+                            Вы забираете готовый заказ
+                        </div>
+
+                    </article>
+
+                </div>
+
+
+                <!-- ORDER -->
+
+                <div class="order-area reveal"
+                     id="order">
+
+                    <h3>
+                        ЗАКАЗАТЬ НАКЛЕЙКИ
+                    </h3>
+
+
+                    <div class="social-grid"
+                         id="stickerContacts">
+
+                        <!-- VK -->
+
+                        <a class="social-button"
+                           id="stickerVkLink"
+                           href="#"
+                           target="_blank"
+                           rel="noopener noreferrer">
+
+                            <svg class="social-icon"
+                                 viewBox="0 0 24 24"
+                                 fill="none"
+                                 aria-hidden="true">
+
+                                <path
+                                    d="M3 6.5C3.2 5.4 3.7 5 4.8 5h2.7c.7 0 1 .3 1.2 1 .5 1.5 1.2 3 2.3 4.2.4.5.7.7.9.7.2 0 .3-.2.3-.7V7.1c0-.7-.2-.9-.9-1.1V5h4.4c.5 0 .7.2.7.6v4.7c0 .3.1.5.3.5.2 0 .5-.2.8-.6 1.1-1.3 1.9-2.8 2.4-4.4.2-.6.5-.8 1.1-.8H22c.6 0 .8.3.6.9-.6 2-1.5 3.8-2.8 5.5-.3.4-.4.7-.4.9 0 .2.1.4.5.7 1.3 1.1 2.3 2.2 3.1 3.4.4.6.2 1.1-.5 1.1h-2.8c-.8 0-1.2-.2-1.7-.8-.8-1-1.7-1.9-2.7-2.7-.4-.3-.7-.4-.9-.4-.3 0-.4.2-.4.7v1.8c0 1-.3 1.4-1.3 1.4-3.5 0-6.3-2-8.3-5.1C3.8 9.6 3.2 8 3 6.5Z"
+                                    fill="currentColor"/>
+
+                            </svg>
+
+                            <span>
+                                Написать во ВКонтакте
+                            </span>
+
+                        </a>
+
+
+                        <!-- TELEGRAM -->
+
+                        <a class="social-button"
+                           id="stickerTelegramLink"
+                           href="#"
+                           target="_blank"
+                           rel="noopener noreferrer">
+
+                            <svg class="social-icon"
+                                 viewBox="0 0 24 24"
+                                 fill="none"
+                                 aria-hidden="true">
+
+                                <path
+                                    d="M21.5 4.5 18.4 19c-.2 1-.8 1.2-1.6.8l-4.7-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.8 8.7-7.9c.4-.4-.1-.6-.6-.2L6.5 13 1.9 11.6c-1-.3-1-1 .2-1.5L20 3c.9-.3 1.7.2 1.5 1.5Z"
+                                    fill="currentColor"/>
+
+                            </svg>
+
+                            <span>
+                                Написать в Telegram
+                            </span>
+
+                        </a>
+
+
+                        <!-- WHATSAPP -->
+
+                        <a class="social-button"
+                           id="stickerWhatsappLink"
+                           href="#"
+                           target="_blank"
+                           rel="noopener noreferrer">
+
+                            <svg class="social-icon"
+                                 viewBox="0 0 24 24"
+                                 fill="none"
+                                 aria-hidden="true">
+
+                                <path
+                                    d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.7-1.2A9 9 0 1 0 12 3Zm0 16.2a7.2 7.2 0 0 1-3.7-1l-.3-.2-2.8.7.7-2.7-.2-.3A7.2 7.2 0 1 1 12 19.2Zm4-5.4c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1-.2.2-.6.8-.7.9-.1.2-.3.2-.5.1-1.5-.7-2.5-1.2-3.5-2.8-.3-.5.3-.5.8-1.6.1-.2.1-.4 0-.5l-.4-1.1c-.1-.3-.3-.3-.5-.3h-.4c-.2 0-.5.1-.7.3-.8.8-1 2-.2 3.1 1.1 1.6 2.1 2.3 3.8 3.1.6.3 1.1.4 1.5.3.5-.1 1.4-.6 1.6-1.2.2-.6.2-1.1.1-1.2-.1-.1-.3-.1-.5-.2Z"
+                                    fill="currentColor"/>
+
+                            </svg>
+
+                            <span>
+                                Написать в WhatsApp
+                            </span>
+
+                        </a>
+
+
+                        <!-- VK GROUP -->
+
+                        <a class="social-button"
+                           id="stickerVkGroupLink"
+                           href="#"
+                           target="_blank"
+                           rel="noopener noreferrer">
+
+                            <svg class="social-icon"
+                                 viewBox="0 0 24 24"
+                                 fill="none"
+                                 aria-hidden="true">
+
+                                <path
+                                    d="M12 4c-4.7 0-8 3.3-8 8s3.3 8 8 8 8-3.3 8-8-3.3-8-8-8Zm3.8 8.8c.3.3.8.7 1.1 1.2.3.4.2.8-.3.8h-1.1c-.4 0-.6-.1-.8-.4-.4-.5-.8-.9-1.3-1.2-.2-.1-.3-.1-.4-.1-.1 0-.2.1-.2.3v.9c0 .3-.1.5-.5.5-1.4 0-2.5-.8-3.3-2-.7-1-1-1.7-1.2-2.4-.1-.4 0-.5.4-.5h1.1c.3 0 .4.1.5.4.2.6.5 1.2.9 1.7.2.3.4.5.5.5.1 0 .2-.1.2-.4V10c0-.3-.1-.4-.4-.5V9h1.7c.2 0 .3.1.3.3v1.9c0 .1.1.2.1.2.1 0 .2-.1.3-.2.4-.5.7-1.1.9-1.8.1-.2.2-.3.4-.3h1.1c.2 0 .3.1.2.4-.2.8-.6 1.5-1.1 2.1-.1.2-.2.3-.2.4s.1.2.3.3Z"
+                                    fill="currentColor"/>
+
+                            </svg>
+
+                            <span>
+                                Вступить в группу ВКонтакте
+                            </span>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <div class="section-divider"></div>
+
+
+        <!-- =====================================================
+             CANVAS
+             ===================================================== -->
+
+        <section class="section service-section"
+                 id="canvas">
+
+            <div class="container">
+
+                <div class="service-header reveal">
+
+                    <div class="service-intro">
 
                         <div class="section-label">
                             Направление 02
                         </div>
 
                         <h2 class="section-title">
-                            Печать
+                            Печать<br>
                             на холсте
                         </h2>
 
-                        <p class="section-lead">
-                            Печать фотографий, картин и изображений
-                            на холсте под вашу задачу.
-                        </p>
+                        <div class="section-description"
+                             id="canvasDescription">
 
-                    </div>
+                            <p>
+                                Здесь размещается описание услуги
+                                по печати изображений на холсте.
+                            </p>
 
-
-                    <div class="service-layout">
-
-
-                        <div class="service-intro reveal">
-
-                            <h3>
-                                Ваше изображение
-                                на холсте
-                            </h3>
-
-                            <p id="canvasIntro">
-                                Передайте фотографию или изображение,
-                                а детали заказа мы согласуем отдельно.
+                            <p>
+                                Вы можете самостоятельно заменить
+                                этот текст в блоке настроек сайта.
                             </p>
 
                         </div>
 
+                    </div>
 
-                        <div class="service-info">
 
+                    <div class="service-badge"
+                         aria-hidden="true">
 
-                            <!-- РЕДАКТИРУЕМЫЙ ТЕКСТ -->
-
-                            <div class="text-card reveal">
-
-                                <p id="canvasText">
-                                    Здесь размещается описание услуги
-                                    печати на холсте. Вы можете
-                                    самостоятельно заменить этот текст
-                                    в настройках сайта.
-                                </p>
-
-                                <p>
-                                    Можно указать здесь дополнительную
-                                    информацию об оформлении заказа,
-                                    подготовке изображения и других
-                                    особенностях услуги.
-                                </p>
-
-                            </div>
-
-
-                            <!-- КАК ЗАКАЗАТЬ ХОЛСТ -->
-
-                            <div class="steps-title reveal">
-                                КАК ЗАКАЗАТЬ
-                            </div>
-
-                            <div class="steps">
-
-
-                                <div class="step reveal">
-
-                                    <div class="step-number">
-                                        01
-                                    </div>
-
-                                    <p>
-                                        Отправьте фотографию
-                                        или изображение.
-                                    </p>
-
-                                </div>
-
-
-                                <div class="step reveal reveal-delay-1">
-
-                                    <div class="step-number">
-                                        02
-                                    </div>
-
-                                    <p>
-                                        Обсудим необходимые размеры.
-                                    </p>
-
-                                </div>
-
-
-                                <div class="step reveal reveal-delay-2">
-
-                                    <div class="step-number">
-                                        03
-                                    </div>
-
-                                    <p>
-                                        Согласуем заказ.
-                                    </p>
-
-                                </div>
-
-
-                                <div class="step reveal reveal-delay-3">
-
-                                    <div class="step-number">
-                                        04
-                                    </div>
-
-                                    <p>
-                                        Изготавливаем холст.
-                                    </p>
-
-                                </div>
-
-
-                                <div class="step reveal">
-
-                                    <div class="step-number">
-                                        05
-                                    </div>
-
-                                    <p>
-                                        Вы забираете готовый заказ.
-                                    </p>
-
-                                </div>
-
-                            </div>
-
-
-                            <!-- CTA ХОЛСТ -->
-
-                            <div class="order-card reveal">
-
-                                <div class="order-card-content">
-
-                                    <h3>
-                                        ЗАКАЗАТЬ
-                                        ПЕЧАТЬ НА ХОЛСТЕ
-                                    </h3>
-
-                                    <p class="order-card-description">
-                                        Выберите удобный способ связи
-                                        и отправьте фотографию или
-                                        изображение для заказа.
-                                    </p>
-
-
-                                    <div
-                                        class="button-row"
-                                        style="margin-bottom:12px;"
-                                    >
-
-                                        <a
-                                            href="#"
-                                            class="button button-primary"
-                                            data-link="VK_LINK"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                        >
-                                            ЗАКАЗАТЬ
-                                        </a>
-
-                                    </div>
-
-
-                                    <div class="social-grid">
-
-
-                                        <a
-                                            href="#"
-                                            class="button button-social"
-                                            data-link="VK_LINK"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                        >
-
-                                            <svg
-                                                class="social-icon"
-                                                viewBox="0 0 24 24"
-                                                fill="currentColor"
-                                            >
-                                                <path d="M13.08 17.13c-5.45 0-8.56-3.74-8.69-9.96h2.73c.09 4.56 2.1 6.49 3.69 6.89V7.17h2.57v3.94c1.98-.21 3.53-1.97 4.23-3.94h2.57c-.43 2.45-2.12 4.21-3.25 4.93 1.13.6 3.03 2.13 3.79 5.03h-2.83c-.75-2.1-2.12-3.73-4.51-3.98v3.98h-.3z"/>
-                                            </svg>
-
-                                            Написать во ВКонтакте
-
-                                        </a>
-
-
-                                        <a
-                                            href="#"
-                                            class="button button-social"
-                                            data-link="TELEGRAM_LINK"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                        >
-
-                                            <svg
-                                                class="social-icon"
-                                                viewBox="0 0 24 24"
-                                                fill="currentColor"
-                                            >
-                                                <path d="M21.8 4.4 18.5 20c-.25 1.1-.9 1.37-1.82.86l-5.02-3.7-2.42 2.33c-.27.27-.5.5-1.02.5l.36-5.11 9.3-8.4c.4-.36-.09-.56-.62-.2L5.77 13.2.82 11.65c-1.08-.34-1.1-1.08.23-1.6L20.4 2.9c.9-.33 1.69.2 1.4 1.5z"/>
-                                            </svg>
-
-                                            Написать в Telegram
-
-                                        </a>
-
-
-                                        <a
-                                            href="#"
-                                            class="button button-social"
-                                            data-link="WHATSAPP_LINK"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                        >
-
-                                            <svg
-                                                class="social-icon"
-                                                viewBox="0 0 24 24"
-                                                fill="currentColor"
-                                            >
-                                                <path d="M20.5 3.5A11.8 11.8 0 0 0 12.08 0C5.54 0 .22 5.32.22 11.86c0 2.09.55 4.13 1.59 5.93L.12 24l6.35-1.66a11.86 11.86 0 0 0 5.61 1.43h.01c6.54 0 11.86-5.32 11.86-11.86a11.8 11.8 0 0 0-3.45-8.41ZM12.09 21.8a9.85 9.85 0 0 1-5.03-1.38l-.36-.22-3.77.99 1.01-3.67-.24-.38a9.84 9.84 0 1 1 8.39 4.66Zm5.4-7.37c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.95 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.47-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.1 3.2 5.09 4.49.71.31 1.27.5 1.7.64.71.23 1.35.2 1.86.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35Z"/>
-                                            </svg>
-
-                                            Написать в WhatsApp
-
-                                        </a>
-
-
-                                        <a
-                                            href="#"
-                                            class="button button-social"
-                                            data-link="VK_GROUP_LINK"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                        >
-
-                                            <svg
-                                                class="social-icon"
-                                                viewBox="0 0 24 24"
-                                                fill="currentColor"
-                                            >
-                                                <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm5.18 14.5h-1.45c-.55 0-.72-.43-1.72-1.42-.87-.83-1.26-.94-1.48-.94-.3 0-.39.08-.39.5v1.3c0 .35-.11.56-1.02.56a5.56 5.56 0 0 1-4.35-2.34C4.99 12.86 4.2 10.3 4.2 9.76c0-.24.08-.46.5-.46h1.45c.37 0 .51.17.66.58.72 2.09 1.93 3.91 2.43 3.91.19 0 .28-.09.28-.58v-2.12c-.06-.97-.57-1.05-.57-1.4 0-.17.14-.35.37-.35h2.28c.31 0 .42.17.42.55v2.86c0 .31.13.42.22.42.2 0 .37-.11.72-.46 1.11-1.24 1.89-3.15 1.89-3.15.1-.24.29-.46.66-.46h1.45c.44 0 .54.22.44.53-.18.83-1.92 3.28-1.92 3.28-.16.27-.22.39 0 .68.16.22.7.67 1.07 1.08.66.74 1.17 1.36 1.17 1.36.22.37.11.67-.36.67Z"/>
-                                            </svg>
-
-                                            Вступить в группу ВК
-
-                                        </a>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
+                        CANVAS
 
                     </div>
 
                 </div>
 
-            </section>
 
+                <!-- PROCESS -->
 
+                <div class="process reveal">
 
-            <!-- =================================================
-                 САМОВЫВОЗ
-            ================================================== -->
+                    <article class="process-card">
 
-            <section
-                class="pickup-section"
-                id="pickup"
-                data-section="pickup"
-            >
-
-                <div class="container">
-
-                    <div class="pickup-card reveal">
-
-
-                        <div class="pickup-content">
-
-                            <div class="pickup-label">
-                                Получение заказа
-                            </div>
-
-                            <h2 class="pickup-title">
-                                ЗАБИРАЙТЕ
-                                ГОТОВЫЙ ЗАКАЗ
-                            </h2>
-
-                            <p
-                                class="pickup-description"
-                                id="pickupDescription"
-                            >
-                                Только самовывоз. Готовый заказ можно
-                                забрать самостоятельно по указанному
-                                адресу.
-                            </p>
-
+                        <div class="process-number">
+                            01
                         </div>
 
-
-                        <div class="pickup-action">
-
-                            <a
-                                id="routeButton"
-                                class="button button-route"
-                                href="#"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-
-                                <!-- Стилизованный знак Яндекс Навигатора -->
-
-                                <svg
-                                    class="route-icon"
-                                    viewBox="0 0 24 24"
-                                    aria-hidden="true"
-                                >
-
-                                    <circle
-                                        cx="12"
-                                        cy="12"
-                                        r="10"
-                                        fill="#ffcc00"
-                                    />
-
-                                    <path
-                                        d="M12 4.7 18 18l-6-2.8L6 18 12 4.7Z"
-                                        fill="#ff2b2b"
-                                    />
-
-                                    <circle
-                                        cx="12"
-                                        cy="11.2"
-                                        r="2"
-                                        fill="#ffffff"
-                                    />
-
-                                </svg>
-
-                                <span>
-                                    ПОСТРОИТЬ МАРШРУТ
-                                </span>
-
-                            </a>
-
+                        <div class="process-title">
+                            Отправьте фотографию
+                            или изображение
                         </div>
 
-                    </div>
+                    </article>
+
+
+                    <article class="process-card">
+
+                        <div class="process-number">
+                            02
+                        </div>
+
+                        <div class="process-title">
+                            Обсудим размеры
+                        </div>
+
+                    </article>
+
+
+                    <article class="process-card">
+
+                        <div class="process-number">
+                            03
+                        </div>
+
+                        <div class="process-title">
+                            Согласуем заказ
+                        </div>
+
+                    </article>
+
+
+                    <article class="process-card">
+
+                        <div class="process-number">
+                            04
+                        </div>
+
+                        <div class="process-title">
+                            Изготавливаем холст
+                        </div>
+
+                    </article>
+
+
+                    <article class="process-card">
+
+                        <div class="process-number">
+                            05
+                        </div>
+
+                        <div class="process-title">
+                            Вы забираете готовый заказ
+                        </div>
+
+                    </article>
 
                 </div>
 
-            </section>
+
+                <!-- ORDER -->
+
+                <div class="order-area reveal"
+                     id="canvasOrder">
+
+                    <h3>
+                        ЗАКАЗАТЬ ПЕЧАТЬ НА ХОЛСТЕ
+                    </h3>
 
 
+                    <div class="social-grid">
 
-            <!-- =================================================
-                 FOOTER
-            ================================================== -->
+                        <!-- VK -->
 
-            <footer>
+                        <a class="social-button"
+                           id="canvasVkLink"
+                           href="#"
+                           target="_blank"
+                           rel="noopener noreferrer">
 
-                <div class="container">
+                            <svg class="social-icon"
+                                 viewBox="0 0 24 24"
+                                 fill="none">
 
-                    <div class="footer-main">
+                                <path
+                                    d="M3 6.5C3.2 5.4 3.7 5 4.8 5h2.7c.7 0 1 .3 1.2 1 .5 1.5 1.2 3 2.3 4.2.4.5.7.7.9.7.2 0 .3-.2.3-.7V7.1c0-.7-.2-.9-.9-1.1V5h4.4c.5 0 .7.2.7.6v4.7c0 .3.1.5.3.5.2 0 .5-.2.8-.6 1.1-1.3 1.9-2.8 2.4-4.4.2-.6.5-.8 1.1-.8H22c.6 0 .8.3.6.9-.6 2-1.5 3.8-2.8 5.5-.3.4-.4.7-.4.9 0 .2.1.4.5.7 1.3 1.1 2.3 2.2 3.1 3.4.4.6.2 1.1-.5 1.1h-2.8c-.8 0-1.2-.2-1.7-.8-.8-1-1.7-1.9-2.7-2.7-.4-.3-.7-.4-.9-.4-.3 0-.4.2-.4.7v1.8c0 1-.3 1.4-1.3 1.4-3.5 0-6.3-2-8.3-5.1C3.8 9.6 3.2 8 3 6.5Z"
+                                    fill="currentColor"/>
 
+                            </svg>
 
-                        <div
-                            class="footer-company"
-                            id="footerCompany"
-                        >
-                            METIZ PROJECT
-                        </div>
-
-
-                        <div class="footer-buttons">
-
-
-                            <a
-                                href="#contacts"
-                                class="button button-secondary"
-                            >
-                                Связаться
-                            </a>
-
-
-                            <a
-                                href="#pickup"
-                                class="button button-secondary"
-                            >
-                                Самовывоз
-                            </a>
-
-
-                            <button
-                                type="button"
-                                class="button button-primary"
-                                id="shareButton"
-                            >
-                                Поделиться сайтом
-                            </button>
-
-                        </div>
-
-
-                        <div
-                            class="footer-info"
-                            id="footerPickupInfo"
-                        >
-                            Только самовывоз
-                        </div>
-
-
-                        <div class="footer-copyright">
-
-                            © <span id="currentYear"></span>
-                            <span id="copyrightCompany">
-                                METIZ PROJECT
+                            <span>
+                                Написать во ВКонтакте
                             </span>
 
-                        </div>
+                        </a>
+
+
+                        <!-- TELEGRAM -->
+
+                        <a class="social-button"
+                           id="canvasTelegramLink"
+                           href="#"
+                           target="_blank"
+                           rel="noopener noreferrer">
+
+                            <svg class="social-icon"
+                                 viewBox="0 0 24 24"
+                                 fill="none">
+
+                                <path
+                                    d="M21.5 4.5 18.4 19c-.2 1-.8 1.2-1.6.8l-4.7-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.8 8.7-7.9c.4-.4-.1-.6-.6-.2L6.5 13 1.9 11.6c-1-.3-1-1 .2-1.5L20 3c.9-.3 1.7.2 1.5 1.5Z"
+                                    fill="currentColor"/>
+
+                            </svg>
+
+                            <span>
+                                Написать в Telegram
+                            </span>
+
+                        </a>
+
+
+                        <!-- WHATSAPP -->
+
+                        <a class="social-button"
+                           id="canvasWhatsappLink"
+                           href="#"
+                           target="_blank"
+                           rel="noopener noreferrer">
+
+                            <svg class="social-icon"
+                                 viewBox="0 0 24 24"
+                                 fill="none">
+
+                                <path
+                                    d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.7-1.2A9 9 0 1 0 12 3Zm0 16.2a7.2 7.2 0 0 1-3.7-1l-.3-.2-2.8.7.7-2.7-.2-.3A7.2 7.2 0 1 1 12 19.2Zm4-5.4c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1-.2.2-.6.8-.7.9-.1.2-.3.2-.5.1-1.5-.7-2.5-1.2-3.5-2.8-.3-.5.3-.5.8-1.6.1-.2.1-.4 0-.5l-.4-1.1c-.1-.3-.3-.3-.5-.3h-.4c-.2 0-.5.1-.7.3-.8.8-1 2-.2 3.1 1.1 1.6 2.1 2.3 3.8 3.1.6.3 1.1.4 1.5.3.5-.1 1.4-.6 1.6-1.2.2-.6.2-1.1.1-1.2-.1-.1-.3-.1-.5-.2Z"
+                                    fill="currentColor"/>
+
+                            </svg>
+
+                            <span>
+                                Написать в WhatsApp
+                            </span>
+
+                        </a>
+
+
+                        <!-- VK GROUP -->
+
+                        <a class="social-button"
+                           id="canvasVkGroupLink"
+                           href="#"
+                           target="_blank"
+                           rel="noopener noreferrer">
+
+                            <svg class="social-icon"
+                                 viewBox="0 0 24 24"
+                                 fill="none">
+
+                                <path
+                                    d="M12 4c-4.7 0-8 3.3-8 8s3.3 8 8 8 8-3.3 8-8-3.3-8-8-8Zm3.8 8.8c.3.3.8.7 1.1 1.2.3.4.2.8-.3.8h-1.1c-.4 0-.6-.1-.8-.4-.4-.5-.8-.9-1.3-1.2-.2-.1-.3-.1-.4-.1-.1 0-.2.1-.2.3v.9c0 .3-.1.5-.5.5-1.4 0-2.5-.8-3.3-2-.7-1-1-1.7-1.2-2.4-.1-.4 0-.5.4-.5h1.1c.3 0 .4.1.5.4.2.6.5 1.2.9 1.7.2.3.4.5.5.5.1 0 .2-.1.2-.4V10c0-.3-.1-.4-.4-.5V9h1.7c.2 0 .3.1.3.3v1.9c0 .1.1.2.1.2.1 0 .2-.1.3-.2.4-.5.7-1.1.9-1.8.1-.2.2-.3.4-.3h1.1c.2 0 .3.1.2.4-.2.8-.6 1.5-1.1 2.1-.1.2-.2.3-.2.4s.1.2.3.3Z"
+                                    fill="currentColor"/>
+
+                            </svg>
+
+                            <span>
+                                Вступить в группу ВКонтакте
+                            </span>
+
+                        </a>
 
                     </div>
 
                 </div>
 
-            </footer>
+            </div>
 
-        </main>
+        </section>
 
-    </div>
+
+        <div class="section-divider"></div>
+
+
+        <!-- =====================================================
+             PICKUP
+             ===================================================== -->
+
+        <section class="pickup-section"
+                 id="pickup">
+
+            <div class="container">
+
+                <div class="pickup-card reveal">
+
+                    <div class="pickup-label">
+                        Получение заказа
+                    </div>
+
+                    <h2 class="pickup-title">
+                        ЗАБИРАЙТЕ
+                        <br>
+                        ГОТОВЫЙ ЗАКАЗ
+                    </h2>
+
+                    <div class="pickup-main">
+                        Только самовывоз
+                    </div>
+
+                    <p class="pickup-address"
+                       id="pickupAddress">
+
+                        Санкт-Петербург, парковка между
+                        Ленинским пр. 95к1 и 97к1
+
+                    </p>
+
+
+                    <a id="routeButton"
+                       class="route-button"
+                       href="#"
+                       target="_blank"
+                       rel="noopener noreferrer">
+
+                        <!-- Yandex Navigator icon -->
+
+                        <svg class="route-icon"
+                             viewBox="0 0 32 32"
+                             fill="none"
+                             aria-hidden="true">
+
+                            <circle
+                                cx="16"
+                                cy="16"
+                                r="15"
+                                fill="#FFCC00"/>
+
+                            <path
+                                d="M18.5 7.5h-3.1c-3.2 0-5.2 2-5.2 4.8 0 2.1 1.1 3.7 3 4.4L10.8 24h3.5l2.8-6.5h1.3V24h3.1V7.5h-3Zm0 7.2h-1.3c-2 0-3.3-.8-3.3-2.4 0-1.5 1-2.3 2.7-2.3h1.9v4.7Z"
+                                fill="#111"/>
+
+                        </svg>
+
+                        <span>
+                            ПОСТРОИТЬ МАРШРУТ
+                        </span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- =========================================================
+         FOOTER
+         ========================================================= -->
+
+    <footer class="footer"
+            id="contacts">
+
+        <div class="container">
+
+            <div class="footer-actions">
+
+                <a class="footer-button"
+                   href="#stickers">
+
+                    <svg width="18"
+                         height="18"
+                         viewBox="0 0 24 24"
+                         fill="none">
+
+                        <path
+                            d="M4 5h16v14H4z"
+                            stroke="currentColor"
+                            stroke-width="1.7"/>
+
+                        <path
+                            d="m7 9 3 3 2-2 5 5"
+                            stroke="currentColor"
+                            stroke-width="1.7"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"/>
+
+                    </svg>
+
+                    Связаться
+
+                </a>
+
+
+                <a class="footer-button"
+                   href="#pickup">
+
+                    <svg width="18"
+                         height="18"
+                         viewBox="0 0 24 24"
+                         fill="none">
+
+                        <path
+                            d="M12 21s7-6.1 7-12a7 7 0 1 0-14 0c0 5.9 7 12 7 12Z"
+                            stroke="currentColor"
+                            stroke-width="1.7"/>
+
+                        <circle
+                            cx="12"
+                            cy="9"
+                            r="2.2"
+                            stroke="currentColor"
+                            stroke-width="1.7"/>
+
+                    </svg>
+
+                    Самовывоз
+
+                </a>
+
+
+                <button class="footer-button share"
+                        id="shareButton"
+                        type="button">
+
+                    <svg width="18"
+                         height="18"
+                         viewBox="0 0 24 24"
+                         fill="none">
+
+                        <circle
+                            cx="18"
+                            cy="5"
+                            r="2.3"
+                            stroke="currentColor"
+                            stroke-width="1.7"/>
+
+                        <circle
+                            cx="6"
+                            cy="12"
+                            r="2.3"
+                            stroke="currentColor"
+                            stroke-width="1.7"/>
+
+                        <circle
+                            cx="18"
+                            cy="19"
+                            r="2.3"
+                            stroke="currentColor"
+                            stroke-width="1.7"/>
+
+                        <path
+                            d="m8 11 7.7-4.5M8 13l7.7 4.5"
+                            stroke="currentColor"
+                            stroke-width="1.7"/>
+
+                    </svg>
+
+                    Поделиться этим сайтом
+
+                </button>
+
+            </div>
+
+
+            <div class="footer-company"
+                 id="footerCompany">
+
+                НАЗВАНИЕ КОМПАНИИ
+
+            </div>
+
+
+            <div class="copyright">
+                © <span id="currentYear"></span>
+                Все права защищены.
+            </div>
+
+        </div>
+
+    </footer>
 
 
 
     <!-- =========================================================
-         JAVASCRIPT
-    ========================================================== -->
+         =========================================================
+                     JAVASCRIPT
+         =========================================================
+         ========================================================= -->
 
     <script>
 
-        /* =========================================================
-           ========================================================
-           НАСТРОЙКИ САЙТА
-           ========================================================
-           
-           ВСЕ ОСНОВНЫЕ ДАННЫЕ РЕДАКТИРУЮТСЯ ЗДЕСЬ.
+        /*
+        ============================================================
+        ================= НАСТРОЙКИ САЙТА ==========================
+        ============================================================
 
-           Вам не нужно искать ссылки или названия
-           по всему коду.
-           
-           ========================================================
+        ВСЕ ОСНОВНЫЕ ДАННЫЕ САЙТА СОБРАНЫ ЗДЕСЬ.
+
+        Вам не нужно искать ссылки и тексты по всему коду.
+
+        Просто замените значения ниже.
+
+        ============================================================
         */
 
-        const SITE_CONFIG = {
 
-            // -----------------------------------------------------
-            // ОСНОВНЫЕ ДАННЫЕ
-            // -----------------------------------------------------
+        const CONFIG = {
+
+            /* =====================================================
+               ОСНОВНЫЕ ДАННЫЕ
+               ===================================================== */
 
             COMPANY_NAME:
-                "METIZ PROJECT",
+                "НАЗВАНИЕ КОМПАНИИ",
 
             LOGO:
                 "metiz-project-logo.png",
 
-            LOCATION:
+
+            /* =====================================================
+               ГЛАВНЫЙ ЭКРАН
+               ===================================================== */
+
+            CITY:
                 "Санкт-Петербург",
 
-
-            // -----------------------------------------------------
-            // ГЛАВНЫЙ ЭКРАН
-            // -----------------------------------------------------
-
             HERO_TITLE:
-                "ПЕЧАТАЕМ И РЕЖЕМ ПОД ВАШИ ЗАДАЧИ",
+                "ПЕЧАТАЕМ И РЕЖЕМ",
+
+            HERO_TITLE_ACCENT:
+                "ПОД ВАШИ ЗАДАЧИ",
 
             HERO_SUBTITLE:
-                "Наклейки и печать на холсте — создаём именно то, что нужно для вашей задачи.",
+                "Изготавливаем наклейки и печатаем изображения на холсте под задачи наших клиентов.",
 
 
-            // -----------------------------------------------------
-            // ССЫЛКИ
-            //
-            // ВСТАВЬТЕ СЮДА СВОИ РЕАЛЬНЫЕ ССЫЛКИ.
-            //
-            // Пока здесь пустые строки — никаких
-            // вымышленных ссылок нет.
-            // -----------------------------------------------------
+            /* =====================================================
+               НАЗВАНИЯ ОСНОВНЫХ КНОПОК
+               ===================================================== */
+
+            STICKERS_BUTTON:
+                "ИЗГОТОВЛЕНИЕ НАКЛЕЕК",
+
+            CANVAS_BUTTON:
+                "ПЕЧАТЬ НА ХОЛСТЕ",
+
+
+            /* =====================================================
+               ОПИСАНИЕ НАКЛЕЕК
+               =====================================================
+
+               Здесь можно писать обычный HTML.
+
+               Например:
+
+               <p>Первый абзац.</p>
+               <p>Второй абзац.</p>
+
+            ===================================================== */
+
+            STICKERS_DESCRIPTION: `
+                <p>
+                    Изготавливаем наклейки на заказ под конкретные
+                    задачи клиента.
+                </p>
+
+                <p>
+                    Можно предоставить собственный макет, эскиз,
+                    пример или описание того, что необходимо изготовить.
+                    Возможна печать и резка.
+                </p>
+
+                <p>
+                    Перед изготовлением согласовываются необходимые
+                    детали заказа и подготовка макета.
+                </p>
+            `,
+
+
+            /* =====================================================
+               ОПИСАНИЕ ХОЛСТОВ
+               ===================================================== */
+
+            CANVAS_DESCRIPTION: `
+                <p>
+                    Печатаем фотографии, картины и другие изображения
+                    на холсте.
+                </p>
+
+                <p>
+                    Вы можете предоставить собственную фотографию,
+                    картинку или изображение для печати.
+                </p>
+
+                <p>
+                    Все необходимые детали заказа можно предварительно
+                    обсудить и согласовать.
+                </p>
+            `,
+
+
+            /* =====================================================
+               АДРЕС САМОВЫВОЗА
+               ===================================================== */
+
+            PICKUP_ADDRESS:
+                "Санкт-Петербург, парковка между Ленинским пр. 95к1 и 97к1",
+
+
+            /* =====================================================
+               ССЫЛКА ЯНДЕКС НАВИГАТОРА
+               ===================================================== */
+
+            YANDEX_NAVIGATOR_LINK:
+                "https://yandex.ru/maps/-/CThrBHy2",
+
+
+            /* =====================================================
+               СОЦИАЛЬНЫЕ ССЫЛКИ
+               =====================================================
+
+               ВАЖНО:
+
+               Сейчас здесь стоят пустые значения.
+
+               Вставьте сюда СВОИ реальные ссылки.
+
+            ===================================================== */
 
             VK_LINK:
                 "",
@@ -3100,158 +2964,269 @@
                 "",
 
             WHATSAPP_LINK:
-                "",
-
-
-            // -----------------------------------------------------
-            // ЯНДЕКС НАВИГАТОР
-            // -----------------------------------------------------
-
-            YANDEX_NAVIGATOR_LINK:
-                "https://yandex.ru/maps/-/CThrBHy2",
-
-
-            // -----------------------------------------------------
-            // НАКЛЕЙКИ
-            // -----------------------------------------------------
-
-            STICKERS_INTRO:
-                "Закажите изготовление наклеек, подготовив собственный макет или описав, что необходимо изготовить.",
-
-            STICKERS_TEXT:
-                "Здесь размещается описание услуги изготовления наклеек. Укажите здесь, какие наклейки вы изготавливаете, можно ли заказать их по своему эскизу или примеру, возможны ли печать и резка, а также другую информацию, которая важна вашим клиентам.",
-
-
-            // -----------------------------------------------------
-            // ХОЛСТЫ
-            // -----------------------------------------------------
-
-            CANVAS_INTRO:
-                "Передайте фотографию или изображение, а детали заказа мы согласуем отдельно.",
-
-            CANVAS_TEXT:
-                "Здесь размещается описание услуги печати на холсте. Укажите здесь, что можно напечатать фотографию, картину или другое изображение, а также добавьте необходимые особенности услуги.",
-
-
-            // -----------------------------------------------------
-            // САМОВЫВОЗ
-            //
-            // АДРЕС НЕ ПРИДУМЫВАЕМ.
-            // -----------------------------------------------------
-
-            PICKUP_DESCRIPTION:
-                "Только самовывоз. Готовый заказ можно забрать самостоятельно по указанному адресу.",
-
-            PICKUP_ADDRESS:
-                "АДРЕС САМОВЫВОЗА УКАЖИТЕ ЗДЕСЬ"
+                ""
 
         };
 
 
-        /* =========================================================
-           ПРИМЕНЕНИЕ НАСТРОЕК
-        ========================================================== */
+        /*
+        ============================================================
+        ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
+        ============================================================
+        */
 
-        document.title =
-            SITE_CONFIG.HERO_TITLE;
 
-        document.getElementById("mainLogo").src =
-            SITE_CONFIG.LOGO;
+        function setText(id, value) {
 
-        document.getElementById("navCompanyName").textContent =
-            SITE_CONFIG.COMPANY_NAME;
+            const element =
+                document.getElementById(id);
 
-        document.getElementById("footerCompany").textContent =
-            SITE_CONFIG.COMPANY_NAME;
+            if (element) {
+                element.textContent = value;
+            }
+        }
 
-        document.getElementById("copyrightCompany").textContent =
-            SITE_CONFIG.COMPANY_NAME;
 
-        document.getElementById("locationText").textContent =
-            SITE_CONFIG.LOCATION;
+        function setHTML(id, value) {
 
-        document.getElementById("heroTitle").textContent =
-            SITE_CONFIG.HERO_TITLE;
+            const element =
+                document.getElementById(id);
 
-        document.getElementById("heroSubtitle").textContent =
-            SITE_CONFIG.HERO_SUBTITLE;
+            if (element) {
+                element.innerHTML = value;
+            }
+        }
 
-        document.getElementById("stickersIntro").textContent =
-            SITE_CONFIG.STICKERS_INTRO;
 
-        document.getElementById("stickersText").textContent =
-            SITE_CONFIG.STICKERS_TEXT;
+        function setLink(id, value) {
 
-        document.getElementById("canvasIntro").textContent =
-            SITE_CONFIG.CANVAS_INTRO;
+            const element =
+                document.getElementById(id);
 
-        document.getElementById("canvasText").textContent =
-            SITE_CONFIG.CANVAS_TEXT;
+            if (!element) return;
 
-        document.getElementById("pickupDescription").textContent =
-            SITE_CONFIG.PICKUP_DESCRIPTION;
+            if (value && value.trim() !== "") {
 
-        document.getElementById("footerPickupInfo").textContent =
-            "Самовывоз • " + SITE_CONFIG.PICKUP_ADDRESS;
+                element.href = value;
 
-        document.getElementById("routeButton").href =
-            SITE_CONFIG.YANDEX_NAVIGATOR_LINK;
+                element.style.pointerEvents = "auto";
+                element.style.opacity = "1";
 
-        document.getElementById("currentYear").textContent =
+            } else {
+
+                /*
+                 * Если ссылка ещё не указана,
+                 * кнопка остаётся визуально активной,
+                 * но не ведёт на несуществующий адрес.
+                 */
+
+                element.href = "#";
+
+                element.addEventListener(
+                    "click",
+                    function(event) {
+
+                        event.preventDefault();
+
+                    },
+                    {
+                        once: false
+                    }
+                );
+            }
+        }
+
+
+        /*
+        ============================================================
+        ПРИМЕНЯЕМ НАСТРОЙКИ
+        ============================================================
+        */
+
+
+        setText(
+            "headerBrand",
+            CONFIG.COMPANY_NAME
+        );
+
+
+        setText(
+            "cityText",
+            CONFIG.CITY
+        );
+
+
+        setText(
+            "heroTitle",
+            CONFIG.HERO_TITLE
+        );
+
+
+        setText(
+            "heroTitleAccent",
+            CONFIG.HERO_TITLE_ACCENT
+        );
+
+
+        setText(
+            "heroSubtitle",
+            CONFIG.HERO_SUBTITLE
+        );
+
+
+        setText(
+            "stickersButtonText",
+            CONFIG.STICKERS_BUTTON
+        );
+
+
+        setText(
+            "canvasButtonText",
+            CONFIG.CANVAS_BUTTON
+        );
+
+
+        setHTML(
+            "stickersDescription",
+            CONFIG.STICKERS_DESCRIPTION
+        );
+
+
+        setHTML(
+            "canvasDescription",
+            CONFIG.CANVAS_DESCRIPTION
+        );
+
+
+        setText(
+            "pickupAddress",
+            CONFIG.PICKUP_ADDRESS
+        );
+
+
+        setText(
+            "footerCompany",
+            CONFIG.COMPANY_NAME
+        );
+
+
+        /*
+        ============================================================
+        ЛОГОТИП
+        ============================================================
+        */
+
+        const mainLogo =
+            document.getElementById("mainLogo");
+
+        if (mainLogo) {
+
+            mainLogo.src =
+                CONFIG.LOGO;
+
+        }
+
+
+        /*
+        ============================================================
+        СОЦИАЛЬНЫЕ ССЫЛКИ
+        ============================================================
+        */
+
+
+        setLink(
+            "stickerVkLink",
+            CONFIG.VK_LINK
+        );
+
+        setLink(
+            "stickerTelegramLink",
+            CONFIG.TELEGRAM_LINK
+        );
+
+        setLink(
+            "stickerWhatsappLink",
+            CONFIG.WHATSAPP_LINK
+        );
+
+        setLink(
+            "stickerVkGroupLink",
+            CONFIG.VK_GROUP_LINK
+        );
+
+
+        setLink(
+            "canvasVkLink",
+            CONFIG.VK_LINK
+        );
+
+        setLink(
+            "canvasTelegramLink",
+            CONFIG.TELEGRAM_LINK
+        );
+
+        setLink(
+            "canvasWhatsappLink",
+            CONFIG.WHATSAPP_LINK
+        );
+
+        setLink(
+            "canvasVkGroupLink",
+            CONFIG.VK_GROUP_LINK
+        );
+
+
+        /*
+        ============================================================
+        ЯНДЕКС НАВИГАТОР
+        ============================================================
+        */
+
+        setLink(
+            "routeButton",
+            CONFIG.YANDEX_NAVIGATOR_LINK
+        );
+
+
+        /*
+        ============================================================
+        ТЕКУЩИЙ ГОД
+        ============================================================
+        */
+
+        document.getElementById(
+            "currentYear"
+        ).textContent =
             new Date().getFullYear();
 
 
-        /* =========================================================
-           СОЦИАЛЬНЫЕ ССЫЛКИ
-        ========================================================== */
+        /*
+        ============================================================
+        ПЛАВНАЯ НАВИГАЦИЯ
+        ============================================================
+        */
 
         document
-            .querySelectorAll("[data-link]")
-            .forEach(link => {
-
-                const key =
-                    link.dataset.link;
-
-                const url =
-                    SITE_CONFIG[key];
-
-                if (url && url.trim() !== "") {
-
-                    link.href = url;
-
-                } else {
-
-                    link.href = "#";
-
-                    link.addEventListener(
-                        "click",
-                        function(event) {
-
-                            event.preventDefault();
-
-                        }
-                    );
-
-                }
-
-            });
-
-
-        /* =========================================================
-           ПЛАВНАЯ ПРОКРУТКА
-        ========================================================== */
-
-        document
-            .querySelectorAll("[data-scroll]")
-            .forEach(link => {
+            .querySelectorAll('a[href^="#"]')
+            .forEach(function(link) {
 
                 link.addEventListener(
                     "click",
                     function(event) {
 
+                        const targetId =
+                            this.getAttribute("href");
+
+                        if (
+                            !targetId ||
+                            targetId === "#"
+                        ) {
+                            return;
+                        }
+
                         const target =
                             document.querySelector(
-                                this.getAttribute("href")
+                                targetId
                             );
 
                         if (!target) return;
@@ -3263,75 +3238,6 @@
                             block: "start"
                         });
 
-                    }
-                );
-
-            });
-
-
-        /* =========================================================
-           MOBILE MENU
-        ========================================================== */
-
-        const mobileToggle =
-            document.getElementById("mobileToggle");
-
-        const mobileMenu =
-            document.getElementById("mobileMenu");
-
-
-        function closeMobileMenu() {
-
-            mobileToggle.classList.remove("active");
-
-            mobileMenu.classList.remove("active");
-
-            mobileToggle.setAttribute(
-                "aria-expanded",
-                "false"
-            );
-
-            document.body.classList.remove(
-                "menu-open"
-            );
-
-        }
-
-
-        mobileToggle.addEventListener(
-            "click",
-            function() {
-
-                const isOpen =
-                    mobileMenu.classList.toggle("active");
-
-                mobileToggle.classList.toggle(
-                    "active",
-                    isOpen
-                );
-
-                mobileToggle.setAttribute(
-                    "aria-expanded",
-                    String(isOpen)
-                );
-
-                document.body.classList.toggle(
-                    "menu-open",
-                    isOpen
-                );
-
-            }
-        );
-
-
-        document
-            .querySelectorAll(".mobile-menu a")
-            .forEach(link => {
-
-                link.addEventListener(
-                    "click",
-                    function() {
-
                         closeMobileMenu();
 
                     }
@@ -3340,23 +3246,129 @@
             });
 
 
-        /* =========================================================
-           HEADER SCROLL STATE
-        ========================================================== */
+        /*
+        ============================================================
+        MOBILE MENU
+        ============================================================
+        */
+
+        const menuToggle =
+            document.getElementById(
+                "menuToggle"
+            );
+
+        const mobileNav =
+            document.getElementById(
+                "mobileNav"
+            );
+
+
+        function openMobileMenu() {
+
+            menuToggle.classList.add(
+                "active"
+            );
+
+            mobileNav.classList.add(
+                "active"
+            );
+
+            menuToggle.setAttribute(
+                "aria-expanded",
+                "true"
+            );
+
+            document.body.classList.add(
+                "menu-open"
+            );
+        }
+
+
+        function closeMobileMenu() {
+
+            menuToggle.classList.remove(
+                "active"
+            );
+
+            mobileNav.classList.remove(
+                "active"
+            );
+
+            menuToggle.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+            document.body.classList.remove(
+                "menu-open"
+            );
+        }
+
+
+        menuToggle.addEventListener(
+            "click",
+            function() {
+
+                const isOpen =
+                    mobileNav.classList.contains(
+                        "active"
+                    );
+
+                if (isOpen) {
+                    closeMobileMenu();
+                } else {
+                    openMobileMenu();
+                }
+
+            }
+        );
+
+
+        /*
+        ============================================================
+        ЗАКРЫТИЕ МЕНЮ ПО ESC
+        ============================================================
+        */
+
+        document.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (
+                    event.key === "Escape"
+                ) {
+                    closeMobileMenu();
+                }
+
+            }
+        );
+
+
+        /*
+        ============================================================
+        HEADER ПО SCROLL
+        ============================================================
+        */
 
         const header =
-            document.getElementById("siteHeader");
+            document.getElementById(
+                "header"
+            );
 
 
         function updateHeader() {
 
             if (window.scrollY > 30) {
 
-                header.classList.add("scrolled");
+                header.classList.add(
+                    "scrolled"
+                );
 
             } else {
 
-                header.classList.remove("scrolled");
+                header.classList.remove(
+                    "scrolled"
+                );
 
             }
 
@@ -3366,52 +3378,62 @@
         window.addEventListener(
             "scroll",
             updateHeader,
-            { passive: true }
+            {
+                passive: true
+            }
         );
+
 
         updateHeader();
 
 
-        /* =========================================================
-           SCROLL REVEAL
-        ========================================================== */
+        /*
+        ============================================================
+        REVEAL ANIMATIONS
+        ============================================================
+        */
 
         const revealElements =
-            document.querySelectorAll(".reveal");
+            document.querySelectorAll(
+                ".reveal"
+            );
 
 
         const revealObserver =
             new IntersectionObserver(
-                entries => {
+                function(entries) {
 
-                    entries.forEach(entry => {
+                    entries.forEach(
+                        function(entry) {
 
-                        if (
-                            entry.isIntersecting
-                        ) {
+                            if (
+                                entry.isIntersecting
+                            ) {
 
-                            entry.target.classList.add(
-                                "visible"
-                            );
+                                entry.target.classList.add(
+                                    "visible"
+                                );
 
-                            revealObserver.unobserve(
-                                entry.target
-                            );
+                                revealObserver.unobserve(
+                                    entry.target
+                                );
+
+                            }
 
                         }
-
-                    });
+                    );
 
                 },
                 {
                     threshold: 0.12,
-                    rootMargin: "0px 0px -40px 0px"
+                    rootMargin:
+                        "0px 0px -40px 0px"
                 }
             );
 
 
         revealElements.forEach(
-            element => {
+            function(element) {
 
                 revealObserver.observe(
                     element
@@ -3421,139 +3443,31 @@
         );
 
 
-        /* =========================================================
-           ACTIVE NAVIGATION
-        ========================================================== */
+        /*
+        ============================================================
+        TIFFANY PARTICLES
+        ============================================================
+        */
 
-        const sections =
-            document.querySelectorAll(
-                "[data-section]"
-            );
-
-        const navLinks =
-            document.querySelectorAll(
-                "[data-nav-target]"
+        const particlesContainer =
+            document.getElementById(
+                "particles"
             );
 
 
-        const navObserver =
-            new IntersectionObserver(
-                entries => {
+        function random(min, max) {
 
-                    entries.forEach(entry => {
-
-                        if (
-                            entry.isIntersecting
-                        ) {
-
-                            const id =
-                                entry.target.dataset.section;
-
-                            navLinks.forEach(link => {
-
-                                link.classList.toggle(
-                                    "active",
-                                    link.dataset.navTarget === id
-                                );
-
-                            });
-
-                        }
-
-                    });
-
-                },
-                {
-                    threshold: 0.3,
-                    rootMargin:
-                        "-20% 0px -55% 0px"
-                }
-            );
-
-
-        sections.forEach(
-            section => {
-
-                navObserver.observe(
-                    section
-                );
-
-            }
-        );
-
-
-        /* =========================================================
-           AMBIENT LIGHT — СЛЕДУЕТ ЗА МЫШЬЮ
-        ========================================================== */
-
-        const ambient =
-            document.getElementById("ambient");
-
-
-        let mouseX =
-            window.innerWidth / 2;
-
-        let mouseY =
-            window.innerHeight / 2;
-
-        let currentX =
-            mouseX;
-
-        let currentY =
-            mouseY;
-
-
-        window.addEventListener(
-            "mousemove",
-            event => {
-
-                mouseX =
-                    event.clientX;
-
-                mouseY =
-                    event.clientY;
-
-            },
-            { passive: true }
-        );
-
-
-        function animateAmbient() {
-
-            currentX +=
-                (mouseX - currentX) * 0.045;
-
-            currentY +=
-                (mouseY - currentY) * 0.045;
-
-            ambient.style.left =
-                currentX + "px";
-
-            ambient.style.top =
-                currentY + "px";
-
-            requestAnimationFrame(
-                animateAmbient
-            );
+            return Math.random()
+                * (max - min)
+                + min;
 
         }
 
 
-        animateAmbient();
-
-
-        /* =========================================================
-           PARTICLES
-        ========================================================== */
-
-        const particleContainer =
-            document.getElementById("particles");
-
-
         const particleCount =
             window.innerWidth < 600
-                ? 22
-                : 42;
+                ? 34
+                : 58;
 
 
         for (
@@ -3563,35 +3477,16 @@
         ) {
 
             const particle =
-                document.createElement("span");
+                document.createElement(
+                    "span"
+                );
 
             particle.className =
                 "particle";
 
 
             const size =
-                Math.random() * 5 + 2;
-
-            const x =
-                Math.random() * 100;
-
-            const y =
-                Math.random() * 100;
-
-            const opacity =
-                Math.random() * 0.42 + 0.10;
-
-            const duration =
-                Math.random() * 8 + 7;
-
-            const delay =
-                Math.random() * -12;
-
-            const moveX =
-                (Math.random() - .5) * 120;
-
-            const moveY =
-                (Math.random() - .5) * 120;
+                random(2, 7);
 
 
             particle.style.setProperty(
@@ -3599,55 +3494,146 @@
                 size + "px"
             );
 
+
             particle.style.setProperty(
                 "--x",
-                x + "%"
+                random(0, 100) + "%"
             );
+
 
             particle.style.setProperty(
                 "--y",
-                y + "%"
+                random(0, 100) + "%"
             );
+
 
             particle.style.setProperty(
                 "--opacity",
-                opacity
+                random(.18, .72)
             );
+
 
             particle.style.setProperty(
                 "--duration",
-                duration + "s"
+                random(5, 13) + "s"
             );
+
 
             particle.style.setProperty(
                 "--delay",
-                delay + "s"
+                random(-12, 0) + "s"
             );
+
 
             particle.style.setProperty(
                 "--move-x",
-                moveX + "px"
+                random(-90, 90) + "px"
             );
+
 
             particle.style.setProperty(
                 "--move-y",
-                moveY + "px"
+                random(-100, 100) + "px"
             );
 
 
-            particleContainer.appendChild(
+            particlesContainer.appendChild(
                 particle
             );
 
         }
 
 
-        /* =========================================================
-           SHARE
-        ========================================================== */
+        /*
+        ============================================================
+        ЛЁГКИЙ PARALLAX ФОНОВОГО СВЕЧЕНИЯ
+        ============================================================
+        */
+
+        const backgroundGlow =
+            document.getElementById(
+                "backgroundGlow"
+            );
+
+
+        let mouseX = 0;
+        let mouseY = 0;
+
+        let targetX = 0;
+        let targetY = 0;
+
+
+        if (
+            window.matchMedia(
+                "(pointer: fine)"
+            ).matches
+        ) {
+
+            window.addEventListener(
+                "mousemove",
+                function(event) {
+
+                    targetX =
+                        (
+                            event.clientX /
+                            window.innerWidth
+                        ) - .5;
+
+                    targetY =
+                        (
+                            event.clientY /
+                            window.innerHeight
+                        ) - .5;
+
+                },
+                {
+                    passive: true
+                }
+            );
+
+
+            function animateGlow() {
+
+                mouseX +=
+                    (targetX - mouseX)
+                    * .04;
+
+                mouseY +=
+                    (targetY - mouseY)
+                    * .04;
+
+
+                backgroundGlow.style.transform =
+                    `
+                    translate(
+                        calc(-50% + ${mouseX * 90}px),
+                        calc(-50% + ${mouseY * 90}px)
+                    )
+                    `;
+
+
+                requestAnimationFrame(
+                    animateGlow
+                );
+
+            }
+
+
+            animateGlow();
+
+        }
+
+
+        /*
+        ============================================================
+        SHARE
+        ============================================================
+        */
 
         const shareButton =
-            document.getElementById("shareButton");
+            document.getElementById(
+                "shareButton"
+            );
 
 
         shareButton.addEventListener(
@@ -3657,10 +3643,10 @@
                 const shareData = {
 
                     title:
-                        SITE_CONFIG.HERO_TITLE,
+                        document.title,
 
                     text:
-                        SITE_CONFIG.HERO_SUBTITLE,
+                        CONFIG.COMPANY_NAME,
 
                     url:
                         window.location.href
@@ -3668,110 +3654,191 @@
                 };
 
 
-                try {
+                /*
+                 * Современное мобильное /
+                 * браузерное меню Share.
+                 */
 
-                    if (
-                        navigator.share
-                    ) {
+                if (
+                    navigator.share
+                ) {
+
+                    try {
 
                         await navigator.share(
                             shareData
                         );
 
-                    } else if (
-                        navigator.clipboard
-                    ) {
+                    } catch (error) {
 
-                        await navigator.clipboard.writeText(
-                            window.location.href
-                        );
-
-                        const originalText =
-                            shareButton.textContent;
-
-                        shareButton.textContent =
-                            "ССЫЛКА СКОПИРОВАНА";
-
-                        setTimeout(
-                            () => {
-
-                                shareButton.textContent =
-                                    originalText;
-
-                            },
-                            1800
-                        );
+                        /*
+                         * Пользователь мог просто
+                         * закрыть окно Share.
+                         */
 
                     }
 
+                    return;
+
+                }
+
+
+                /*
+                 * Fallback для браузеров,
+                 * где navigator.share отсутствует.
+                 */
+
+                try {
+
+                    await navigator.clipboard.writeText(
+                        window.location.href
+                    );
+
+
+                    const originalText =
+                        shareButton.innerHTML;
+
+
+                    shareButton.innerHTML =
+                        `
+                        <svg width="18"
+                             height="18"
+                             viewBox="0 0 24 24"
+                             fill="none">
+
+                            <path
+                                d="m5 12 4 4L19 6"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"/>
+
+                        </svg>
+
+                        Ссылка скопирована
+                        `;
+
+
+                    setTimeout(
+                        function() {
+
+                            shareButton.innerHTML =
+                                originalText;
+
+                        },
+                        1800
+                    );
+
+
                 } catch (error) {
 
-                    // Пользователь мог закрыть
-                    // системное окно "Поделиться".
-                    // Ничего делать не нужно.
-
-                }
-
-            }
-        );
-
-
-        /* =========================================================
-           ESC — ЗАКРЫТИЕ МОБИЛЬНОГО МЕНЮ
-        ========================================================== */
-
-        document.addEventListener(
-            "keydown",
-            event => {
-
-                if (
-                    event.key === "Escape"
-                ) {
-
-                    closeMobileMenu();
-
-                }
-
-            }
-        );
-
-
-        /* =========================================================
-           ЗАЩИТА ОТ СЛУЧАЙНОГО ГОРИЗОНТАЛЬНОГО СКРОЛЛА
-        ========================================================== */
-
-        window.addEventListener(
-            "resize",
-            () => {
-
-                if (
-                    window.innerWidth > 1000
-                ) {
-
-                    closeMobileMenu();
-
-                }
-
-            }
-        );
-
-
-        /* =========================================================
-           ЛОГОТИП — FALLBACK
-        ========================================================== */
-
-        document
-            .getElementById("mainLogo")
-            .addEventListener(
-                "error",
-                function() {
-
-                    console.warn(
-                        "Файл metiz-project-logo.png не найден."
+                    alert(
+                        "Скопируйте адрес страницы из адресной строки браузера."
                     );
 
                 }
+
+            }
+        );
+
+
+        /*
+        ============================================================
+        ЗАЩИТА ОТ НЕЖЕЛАТЕЛЬНОГО ПЕРЕХОДА
+        ДЛЯ ПУСТЫХ СОЦИАЛЬНЫХ ССЫЛОК
+        ============================================================
+        */
+
+
+        const emptyLinks = [
+
+            "stickerVkLink",
+            "stickerTelegramLink",
+            "stickerWhatsappLink",
+            "stickerVkGroupLink",
+
+            "canvasVkLink",
+            "canvasTelegramLink",
+            "canvasWhatsappLink",
+            "canvasVkGroupLink"
+
+        ];
+
+
+        emptyLinks.forEach(
+            function(id) {
+
+                const element =
+                    document.getElementById(id);
+
+                if (!element) return;
+
+
+                const href =
+                    element.getAttribute(
+                        "href"
+                    );
+
+
+                if (
+                    !href ||
+                    href === "#"
+                ) {
+
+                    element.addEventListener(
+                        "click",
+                        function(event) {
+
+                            event.preventDefault();
+
+                        }
+                    );
+
+                }
+
+            }
+        );
+
+
+        /*
+        ============================================================
+        ПЕРЕХОД К НАЧАЛУ ПО КЛИКУ НА ЛОГОТИП В HEADER
+        ============================================================
+        */
+
+        const headerBrand =
+            document.querySelector(
+                ".header-brand"
             );
+
+
+        headerBrand.addEventListener(
+            "click",
+            function(event) {
+
+                event.preventDefault();
+
+                window.scrollTo({
+
+                    top: 0,
+
+                    behavior: "smooth"
+
+                });
+
+            }
+        );
+
+
+        /*
+        ============================================================
+        ГОТОВО
+        ============================================================
+        */
+
+        console.log(
+            "Premium website initialized."
+        );
 
     </script>
 
