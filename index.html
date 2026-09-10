@@ -1,89 +1,366 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#030707">
-<meta name="description" content="METIZ PROJECT — наклейки, плоттерная резка, печать на холсте и брендирование в Санкт-Петербурге.">
-<title>METIZ PROJECT — Print / Cut / Brand</title>
-<style>
-:root{
-  --tiffany:#4cd5d3;
-  --tiffany-2:#8bfffa;
-  --tiffany-dark:#168f8d;
-  --ink:#030707;
-  --ink-2:#07100f;
-  --panel:rgba(11,22,21,.72);
-  --panel-2:rgba(255,255,255,.055);
-  --line:rgba(255,255,255,.105);
-  --white:#f6fffe;
-  --muted:#8d9b99;
-  --ease:cubic-bezier(.16,1,.3,1);
-  --shadow:0 30px 100px rgba(0,0,0,.48);
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;background:var(--ink);overflow-x:hidden}
-body{min-height:100svh;background:
- radial-gradient(900px 650px at 78% 4%,rgba(76,213,211,.13),transparent 62%),
- radial-gradient(700px 500px at 8% 58%,rgba(76,213,211,.07),transparent 65%),
- linear-gradient(145deg,var(--ink),var(--ink-2));
- color:var(--white);font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
-a{color:inherit;text-decoration:none}
-button{font:inherit}
-::selection{background:var(--tiffany);color:#001010}
-.noise{position:fixed;inset:0;z-index:50;pointer-events:none;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E")}
-.grid{position:fixed;inset:0;pointer-events:none;opacity:.42;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(circle at 50% 35%,black,transparent 80%);z-index:-5}
-.cursor{position:fixed;width:360px;height:360px;border-radius:50%;pointer-events:none;z-index:-2;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(76,213,211,.12),rgba(76,213,211,.035) 28%,transparent 68%);filter:blur(10px)}
-.orb{position:fixed;border-radius:50%;pointer-events:none;filter:blur(90px);z-index:-4}.orb.a{width:420px;height:420px;right:-180px;top:24%;background:rgba(76,213,211,.09)}.orb.b{width:320px;height:320px;left:-150px;bottom:8%;background:rgba(76,213,211,.055)}
-.container{width:min(1180px,calc(100% - 44px));margin:auto}
-.header{position:fixed;top:0;left:0;right:0;z-index:40;border-bottom:1px solid transparent;transition:.5s var(--ease);background:linear-gradient(180deg,rgba(3,7,7,.82),rgba(3,7,7,0));backdrop-filter:blur(0)}
-.header.scrolled{border-color:var(--line);background:rgba(3,7,7,.72);backdrop-filter:blur(18px) saturate(140%)}
-.nav{height:82px;display:flex;align-items:center;justify-content:space-between;gap:28px}
-.brand{display:flex;align-items:center;gap:13px;min-width:0}.brand img{width:148px;height:auto;display:block;filter:drop-shadow(0 0 15px rgba(76,213,211,.12))}.brand-dot{width:6px;height:6px;border-radius:50%;background:var(--tiffany);box-shadow:0 0 15px var(--tiffany)}
-.nav-links{display:flex;align-items:center;gap:28px;color:#a9b6b4;font-size:12px;letter-spacing:.1em;text-transform:uppercase}.nav-links a{position:relative;padding:8px 0;transition:.3s}.nav-links a:after{content:"";position:absolute;left:0;bottom:2px;width:100%;height:1px;background:var(--tiffany);transform:scaleX(0);transform-origin:right;transition:.4s var(--ease)}.nav-links a:hover{color:var(--white)}.nav-links a:hover:after{transform:scaleX(1);transform-origin:left}
-.nav-cta{display:inline-flex;align-items:center;gap:9px;padding:12px 17px;border:1px solid rgba(76,213,211,.35);background:rgba(76,213,211,.08);border-radius:999px;color:var(--tiffany);font-size:11px;font-weight:800;letter-spacing:.11em;text-transform:uppercase;transition:.35s var(--ease)}.nav-cta:hover{background:var(--tiffany);color:#03100f;box-shadow:0 0 35px rgba(76,213,211,.22);transform:translateY(-2px)}
-.menu{display:none;width:44px;height:44px;border:1px solid var(--line);border-radius:50%;background:rgba(255,255,255,.035);color:var(--white);cursor:pointer}.menu span,.menu span:before,.menu span:after{display:block;width:15px;height:1px;background:currentColor;margin:auto;position:relative}.menu span:before,.menu span:after{content:"";position:absolute;left:0}.menu span:before{top:-5px}.menu span:after{top:5px}
-.hero{min-height:100svh;display:grid;align-items:center;padding:130px 0 70px;position:relative}.hero-wrap{display:grid;grid-template-columns:1.04fr .96fr;align-items:center;gap:70px}.eyebrow{display:flex;align-items:center;gap:12px;color:var(--tiffany);font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;margin-bottom:26px}.eyebrow:before{content:"";width:42px;height:1px;background:linear-gradient(90deg,transparent,var(--tiffany))}.hero h1{font-size:clamp(52px,7.4vw,108px);line-height:.88;letter-spacing:-.065em;font-weight:850;max-width:780px}.hero h1 span{display:block;color:var(--tiffany);text-shadow:0 0 40px rgba(76,213,211,.13)}.hero-copy{max-width:590px;color:#a4b1af;font-size:17px;line-height:1.7;margin:28px 0 34px}.hero-actions{display:flex;gap:12px;flex-wrap:wrap}.btn{min-height:54px;padding:0 20px;display:inline-flex;align-items:center;justify-content:center;gap:10px;border-radius:13px;border:1px solid var(--line);font-size:12px;font-weight:850;letter-spacing:.09em;text-transform:uppercase;transition:.35s var(--ease);cursor:pointer}.btn-primary{background:var(--tiffany);border-color:var(--tiffany);color:#02100f;box-shadow:0 14px 45px rgba(76,213,211,.15)}.btn-primary:hover{transform:translateY(-3px);box-shadow:0 18px 55px rgba(76,213,211,.26)}.btn-ghost{background:rgba(255,255,255,.035);color:var(--white)}.btn-ghost:hover{border-color:rgba(76,213,211,.4);background:rgba(76,213,211,.06);transform:translateY(-3px)}.btn-arrow{font-size:17px;line-height:1}
-.hero-meta{display:flex;gap:28px;margin-top:46px;flex-wrap:wrap}.meta-item{display:flex;flex-direction:column;gap:5px}.meta-k{font-size:9px;color:#61706e;letter-spacing:.16em;text-transform:uppercase}.meta-v{font-size:13px;color:#c6d0ce}.online{display:inline-flex;align-items:center;gap:8px;color:var(--tiffany)}.online i{width:6px;height:6px;border-radius:50%;background:var(--tiffany);box-shadow:0 0 13px var(--tiffany);animation:pulse 1.8s infinite}
-.hero-art{position:relative;min-height:570px;display:grid;place-items:center}.halo{position:absolute;width:min(520px,42vw);aspect-ratio:1;border:1px solid rgba(76,213,211,.12);border-radius:50%;box-shadow:inset 0 0 80px rgba(76,213,211,.035),0 0 80px rgba(76,213,211,.04);animation:float 8s ease-in-out infinite}.halo:before,.halo:after{content:"";position:absolute;inset:9%;border:1px solid rgba(255,255,255,.055);border-radius:50%;transform:rotate(24deg)}.halo:after{inset:18%;border-color:rgba(76,213,211,.08);transform:rotate(-35deg)}.logo-card{position:relative;width:min(460px,82%);padding:34px;border:1px solid rgba(255,255,255,.12);border-radius:30px;background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.018));box-shadow:var(--shadow),inset 0 1px 0 rgba(255,255,255,.08);backdrop-filter:blur(18px);transform:rotate(-4deg);transition:transform .7s var(--ease)}.logo-card:hover{transform:rotate(0) translateY(-8px)}.logo-card:before{content:"";position:absolute;inset:-1px;border-radius:30px;padding:1px;background:linear-gradient(135deg,rgba(76,213,211,.55),transparent 34%,transparent 70%,rgba(76,213,211,.18));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}.logo-card img{width:100%;height:auto;display:block;filter:drop-shadow(0 0 28px rgba(76,213,211,.16))}.art-label{position:absolute;right:-12px;bottom:54px;padding:10px 13px;border:1px solid var(--line);border-radius:10px;background:rgba(4,11,10,.82);backdrop-filter:blur(12px);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#91a09e}.art-label strong{color:var(--tiffany);font-weight:800}.corner{position:absolute;width:80px;height:80px;border-color:rgba(76,213,211,.22)}.corner.tl{top:40px;left:10px;border-top:1px solid;border-left:1px solid}.corner.br{bottom:20px;right:0;border-right:1px solid;border-bottom:1px solid}
-.ticker{border-block:1px solid var(--line);overflow:hidden;background:rgba(255,255,255,.018)}.ticker-track{display:flex;width:max-content;animation:marquee 26s linear infinite}.ticker span{display:flex;align-items:center;gap:34px;padding:17px 34px;color:#7e8c8a;font-size:10px;font-weight:700;letter-spacing:.17em;text-transform:uppercase;white-space:nowrap}.ticker b{width:4px;height:4px;border-radius:50%;background:var(--tiffany);box-shadow:0 0 10px var(--tiffany)}
-.section{padding:130px 0}.section-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:52px}.section-kicker{color:var(--tiffany);font-size:10px;font-weight:850;letter-spacing:.2em;text-transform:uppercase;margin-bottom:13px}.section h2{font-size:clamp(38px,5vw,66px);line-height:.96;letter-spacing:-.055em;max-width:720px}.section-head p{max-width:360px;color:#7e8d8a;font-size:14px;line-height:1.65}
-.services{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.service{min-height:340px;padding:30px;position:relative;overflow:hidden;border:1px solid var(--line);border-radius:22px;background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.018));transition:.5s var(--ease)}.service:hover{transform:translateY(-8px);border-color:rgba(76,213,211,.32);box-shadow:0 28px 80px rgba(0,0,0,.32)}.service:after{content:"";position:absolute;width:220px;height:220px;right:-100px;top:-100px;border-radius:50%;background:rgba(76,213,211,.07);filter:blur(20px);transition:.5s}.service:hover:after{background:rgba(76,213,211,.13)}.num{font-size:10px;color:#596765;letter-spacing:.14em}.service-icon{width:54px;height:54px;margin:55px 0 34px;border:1px solid rgba(76,213,211,.25);border-radius:16px;display:grid;place-items:center;color:var(--tiffany);background:rgba(76,213,211,.055);font-size:20px}.service h3{font-size:25px;letter-spacing:-.035em;margin-bottom:12px}.service p{font-size:13px;line-height:1.65;color:#788683;max-width:290px}.service .more{position:absolute;right:27px;bottom:28px;color:var(--tiffany);font-size:20px;transition:.35s}.service:hover .more{transform:translate(4px,-4px)}
-.process{display:grid;grid-template-columns:1.1fr .9fr;gap:70px;align-items:start}.process-list{border-top:1px solid var(--line)}.step{display:grid;grid-template-columns:70px 1fr 30px;gap:18px;padding:27px 0;border-bottom:1px solid var(--line);align-items:start;transition:.35s}.step:hover{padding-left:10px}.step-no{font-size:10px;color:var(--tiffany);letter-spacing:.15em}.step h3{font-size:19px;margin-bottom:7px}.step p{color:#75827f;font-size:13px;line-height:1.6;max-width:500px}.step-arrow{color:#566360;font-size:17px}.process-card{position:sticky;top:120px;padding:34px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(145deg,rgba(76,213,211,.08),rgba(255,255,255,.025));overflow:hidden}.process-card:before{content:"";position:absolute;width:280px;height:280px;right:-150px;bottom:-160px;border-radius:50%;background:rgba(76,213,211,.11);filter:blur(40px)}.process-card .big{font-size:74px;font-weight:850;line-height:1;color:var(--tiffany);letter-spacing:-.07em}.process-card h3{font-size:25px;margin:18px 0 10px}.process-card p{color:#82908d;font-size:13px;line-height:1.7}.mini-line{height:1px;background:var(--line);margin:28px 0}.chips{display:flex;gap:7px;flex-wrap:wrap}.chip{padding:8px 10px;border:1px solid var(--line);border-radius:999px;color:#899693;font-size:9px;letter-spacing:.12em;text-transform:uppercase}
-.showcase{display:grid;grid-template-columns:1.35fr .65fr;gap:14px}.show{min-height:440px;border-radius:24px;border:1px solid var(--line);position:relative;overflow:hidden;background:linear-gradient(135deg,#07110f,#0a1917)}.show.small{min-height:213px}.show-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(76,213,211,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(76,213,211,.08) 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(to bottom,black,transparent 85%)}.show-glow{position:absolute;width:340px;height:340px;border-radius:50%;background:rgba(76,213,211,.12);filter:blur(70px);right:-80px;top:-80px}.show-content{position:absolute;inset:auto 28px 28px}.show-tag{font-size:9px;color:var(--tiffany);letter-spacing:.16em;text-transform:uppercase;margin-bottom:9px}.show h3{font-size:30px;letter-spacing:-.04em}.show p{margin-top:7px;color:#74827f;font-size:12px}.show-code{position:absolute;top:27px;left:28px;color:rgba(255,255,255,.28);font:10px/1.7 ui-monospace,SFMono-Regular,Menlo,monospace}.show-stack{display:grid;gap:14px}.show.small h3{font-size:22px}.show.small .show-content{inset:auto 22px 22px}
-.cta{padding:1px}.cta-box{position:relative;overflow:hidden;border:1px solid rgba(76,213,211,.22);border-radius:30px;padding:70px;display:flex;align-items:end;justify-content:space-between;gap:40px;background:radial-gradient(circle at 80% 30%,rgba(76,213,211,.12),transparent 38%),linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.018));box-shadow:var(--shadow)}.cta-box:after{content:"";position:absolute;right:-80px;bottom:-180px;width:450px;height:450px;border:1px solid rgba(76,213,211,.12);border-radius:50%;box-shadow:0 0 0 50px rgba(76,213,211,.02),0 0 0 100px rgba(76,213,211,.012)}.cta h2{font-size:clamp(38px,5vw,65px);line-height:.95;letter-spacing:-.055em;max-width:650px}.cta h2 span{color:var(--tiffany)}.cta-copy{color:#83918e;font-size:13px;line-height:1.7;max-width:420px;margin-top:20px}.cta-actions{position:relative;z-index:2;flex:none;display:flex;flex-direction:column;gap:9px;min-width:190px}.footer{padding:45px 0 35px;border-top:1px solid var(--line)}.footer-row{display:flex;justify-content:space-between;gap:30px;align-items:center}.footer-logo{width:150px}.footer-note{font-size:9px;color:#53615e;letter-spacing:.14em;text-transform:uppercase}.footer-links{display:flex;gap:18px;color:#6e7b78;font-size:10px}.footer-links a:hover{color:var(--tiffany)}
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease),transform .9s var(--ease)}.reveal.visible{opacity:1;transform:none}
-.intro{position:fixed;inset:0;z-index:100;background:#030707;display:grid;place-items:center;transition:opacity .8s var(--ease),visibility .8s}.intro.done{opacity:0;visibility:hidden;pointer-events:none}.intro-inner{width:min(430px,72vw);text-align:center;animation:introIn 1.1s var(--ease) both}.intro-inner img{width:100%;display:block;filter:drop-shadow(0 0 35px rgba(76,213,211,.18))}.intro-line{height:1px;margin:24px auto 13px;width:70px;background:var(--tiffany);box-shadow:0 0 18px rgba(76,213,211,.5)}.intro-text{font-size:9px;color:#788784;letter-spacing:.32em;text-transform:uppercase}
-@keyframes introIn{from{opacity:0;transform:translateY(15px) scale(.96);filter:blur(8px)}to{opacity:1;transform:none;filter:blur(0)}}
-@keyframes pulse{50%{opacity:.4;transform:scale(.72)}}@keyframes float{0%,100%{transform:rotate(0) scale(1)}50%{transform:rotate(4deg) scale(1.025)}}@keyframes marquee{to{transform:translateX(-50%)}}
-@media(max-width:900px){.nav-links,.nav-cta{display:none}.menu{display:grid;place-items:center}.hero-wrap,.process{grid-template-columns:1fr;gap:50px}.hero-art{min-height:430px}.halo{width:min(480px,78vw)}.logo-card{width:min(470px,84%)}.services{grid-template-columns:1fr 1fr}.showcase{grid-template-columns:1fr}.show-stack{grid-template-columns:1fr 1fr}.show.small{min-height:280px}.process-card{position:relative;top:auto}.cta-box{padding:52px;flex-direction:column;align-items:flex-start}.cta-actions{width:100%;flex-direction:row;flex-wrap:wrap}.cta-actions .btn{flex:1}.section{padding:100px 0}}
-@media(max-width:620px){.container{width:min(100% - 28px,1180px)}.nav{height:70px}.brand img{width:128px}.hero{padding-top:105px}.hero h1{font-size:clamp(48px,15vw,74px)}.hero-copy{font-size:15px;margin:22px 0 28px}.hero-meta{margin-top:34px;gap:18px}.hero-art{min-height:350px}.logo-card{padding:23px;border-radius:22px}.halo{width:90vw}.corner{display:none}.section{padding:82px 0}.section-head{display:block;margin-bottom:34px}.section-head p{margin-top:18px}.services{grid-template-columns:1fr}.service{min-height:285px}.service-icon{margin:42px 0 25px}.show-stack{grid-template-columns:1fr}.show,.show.small{min-height:300px}.cta-box{padding:38px 25px;border-radius:23px}.cta-actions{flex-direction:column}.footer-row{flex-direction:column;align-items:flex-start}.footer-links{flex-wrap:wrap}.footer-note{line-height:1.6}.cursor{display:none}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.ticker-track{animation:none}.halo,.online i{animation:none}.reveal{opacity:1;transform:none;transition:none}.intro-inner{animation:none}}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>METIZ PROJECT — Печать, наклейки, плоттерная резка</title>
+    <meta name="description" content="METIZ PROJECT — изготовление наклеек, плоттерная резка, брендирование автомобилей и реклама в Санкт-Петербурге.">
+    <meta name="theme-color" content="#080c0b">
+    <style>
+        :root {
+            --tiffany: #4cd5d3;
+            --tiffany-hover: #6df9f0;
+            --tiffany-glow: rgba(76, 213, 211, 0.25);
+            --bg-dark: #080c0b;
+            --bg-card: rgba(255, 255, 255, 0.035);
+            --bg-card-hover: rgba(255, 255, 255, 0.07);
+            --border: rgba(255, 255, 255, 0.08);
+            --border-tiffany: rgba(76, 213, 211, 0.35);
+            --text-main: #ffffff;
+            --text-muted: #94a3a0;
+            --radius: 16px;
+            --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(76, 213, 211, 0.12), transparent 45%),
+                radial-gradient(circle at 90% 90%, rgba(76, 213, 211, 0.04), transparent 35%);
+            background-attachment: fixed;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 860px;
+            padding: 48px 20px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 36px;
+        }
+
+        /* HEADER */
+        header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 16px;
+        }
+
+        .logo-wrap {
+            max-width: 290px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .logo-wrap img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 0 16px var(--tiffany-glow));
+        }
+
+        .location-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            font-weight: 700;
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            background-color: var(--tiffany);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--tiffany);
+        }
+
+        /* HERO */
+        .hero {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .hero h1 {
+            font-size: clamp(26px, 5.5vw, 40px);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+        }
+
+        .hero h1 span {
+            color: var(--tiffany);
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: clamp(14px, 2.5vw, 16px);
+            max-width: 520px;
+        }
+
+        /* SECTION TITLE */
+        .section-title {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--tiffany);
+            text-align: center;
+            margin-bottom: -12px;
+        }
+
+        /* SERVICES GRID */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .card:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--border-tiffany);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 18px var(--tiffany-glow);
+        }
+
+        .card-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: rgba(76, 213, 211, 0.1);
+            color: var(--tiffany);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 6px;
+        }
+
+        .card-icon svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .card h3 {
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+        .card p {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* BUTTONS / CONTACTS */
+        .buttons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 16px 20px;
+            border-radius: 14px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+            transition: var(--transition);
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            color: var(--text-main);
+        }
+
+        .btn-primary {
+            background: var(--tiffany);
+            color: #030605;
+            border-color: var(--tiffany);
+            box-shadow: 0 4px 20px var(--tiffany-glow);
+        }
+
+        .btn-primary:hover {
+            background: var(--tiffany-hover);
+            border-color: var(--tiffany-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(76, 213, 211, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--border-tiffany);
+            color: var(--tiffany);
+            transform: translateY(-2px);
+        }
+
+        .btn svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+            flex-shrink: 0;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding-top: 20px;
+            font-size: 11px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+            letter-spacing: 0.1em;
+        }
+
+        /* MOBILE ADJUSTMENTS */
+        @media (max-width: 600px) {
+            .container {
+                padding: 28px 16px;
+                gap: 28px;
+            }
+
+            .logo-wrap {
+                max-width: 230px;
+            }
+
+            .grid, .buttons-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .btn {
+                padding: 14px 18px;
+            }
+        }
+    </style>
 </head>
 <body>
-<div class="intro" id="intro"><div class="intro-inner"><img src="metiz-project-logo.png" alt="METIZ PROJECT"><div class="intro-line"></div><div class="intro-text">PRINT / CUT / BRAND</div></div></div>
-<div class="grid"></div><div class="noise"></div><div class="cursor" id="cursor"></div><div class="orb a"></div><div class="orb b"></div>
-<header class="header" id="header"><div class="container nav"><a class="brand" href="#top" aria-label="METIZ PROJECT"><img src="metiz-project-logo.png" alt="METIZ PROJECT"><i class="brand-dot"></i></a><nav class="nav-links"><a href="#services">Услуги</a><a href="#process">Как работаем</a><a href="#showcase">Направления</a></nav><a class="nav-cta" href="https://vk.ru/metiz_project" target="_blank" rel="noopener noreferrer">Обсудить проект <span>↗</span></a><button class="menu" id="menu" aria-label="Открыть меню"><span></span></button></div></header>
-<main id="top">
-<section class="hero"><div class="container hero-wrap"><div class="hero-copy-wrap reveal"><div class="eyebrow">Санкт-Петербург · с 2010</div><h1>ПЕЧАТАЕМ.<br><span>РЕЖЕМ.</span><br>БРЕНДИРУЕМ.</h1><p class="hero-copy">Наклейки, плоттерная резка, холсты и визуальное оформление транспорта, витрин и бизнеса. Собираем решение под задачу — аккуратно, быстро и с характером.</p><div class="hero-actions"><a class="btn btn-primary" href="https://vk.ru/metiz_project" target="_blank" rel="noopener noreferrer">Обсудить задачу <span class="btn-arrow">↗</span></a><a class="btn btn-ghost" href="#services">Смотреть услуги <span class="btn-arrow">↓</span></a></div><div class="hero-meta"><div class="meta-item"><span class="meta-k">Статус</span><span class="meta-v online"><i></i> ONLINE</span></div><div class="meta-item"><span class="meta-k">Фокус</span><span class="meta-v">Print / Cut / Brand</span></div><div class="meta-item"><span class="meta-k">Город</span><span class="meta-v">Санкт-Петербург</span></div></div></div><div class="hero-art reveal"><div class="halo"></div><div class="corner tl"></div><div class="corner br"></div><div class="logo-card"><img src="metiz-project-logo.png" alt="METIZ PROJECT"></div><div class="art-label">digital workshop · <strong>01</strong></div></div></div></section>
-<div class="ticker"><div class="ticker-track"><span>Наклейки на заказ <b></b> Плоттерная резка <b></b> Холсты <b></b> Автостайлинг <b></b> Витрины <b></b> Брендирование <b></b></span><span>Наклейки на заказ <b></b> Плоттерная резка <b></b> Холсты <b></b> Автостайлинг <b></b> Витрины <b></b> Брендирование <b></b></span></div></div>
-<section class="section" id="services"><div class="container"><div class="section-head reveal"><div><div class="section-kicker">01 / услуги</div><h2>Всё начинается<br>с правильного материала.</h2></div><p>От одной наклейки до комплексного брендирования. Без лишнего визуального шума — только то, что работает на вашу задачу.</p></div><div class="services"><article class="service reveal"><div class="num">01 — PRINT</div><div class="service-icon">✦</div><h3>Печать</h3><p>Фото и картины на холсте, рекламная печать и визуальные материалы для бизнеса.</p><span class="more">↗</span></article><article class="service reveal"><div class="num">02 — CUT</div><div class="service-icon">⌁</div><h3>Наклейки</h3><p>Изготовление наклеек на заказ: кузов, стекло, продукция, витрины и любые поверхности.</p><span class="more">↗</span></article><article class="service reveal"><div class="num">03 — BRAND</div><div class="service-icon">◈</div><h3>Брендинг</h3><p>Оформление автомобилей, магазинов и витрин — от идеи и макета до готового нанесения.</p><span class="more">↗</span></article></div></div></section>
-<section class="section" id="process"><div class="container"><div class="section-head reveal"><div><div class="section-kicker">02 / процесс</div><h2>Просто. Понятно.<br>Без лишних кругов.</h2></div><p>Сначала понимаем задачу, затем предлагаем решение и только после согласования запускаем производство.</p></div><div class="process"><div class="process-list"><div class="step reveal"><div class="step-no">01</div><div><h3>Задача</h3><p>Вы рассказываете, что нужно сделать и где это будет использоваться.</p></div><div class="step-arrow">↗</div></div><div class="step reveal"><div class="step-no">02</div><div><h3>Решение</h3><p>Подбираем материал, технологию и формат. Согласовываем детали.</p></div><div class="step-arrow">↗</div></div><div class="step reveal"><div class="step-no">03</div><div><h3>Производство</h3><p>Печатаем, режем и готовим изделие к выдаче или нанесению.</p></div><div class="step-arrow">↗</div></div><div class="step reveal"><div class="step-no">04</div><div><h3>Готово</h3><p>Вы получаете готовый результат, который можно использовать сразу.</p></div><div class="step-arrow">↗</div></div></div><aside class="process-card reveal"><div class="big">04</div><h3>Шага до результата.</h3><p>Минимум формальностей. Максимум внимания к тому, как будет выглядеть готовая работа.</p><div class="mini-line"></div><div class="chips"><span class="chip">Print</span><span class="chip">Cut</span><span class="chip">Brand</span><span class="chip">SPB</span></div></aside></div></div></section>
-<section class="section" id="showcase"><div class="container"><div class="section-head reveal"><div><div class="section-kicker">03 / направления</div><h2>Работаем там,<br>где нужен акцент.</h2></div><p>Автомобили, витрины, магазины, продукция и интерьерные задачи — визуальная коммуникация в физическом пространстве.</p></div><div class="showcase"><article class="show reveal"><div class="show-grid"></div><div class="show-glow"></div><div class="show-code">METIZ / 001<br>PRINT SYSTEM<br>VECTOR / CMYK<br>READY</div><div class="show-content"><div class="show-tag">AUTOMOTIVE</div><h3>Автомобили</h3><p>Наклейки на кузов · стекла · реклама на транспорте</p></div></article><div class="show-stack"><article class="show small reveal"><div class="show-grid"></div><div class="show-content"><div class="show-tag">RETAIL</div><h3>Витрины</h3><p>Графика · оформление · навигация</p></div></article><article class="show small reveal"><div class="show-grid"></div><div class="show-content"><div class="show-tag">PRODUCT</div><h3>Продукция</h3><p>Стикеры · этикетки · брендирование</p></div></article></div></div></div></section>
-<section class="section cta"><div class="container"><div class="cta-box reveal"><div><div class="section-kicker">04 / старт</div><h2>Есть задача?<br><span>Давайте сделаем.</span></h2><p class="cta-copy">Напишите нам — обсудим идею, материал, размеры и способ нанесения. Можно начать с фотографии или просто описать, что хотите получить.</p></div><div class="cta-actions"><a class="btn btn-primary" href="https://vk.ru/metiz_project" target="_blank" rel="noopener noreferrer">ВКонтакте ↗</a><a class="btn btn-ghost" href="https://t.me/metizproject" target="_blank" rel="noopener noreferrer">Telegram ↗</a></div></div></div></section>
-</main>
-<footer class="footer"><div class="container footer-row"><img class="footer-logo" src="metiz-project-logo.png" alt="METIZ PROJECT"><div class="footer-note">© METIZ PROJECT 2010–2026 · PRINT / CUT / BRAND</div><div class="footer-links"><a href="https://vk.ru/metiz_project" target="_blank" rel="noopener noreferrer">VK</a><a href="https://t.me/metizproject" target="_blank" rel="noopener noreferrer">Telegram</a></div></div></footer>
-<script>
-(() => {
- const intro=document.getElementById('intro'), header=document.getElementById('header'), cursor=document.getElementById('cursor'), menu=document.getElementById('menu');
- const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
- setTimeout(()=>intro.classList.add('done'),1450);
- const onScroll=()=>header.classList.toggle('scrolled',window.scrollY>18); onScroll(); window.addEventListener('scroll',onScroll,{passive:true});
- if(!reduced && matchMedia('(pointer:fine)').matches){let x=innerWidth/2,y=innerHeight/2,cx=x,cy=y;addEventListener('pointermove',e=>{x=e.clientX;y=e.clientY},{passive:true});const loop=()=>{cx+=(x-cx)*.08;cy+=(y-cy)*.08;cursor.style.left=cx+'px';cursor.style.top=cy+'px';requestAnimationFrame(loop)};loop();}
- const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.12});document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
- menu?.addEventListener('click',()=>{document.querySelector('.nav-links')?.classList.toggle('open')});
-})();
-</script>
+
+    <div class="container">
+
+        <!-- HEADER / LOGO -->
+        <header>
+            <div class="logo-wrap">
+                <img src="metiz-project-logo.png" alt="METIZ PROJECT">
+            </div>
+            <div class="location-badge">
+                <span class="status-dot"></span>
+                Санкт-Петербург
+            </div>
+        </header>
+
+        <!-- HERO -->
+        <section class="hero">
+            <h1>ПЕЧАТЬ И ПЛОТТЕРНАЯ РЕЗКА <span>ПОД ВАШИ ЗАДАЧИ</span></h1>
+            <p>Изготовление наклеек, брендирование транспорта, витрин и интерьерная печать любой сложности.</p>
+        </section>
+
+        <!-- SERVICES -->
+        <div class="section-title">Наши услуги</div>
+        <section class="grid">
+
+            <div class="card">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 10h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z"/></svg>
+                </div>
+                <h3>Плоттерная резка</h3>
+                <p>Вырезка элементов любой формы из виниловой пленки для авто, витрин и рекламы.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24"><path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/></svg>
+                </div>
+                <h3>Печать наклеек</h3>
+                <p>Индивидуальные стикеры, наклейки на продукцию, упаковку и кузов автомобиля.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>
+                </div>
+                <h3>Брендирование</h3>
+                <p>Оклейка коммерческого и личного транспорта, оформление магазинов и витрин.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24"><path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H3V5h18v14zm-10-7l-2.03 2.71L7.5 12 4.5 16h15l-4.5-6z"/></svg>
+                </div>
+                <h3>Картины на холсте</h3>
+                <p>Интерьерная печать фотографий и картин на качественном натуральном холсте.</p>
+            </div>
+
+        </section>
+
+        <!-- CONTACTS -->
+        <div class="section-title">Связаться с нами</div>
+        <section class="buttons-grid">
+
+            <a href="https://vk.ru/metiz_project" target="_blank" rel="noopener" class="btn btn-primary">
+                <svg viewBox="0 0 24 24"><path d="M13.07 18.75h1.56s.47-.05.71-.31c.22-.25.21-.72.21-.72s-.03-2.2.99-2.52c1-.31 2.28 2.13 3.64 3.07.98.68 1.73.53 1.73.53l3.47-.05s1.82-.11.96-1.55c-.07-.12-.51-1.06-2.64-3-2.23-2.03-1.93-1.7.76-5.21 1.64-2.15 2.3-3.46 2.09-4.02-.2-.54-1.43-.4-1.43-.4l-3.9.02s-.29-.04-.5.09c-.21.13-.34.43-.34.43s-.62 1.65-1.44 3.05c-1.74 2.96-2.44 3.12-2.73 2.93-.67-.43-.5-1.72-.5-2.64 0-2.87.43-4.07-.84-4.38-.42-.1-.73-.17-1.8-.18-1.37-.01-2.53.01-3.19.33-.44.21-.78.68-.57.71.26.03.86.16 1.18.59.41.55.4 1.78.4 1.78s.24 3.39-.55 3.81c-.54.29-1.28-.3-2.87-2.99-.81-1.38-1.42-2.9-1.42-2.9s-.12-.29-.33-.44c-.26-.19-.62-.25-.62-.25l-3.71.02s-.56.02-.77.26c-.18.21-.01.65-.01.65s2.9 6.79 6.19 10.22c3.02 3.15 6.45 2.94 6.45 2.94h1.56z"/></svg>
+                Группа ВКонтакте
+            </a>
+
+            <a href="https://t.me/metizproject" target="_blank" rel="noopener" class="btn btn-secondary">
+                <svg viewBox="0 0 24 24"><path d="M21.7 3.25 2.95 10.48c-1.28.51-1.27 1.22-.23 1.54l4.81 1.5 1.84 5.63c.22.61.11.85.74.85.49 0 .71-.22.98-.48l2.34-2.27 4.86 3.59c.89.49 1.53.23 1.75-.83l3.12-14.69c.33-1.31-.5-1.9-1.46-1.57ZM8.26 13.15l10.94-6.9c.55-.34 1.06-.16.64.21l-8.9 8.04-.35 3.75-2.33-5.1Z"/></svg>
+                Telegram
+            </a>
+
+            <a href="https://wa.me/message/RDHE3F4PU2D3L1" target="_blank" rel="noopener" class="btn btn-secondary">
+                <svg viewBox="0 0 24 24"><path d="M20.52 3.48A11.83 11.83 0 0 0 12.1 0C5.55 0 .22 5.33.22 11.88c0 2.09.55 4.13 1.6 5.93L.12 24l6.33-1.66a11.86 11.86 0 0 0 5.65 1.44h.01c6.54 0 11.87-5.33 11.87-11.88 0-3.17-1.23-6.14-3.46-8.42ZM12.11 21.76h-.01a9.84 9.84 0 0 1-5.02-1.37l-.36-.21-3.76.98 1-3.67-.23-.38a9.84 9.84 0 0 1-1.51-5.23C2.22 6.44 6.66 2 12.11 2c2.64 0 5.12 1.03 6.99 2.9a9.84 9.84 0 0 1 2.89 7c0 5.45-4.43 9.86-9.88 9.86Zm5.42-7.39c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.76-1.67-2.06-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.49 0 1.47 1.07 2.89 1.22 3.09.15.2 2.1 3.21 5.09 4.5.71.31 1.26.49 1.69.63.71.23 1.35.2 1.86.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35Z"/></svg>
+                WhatsApp
+            </a>
+
+        </section>
+
+        <!-- FOOTER -->
+        <footer>
+            © METIZ PROJECT 2010–2026
+        </footer>
+
+    </div>
+
 </body>
 </html>
