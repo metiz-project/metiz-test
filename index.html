@@ -1,2532 +1,1492 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-
-    <title>METIZ PROJECT — наклейки на заказ и печать на холсте</title>
-    <meta name="description" content="METIZ PROJECT — изготовление наклеек на заказ и печать фотографий и изображений на холсте в Санкт-Петербурге.">
-    <meta name="theme-color" content="#080b0f">
-    <meta name="color-scheme" content="dark">
-
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="METIZ PROJECT — печатаем и режем под ваши задачи">
-    <meta property="og:description" content="Изготовление наклеек на заказ и печать фотографий и изображений на холсте. Санкт-Петербург.">
-    <meta property="og:locale" content="ru_RU">
-
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23080b0f'/%3E%3Ccircle cx='32' cy='32' r='19' fill='none' stroke='%234CD5D3' stroke-width='3'/%3E%3Ccircle cx='32' cy='32' r='5' fill='%234CD5D3'/%3E%3C/svg%3E">
-
-    <style>
-        :root {
-            --tiffany: #4CD5D3;
-            --tiffany-rgb: 76, 213, 211;
-
-            --bg: #080b0f;
-            --bg-soft: #0c1116;
-            --surface: #10161c;
-            --surface-2: #141b22;
-            --surface-3: #182129;
-
-            --text: #f4f7f7;
-            --text-soft: #a8b3b9;
-            --text-muted: #6f7b82;
-
-            --line: rgba(255, 255, 255, 0.09);
-            --line-strong: rgba(255, 255, 255, 0.15);
-
-            --nav-height: 76px;
-            --radius: 24px;
-            --radius-small: 16px;
-
-            --shadow: 0 25px 70px rgba(0, 0, 0, 0.38);
-            --tiffany-shadow: 0 15px 45px rgba(var(--tiffany-rgb), 0.15);
-
-            --content-width: 1180px;
-            --ease: cubic-bezier(.22, .61, .36, 1);
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            background: var(--bg);
-        }
-
-        body {
-            margin: 0;
-            min-width: 320px;
-            overflow-x: hidden;
-            background:
-                radial-gradient(circle at 50% -15%, rgba(var(--tiffany-rgb), 0.08), transparent 32rem),
-                var(--bg);
-            color: var(--text);
-            font-family:
-                Inter,
-                ui-sans-serif,
-                -apple-system,
-                BlinkMacSystemFont,
-                "Segoe UI",
-                Roboto,
-                Helvetica,
-                Arial,
-                sans-serif;
-            line-height: 1.55;
-            -webkit-font-smoothing: antialiased;
-            text-rendering: optimizeLegibility;
-        }
-
-        body.menu-open {
-            overflow: hidden;
-        }
-
-        button,
-        a {
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        button {
-            font: inherit;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-        }
-
-        ::selection {
-            color: #061011;
-            background: var(--tiffany);
-        }
-
-        :focus-visible {
-            outline: 2px solid var(--tiffany);
-            outline-offset: 4px;
-        }
-
-        .site-shell {
-            position: relative;
-            isolation: isolate;
-        }
-
-        /* =========================================================
-           BACKGROUND PARTICLES
-        ========================================================== */
-
-        #particles {
-            position: fixed;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            pointer-events: none;
-        }
-
-        .background-glow {
-            position: fixed;
-            width: 520px;
-            height: 520px;
-            left: 50%;
-            top: 12%;
-            transform: translateX(-50%);
-            border-radius: 50%;
-            background: rgba(var(--tiffany-rgb), 0.035);
-            filter: blur(80px);
-            z-index: -3;
-            pointer-events: none;
-        }
-
-        .noise {
-            position: fixed;
-            inset: 0;
-            z-index: -1;
-            pointer-events: none;
-            opacity: 0.028;
-            background-image:
-                url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E");
-        }
-
-        /* =========================================================
-           NAVIGATION
-        ========================================================== */
-
-        .site-nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            height: var(--nav-height);
-            border-bottom: 1px solid transparent;
-            transition:
-                background .45s var(--ease),
-                border-color .45s var(--ease),
-                box-shadow .45s var(--ease);
-        }
-
-        .site-nav.scrolled {
-            background: rgba(8, 11, 15, 0.82);
-            border-color: var(--line);
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.22);
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
-        }
-
-        .nav-inner {
-            width: min(calc(100% - 40px), var(--content-width));
-            height: 100%;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 30px;
-        }
-
-        .nav-brand {
-            display: inline-flex;
-            align-items: center;
-            gap: 11px;
-            min-width: 0;
-            color: var(--text);
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: .15em;
-            text-transform: uppercase;
-        }
-
-        .nav-brand-mark {
-            width: 11px;
-            height: 11px;
-            border-radius: 50%;
-            background: var(--tiffany);
-            box-shadow: 0 0 18px rgba(var(--tiffany-rgb), .75);
-            flex: 0 0 auto;
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            gap: 5px;
-        }
-
-        .nav-link {
-            position: relative;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 44px;
-            padding: 0 14px;
-            color: var(--text-soft);
-            border-radius: 12px;
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: .01em;
-            transition:
-                color .3s ease,
-                background .3s ease;
-        }
-
-        .nav-link::after {
-            content: "";
-            position: absolute;
-            left: 14px;
-            right: 14px;
-            bottom: 7px;
-            height: 1px;
-            transform: scaleX(0);
-            transform-origin: center;
-            background: var(--tiffany);
-            transition: transform .3s var(--ease);
-        }
-
-        .nav-link:hover {
-            color: var(--text);
-            background: rgba(255, 255, 255, .035);
-        }
-
-        .nav-link:hover::after {
-            transform: scaleX(1);
-        }
-
-        .hamburger {
-            display: none;
-            width: 46px;
-            height: 46px;
-            padding: 0;
-            border: 1px solid var(--line);
-            border-radius: 14px;
-            color: var(--text);
-            background: rgba(255, 255, 255, .035);
-            cursor: pointer;
-        }
-
-        .hamburger-lines,
-        .hamburger-lines::before,
-        .hamburger-lines::after {
-            width: 19px;
-            height: 1.5px;
-            display: block;
-            margin: auto;
-            background: currentColor;
-            transition: transform .35s var(--ease);
-        }
-
-        .hamburger-lines {
-            position: relative;
-        }
-
-        .hamburger-lines::before,
-        .hamburger-lines::after {
-            content: "";
-            position: absolute;
-            left: 0;
-        }
-
-        .hamburger-lines::before {
-            transform: translateY(-6px);
-        }
-
-        .hamburger-lines::after {
-            transform: translateY(6px);
-        }
-
-        .hamburger[aria-expanded="true"] .hamburger-lines {
-            background: transparent;
-        }
-
-        .hamburger[aria-expanded="true"] .hamburger-lines::before {
-            transform: rotate(45deg);
-        }
-
-        .hamburger[aria-expanded="true"] .hamburger-lines::after {
-            transform: rotate(-45deg);
-        }
-
-        .mobile-menu {
-            display: none;
-        }
-
-        /* =========================================================
-           COMMON
-        ========================================================== */
-
-        main,
-        header,
-        footer {
-            position: relative;
-            z-index: 1;
-        }
-
-        .container {
-            width: min(calc(100% - 40px), var(--content-width));
-            margin: 0 auto;
-        }
-
-        .section {
-            position: relative;
-            padding: 125px 0;
-            scroll-margin-top: 85px;
-        }
-
-        .section + .section {
-            border-top: 1px solid rgba(255, 255, 255, .045);
-        }
-
-        .section-kicker {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 20px;
-            color: var(--tiffany);
-            font-size: 11px;
-            font-weight: 800;
-            letter-spacing: .2em;
-            text-transform: uppercase;
-        }
-
-        .section-kicker::before {
-            content: "";
-            width: 26px;
-            height: 1px;
-            background: var(--tiffany);
-            box-shadow: 0 0 12px rgba(var(--tiffany-rgb), .7);
-        }
-
-        .section-title {
-            max-width: 900px;
-            margin: 0;
-            color: var(--text);
-            font-size: clamp(36px, 5vw, 68px);
-            line-height: .98;
-            letter-spacing: -.045em;
-            font-weight: 750;
-        }
-
-        .section-description {
-            max-width: 760px;
-            margin: 28px 0 0;
-            color: var(--text-soft);
-            font-size: clamp(16px, 1.8vw, 19px);
-            line-height: 1.75;
-        }
-
-        .eyebrow-line {
-            width: 70px;
-            height: 1px;
-            margin-top: 30px;
-            background: linear-gradient(90deg, var(--tiffany), transparent);
-        }
-
-        .glass-card {
-            border: 1px solid var(--line);
-            border-radius: var(--radius);
-            background:
-                linear-gradient(145deg, rgba(255,255,255,.045), rgba(255,255,255,.015)),
-                rgba(10, 14, 18, .7);
-            box-shadow: var(--shadow);
-        }
-
-        .reveal {
-            opacity: 0;
-            transform: translateY(26px);
-            transition:
-                opacity .8s var(--ease),
-                transform .8s var(--ease);
-        }
-
-        .reveal.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .stagger > * {
-            opacity: 0;
-            transform: translateY(22px);
-            transition:
-                opacity .75s var(--ease),
-                transform .75s var(--ease);
-        }
-
-        .stagger.is-visible > * {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .stagger.is-visible > *:nth-child(2) {
-            transition-delay: .07s;
-        }
-
-        .stagger.is-visible > *:nth-child(3) {
-            transition-delay: .14s;
-        }
-
-        .stagger.is-visible > *:nth-child(4) {
-            transition-delay: .21s;
-        }
-
-        .stagger.is-visible > *:nth-child(5) {
-            transition-delay: .28s;
-        }
-
-        /* =========================================================
-           HERO
-        ========================================================== */
-
-        .hero {
-            min-height: 100svh;
-            padding: calc(var(--nav-height) + 54px) 0 70px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        .hero-inner {
-            width: min(calc(100% - 40px), 1060px);
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .hero-logo-wrap {
-            position: relative;
-            width: fit-content;
-            max-width: min(78vw, 380px);
-            margin: 0 auto 18px;
-            opacity: 0;
-            transform: translateY(18px) scale(.985);
-            animation: heroLogoIn 1s .15s var(--ease) forwards;
-        }
-
-        .hero-logo-wrap::before {
-            content: "";
-            position: absolute;
-            inset: 15% -10%;
-            border-radius: 50%;
-            background: rgba(var(--tiffany-rgb), .13);
-            filter: blur(35px);
-            z-index: -1;
-        }
-
-        .hero-logo {
-            display: block;
-            width: auto;
-            max-width: 100%;
-            max-height: 150px;
-            object-fit: contain;
-            object-position: center;
-        }
-
-        .hero-city {
-            margin: 0;
-            color: var(--text-soft);
-            font-size: clamp(13px, 1.5vw, 16px);
-            font-weight: 600;
-            letter-spacing: .18em;
-            text-transform: uppercase;
-            opacity: 0;
-            animation: heroTextIn .8s .42s var(--ease) forwards;
-        }
-
-        .hero-city::after {
-            content: "";
-            display: block;
-            width: 42px;
-            height: 1px;
-            margin: 16px auto 0;
-            background: var(--tiffany);
-            box-shadow: 0 0 15px rgba(var(--tiffany-rgb), .7);
-        }
-
-        .hero-title {
-            max-width: 900px;
-            margin: 38px auto 0;
-            color: var(--text);
-            font-size: clamp(34px, 7vw, 78px);
-            line-height: .96;
-            letter-spacing: -.055em;
-            font-weight: 800;
-            text-wrap: balance;
-            opacity: 0;
-            animation: heroTextIn .9s .58s var(--ease) forwards;
-        }
-
-        .hero-title span {
-            color: var(--tiffany);
-            text-shadow: 0 0 35px rgba(var(--tiffany-rgb), .16);
-        }
-
-        .hero-actions {
-            width: 100%;
-            max-width: 820px;
-            margin: 46px auto 0;
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 14px;
-            opacity: 0;
-            animation: heroTextIn .9s .75s var(--ease) forwards;
-        }
-
-        .hero-action {
-            min-width: 0;
-            min-height: 68px;
-            padding: 13px 18px;
-            border: 1px solid rgba(var(--tiffany-rgb), .55);
-            border-radius: 17px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            color: #061011;
-            background: var(--tiffany);
-            box-shadow:
-                0 10px 35px rgba(var(--tiffany-rgb), .13),
-                inset 0 1px 0 rgba(255,255,255,.35);
-            font-size: clamp(11px, 1.3vw, 14px);
-            font-weight: 850;
-            letter-spacing: .04em;
-            text-align: center;
-            cursor: pointer;
-            transition:
-                transform .35s var(--ease),
-                box-shadow .35s var(--ease),
-                background .35s ease;
-        }
-
-        .hero-action:hover {
-            transform: translateY(-4px) scale(1.012);
-            background: #68dedc;
-            box-shadow:
-                0 18px 48px rgba(var(--tiffany-rgb), .23),
-                0 0 0 1px rgba(var(--tiffany-rgb), .18);
-        }
-
-        .hero-action:active {
-            transform: translateY(0) scale(.985);
-            box-shadow: 0 7px 22px rgba(var(--tiffany-rgb), .14);
-        }
-
-        .hero-action.secondary {
-            color: var(--text);
-            background:
-                linear-gradient(145deg, rgba(255,255,255,.08), rgba(255,255,255,.025));
-            border-color: rgba(var(--tiffany-rgb), .38);
-            box-shadow:
-                0 10px 35px rgba(0,0,0,.25),
-                inset 0 1px 0 rgba(255,255,255,.07);
-        }
-
-        .hero-action.secondary:hover {
-            color: #061011;
-            background: var(--tiffany);
-            box-shadow:
-                0 18px 48px rgba(var(--tiffany-rgb), .22);
-        }
-
-        .hero-scroll {
-            display: inline-flex;
-            align-items: center;
-            gap: 11px;
-            margin-top: 58px;
-            color: var(--text-muted);
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: .18em;
-            text-transform: uppercase;
-            opacity: 0;
-            animation: heroTextIn .8s 1s var(--ease) forwards;
-        }
-
-        .hero-scroll::before {
-            content: "";
-            width: 34px;
-            height: 1px;
-            background: rgba(var(--tiffany-rgb), .6);
-        }
-
-        @keyframes heroLogoIn {
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        @keyframes heroTextIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* =========================================================
-           SERVICE SECTIONS
-        ========================================================== */
-
-        .service-header {
-            display: grid;
-            grid-template-columns: minmax(0, 1.05fr) minmax(280px, .95fr);
-            gap: 70px;
-            align-items: end;
-        }
-
-        .service-index {
-            justify-self: end;
-            color: rgba(var(--tiffany-rgb), .22);
-            font-size: clamp(90px, 15vw, 190px);
-            line-height: .7;
-            font-weight: 800;
-            letter-spacing: -.09em;
-            user-select: none;
-        }
-
-        .service-content {
-            margin-top: 78px;
-        }
-
-        .content-label {
-            margin: 0 0 25px;
-            color: var(--text);
-            font-size: 12px;
-            font-weight: 800;
-            letter-spacing: .18em;
-            text-transform: uppercase;
-        }
-
-        .process-grid {
-            display: grid;
-            grid-template-columns: repeat(5, minmax(0, 1fr));
-            border: 1px solid var(--line);
-            border-radius: var(--radius);
-            overflow: hidden;
-            background: rgba(255,255,255,.018);
-            box-shadow: var(--shadow);
-        }
-
-        .process-card {
-            position: relative;
-            min-height: 215px;
-            padding: 28px 25px;
-            background:
-                linear-gradient(145deg, rgba(255,255,255,.035), rgba(255,255,255,.008));
-            transition:
-                background .4s ease,
-                transform .4s var(--ease);
-        }
-
-        .process-card + .process-card {
-            border-left: 1px solid var(--line);
-        }
-
-        .process-card:hover {
-            background:
-                linear-gradient(145deg, rgba(var(--tiffany-rgb), .085), rgba(255,255,255,.012));
-        }
-
-        .process-number {
-            display: block;
-            margin-bottom: 45px;
-            color: var(--tiffany);
-            font-size: 12px;
-            font-weight: 850;
-            letter-spacing: .15em;
-        }
-
-        .process-number::after {
-            content: "";
-            display: block;
-            width: 28px;
-            height: 1px;
-            margin-top: 13px;
-            background: rgba(var(--tiffany-rgb), .45);
-        }
-
-        .process-text {
-            margin: 0;
-            color: var(--text-soft);
-            font-size: 14px;
-            line-height: 1.6;
-            font-weight: 600;
-        }
-
-        .service-cta {
-            position: relative;
-            margin-top: 70px;
-            padding: 55px;
-            overflow: hidden;
-        }
-
-        .service-cta::before {
-            content: "";
-            position: absolute;
-            width: 340px;
-            height: 340px;
-            top: -180px;
-            right: -80px;
-            border-radius: 50%;
-            background: rgba(var(--tiffany-rgb), .09);
-            filter: blur(8px);
-            pointer-events: none;
-        }
-
-        .service-cta::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            height: 1px;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                rgba(var(--tiffany-rgb), .4),
-                transparent
-            );
-        }
-
-        .cta-inner {
-            position: relative;
-            z-index: 1;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 35px;
-        }
-
-        .cta-title {
-            margin: 0;
-            font-size: clamp(26px, 4vw, 46px);
-            line-height: 1;
-            letter-spacing: -.04em;
-            font-weight: 800;
-        }
-
-        .cta-subtitle {
-            margin: 14px 0 0;
-            color: var(--text-muted);
-            font-size: 14px;
-        }
-
-        .social-grid {
-            flex: 0 0 min(100%, 520px);
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 10px;
-        }
-
-        .social-link {
-            min-height: 58px;
-            padding: 10px 15px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            border: 1px solid var(--line);
-            border-radius: 14px;
-            color: var(--text);
-            background: rgba(255,255,255,.035);
-            font-size: 12px;
-            font-weight: 750;
-            transition:
-                transform .3s var(--ease),
-                border-color .3s ease,
-                background .3s ease,
-                color .3s ease;
-        }
-
-        .social-link:hover {
-            transform: translateY(-3px);
-            border-color: rgba(var(--tiffany-rgb), .48);
-            background: rgba(var(--tiffany-rgb), .08);
-            color: var(--tiffany);
-        }
-
-        .social-icon {
-            width: 19px;
-            height: 19px;
-            flex: 0 0 auto;
-            fill: currentColor;
-        }
-
-        .social-icon-stroke {
-            fill: none;
-            stroke: currentColor;
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-
-        /* =========================================================
-           PICKUP
-        ========================================================== */
-
-        .pickup-section {
-            padding-top: 110px;
-            padding-bottom: 110px;
-        }
-
-        .pickup-card {
-            position: relative;
-            padding: clamp(35px, 6vw, 70px);
-            overflow: hidden;
-            border: 1px solid rgba(255, 184, 61, .28);
-            border-radius: 30px;
-            background:
-                radial-gradient(circle at 85% 15%, rgba(255, 178, 46, .09), transparent 28%),
-                linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.012));
-            box-shadow: var(--shadow);
-        }
-
-        .pickup-card::before {
-            content: "";
-            position: absolute;
-            width: 420px;
-            height: 420px;
-            right: -220px;
-            bottom: -260px;
-            border-radius: 50%;
-            background: rgba(255, 170, 40, .08);
-            filter: blur(55px);
-            pointer-events: none;
-        }
-
-        .pickup-layout {
-            position: relative;
-            z-index: 1;
-            display: grid;
-            grid-template-columns: minmax(0, 1fr) auto;
-            align-items: center;
-            gap: 60px;
-        }
-
-        .pickup-kicker {
-            display: inline-flex;
-            align-items: center;
-            gap: 9px;
-            color: #ffb52e;
-            font-size: 11px;
-            font-weight: 850;
-            letter-spacing: .18em;
-            text-transform: uppercase;
-        }
-
-        .pickup-kicker::before {
-            content: "";
-            width: 28px;
-            height: 1px;
-            background: #ffb52e;
-        }
-
-        .pickup-title {
-            margin: 18px 0 0;
-            font-size: clamp(31px, 5vw, 62px);
-            line-height: .98;
-            letter-spacing: -.05em;
-            font-weight: 800;
-        }
-
-        .pickup-only {
-            margin: 22px 0 0;
-            color: var(--text);
-            font-size: 20px;
-            font-weight: 750;
-        }
-
-        .pickup-address {
-            max-width: 650px;
-            margin: 10px 0 0;
-            color: var(--text-soft);
-            font-size: 16px;
-            line-height: 1.65;
-        }
-
-        .route-button {
-            min-height: 64px;
-            min-width: 255px;
-            padding: 12px 23px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 13px;
-            border: 1px solid rgba(255, 191, 65, .7);
-            border-radius: 16px;
-            color: #241600;
-            background: linear-gradient(145deg, #ffc64b, #ffac1e);
-            box-shadow:
-                0 14px 35px rgba(255, 173, 34, .16),
-                inset 0 1px 0 rgba(255,255,255,.5);
-            font-size: 12px;
-            font-weight: 900;
-            letter-spacing: .055em;
-            transition:
-                transform .35s var(--ease),
-                box-shadow .35s var(--ease),
-                filter .35s ease;
-        }
-
-        .route-button:hover {
-            transform: translateY(-4px);
-            filter: brightness(1.04);
-            box-shadow:
-                0 21px 45px rgba(255, 173, 34, .24),
-                inset 0 1px 0 rgba(255,255,255,.5);
-        }
-
-        .route-button:active {
-            transform: translateY(0) scale(.985);
-        }
-
-        .yandex-icon {
-            width: 29px;
-            height: 29px;
-            flex: 0 0 auto;
-        }
-
-        /* =========================================================
-           FOOTER
-        ========================================================== */
-
-        .site-footer {
-            padding: 65px 0 35px;
-            border-top: 1px solid var(--line);
-        }
-
-        .footer-main {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            gap: 25px;
-            text-align: center;
-        }
-
-        .share-button {
-            min-height: 56px;
-            padding: 12px 22px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            border: 1px solid rgba(96, 212, 128, .55);
-            border-radius: 15px;
-            color: #07130b;
-            background: linear-gradient(145deg, #65db8b, #3fc76c);
-            box-shadow: 0 12px 32px rgba(53, 197, 103, .12);
-            font-size: 11px;
-            font-weight: 900;
-            letter-spacing: .08em;
-            cursor: pointer;
-            transition:
-                transform .3s var(--ease),
-                box-shadow .3s ease,
-                filter .3s ease;
-        }
-
-        .share-button:hover {
-            transform: translateY(-3px);
-            filter: brightness(1.04);
-            box-shadow: 0 17px 38px rgba(53, 197, 103, .2);
-        }
-
-        .share-button:active {
-            transform: scale(.98);
-        }
-
-        .share-icon {
-            width: 19px;
-            height: 19px;
-            fill: none;
-            stroke: currentColor;
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-
-        .share-status {
-            min-height: 20px;
-            margin: 0;
-            color: var(--text-muted);
-            font-size: 12px;
-        }
-
-        .footer-brand {
-            margin: 0;
-            color: var(--text-soft);
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: .16em;
-            text-transform: uppercase;
-        }
-
-        .footer-copy {
-            margin: 0;
-            color: var(--text-muted);
-            font-size: 11px;
-        }
-
-        .footer-links {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px 25px;
-            margin-top: 7px;
-        }
-
-        .footer-link {
-            color: var(--text-muted);
-            font-size: 11px;
-            transition: color .25s ease;
-        }
-
-        .footer-link:hover {
-            color: var(--tiffany);
-        }
-
-        /* =========================================================
-           TOAST
-        ========================================================== */
-
-        .toast {
-            position: fixed;
-            left: 50%;
-            bottom: 25px;
-            z-index: 1200;
-            min-width: min(340px, calc(100vw - 32px));
-            max-width: calc(100vw - 32px);
-            padding: 13px 18px;
-            transform: translate(-50%, 30px);
-            opacity: 0;
-            pointer-events: none;
-            border: 1px solid var(--line-strong);
-            border-radius: 14px;
-            color: var(--text);
-            background: rgba(15, 20, 25, .92);
-            box-shadow: var(--shadow);
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
-            text-align: center;
-            font-size: 12px;
-            font-weight: 600;
-            transition:
-                opacity .35s var(--ease),
-                transform .35s var(--ease);
-        }
-
-        .toast.visible {
-            opacity: 1;
-            transform: translate(-50%, 0);
-        }
-
-        /* =========================================================
-           RESPONSIVE
-        ========================================================== */
-
-        @media (max-width: 980px) {
-            .nav-links {
-                display: none;
-            }
-
-            .hamburger {
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .mobile-menu {
-                position: fixed;
-                inset: var(--nav-height) 0 0;
-                z-index: 999;
-                display: flex;
-                visibility: hidden;
-                opacity: 0;
-                pointer-events: none;
-                padding: 28px 20px;
-                background: rgba(8, 11, 15, .97);
-                backdrop-filter: blur(20px);
-                -webkit-backdrop-filter: blur(20px);
-                transform: translateY(-12px);
-                transition:
-                    opacity .35s var(--ease),
-                    transform .35s var(--ease),
-                    visibility .35s;
-                overflow-y: auto;
-            }
-
-            .mobile-menu.open {
-                visibility: visible;
-                opacity: 1;
-                pointer-events: auto;
-                transform: translateY(0);
-            }
-
-            .mobile-menu-inner {
-                width: min(100%, 500px);
-                margin: 0 auto;
-                display: flex;
-                flex-direction: column;
-                gap: 8px;
-            }
-
-            .mobile-menu-link {
-                min-height: 62px;
-                padding: 0 18px;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                border: 1px solid var(--line);
-                border-radius: 15px;
-                color: var(--text);
-                background: rgba(255,255,255,.025);
-                font-size: 15px;
-                font-weight: 700;
-            }
-
-            .mobile-menu-link::after {
-                content: "↗";
-                color: var(--tiffany);
-                font-size: 17px;
-            }
-
-            .service-header {
-                grid-template-columns: 1fr;
-                gap: 25px;
-            }
-
-            .service-index {
-                justify-self: start;
-                font-size: 100px;
-                line-height: .7;
-            }
-
-            .process-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-
-            .process-card:nth-child(odd) {
-                border-left: 0;
-            }
-
-            .process-card:nth-child(n + 3) {
-                border-top: 1px solid var(--line);
-            }
-
-            .cta-inner {
-                align-items: flex-start;
-                flex-direction: column;
-            }
-
-            .social-grid {
-                width: 100%;
-                flex-basis: auto;
-            }
-
-            .pickup-layout {
-                grid-template-columns: 1fr;
-            }
-
-            .route-button {
-                width: 100%;
-            }
-        }
-
-        @media (max-width: 640px) {
-            :root {
-                --nav-height: 68px;
-                --radius: 19px;
-            }
-
-            .container,
-            .nav-inner {
-                width: min(calc(100% - 28px), var(--content-width));
-            }
-
-            .site-nav {
-                height: var(--nav-height);
-            }
-
-            .hero {
-                padding:
-                    calc(var(--nav-height) + 38px)
-                    0
-                    55px;
-            }
-
-            .hero-inner {
-                width: calc(100% - 28px);
-            }
-
-            .hero-logo-wrap {
-                max-width: min(72vw, 290px);
-                margin-bottom: 15px;
-            }
-
-            .hero-logo {
-                max-height: 110px;
-            }
-
-            .hero-title {
-                margin-top: 29px;
-                font-size: clamp(29px, 10.5vw, 48px);
-            }
-
-            /*
-             * КРИТИЧЕСКИ ВАЖНО:
-             * главные две кнопки ВСЕГДА остаются в двух колонках
-             * даже на самых узких мобильных экранах.
-             */
-            .hero-actions {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-                gap: 8px;
-                margin-top: 35px;
-            }
-
-            .hero-action {
-                min-height: 58px;
-                padding: 9px 5px;
-                border-radius: 13px;
-                font-size: clamp(8.5px, 2.55vw, 11px);
-                line-height: 1.18;
-                letter-spacing: .015em;
-            }
-
-            .hero-scroll {
-                margin-top: 42px;
-                font-size: 9px;
-            }
-
-            .section {
-                padding: 85px 0;
-                scroll-margin-top: 72px;
-            }
-
-            .section-title {
-                font-size: clamp(34px, 11vw, 52px);
-            }
-
-            .section-description {
-                margin-top: 22px;
-                font-size: 15px;
-                line-height: 1.7;
-            }
-
-            .service-content {
-                margin-top: 50px;
-            }
-
-            .process-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .process-card,
-            .process-card:nth-child(n + 3) {
-                min-height: auto;
-                padding: 25px 22px;
-                border-left: 0;
-                border-top: 1px solid var(--line);
-            }
-
-            .process-card:first-child {
-                border-top: 0;
-            }
-
-            .process-number {
-                margin-bottom: 25px;
-            }
-
-            .service-cta {
-                margin-top: 45px;
-                padding: 30px 20px;
-            }
-
-            .cta-title {
-                font-size: 30px;
-            }
-
-            .social-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .social-link {
-                min-height: 55px;
-            }
-
-            .pickup-section {
-                padding-top: 80px;
-                padding-bottom: 80px;
-            }
-
-            .pickup-card {
-                padding: 30px 21px;
-                border-radius: 22px;
-            }
-
-            .pickup-title {
-                font-size: 37px;
-            }
-
-            .pickup-only {
-                font-size: 18px;
-            }
-
-            .pickup-address {
-                font-size: 14px;
-            }
-
-            .site-footer {
-                padding: 55px 0 28px;
-            }
-
-            .footer-links {
-                gap: 13px 18px;
-            }
-        }
-
-        @media (max-width: 360px) {
-            .container,
-            .nav-inner {
-                width: calc(100% - 24px);
-            }
-
-            .hero-inner {
-                width: calc(100% - 24px);
-            }
-
-            .hero-action {
-                min-height: 56px;
-                padding-left: 3px;
-                padding-right: 3px;
-                font-size: 8.2px;
-            }
-
-            .hero-title {
-                font-size: 29px;
-            }
-
-            .hero-logo-wrap {
-                max-width: 68vw;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            html {
-                scroll-behavior: auto;
-            }
-
-            *,
-            *::before,
-            *::after {
-                animation-duration: .01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: .01ms !important;
-            }
-
-            .reveal,
-            .stagger > * {
-                opacity: 1;
-                transform: none;
-            }
-
-            #particles {
-                display: none;
-            }
-        }
-    </style>
-</head>
-
-<body>
-<div class="site-shell">
-
-    <canvas id="particles" aria-hidden="true"></canvas>
-    <div class="background-glow" aria-hidden="true"></div>
-    <div class="noise" aria-hidden="true"></div>
-
-    <!-- =========================================================
-         NAVIGATION
-    ========================================================== -->
-    <nav class="site-nav" id="site-nav" aria-label="Основная навигация">
-        <div class="nav-inner">
-            <a class="nav-brand" href="#top" aria-label="На главную">
-                <span class="nav-brand-mark" aria-hidden="true"></span>
-                <span id="nav-company-name">METIZ PROJECT</span>
-            </a>
-
-            <div class="nav-links">
-                <a class="nav-link" href="#stickers">Наклейки</a>
-                <a class="nav-link" href="#canvas">Холсты</a>
-                <a class="nav-link" href="#how-to-order">Как заказать</a>
-                <a class="nav-link" href="#pickup">Самовывоз</a>
-                <a class="nav-link" href="#contacts">Контакты</a>
-            </div>
-
-            <button
-                class="hamburger"
-                id="hamburger"
-                type="button"
-                aria-label="Открыть меню"
-                aria-expanded="false"
-                aria-controls="mobile-menu"
-            >
-                <span class="hamburger-lines" aria-hidden="true"></span>
-            </button>
-        </div>
-    </nav>
-
-    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
-        <div class="mobile-menu-inner">
-            <a class="mobile-menu-link" href="#stickers">Наклейки</a>
-            <a class="mobile-menu-link" href="#canvas">Холсты</a>
-            <a class="mobile-menu-link" href="#how-to-order">Как заказать</a>
-            <a class="mobile-menu-link" href="#pickup">Самовывоз</a>
-            <a class="mobile-menu-link" href="#contacts">Контакты</a>
-        </div>
-    </div>
-
-    <!-- =========================================================
-         HERO
-    ========================================================== -->
-    <header class="hero" id="top">
-        <div class="hero-inner">
-            <div class="hero-logo-wrap">
-                <img
-                    id="hero-logo"
-                    class="hero-logo"
-                    src="metiz-project-logo.png"
-                    alt="Логотип METIZ PROJECT"
-                    decoding="async"
-                >
-            </div>
-
-            <p class="hero-city" id="hero-city">Санкт-Петербург</p>
-
-            <h1 class="hero-title" id="hero-title">
-                ПЕЧАТАЕМ И РЕЖЕМ ПОД ВАШИ ЗАДАЧИ
-            </h1>
-
-            <div class="hero-actions" aria-label="Основные услуги">
-                <a
-                    class="hero-action"
-                    href="#stickers"
-                    data-scroll-target="stickers"
-                >
-                    ИЗГОТОВЛЕНИЕ НАКЛЕЕК
-                </a>
-
-                <a
-                    class="hero-action secondary"
-                    href="#canvas"
-                    data-scroll-target="canvas"
-                >
-                    ПЕЧАТЬ НА ХОЛСТЕ
-                </a>
-            </div>
-
-            <span class="hero-scroll" aria-hidden="true">
-                Выберите услугу
-            </span>
-        </div>
-    </header>
-
-    <main>
-
-        <!-- =====================================================
-             STICKERS
-        ====================================================== -->
-        <section class="section" id="stickers" aria-labelledby="stickers-heading">
-            <div class="container">
-
-                <div class="service-header reveal">
-                    <div>
-                        <span class="section-kicker">01 / Услуга</span>
-
-                        <h2 class="section-title" id="stickers-heading">
-                            <span id="stickers-title">
-                                Изготовление наклеек на заказ
-                            </span>
-                        </h2>
-
-                        <div class="eyebrow-line" aria-hidden="true"></div>
-                    </div>
-
-                    <div class="service-index" aria-hidden="true">01</div>
-                </div>
-
-                <div class="service-content">
-                    <article class="reveal">
-                        <h3 class="content-label">ОБ УСЛУГЕ</h3>
-
-                        <p class="section-description" id="stickers-description">
-                            ТЕКСТ ДЛЯ РЕДАКТИРОВАНИЯ
-                        </p>
-                    </article>
-
-                    <div
-                        class="service-content"
-                        id="how-to-order"
-                        style="margin-top: 65px; scroll-margin-top: 85px;"
-                    >
-                        <div class="reveal">
-                            <h3 class="content-label">КАК ЗАКАЗАТЬ</h3>
-                        </div>
-
-                        <div class="process-grid stagger" data-stagger>
-                            <article class="process-card">
-                                <span class="process-number">01</span>
-                                <p class="process-text">
-                                    Отправьте макет или напишите, что нужно изготовить
-                                </p>
-                            </article>
-
-                            <article class="process-card">
-                                <span class="process-number">02</span>
-                                <p class="process-text">
-                                    Мы уточним детали заказа
-                                </p>
-                            </article>
-
-                            <article class="process-card">
-                                <span class="process-number">03</span>
-                                <p class="process-text">
-                                    Согласуем изготовление
-                                </p>
-                            </article>
-
-                            <article class="process-card">
-                                <span class="process-number">04</span>
-                                <p class="process-text">
-                                    Изготавливаем заказ
-                                </p>
-                            </article>
-
-                            <article class="process-card">
-                                <span class="process-number">05</span>
-                                <p class="process-text">
-                                    Вы забираете готовый заказ
-                                </p>
-                            </article>
-                        </div>
-                    </div>
-
-                    <div class="service-cta glass-card reveal" id="contacts">
-                        <div class="cta-inner">
-                            <div>
-                                <h3 class="cta-title">ЗАКАЗАТЬ НАКЛЕЙКИ</h3>
-                                <p class="cta-subtitle">
-                                    Выберите удобный способ связи
-                                </p>
-                            </div>
-
-                            <div class="social-grid">
-                                <a
-                                    class="social-link"
-                                    data-link="vkLink"
-                                    href="#"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
-                                        <path d="M3 7.2C3 5.25 4.25 4 6.2 4h11.6C19.75 4 21 5.25 21 7.2v9.6c0 1.95-1.25 3.2-3.2 3.2H6.2C4.25 20 3 18.75 3 16.8V7.2Zm3.05 2.05c.1 3.25 1.7 5.2 4.48 5.4v-2.1c1.18.12 2.08.92 2.45 2.1h2.17c-.6-2.2-1.85-3.1-2.62-3.43.77-.42 1.86-1.44 2.25-3.97h-1.97c-.33 1.3-1.3 2.52-2.28 2.62V7.25H8.56v4.53c-1-.25-2.2-1.55-2.27-2.53H6.05Z"/>
-                                    </svg>
-                                    <span>Написать во ВКонтакте</span>
-                                </a>
-
-                                <a
-                                    class="social-link"
-                                    data-link="telegramLink"
-                                    href="#"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
-                                        <path d="M21.6 4.2 18.2 20c-.26 1.12-.91 1.4-1.85.87l-5.15-3.8-2.48 2.39c-.27.27-.5.5-1.02.5l.37-5.25 9.55-8.63c.42-.37-.1-.58-.65-.21L5.16 13.1.06 11.5c-1.11-.35-1.13-1.12.23-1.63L20.2 2.1c.92-.34 1.72.21 1.4 2.1Z"/>
-                                    </svg>
-                                    <span>Написать в Telegram</span>
-                                </a>
-
-                                <a
-                                    class="social-link"
-                                    data-link="whatsappLink"
-                                    href="#"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
-                                        <path d="M12 2.7a9.2 9.2 0 0 0-7.9 14l-1.05 3.83 3.92-1.03A9.2 9.2 0 1 0 12 2.7Zm0 16.67a7.44 7.44 0 0 1-3.8-1.04l-.27-.16-2.33.61.62-2.27-.17-.28A7.44 7.44 0 1 1 12 19.37Zm4.08-5.55c-.22-.11-1.3-.64-1.5-.71-.2-.07-.35-.11-.5.11-.15.22-.57.71-.7.86-.13.15-.26.16-.48.05-.22-.11-.93-.34-1.77-1.08-.65-.58-1.09-1.29-1.22-1.51-.13-.22-.01-.34.1-.45.1-.1.22-.26.33-.39.11-.13.15-.22.22-.37.07-.15.04-.28-.02-.39-.06-.11-.5-1.2-.69-1.64-.18-.43-.36-.37-.5-.38h-.43c-.15 0-.39.06-.59.28-.2.22-.77.75-.77 1.83s.79 2.12.9 2.27c.11.15 1.55 2.36 3.75 3.31.52.23.93.37 1.25.47.53.17 1.02.15 1.4.09.43-.06 1.3-.53 1.49-1.04.18-.51.18-.94.13-1.03-.06-.09-.2-.14-.42-.25Z"/>
-                                    </svg>
-                                    <span>Написать в WhatsApp</span>
-                                </a>
-
-                                <a
-                                    class="social-link"
-                                    data-link="vkGroupLink"
-                                    href="#"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
-                                        <path d="M3 7.2C3 5.25 4.25 4 6.2 4h11.6C19.75 4 21 5.25 21 7.2v9.6c0 1.95-1.25 3.2-3.2 3.2H6.2C4.25 20 3 18.75 3 16.8V7.2Zm3.05 2.05c.1 3.25 1.7 5.2 4.48 5.4v-2.1c1.18.12 2.08.92 2.45 2.1h2.17c-.6-2.2-1.85-3.1-2.62-3.43.77-.42 1.86-1.44 2.25-3.97h-1.97c-.33 1.3-1.3 2.52-2.28 2.62V7.25H8.56v4.53c-1-.25-2.2-1.55-2.27-2.53H6.05Z"/>
-                                    </svg>
-                                    <span>Группа ВКонтакте</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- =====================================================
-             CANVAS
-        ====================================================== -->
-        <section class="section" id="canvas" aria-labelledby="canvas-heading">
-            <div class="container">
-
-                <div class="service-header reveal">
-                    <div>
-                        <span class="section-kicker">02 / Услуга</span>
-
-                        <h2 class="section-title" id="canvas-heading">
-                            <span id="canvas-title">
-                                Печать фотографий и изображений на холсте
-                            </span>
-                        </h2>
-
-                        <div class="eyebrow-line" aria-hidden="true"></div>
-                    </div>
-
-                    <div class="service-index" aria-hidden="true">02</div>
-                </div>
-
-                <div class="service-content">
-                    <article class="reveal">
-                        <h3 class="content-label">ОБ УСЛУГЕ</h3>
-
-                        <p class="section-description" id="canvas-description">
-                            ТЕКСТ ДЛЯ РЕДАКТИРОВАНИЯ
-                        </p>
-                    </article>
-
-                    <div class="service-content" style="margin-top: 65px;">
-                        <div class="reveal">
-                            <h3 class="content-label">КАК ЗАКАЗАТЬ</h3>
-                        </div>
-
-                        <div class="process-grid stagger" data-stagger>
-                            <article class="process-card">
-                                <span class="process-number">01</span>
-                                <p class="process-text">
-                                    Отправьте фотографию или изображение
-                                </p>
-                            </article>
-
-                            <article class="process-card">
-                                <span class="process-number">02</span>
-                                <p class="process-text">
-                                    Обсудим размеры
-                                </p>
-                            </article>
-
-                            <article class="process-card">
-                                <span class="process-number">03</span>
-                                <p class="process-text">
-                                    Согласуем заказ
-                                </p>
-                            </article>
-
-                            <article class="process-card">
-                                <span class="process-number">04</span>
-                                <p class="process-text">
-                                    Изготавливаем холст
-                                </p>
-                            </article>
-
-                            <article class="process-card">
-                                <span class="process-number">05</span>
-                                <p class="process-text">
-                                    Вы забираете готовый заказ
-                                </p>
-                            </article>
-                        </div>
-                    </div>
-
-                    <div class="service-cta glass-card reveal">
-                        <div class="cta-inner">
-                            <div>
-                                <h3 class="cta-title">ЗАКАЗАТЬ ПЕЧАТЬ НА ХОЛСТЕ</h3>
-                                <p class="cta-subtitle">
-                                    Выберите удобный способ связи
-                                </p>
-                            </div>
-
-                            <div class="social-grid">
-                                <a
-                                    class="social-link"
-                                    data-link="vkLink"
-                                    href="#"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
-                                        <path d="M3 7.2C3 5.25 4.25 4 6.2 4h11.6C19.75 4 21 5.25 21 7.2v9.6c0 1.95-1.25 3.2-3.2 3.2H6.2C4.25 20 3 18.75 3 16.8V7.2Zm3.05 2.05c.1 3.25 1.7 5.2 4.48 5.4v-2.1c1.18.12 2.08.92 2.45 2.1h2.17c-.6-2.2-1.85-3.1-2.62-3.43.77-.42 1.86-1.44 2.25-3.97h-1.97c-.33 1.3-1.3 2.52-2.28 2.62V7.25H8.56v4.53c-1-.25-2.2-1.55-2.27-2.53H6.05Z"/>
-                                    </svg>
-                                    <span>Написать во ВКонтакте</span>
-                                </a>
-
-                                <a
-                                    class="social-link"
-                                    data-link="telegramLink"
-                                    href="#"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
-                                        <path d="M21.6 4.2 18.2 20c-.26 1.12-.91 1.4-1.85.87l-5.15-3.8-2.48 2.39c-.27.27-.5.5-1.02.5l.37-5.25 9.55-8.63c.42-.37-.1-.58-.65-.21L5.16 13.1.06 11.5c-1.11-.35-1.13-1.12.23-1.63L20.2 2.1c.92-.34 1.72.21 1.4 2.1Z"/>
-                                    </svg>
-                                    <span>Написать в Telegram</span>
-                                </a>
-
-                                <a
-                                    class="social-link"
-                                    data-link="whatsappLink"
-                                    href="#"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
-                                        <path d="M12 2.7a9.2 9.2 0 0 0-7.9 14l-1.05 3.83 3.92-1.03A9.2 9.2 0 1 0 12 2.7Zm0 16.67a7.44 7.44 0 0 1-3.8-1.04l-.27-.16-2.33.61.62-2.27-.17-.28A7.44 7.44 0 1 1 12 19.37Zm4.08-5.55c-.22-.11-1.3-.64-1.5-.71-.2-.07-.35-.11-.5.11-.15.22-.57.71-.7.86-.13.15-.26.16-.48.05-.22-.11-.93-.34-1.77-1.08-.65-.58-1.09-1.29-1.22-1.51-.13-.22-.01-.34.1-.45.1-.1.22-.26.33-.39.11-.13.15-.22.22-.37.07-.15.04-.28-.02-.39-.06-.11-.5-1.2-.69-1.64-.18-.43-.36-.37-.5-.38h-.43c-.15 0-.39.06-.59.28-.2.22-.77.75-.77 1.83s.79 2.12.9 2.27c.11.15 1.55 2.36 3.75 3.31.52.23.93.37 1.25.47.53.17 1.02.15 1.4.09.43-.06 1.3-.53 1.49-1.04.18-.51.18-.94.13-1.03-.06-.09-.2-.14-.42-.25Z"/>
-                                    </svg>
-                                    <span>Написать в WhatsApp</span>
-                                </a>
-
-                                <a
-                                    class="social-link"
-                                    data-link="vkGroupLink"
-                                    href="#"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
-                                        <path d="M3 7.2C3 5.25 4.25 4 6.2 4h11.6C19.75 4 21 5.25 21 7.2v9.6c0 1.95-1.25 3.2-3.2 3.2H6.2C4.25 20 3 18.75 3 16.8V7.2Zm3.05 2.05c.1 3.25 1.7 5.2 4.48 5.4v-2.1c1.18.12 2.08.92 2.45 2.1h2.17c-.6-2.2-1.85-3.1-2.62-3.43.77-.42 1.86-1.44 2.25-3.97h-1.97c-.33 1.3-1.3 2.52-2.28 2.62V7.25H8.56v4.53c-1-.25-2.2-1.55-2.27-2.53H6.05Z"/>
-                                    </svg>
-                                    <span>Группа ВКонтакте</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- =====================================================
-             PICKUP
-        ====================================================== -->
-        <section class="section pickup-section" id="pickup" aria-labelledby="pickup-heading">
-            <div class="container">
-                <div class="pickup-card reveal">
-                    <div class="pickup-layout">
-                        <div>
-                            <span class="pickup-kicker">Самовывоз</span>
-
-                            <h2 class="pickup-title" id="pickup-heading">
-                                ЗАБИРАЙТЕ ГОТОВЫЙ ЗАКАЗ
-                            </h2>
-
-                            <p class="pickup-only">
-                                Только самовывоз
-                            </p>
-
-                            <p class="pickup-address" id="pickup-address">
-                                Санкт-Петербург, парковка между Ленинским пр. 95к1 и 97к1
-                            </p>
-                        </div>
-
-                        <a
-                            class="route-button"
-                            id="route-button"
-                            href="#"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            <svg
-                                class="yandex-icon"
-                                viewBox="0 0 32 32"
-                                aria-hidden="true"
-                            >
-                                <rect x="1.5" y="1.5" width="29" height="29" rx="8" fill="#FFB522"/>
-                                <path
-                                    d="M18.7 8.1h-2.8c-3.25 0-5.35 1.72-5.35 4.53 0 2.29 1.18 3.55 3.02 4.82l-3.43 5.45h3.23l3.08-4.95.9.62v4.33h2.85V8.1Zm-2.85 2.35v5.72c-1.54-.95-2.46-1.82-2.46-3.42 0-1.5.87-2.3 2.46-2.3Z"
-                                    fill="#151515"
-                                />
-                            </svg>
-                            <span>ПОСТРОИТЬ МАРШРУТ</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- =========================================================
-         FOOTER
-    ========================================================== -->
-    <footer class="site-footer">
-        <div class="container">
-            <div class="footer-main">
-
-                <button
-                    class="share-button"
-                    id="share-button"
-                    type="button"
-                >
-                    <svg class="share-icon" viewBox="0 0 24 24" aria-hidden="true">
-                        <circle cx="18" cy="5" r="2.4"></circle>
-                        <circle cx="6" cy="12" r="2.4"></circle>
-                        <circle cx="18" cy="19" r="2.4"></circle>
-                        <path d="m8.1 10.9 7.8-4.7M8.1 13.1l7.8 4.7"></path>
-                    </svg>
-                    <span>ПОДЕЛИТЬСЯ ЭТИМ САЙТОМ</span>
-                </button>
-
-                <p class="share-status" id="share-status" aria-live="polite"></p>
-
-                <p class="footer-brand" id="footer-company-name">
-                    METIZ PROJECT
-                </p>
-
-                <div class="footer-links">
-                    <a class="footer-link" href="#stickers">Наклейки</a>
-                    <a class="footer-link" href="#canvas">Холсты</a>
-                    <a class="footer-link" href="#pickup">Самовывоз</a>
-                    <a class="footer-link" href="#contacts">Контакты</a>
-                </div>
-
-                <p class="footer-copy">
-                    © <span id="footer-year"></span> <span id="footer-company-copy">METIZ PROJECT</span>
-                </p>
-            </div>
-        </div>
-    </footer>
-
-    <div class="toast" id="toast" role="status" aria-live="polite"></div>
-</div>
-
-<script>
-    // ================= НАСТРОЙКИ САЙТА =================
-    const SITE_CONFIG = {
-        logo: "metiz-project-logo.png",
-
-        companyName: "НАЗВАНИЕ КОМПАНИИ",
-
-        vkLink: "https://vk.ru/im?sel=-10150150",
-        telegramLink: "https://t.me/metizproject",
-        whatsappLink: "https://wa.me/message/RDHE3F4PU2D3L1",
-        vkGroupLink: "https://vk.ru/metiz_project",
-
-        yandexNavigatorLink: "https://vk.ru/away.php?to=https%3A%2F%2Fyandex.ru%2Fnavi%3Fwhatshere%255Bpoint%255D%3D30.21662784438228%252C59.85210231769749%26whatshere%255Bzoom%255D%3D19.12837%26ll%3D30.21662784438228%252C59.85210231733536%26z%3D19.12837%26si%3Dm9m3ea890rnugydny1wn4zth5c&utf=1",
-
-        city: "Санкт-Петербург",
-
-        pickupAddress: "Санкт-Петербург, парковка между Ленинским пр. 95к1 и 97к1",
-
-        heroTitle: "ПЕЧАТАЕМ И РЕЖЕМ ПОД ВАШИ ЗАДАЧИ",
-        heroSubtitle: "Санкт-Петербург",
-
-        stickersTitle: "Изготовление наклеек на заказ",
-        stickersDescription: "ТЕКСТ ДЛЯ РЕДАКТИРОВАНИЯ",
-
-        canvasTitle: "Печать фотографий и изображений на холсте",
-        canvasDescription: "ТЕКСТ ДЛЯ РЕДАКТИРОВАНИЯ",
-
-        stickersHeroButton: "ИЗГОТОВЛЕНИЕ НАКЛЕЕК",
-        canvasHeroButton: "ПЕЧАТЬ НА ХОЛСТЕ",
-
-        stickersCtaButton: "ЗАКАЗАТЬ НАКЛЕЙКИ",
-        canvasCtaButton: "ЗАКАЗАТЬ ПЕЧАТЬ НА ХОЛСТЕ",
-
-        vkButton: "Написать во ВКонтакте",
-        telegramButton: "Написать в Telegram",
-        whatsappButton: "Написать в WhatsApp",
-        vkGroupButton: "Группа ВКонтакте",
-
-        pickupTitle: "ЗАБИРАЙТЕ ГОТОВЫЙ ЗАКАЗ",
-        pickupOnlyText: "Только самовывоз",
-        routeButton: "ПОСТРОИТЬ МАРШРУТ",
-
-        shareButton: "ПОДЕЛИТЬСЯ ЭТИМ САЙТОМ"
-    };
-
-    document.addEventListener("DOMContentLoaded", () => {
-        initSiteConfig();
-        initNavigation();
-        initRevealAnimations();
-        initParticles();
-        initShare();
-        initYear();
-    });
-
-    // =========================================================
-    // CONFIGURATION
-    // =========================================================
-
-    function initSiteConfig() {
-        const $ = (selector) => document.querySelector(selector);
-        const $$ = (selector) => document.querySelectorAll(selector);
-
-        const logo = $("#hero-logo");
-        if (logo) {
-            logo.src = SITE_CONFIG.logo;
-        }
-
-        const textBindings = {
-            "#nav-company-name": SITE_CONFIG.companyName,
-            "#hero-city": SITE_CONFIG.heroSubtitle,
-            "#hero-title": SITE_CONFIG.heroTitle,
-
-            "#stickers-title": SITE_CONFIG.stickersTitle,
-            "#stickers-description": SITE_CONFIG.stickersDescription,
-
-            "#canvas-title": SITE_CONFIG.canvasTitle,
-            "#canvas-description": SITE_CONFIG.canvasDescription,
-
-            "#pickup-address": SITE_CONFIG.pickupAddress,
-
-            "#footer-company-name": SITE_CONFIG.companyName,
-            "#footer-company-copy": SITE_CONFIG.companyName
-        };
-
-        Object.entries(textBindings).forEach(([selector, value]) => {
-            const element = $(selector);
-            if (element) {
-                element.textContent = value;
-            }
-        });
-
-        const heroButtons = $$(".hero-action");
-        if (heroButtons[0]) {
-            heroButtons[0].textContent = SITE_CONFIG.stickersHeroButton;
-        }
-
-        if (heroButtons[1]) {
-            heroButtons[1].textContent = SITE_CONFIG.canvasHeroButton;
-        }
-
-        const ctaTitles = $$(".cta-title");
-        if (ctaTitles[0]) {
-            ctaTitles[0].textContent = SITE_CONFIG.stickersCtaButton;
-        }
-
-        if (ctaTitles[1]) {
-            ctaTitles[1].textContent = SITE_CONFIG.canvasCtaButton;
-        }
-
-        const socialTextBindings = {
-            vkLink: SITE_CONFIG.vkButton,
-            telegramLink: SITE_CONFIG.telegramButton,
-            whatsappLink: SITE_CONFIG.whatsappButton,
-            vkGroupLink: SITE_CONFIG.vkGroupButton
-        };
-
-        $$("[data-link]").forEach((link) => {
-            const key = link.dataset.link;
-
-            if (SITE_CONFIG[key]) {
-                link.href = SITE_CONFIG[key];
-            }
-
-            const label = link.querySelector("span");
-
-            if (label && socialTextBindings[key]) {
-                label.textContent = socialTextBindings[key];
-            }
-        });
-
-        const routeButton = $("#route-button");
-        if (routeButton) {
-            routeButton.href = SITE_CONFIG.yandexNavigatorLink;
-
-            const routeText = routeButton.querySelector("span");
-            if (routeText) {
-                routeText.textContent = SITE_CONFIG.routeButton;
-            }
-        }
-
-        const shareButton = $("#share-button");
-        if (shareButton) {
-            const shareText = shareButton.querySelector("span");
-            if (shareText) {
-                shareText.textContent = SITE_CONFIG.shareButton;
-            }
-        }
-
-        document.title =
-            SITE_CONFIG.companyName +
-            " — наклейки на заказ и печать на холсте";
-    }
-
-    // =========================================================
-    // NAVIGATION
-    // =========================================================
-
-    function initNavigation() {
-        const nav = document.getElementById("site-nav");
-        const hamburger = document.getElementById("hamburger");
-        const mobileMenu = document.getElementById("mobile-menu");
-        const mobileLinks = mobileMenu
-            ? mobileMenu.querySelectorAll("a")
-            : [];
-
-        function updateNav() {
-            if (!nav) return;
-
-            if (window.scrollY > 20) {
-                nav.classList.add("scrolled");
-            } else {
-                nav.classList.remove("scrolled");
-            }
-        }
-
-        function closeMobileMenu() {
-            if (!hamburger || !mobileMenu) return;
-
-            hamburger.setAttribute("aria-expanded", "false");
-            hamburger.setAttribute("aria-label", "Открыть меню");
-
-            mobileMenu.classList.remove("open");
-            mobileMenu.setAttribute("aria-hidden", "true");
-
-            document.body.classList.remove("menu-open");
-        }
-
-        function openMobileMenu() {
-            if (!hamburger || !mobileMenu) return;
-
-            hamburger.setAttribute("aria-expanded", "true");
-            hamburger.setAttribute("aria-label", "Закрыть меню");
-
-            mobileMenu.classList.add("open");
-            mobileMenu.setAttribute("aria-hidden", "false");
-
-            document.body.classList.add("menu-open");
-        }
-
-        function toggleMobileMenu() {
-            const isOpen = hamburger.getAttribute("aria-expanded") === "true";
-
-            if (isOpen) {
-                closeMobileMenu();
-            } else {
-                openMobileMenu();
-            }
-        }
-
-        function smoothScrollToId(id) {
-            const target = document.getElementById(id);
-
-            if (!target) return;
-
-            const navHeight =
-                document.getElementById("site-nav")?.offsetHeight || 0;
-
-            const top =
-                target.getBoundingClientRect().top +
-                window.scrollY -
-                navHeight -
-                12;
-
-            window.scrollTo({
-                top: Math.max(0, top),
-                behavior: "smooth"
-            });
-        }
-
-        document.querySelectorAll('a[href^="#"]').forEach((link) => {
-            link.addEventListener("click", (event) => {
-                const href = link.getAttribute("href");
-
-                if (!href || href === "#") return;
-
-                const id = href.slice(1);
-                const target = document.getElementById(id);
-
-                if (!target) return;
-
-                event.preventDefault();
-
-                closeMobileMenu();
-                smoothScrollToId(id);
-
-                if (history.pushState) {
-                    history.pushState(null, "", "#" + id);
-                }
-            });
-        });
-
-        if (hamburger) {
-            hamburger.addEventListener("click", toggleMobileMenu);
-        }
-
-        mobileLinks.forEach((link) => {
-            link.addEventListener("click", closeMobileMenu);
-        });
-
-        document.addEventListener("keydown", (event) => {
-            if (event.key === "Escape") {
-                closeMobileMenu();
-            }
-        });
-
-        document.addEventListener("click", (event) => {
-            if (!mobileMenu || !hamburger) return;
-
-            if (!mobileMenu.classList.contains("open")) return;
-
-            const clickedInsideMenu = mobileMenu.contains(event.target);
-            const clickedHamburger = hamburger.contains(event.target);
-
-            if (!clickedInsideMenu && !clickedHamburger) {
-                closeMobileMenu();
-            }
-        });
-
-        window.addEventListener("resize", () => {
-            if (window.innerWidth > 980) {
-                closeMobileMenu();
-            }
-        });
-
-        window.addEventListener(
-            "scroll",
-            updateNav,
-            { passive: true }
-        );
-
-        updateNav();
-    }
-
-    // =========================================================
-    // REVEAL ANIMATIONS
-    // =========================================================
-
-    function initRevealAnimations() {
-        const elements = document.querySelectorAll(
-            ".reveal, [data-stagger]"
-        );
-
-        if (!elements.length) return;
-
-        if (
-            window.matchMedia &&
-            window.matchMedia("(prefers-reduced-motion: reduce)").matches
-        ) {
-            elements.forEach((element) => {
-                element.classList.add("is-visible");
-            });
-
-            return;
-        }
-
-        if (!("IntersectionObserver" in window)) {
-            elements.forEach((element) => {
-                element.classList.add("is-visible");
-            });
-
-            return;
-        }
-
-        const observer = new IntersectionObserver(
-            (entries, obs) => {
-                entries.forEach((entry) => {
-                    if (!entry.isIntersecting) return;
-
-                    entry.target.classList.add("is-visible");
-                    obs.unobserve(entry.target);
-                });
-            },
-            {
-                root: null,
-                rootMargin: "0px 0px -8% 0px",
-                threshold: 0.08
-            }
-        );
-
-        elements.forEach((element) => observer.observe(element));
-    }
-
-    // =========================================================
-    // BACKGROUND PARTICLES
-    // =========================================================
-
-    function initParticles() {
-        const canvas = document.getElementById("particles");
-
-        if (!canvas) return;
-
-        const reducedMotion =
-            window.matchMedia &&
-            window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-        if (reducedMotion) return;
-
-        const context = canvas.getContext("2d", {
-            alpha: true
-        });
-
-        if (!context) return;
-
-        let width = 0;
-        let height = 0;
-        let devicePixelRatio = Math.min(window.devicePixelRatio || 1, 1.5);
-        let particles = [];
-        let animationFrame = 0;
-        let running = true;
-
-        const isSmallScreen = () => window.innerWidth < 600;
-
-        function getParticleCount() {
-            if (window.innerWidth < 380) return 14;
-            if (window.innerWidth < 600) return 18;
-            if (window.innerWidth < 1000) return 23;
-            return 30;
-        }
-
-        function resizeCanvas() {
-            width = window.innerWidth;
-            height = window.innerHeight;
-
-            devicePixelRatio =
-                Math.min(window.devicePixelRatio || 1, 1.5);
-
-            canvas.width = Math.floor(width * devicePixelRatio);
-            canvas.height = Math.floor(height * devicePixelRatio);
-
-            canvas.style.width = width + "px";
-            canvas.style.height = height + "px";
-
-            context.setTransform(
-                devicePixelRatio,
-                0,
-                0,
-                devicePixelRatio,
-                0,
-                0
-            );
-
-            const count = getParticleCount();
-
-            if (particles.length > count) {
-                particles.length = count;
-            }
-
-            while (particles.length < count) {
-                particles.push(createParticle(true));
-            }
-        }
-
-        function createParticle(randomPosition = false) {
-            const base = isSmallScreen() ? 1 : 1.15;
-
-            return {
-                x: randomPosition
-                    ? Math.random() * width
-                    : width * 0.5,
-                y: randomPosition
-                    ? Math.random() * height
-                    : height * 0.5,
-                radius:
-                    (Math.random() * 1.7 + 0.7) * base,
-                alpha:
-                    Math.random() * 0.36 + 0.16,
-                speedX:
-                    (Math.random() - 0.5) * 0.12,
-                speedY:
-                    (Math.random() - 0.5) * 0.12,
-                phase:
-                    Math.random() * Math.PI * 2,
-                phaseSpeed:
-                    Math.random() * 0.008 + 0.003
-            };
-        }
-
-        function updateParticle(particle) {
-            particle.phase += particle.phaseSpeed;
-
-            particle.x +=
-                particle.speedX +
-                Math.sin(particle.phase) * 0.035;
-
-            particle.y +=
-                particle.speedY +
-                Math.cos(particle.phase * 0.8) * 0.035;
-
-            const padding = 30;
-
-            if (particle.x < -padding) {
-                particle.x = width + padding;
-            }
-
-            if (particle.x > width + padding) {
-                particle.x = -padding;
-            }
-
-            if (particle.y < -padding) {
-                particle.y = height + padding;
-            }
-
-            if (particle.y > height + padding) {
-                particle.y = -padding;
-            }
-        }
-
-        function drawParticle(particle) {
-            const pulse =
-                0.8 + Math.sin(particle.phase) * 0.2;
-
-            const alpha =
-                Math.max(0.04, particle.alpha * pulse);
-
-            context.beginPath();
-
-            context.fillStyle =
-                `rgba(${getComputedStyle(document.documentElement)
-                    .getPropertyValue("--tiffany-rgb")
-                    .trim()}, ${alpha})`;
-
-            context.shadowColor =
-                "rgba(76, 213, 211, 0.45)";
-
-            context.shadowBlur =
-                Math.max(4, particle.radius * 5);
-
-            context.arc(
-                particle.x,
-                particle.y,
-                particle.radius,
-                0,
-                Math.PI * 2
-            );
-
-            context.fill();
-
-            context.shadowBlur = 0;
-        }
-
-        function render() {
-            if (!running) return;
-
-            context.clearRect(0, 0, width, height);
-
-            particles.forEach((particle) => {
-                updateParticle(particle);
-                drawParticle(particle);
-            });
-
-            animationFrame = requestAnimationFrame(render);
-        }
-
-        function stopAnimation() {
-            if (!running) return;
-
-            running = false;
-
-            if (animationFrame) {
-                cancelAnimationFrame(animationFrame);
-                animationFrame = 0;
-            }
-        }
-
-        function startAnimation() {
-            if (running) return;
-
-            running = true;
-            render();
-        }
-
-        resizeCanvas();
-        render();
-
-        window.addEventListener("resize", resizeCanvas);
-
-        document.addEventListener("visibilitychange", () => {
-            if (document.hidden) {
-                stopAnimation();
-            } else {
-                startAnimation();
-            }
-        });
-    }
-
-    // =========================================================
-    // WEB SHARE API + FALLBACK
-    // =========================================================
-
-    function initShare() {
-        const shareButton = document.getElementById("share-button");
-        const shareStatus = document.getElementById("share-status");
-
-        if (!shareButton) return;
-
-        function showShareStatus(message) {
-            if (!shareStatus) return;
-
-            shareStatus.textContent = message;
-
-            window.clearTimeout(showShareStatus.timer);
-
-            showShareStatus.timer = window.setTimeout(() => {
-                shareStatus.textContent = "";
-            }, 3200);
-        }
-
-        async function copyCurrentUrl() {
-            const url = window.location.href;
-
-            if (navigator.clipboard && window.isSecureContext) {
-                try {
-                    await navigator.clipboard.writeText(url);
-                    return true;
-                } catch (error) {
-                    // Продолжаем к fallback ниже.
-                }
-            }
-
-            const textarea = document.createElement("textarea");
-
-            textarea.value = url;
-            textarea.setAttribute("readonly", "");
-            textarea.style.position = "fixed";
-            textarea.style.left = "-9999px";
-            textarea.style.top = "0";
-
-            document.body.appendChild(textarea);
-
-            textarea.select();
-            textarea.setSelectionRange(0, textarea.value.length);
-
-            let copied = false;
-
-            try {
-                copied = document.execCommand("copy");
-            } catch (error) {
-                copied = false;
-            }
-
-            textarea.remove();
-
-            return copied;
-        }
-
-        shareButton.addEventListener("click", async () => {
-            const shareData = {
-                title: document.title,
-                text:
-                    SITE_CONFIG.heroTitle +
-                    " — " +
-                    SITE_CONFIG.companyName,
-                url: window.location.href
-            };
-
-            if (navigator.share) {
-                try {
-                    await navigator.share(shareData);
-                    showShareStatus("Ссылка отправлена.");
-                    return;
-                } catch (error) {
-                    if (error && error.name === "AbortError") {
-                        return;
-                    }
-                }
-            }
-
-            const copied = await copyCurrentUrl();
-
-            if (copied) {
-                showShareStatus("Ссылка на сайт скопирована.");
-            } else {
-                showShareStatus(
-                    "Не удалось скопировать ссылку автоматически."
-                );
-            }
-        });
-    }
-
-    // =========================================================
-    // YEAR
-    // =========================================================
-
-    function initYear() {
-        const year = document.getElementById("footer-year");
-
-        if (year) {
-            year.textContent = new Date().getFullYear();
-        }
-    }
-</script>
-
-</body>
-</html>
+# ЗАДАЧА: СОЗДАТЬ ПОЛНОСТЬЮ ГОТОВЫЙ ПРЕМИАЛЬНЫЙ САЙТ METIZ PROJECT
+
+Создай полностью рабочий, современный, премиальный и визуально дорогой сайт для компании, занимающейся:
+
+**ИЗГОТОВЛЕНИЕМ НАКЛЕЕК НА ЗАКАЗ**
+
+и
+
+**ПЕЧАТЬЮ НА ХОЛСТЕ**
+
+Главная задача сайта — максимально быстро и понятно показать посетителю две основные услуги и привести его к оформлению заказа через удобный способ связи.
+
+---
+
+# 0. КРИТИЧЕСКИЕ ПРАВИЛА — СОБЛЮДАТЬ ОБЯЗАТЕЛЬНО
+
+Перед созданием сайта внимательно проанализируй всё техническое задание.
+
+Не меняй самостоятельно:
+
+* структуру сайта;
+* порядок основных разделов;
+* названия основных разделов;
+* порядок расположения элементов;
+* основные тексты, которые указаны в задании;
+* название кнопок;
+* фирменный цвет;
+* название файла логотипа;
+* предоставленные ссылки;
+* адрес и координаты;
+* требования к мобильной версии.
+
+Не добавляй новые основные разделы и не перестраивай существующие.
+
+**Единственное дополнительное изменение, которое необходимо добавить к данному техническому заданию, — бегущая текстовая строка, описанная в пункте 6.1 ниже.**
+
+Если в задании явно указано конкретное решение, **не заменяй его своим вариантом**.
+
+Не сокращай функциональность.
+
+Не удаляй элементы ради упрощения кода.
+
+Не заменяй полноценный сайт демонстрационным макетом.
+
+Мне нужен именно **готовый работающий сайт**.
+
+---
+
+# 1. ФОРМАТ ФИНАЛЬНОГО РЕЗУЛЬТАТА
+
+Создай один полностью готовый файл:
+
+**index.html**
+
+Весь сайт должен находиться внутри одного HTML-файла:
+
+* HTML;
+* CSS;
+* JavaScript.
+
+Допускается использование внешних библиотек только через CDN, если они действительно необходимы.
+
+По возможности использовать чистые:
+
+* HTML5;
+* CSS3;
+* JavaScript.
+
+Сайт должен работать после следующего действия:
+
+1. Скопировать весь предоставленный код.
+2. Сохранить его как `index.html`.
+3. Положить рядом файл `metiz-project-logo.png`.
+4. Открыть `index.html` непосредственно в браузере.
+
+Не требовать:
+
+* Node.js;
+* npm;
+* сборщика;
+* React;
+* Vue;
+* Vite;
+* локального сервера;
+* компиляции;
+* дополнительных файлов.
+
+Если сторонняя библиотека не является необходимой — не используй её.
+
+---
+
+# 2. ФИРМЕННЫЙ СТИЛЬ
+
+Основной фирменный цвет:
+
+**Tiffany — #4CD5D3**
+
+Использовать #4CD5D3 в:
+
+* кнопках;
+* акцентах;
+* интерактивных элементах;
+* hover-состояниях;
+* тонких линиях;
+* подсветке;
+* активных состояниях;
+* декоративных элементах;
+* элементах навигации;
+* мягком свечении;
+* небольших визуальных акцентах.
+
+Не заливать весь сайт Tiffany-цветом.
+
+Основной визуальный стиль:
+
+**PREMIUM + MINIMALISM + TECHNOLOGY**
+
+Использовать:
+
+* глубокий нейтральный фон;
+* качественную типографику;
+* большое количество аккуратного свободного пространства;
+* контрастную иерархию;
+* современные карточки;
+* тонкие границы;
+* мягкие тени;
+* аккуратные градиенты;
+* Tiffany как фирменный акцент.
+
+Сайт должен выглядеть как сайт современного дорогого коммерческого бренда.
+
+Он НЕ должен выглядеть:
+
+* как дешёвый шаблон;
+* как обычный лендинг из конструктора;
+* как перегруженный сайт;
+* как интернет-магазин 2010-х годов;
+* как чрезмерно анимированный игровой сайт.
+
+---
+
+# 3. ЛОГОТИП
+
+Использовать именно файл:
+
+**metiz-project-logo.png**
+
+Это основной логотип компании.
+
+ВАЖНО:
+
+Не заменять логотип текстом.
+
+Не перерисовывать логотип.
+
+Не создавать альтернативный логотип.
+
+Не менять форму логотипа.
+
+Не менять пропорции.
+
+Не деформировать изображение.
+
+Не растягивать по ширине или высоте.
+
+Использовать исходное изображение с сохранением пропорций.
+
+Логотип должен быть визуально главным элементом верхней части сайта.
+
+Допускается только внешний визуальный эффект вокруг логотипа:
+
+* мягкое свечение;
+* Tiffany-подсветка;
+* аккуратная анимация появления.
+
+Не применять к самому изображению логотипа фильтры, которые изменяют его внешний вид или цвет.
+
+---
+
+# 4. ГЛАВНЫЙ ЭКРАН
+
+При открытии сайта пользователь должен сразу увидеть главный экран.
+
+В верхней центральной части разместить логотип:
+
+**metiz-project-logo.png**
+
+Расположение:
+
+* по центру;
+* в верхней части первого экрана;
+* с сохранением пропорций;
+* без искажений;
+* с адаптацией под разные размеры экрана.
+
+Под логотипом разместить:
+
+**Санкт-Петербург**
+
+Текст должен иметь аккуратный белый цвет с возможностью мягкого Tiffany-перелива/свечения.
+
+Не использовать чрезмерную анимацию.
+
+Ниже разместить главный слоган:
+
+**«ПЕЧАТАЕМ И РЕЖЕМ ПОД ВАШИ ЗАДАЧИ»**
+
+Слоган должен выглядеть современно, технологично и премиально.
+
+---
+
+# 5. ДВЕ ГЛАВНЫЕ УСЛУГИ
+
+Сразу под главным слоганом разместить две основные интерактивные кнопки.
+
+Слева:
+
+**ИЗГОТОВЛЕНИЕ НАКЛЕЕК**
+
+Справа:
+
+**ПЕЧАТЬ НА ХОЛСТЕ**
+
+На компьютерах кнопки должны располагаться рядом горизонтально.
+
+## КРИТИЧЕСКОЕ ТРЕБОВАНИЕ ДЛЯ МОБИЛЬНЫХ
+
+На мобильных устройствах эти две главные кнопки **ОБЯЗАТЕЛЬНО ДОЛЖНЫ ОСТАВАТЬСЯ ГОРИЗОНТАЛЬНО, РЯДОМ ДРУГ С ДРУГОМ.**
+
+Не перестраивать их вертикально.
+
+Не переносить одну кнопку под другую.
+
+Не изменять это поведение.
+
+Для узких экранов необходимо грамотно уменьшать:
+
+* размеры;
+* внутренние отступы;
+* размер шрифта;
+* ширину кнопок;
+
+чтобы обе кнопки полностью помещались на экране без горизонтального скролла.
+
+Кнопки должны оставаться удобными для нажатия пальцем.
+
+---
+
+# 6. СТИЛЬ ГЛАВНЫХ КНОПОК
+
+Главные кнопки должны быть крупными и визуально привлекательными.
+
+Использовать Tiffany #4CD5D3.
+
+Добавить:
+
+* плавный hover;
+* Tiffany-свечение;
+* лёгкое увеличение;
+* эффект глубины;
+* мягкую тень;
+* красивую анимацию;
+* плавное нажатие;
+* transition;
+* визуальную реакцию на наведение;
+* визуальную реакцию на touch.
+
+Анимации должны быть плавными и дорогими.
+
+Не использовать резкие или дешёвые эффекты.
+
+Пользователь должен сразу понимать, что кнопки интерактивные.
+
+---
+
+# 6.1. БЕГУЩАЯ ТЕКСТОВАЯ СТРОКА — ОБЯЗАТЕЛЬНО ДОБАВИТЬ
+
+**Это единственный дополнительный визуальный блок, который необходимо добавить к исходной структуре сайта.**
+
+Сразу **ПОСЛЕ двух главных кнопок**:
+
+**ИЗГОТОВЛЕНИЕ НАКЛЕЕК**
+
+и
+
+**ПЕЧАТЬ НА ХОЛСТЕ**
+
+и **НЕПОСРЕДСТВЕННО ПЕРЕД разделом «ИЗГОТОВЛЕНИЕ НАКЛЕЕК»**, добавить отдельную горизонтальную бегущую текстовую строку.
+
+Точный порядок должен быть именно таким:
+
+**Главный слоган**
+
+↓
+
+**ИЗГОТОВЛЕНИЕ НАКЛЕЕК | ПЕЧАТЬ НА ХОЛСТЕ**
+
+↓
+
+**БЕГУЩАЯ ТЕКСТОВАЯ СТРОКА**
+
+↓
+
+**Изготовление наклеек на заказ**
+
+Нельзя размещать бегущую строку:
+
+* выше главных кнопок;
+* между двумя главными кнопками;
+* внутри раздела «Изготовление наклеек»;
+* после заголовка «Изготовление наклеек на заказ»;
+* после описания;
+* в другом месте страницы.
+
+Она должна находиться **строго между главным блоком с двумя кнопками и разделом «Изготовление наклеек на заказ»**.
+
+Текст бегущей строки:
+
+**«ИЗГОТОВЛЕНИЕ НАКЛЕЕК, ПЕЧАТЬ, АВТОМОБИЛИ, ХОЛСТ, БЕРНДИНГ, НАКЛЕКИ НА АВТО, НА ЗАДНЕЕ СТЕКЛО»**
+
+Не изменять текст.
+
+Не сокращать текст.
+
+Не исправлять слова самостоятельно.
+
+Не добавлять другие рекламные фразы.
+
+Не добавлять новые коммерческие данные.
+
+## Визуальный стиль бегущей строки
+
+Блок должен полностью соответствовать общему стилю:
+
+**PREMIUM + MINIMALISM + TECHNOLOGY**
+
+Использовать фирменный Tiffany:
+
+**#4CD5D3**
+
+Допускаются:
+
+* мягкое Tiffany-свечение;
+* тонкие разделители;
+* аккуратные декоративные элементы;
+* небольшая контрастная типографика;
+* тонкие линии.
+
+Бегущая строка не должна выглядеть дешёвой или кричащей.
+
+Она должна восприниматься как премиальный технологичный элемент интерфейса.
+
+## Анимация бегущей строки
+
+Текст должен непрерывно и плавно двигаться по горизонтали.
+
+Использовать эффект **marquee / бегущей строки**.
+
+Анимация должна быть:
+
+* плавной;
+* равномерной;
+* непрерывной;
+* медленной;
+* ненавязчивой;
+* визуально дорогой.
+
+После окончания текста он должен корректно повторяться по кругу.
+
+Не должно быть заметного резкого скачка при повторении.
+
+По возможности создать бесшовный цикл за счёт дублирования текстового содержимого внутри анимационного трека, чтобы движение выглядело непрерывным.
+
+Для реализации использовать лёгкий CSS/JavaScript без тяжёлых библиотек.
+
+## Контейнер
+
+Бегущая строка должна находиться в отдельном контейнере.
+
+Обязательно:
+
+* `overflow: hidden`;
+* отсутствие горизонтального overflow у всей страницы;
+* текст не должен выходить за границы экрана;
+* бегущая строка не должна перекрывать другие элементы;
+* контент сайта должен визуально находиться выше декоративных фоновых частиц.
+
+## Мобильная версия
+
+На мобильных устройствах бегущая строка также должна работать.
+
+Она должна оставаться горизонтальной.
+
+Не переносить её в несколько строк.
+
+Не создавать горизонтальный скролл страницы.
+
+На ширинах:
+
+* 320px;
+* 360px;
+* 390px;
+* 430px
+
+бегущая строка должна корректно помещаться внутри своего контейнера и плавно двигаться.
+
+## Touch
+
+Бегущая строка не должна мешать нажатию на расположенные рядом интерактивные элементы.
+
+Она является декоративно-информационным элементом и не должна перехватывать ненужные touch-события.
+
+## PREFERS-REDUCED-MOTION
+
+При:
+
+`prefers-reduced-motion: reduce`
+
+движение бегущей строки необходимо существенно замедлить либо отключить, сохранив сам текстовый блок.
+
+Это дополнение не должно нарушать существующее требование по accessibility.
+
+## ВАЖНО
+
+Добавление этой бегущей строки **не должно менять существующий порядок остальных разделов и элементов сайта**.
+
+Все остальные требования этого технического задания остаются без изменений.
+
+---
+
+# 7. ПЕРЕХОД К РАЗДЕЛУ «ИЗГОТОВЛЕНИЕ НАКЛЕЕК»
+
+При нажатии:
+
+**ИЗГОТОВЛЕНИЕ НАКЛЕЕК**
+
+страница должна плавно прокрутиться к разделу:
+
+**ИЗГОТОВЛЕНИЕ НАКЛЕЕК**
+
+Не использовать резкий переход.
+
+Использовать плавный scroll.
+
+---
+
+# 8. РАЗДЕЛ «ИЗГОТОВЛЕНИЕ НАКЛЕЕК»
+
+Создать полноценный визуальный раздел:
+
+**ИЗГОТОВЛЕНИЕ НАКЛЕЕК**
+
+Заголовок:
+
+**Изготовление наклеек на заказ**
+
+Ниже разместить редактируемое текстовое описание.
+
+Описание должно объяснять:
+
+* какие наклейки изготавливаются;
+* что можно заказать по своему эскизу;
+* что можно предоставить пример;
+* что возможна печать;
+* что возможна резка;
+* что изготовление выполняется под конкретные задачи клиента;
+* как подготовить макет;
+* как оформить заказ.
+
+НЕ придумывать:
+
+* конкретные цены;
+* сроки;
+* характеристики материалов;
+* размеры;
+* гарантии;
+* другие коммерческие условия.
+
+Если информация не предоставлена, использовать нейтральный текст-заглушку, который можно легко заменить.
+
+Текст должен быть редактируемым непосредственно в коде.
+
+Не заставлять пользователя менять структуру HTML.
+
+---
+
+# 9. КАК ЗАКАЗАТЬ НАКЛЕЙКИ
+
+После описания создать отдельный визуальный блок:
+
+**КАК ЗАКАЗАТЬ**
+
+Показать процесс:
+
+**01 — Отправьте макет или напишите, что нужно изготовить**
+
+**02 — Мы уточним детали заказа**
+
+**03 — Согласуем изготовление**
+
+**04 — Изготавливаем заказ**
+
+**05 — Вы забираете готовый заказ**
+
+Оформить эти пункты современно и премиально.
+
+Можно использовать:
+
+* нумерацию;
+* карточки;
+* линии;
+* аккуратные соединения;
+* Tiffany-акценты.
+
+---
+
+# 10. ЗАКАЗ НАКЛЕЕК
+
+После описания и блока «Как заказать» создать крупный CTA-блок:
+
+**ЗАКАЗАТЬ НАКЛЕЙКИ**
+
+Добавить кнопки связи.
+
+### VK
+
+Название:
+
+**Написать во ВКонтакте**
+
+Ссылка:
+
+`https://vk.ru/im?sel=-10150150`
+
+### TELEGRAM
+
+Название:
+
+**Написать в Telegram**
+
+Ссылка:
+
+`https://t.me/metizproject`
+
+### WHATSAPP
+
+Название:
+
+**Написать в WhatsApp**
+
+Ссылка:
+
+`https://wa.me/message/RDHE3F4PU2D3L1`
+
+### VK GROUP
+
+Название:
+
+**Группа ВКонтакте**
+
+Ссылка:
+
+`https://vk.ru/metiz_project`
+
+На кнопках должны быть соответствующие логотипы социальных сетей.
+
+Не использовать вымышленные ссылки.
+
+---
+
+# 11. РАЗДЕЛ «ПЕЧАТЬ НА ХОЛСТЕ»
+
+Второй основной раздел должен работать по аналогичной логике.
+
+При нажатии:
+
+**ПЕЧАТЬ НА ХОЛСТЕ**
+
+страница должна плавно прокручиваться к соответствующему разделу.
+
+Создать полноценный раздел:
+
+**ПЕЧАТЬ НА ХОЛСТЕ**
+
+Заголовок:
+
+**Печать фотографий и изображений на холсте**
+
+Предусмотреть редактируемое описание.
+
+Текст должен объяснять:
+
+* что можно напечатать фотографию;
+* что можно напечатать картину;
+* что можно напечатать изображение;
+* что можно заказать печать на холсте;
+* другие особенности услуги.
+
+Не придумывать:
+
+* цены;
+* размеры;
+* сроки;
+* характеристики;
+* плотность;
+* материалы;
+* гарантии;
+* другие конкретные параметры.
+
+Если данные неизвестны — использовать нейтральный текст-заглушку.
+
+---
+
+# 12. КАК ЗАКАЗАТЬ ХОЛСТ
+
+Создать отдельный блок:
+
+**КАК ЗАКАЗАТЬ**
+
+Процесс:
+
+**01 — Отправьте фотографию или изображение**
+
+**02 — Обсудим размеры**
+
+**03 — Согласуем заказ**
+
+**04 — Изготавливаем холст**
+
+**05 — Вы забираете готовый заказ**
+
+Оформить в том же премиальном стиле.
+
+---
+
+# 13. ЗАКАЗ ПЕЧАТИ НА ХОЛСТЕ
+
+Создать крупный CTA-блок:
+
+**ЗАКАЗАТЬ ПЕЧАТЬ НА ХОЛСТЕ**
+
+Добавить кнопки:
+
+**Написать во ВКонтакте**
+
+**Написать в Telegram**
+
+**Написать в WhatsApp**
+
+**Группа ВКонтакте**
+
+Использовать те же предоставленные ссылки.
+
+На каждой кнопке должен быть логотип соответствующей социальной сети.
+
+---
+
+# 14. КОНФИГУРАЦИЯ САЙТА
+
+В самом начале JavaScript создать отдельный понятный блок:
+
+```js
+// ================= НАСТРОЙКИ САЙТА =================
+```
+
+Все основные изменяемые данные должны находиться только там.
+
+Создать конфигурацию:
+
+```js
+const SITE_CONFIG = {
+    logo: "metiz-project-logo.png",
+
+    companyName: "НАЗВАНИЕ КОМПАНИИ",
+
+    vkLink: "https://vk.ru/im?sel=-10150150",
+    telegramLink: "https://t.me/metizproject",
+    whatsappLink: "https://wa.me/message/RDHE3F4PU2D3L1",
+    vkGroupLink: "https://vk.ru/metiz_project",
+
+    yandexNavigatorLink: "https://vk.ru/away.php?to=https%3A%2F%2Fyandex.ru%2Fnavi%3Fwhatshere%255Bpoint%255D%3D30.21662784438228%252C59.85210231769749%26whatshere%255Bzoom%255D%3D19.12837%26ll%3D30.21662784438228%252C59.85210231733536%26z%3D19.12837%26si%3Dm9m3ea890rnugydny1wn4zth5c&utf=1",
+
+    city: "Санкт-Петербург",
+
+    pickupAddress: "Санкт-Петербург, парковка между Ленинским пр. 95к1 и 97к1",
+
+    heroTitle: "ПЕЧАТАЕМ И РЕЖЕМ ПОД ВАШИ ЗАДАЧИ",
+    heroSubtitle: "Санкт-Петербург",
+
+    stickersTitle: "Изготовление наклеек на заказ",
+    stickersDescription: "ТЕКСТ ДЛЯ РЕДАКТИРОВАНИЯ",
+
+    canvasTitle: "Печать фотографий и изображений на холсте",
+    canvasDescription: "ТЕКСТ ДЛЯ РЕДАКТИРОВАНИЯ"
+};
+```
+
+Все повторяющиеся ссылки должны браться из этой конфигурации.
+
+Не дублировать одну и ту же ссылку в нескольких местах HTML/JS.
+
+Если ссылка меняется в `SITE_CONFIG`, она должна автоматически измениться во всех соответствующих кнопках сайта.
+
+---
+
+# 15. РАЗДЕЛ «САМОВЫВОЗ»
+
+В нижней части сайта обязательно создать отдельный заметный блок:
+
+**ЗАБИРАЙТЕ ГОТОВЫЙ ЗАКАЗ**
+
+Основной текст:
+
+**Только самовывоз**
+
+Адрес:
+
+**Санкт-Петербург, парковка между Ленинским пр. 95к1 и 97к1**
+
+Не изменять этот адрес и не придумывать другой.
+
+Добавить большую жёлто-оранжевую кнопку:
+
+**ПОСТРОИТЬ МАРШРУТ**
+
+Кнопка должна:
+
+* быть заметной;
+* иметь оригинальный цветовой стиль Яндекс Навигатора;
+* содержать оригинальный логотип Яндекс Навигатора;
+* быть интерактивной;
+* открывать предоставленную ссылку навигации.
+
+Использовать:
+
+`YANDEX_NAVIGATOR_LINK`
+
+из `SITE_CONFIG`.
+
+Не изменять предоставленные координаты.
+
+Не придумывать другие координаты.
+
+---
+
+# 16. FOOTER
+
+В самом низу сайта создать минималистичный премиальный footer.
+
+Разместить по центру:
+
+* зелёную кнопку «Поделиться этим сайтом»;
+* логотип/иконку поделиться;
+
+Добавить небольшую надпись об авторских правах.
+
+Кнопка:
+
+**ПОДЕЛИТЬСЯ ЭТИМ САЙТОМ**
+
+должна использовать стандартный механизм Web Share API там, где он поддерживается.
+
+Если Web Share API недоступен, предусмотреть аккуратный fallback, например копирование ссылки сайта в буфер обмена.
+
+Не создавать фальшивую кнопку, которая ничего не делает.
+
+---
+
+# 17. НАВИГАЦИЯ
+
+Добавить удобную фиксированную/липкую навигацию.
+
+На ПК:
+
+полноценное меню.
+
+Основные пункты:
+
+* Наклейки
+* Холсты
+* Как заказать
+* Самовывоз
+* Контакты
+
+Каждый пункт должен плавно прокручивать пользователя к соответствующему разделу.
+
+На мобильных:
+
+создать красивое адаптивное hamburger menu.
+
+Меню должно:
+
+* открываться плавно;
+* закрываться плавно;
+* закрываться после выбора пункта;
+* корректно работать на сенсорном экране;
+* не позволять странице неконтролируемо прокручиваться под открытым меню;
+* иметь понятную кнопку закрытия.
+
+---
+
+# 18. ВИЗУАЛЬНЫЕ ЭФФЕКТЫ
+
+Сайт должен ощущаться как PREMIUM.
+
+Использовать аккуратные:
+
+* плавные появления;
+* scroll-анимации;
+* hover-анимации;
+* мягкое Tiffany-свечение;
+* эффект глубины;
+* плавное увеличение карточек;
+* анимацию кнопок;
+* красивые переходы;
+* появление текста при прокрутке.
+
+Можно использовать subtle parallax, но только если он действительно улучшает дизайн.
+
+Не перегружать сайт эффектами.
+
+Анимации должны быть:
+
+* плавными;
+* медленными;
+* естественными;
+* дорогими визуально;
+* ненавязчивыми.
+
+Не использовать:
+
+* резкие вспышки;
+* постоянное мигание;
+* чрезмерные вращения;
+* агрессивные эффекты;
+* дешёвые 3D-анимации.
+
+---
+
+# 19. ФОНОВЫЕ ЧАСТИЦЫ
+
+На заднем фоне сайта должны присутствовать хаотично движущиеся круглые частицы.
+
+Частицы:
+
+* круглые;
+* разных размеров;
+* Tiffany #4CD5D3;
+* медленно перемещаются;
+* имеют лёгкое свечение;
+* хорошо заметны;
+* создают ощущение технологичности.
+
+Количество частиц должно быть ограниченным.
+
+Они не должны:
+
+* закрывать текст;
+* мешать кнопкам;
+* ухудшать читаемость;
+* создавать визуальный шум;
+* выглядеть как дешёвый эффект.
+
+Частицы должны находиться на заднем плане.
+
+Контент всегда должен быть визуально выше частиц.
+
+---
+
+# 20. АДАПТИВНОСТЬ
+
+Сайт должен корректно работать на:
+
+* больших мониторах;
+* широкоформатных мониторах;
+* ноутбуках;
+* планшетах;
+* iPhone;
+* Android;
+* небольших мобильных устройствах.
+
+Проверить интерфейс на ширинах примерно от:
+
+**320px до широких desktop-экранов.**
+
+Не должно быть:
+
+* горизонтального скролла;
+* обрезанных элементов;
+* элементов, выходящих за границы экрана;
+* наложения кнопок;
+* слишком маленького текста;
+* дёрганий;
+* сломанных отступов;
+* выходящих за экран изображений;
+* перекрытия меню;
+* некорректного позиционирования.
+
+## КРИТИЧЕСКОЕ ПРАВИЛО
+
+На мобильном устройстве две главные кнопки:
+
+**ИЗГОТОВЛЕНИЕ НАКЛЕЕК**
+
+и
+
+**ПЕЧАТЬ НА ХОЛСТЕ**
+
+должны располагаться **ГОРИЗОНТАЛЬНО, РЯДОМ ДРУГ С ДРУГОМ**.
+
+Это обязательное требование.
+
+---
+
+# 21. TOUCH-ИНТЕРФЕЙС
+
+Все интерактивные элементы должны быть удобными для пальца.
+
+Не делать слишком маленькие кнопки.
+
+Обеспечить достаточную область нажатия.
+
+Hover-эффекты не должны быть единственным способом понять состояние элемента.
+
+На мобильных должны корректно работать:
+
+* touch;
+* tap;
+* меню;
+* ссылки;
+* кнопки;
+* прокрутка.
+
+---
+
+# 22. ACCESSIBILITY
+
+Использовать:
+
+* семантический HTML;
+* правильные heading levels;
+* alt для логотипа;
+* aria-label там, где необходимо;
+* понятные интерактивные элементы;
+* достаточный контраст текста;
+* видимый focus state.
+
+Добавить поддержку:
+
+`prefers-reduced-motion`
+
+Если пользователь отключил анимации в настройках операционной системы, декоративные анимации должны быть существенно уменьшены или отключены.
+
+---
+
+# 23. SEO
+
+Добавить:
+
+* `<title>`;
+* `<meta name="description">`;
+* viewport;
+* favicon;
+* semantic HTML;
+* корректную структуру заголовков;
+* понятные alt-атрибуты;
+* Open Graph meta tags, если это возможно без дополнительных файлов.
+
+Не придумывать ложную информацию для SEO.
+
+Не создавать вымышленные отзывы, рейтинги или характеристики.
+
+---
+
+# 24. НЕ ПРИДУМЫВАТЬ ДАННЫЕ
+
+Категорически запрещено придумывать:
+
+* адреса;
+* телефоны;
+* цены;
+* сроки;
+* координаты;
+* характеристики материалов;
+* размеры;
+* реальные отзывы;
+* реальные фотографии;
+* гарантии;
+* вымышленные преимущества;
+* несуществующие услуги;
+* несуществующие социальные сети;
+* ссылки.
+
+Использовать только данные из этого технического задания.
+
+Для неизвестных данных использовать понятные редактируемые переменные.
+
+---
+
+# 25. ИЗОБРАЖЕНИЯ
+
+Единственное обязательное изображение, предоставляемое мной:
+
+**metiz-project-logo.png**
+
+Не использовать случайные изображения из фотостоков.
+
+Не использовать Unsplash, Pexels и аналогичные источники для вымышленных фотографий услуг, если я отдельно не предоставил такие изображения.
+
+Если для визуального оформления необходимы декоративные элементы, использовать:
+
+* CSS;
+* SVG-иконки;
+* простые графические элементы;
+
+но не придумывать фотографии реальных работ.
+
+---
+
+# 26. ИКОНКИ СОЦИАЛЬНЫХ СЕТЕЙ
+
+На кнопках связи использовать узнаваемые логотипы:
+
+* VK;
+* Telegram;
+* WhatsApp.
+
+Иконки должны быть аккуратными и визуально соответствовать премиальному дизайну.
+
+Не использовать случайные изображения низкого качества.
+
+Можно использовать SVG или корректно подключённую библиотеку иконок через CDN.
+
+---
+
+# 27. ПРОИЗВОДИТЕЛЬНОСТЬ
+
+Сайт должен быстро загружаться.
+
+Не использовать без необходимости:
+
+* тяжёлые библиотеки;
+* большие изображения;
+* огромное количество DOM-элементов;
+* бесконечные анимации;
+* тяжёлые фоновые эффекты.
+
+Анимации частиц должны быть оптимизированы.
+
+По возможности использовать:
+
+* CSS transforms;
+* opacity;
+* requestAnimationFrame только там, где действительно необходимо.
+
+Не создавать нагрузку на процессор без необходимости.
+
+Бегущая строка также должна быть производительной и по возможности реализовываться через CSS `transform` и `opacity`, без постоянных тяжёлых JavaScript-вычислений.
+
+---
+
+# 28. СТРУКТУРА HTML
+
+Использовать семантическую структуру примерно:
+
+* header;
+* nav;
+* main;
+* section;
+* article;
+* footer.
+
+Разделы должны иметь понятные `id`, например:
+
+```text
+#stickers
+#canvas
+#how-to-order
+#pickup
+#contacts
+```
+
+Навигация должна использовать эти якоря.
+
+---
+
+# 29. CSS
+
+CSS должен быть структурирован.
+
+В начале CSS создать глобальные переменные:
+
+```css
+:root {
+    --tiffany: #4CD5D3;
+}
+```
+
+Использовать переменную фирменного цвета вместо многократного ручного написания цвета.
+
+Например:
+
+```css
+var(--tiffany)
+```
+
+Не дублировать фирменный цвет по всему CSS без необходимости.
+
+---
+
+# 30. JAVASCRIPT
+
+JavaScript должен быть чистым и структурированным.
+
+Не использовать inline JavaScript в HTML без необходимости.
+
+Скрипты должны:
+
+* инициализировать конфигурацию;
+* подставлять настройки;
+* обрабатывать навигацию;
+* обрабатывать мобильное меню;
+* обрабатывать scroll;
+* обрабатывать анимации;
+* обрабатывать кнопки;
+* обрабатывать Web Share API;
+* корректно работать без ошибок в консоли.
+
+---
+
+# 31. РЕДАКТИРУЕМЫЕ ПАРАМЕТРЫ
+
+В `SITE_CONFIG` обязательно предусмотреть возможность легко заменить:
+
+* LOGO;
+* название компании;
+* VK_LINK;
+* VK_GROUP_LINK;
+* TELEGRAM_LINK;
+* WHATSAPP_LINK;
+* YANDEX_NAVIGATOR_LINK;
+* город;
+* адрес самовывоза;
+* главный заголовок;
+* подзаголовок;
+* текст раздела наклеек;
+* текст раздела холстов;
+* названия кнопок.
+
+Не заставлять меня искать эти данные по всему коду.
+
+Все основные настройки должны находиться в одном месте.
+
+---
+
+# 32. БЕЗ ДУБЛИРОВАНИЯ ДАННЫХ
+
+Если один и тот же элемент используется несколько раз, например Telegram:
+
+**TELEGRAM_LINK**
+
+он должен задаваться один раз в конфигурации.
+
+Обе услуги должны использовать одну и ту же настройку.
+
+То же самое относится к:
+
+* VK;
+* WhatsApp;
+* группе VK;
+* Яндекс Навигатору;
+* названию компании;
+* адресу.
+
+---
+
+# 33. ВАЖНАЯ ЛОГИКА НАВИГАЦИИ
+
+Главные две кнопки на первом экране:
+
+**ИЗГОТОВЛЕНИЕ НАКЛЕЕК**
+
+→ плавно прокручивают к разделу наклеек.
+
+**ПЕЧАТЬ НА ХОЛСТЕ**
+
+→ плавно прокручивают к разделу холстов.
+
+Пункты основного меню должны вести к соответствующим разделам.
+
+Все переходы должны быть плавными.
+
+---
+
+# 34. ФИНАЛЬНАЯ ПРОВЕРКА КОДА
+
+Перед тем как вывести итоговый код, самостоятельно проверь его как готовый сайт.
+
+Проверить:
+
+### HTML
+
+* все теги закрыты;
+* структура корректна;
+* нет лишних элементов;
+* нет ошибок.
+
+### CSS
+
+* нет критических конфликтов;
+* нет элементов, выходящих за экран;
+* нет горизонтального overflow;
+* адаптивность работает.
+
+### JavaScript
+
+* нет синтаксических ошибок;
+* нет ошибок в консоли;
+* все функции работают;
+* конфигурация работает.
+
+### Кнопки
+
+Проверить все:
+
+* кнопки наклеек;
+* кнопки холста;
+* VK;
+* Telegram;
+* WhatsApp;
+* группа VK;
+* самовывоз;
+* Яндекс Навигатор;
+* поделиться;
+* пункты меню.
+
+### Бегущая строка
+
+Проверить:
+
+* находится строго после двух главных кнопок;
+* находится строго перед разделом «Изготовление наклеек на заказ»;
+* текст полностью соответствует заданному;
+* анимация непрерывная;
+* нет резкого скачка при повторении;
+* нет горизонтального overflow страницы;
+* корректно работает на мобильных;
+* корректно работает при `prefers-reduced-motion`.
+
+### Мобильная версия
+
+Особенно проверить:
+
+* ширину 320px;
+* ширину 360px;
+* ширину 390px;
+* ширину 430px.
+
+Главные две кнопки на всех этих ширинах должны оставаться:
+
+**ГОРИЗОНТАЛЬНЫМИ.**
+
+### Логотип
+
+Проверить:
+
+`metiz-project-logo.png`
+
+загружается корректно и сохраняет пропорции.
+
+### Ссылки
+
+Использовать только предоставленные ссылки.
+
+### Данные
+
+Не должно быть выдуманных коммерческих данных.
+
+---
+
+# 35. ФОРМАТ ОТВЕТА
+
+После выполнения задания НЕ показывай мне:
+
+* описание концепции вместо сайта;
+* отдельные фрагменты;
+* отдельный CSS;
+* отдельный JavaScript;
+* инструкции «вставьте этот код в существующий файл»;
+* псевдокод;
+* незаконченный код;
+* демонстрационный пример.
+
+Мне нужен **ПОЛНЫЙ ФИНАЛЬНЫЙ КОД `index.html` ЦЕЛИКОМ**.
+
+Выведи весь код **ОДНИМ блоком**.
+
+Я должен иметь возможность:
+
+1. Скопировать код целиком.
+2. Сохранить как `index.html`.
+3. Положить рядом `metiz-project-logo.png`.
+4. Открыть `index.html`.
+5. Получить полностью работающий сайт.
+
+Не заставляй меня собирать код из нескольких частей.
+
+---
+
+# 36. ГЛАВНЫЙ ПРИОРИТЕТ ДИЗАЙНА
+
+Итоговый сайт должен сочетать:
+
+**PREMIUM**
+
+*
+
+**MINIMALISM**
+
+*
+
+**TECHNOLOGY**
+
+*
+
+**TIFFANY #4CD5D3**
+
+*
+
+**КАЧЕСТВЕННАЯ ТИПОГРАФИКА**
+
+*
+
+**ПЛАВНЫЕ АНИМАЦИИ**
+
+*
+
+**ПРОФЕССИОНАЛЬНЫЙ UX**
+
+*
+
+**АДАПТИВНОСТЬ**
+
+Главное ощущение от сайта:
+
+**современный, дорогой, технологичный, аккуратный коммерческий бренд.**
+
+Сайт не должен выглядеть как обычный бесплатный шаблон.
+
+---
+
+# 37. ГЛАВНАЯ БИЗНЕС-ЗАДАЧА
+
+Посетитель должен буквально за несколько секунд понять:
+
+### 1.
+
+**ИЗГОТОВЛЕНИЕ НАКЛЕЕК**
+
+или
+
+### 2.
+
+**ПЕЧАТЬ НА ХОЛСТЕ**
+
+После выбора услуги пользователь должен максимально быстро получить возможность связаться и оформить заказ.
+
+Не перегружай путь пользователя лишними действиями.
+
+Главные CTA должны быть визуально заметными.
+
+---
+
+# 38. НЕ МЕНЯТЬ ПОРЯДОК САЙТА
+
+Итоговая последовательность страницы должна быть именно такой:
+
+**1. ГЛАВНЫЙ ЭКРАН**
+
+Логотип → Санкт-Петербург → слоган → две главные кнопки
+
+↓
+
+**БЕГУЩАЯ ТЕКСТОВАЯ СТРОКА**
+
+**ИЗГОТОВЛЕНИЕ НАКЛЕЕК, ПЕЧАТЬ, АВТОМОБИЛИ, ХОЛСТ, БЕРНДИНГ, НАКЛЕКИ НА АВТО, НА ЗАДНЕЕ СТЕКЛО**
+
+↓
+
+**2. ИЗГОТОВЛЕНИЕ НАКЛЕЕК**
+
+Описание → Как заказать → 01–05 → Заказать наклейки → контакты
+
+↓
+
+**3. ПЕЧАТЬ НА ХОЛСТЕ**
+
+Описание → Как заказать → 01–05 → Заказать печать на холсте → контакты
+
+↓
+
+**4. САМОВЫВОЗ**
+
+Адрес → Только самовывоз → Построить маршрут
+
+↓
+
+**5. FOOTER**
+
+Связь → Самовывоз → Поделиться → название компании → авторские права
+
+Этот порядок является обязательным.
+
+Не переставляй основные разделы местами.
+
+**Бегущая строка является единственным добавленным элементом и должна находиться строго между двумя главными кнопками первого экрана и разделом «ИЗГОТОВЛЕНИЕ НАКЛЕЕК».**
+
+---
+
+# 39. ИТОГ
+
+Создай полностью готовый премиальный сайт METIZ PROJECT в одном файле:
+
+**index.html**
+
+с использованием:
+
+**HTML5 + CSS3 + JavaScript**
+
+с логотипом:
+
+**metiz-project-logo.png**
+
+с фирменным цветом:
+
+**#4CD5D3**
+
+с полной адаптивностью,
+
+с рабочими кнопками,
+
+с рабочей навигацией,
+
+с мобильным hamburger menu,
+
+с плавным scroll,
+
+с премиальными анимациями,
+
+с Tiffany-частицами на фоне,
+
+с **бегущей текстовой строкой после двух главных кнопок и перед разделом «Изготовление наклеек на заказ»**,
+
+с конфигурацией `SITE_CONFIG`,
+
+с предоставленными ссылками,
+
+с Яндекс Навигатором,
+
+с Web Share API,
+
+с SEO,
+
+с корректной мобильной версией.
+
+**ОСОБОЕ ОБЯЗАТЕЛЬНОЕ ТРЕБОВАНИЕ:**
+
+На мобильных устройствах две главные кнопки:
+
+**«ИЗГОТОВЛЕНИЕ НАКЛЕЕК»**
+
+и
+
+**«ПЕЧАТЬ НА ХОЛСТЕ»**
+
+всегда должны находиться **ГОРИЗОНТАЛЬНО, РЯДОМ ДРУГ С ДРУГОМ**.
+
+Не изменять это требование.
+
+Не менять структуру сайта.
+
+Не менять порядок основных разделов.
+
+Не придумывать отсутствующие данные.
+
+Не использовать вымышленные фотографии.
+
+Не заменять логотип.
+
+Не выдавать фрагменты.
+
+**Вывести полностью готовый `index.html` целиком одним блоком.**
