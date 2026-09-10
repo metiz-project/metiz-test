@@ -2,667 +2,1240 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>METIZ PROJECT — Изготовление наклеек и печать на холсте в СПб</title>
-    <meta name="description" content="Плоттерная резка наклеек на авто, витрины, упаковку. Печать картин на холсте в Санкт-Петербурге.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>METIZ PROJECT — Студия брендирования, печати и оклейки в СПб</title>
+    <meta name="description" content="METIZ PROJECT — премиальная оклейка, плоттерная резка винила Oracal, брендирование транспорта и витрин в Санкт-Петербурге.">
     
-    <!-- Шрифты -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
 
     <style>
+        /* =========================================================
+           DESIGN SYSTEM & LUXURY VARIABLES
+           ========================================================= */
         :root {
-            --bg-main: #0b0d10;
-            --bg-card: #13171d;
-            --bg-card-hover: #1a2029;
-            --accent: #43DAC1; /* Tiffany Blue */
-            --accent-glow: rgba(67, 218, 193, 0.25);
-            --text-main: #f1f5f9;
-            --text-muted: #94a3b8;
-            --border: #212833;
-            --radius: 12px;
-            --transition: all 0.3s ease;
+            --tiffany: #43DAC1;
+            --tiffany-bright: #72FFF6;
+            --tiffany-dark: #128172;
+            --tiffany-glow: rgba(67, 218, 193, 0.35);
+            --tiffany-glass: rgba(67, 218, 193, 0.08);
+
+            --bg-deep: #020403;
+            --bg-card: rgba(14, 23, 21, 0.6);
+            --bg-card-hover: rgba(22, 38, 34, 0.85);
+
+            --white: #ffffff;
+            --soft-white: rgba(255, 255, 255, 0.88);
+            --muted: #839793;
+            --border: rgba(67, 218, 193, 0.18);
+            --border-light: rgba(255, 255, 255, 0.07);
+
+            --radius-lg: 28px;
+            --radius-md: 18px;
+            --radius-sm: 12px;
+            --ease: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background: var(--bg-deep);
+            color: var(--white);
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
         }
 
         body {
-            background-color: var(--bg-main);
-            color: var(--text-main);
-            line-height: 1.6;
+            min-height: 100vh;
             overflow-x: hidden;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
+            background: 
+                radial-gradient(circle at 50% 0%, rgba(67, 218, 193, 0.18) 0%, transparent 50%),
+                radial-gradient(circle at 85% 40%, rgba(67, 218, 193, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 15% 85%, rgba(67, 218, 193, 0.06) 0%, transparent 35%),
+                linear-gradient(180deg, #020403 0%, #050d0a 100%);
+            -webkit-font-smoothing: antialiased;
         }
 
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* --- Шапка (Header) --- */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
             width: 100%;
-            z-index: 1000;
-            background: rgba(11, 13, 16, 0.85);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border);
+            max-width: 1260px;
+            margin: 0 auto;
+            padding: 0 24px;
         }
 
-        .header-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 70px;
+        /* Ambient Noise / Grid Backdrop */
+        .grid-backdrop {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+            z-index: -1;
+            mask-image: radial-gradient(circle at center, black 30%, transparent 85%);
         }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: 800;
-            font-size: 1.2rem;
-            letter-spacing: 1px;
+        /* Dynamic Cursor Glow */
+        .cursor-glow {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            margin-left: -250px;
+            margin-top: -250px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(67, 218, 193, 0.12) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: -1;
+            transition: transform 0.08s ease-out;
         }
 
-        .logo-badge {
-            border: 2px solid var(--accent);
-            padding: 4px 12px;
-            border-radius: 20px;
-            box-shadow: 0 0 10px var(--accent-glow);
-            color: var(--accent);
-            text-transform: uppercase;
+        /* =========================================================
+           HEADER & CENTER LOGO
+           ========================================================= */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 16px 0;
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            background: rgba(2, 4, 3, 0.82);
+            border-bottom: 1px solid var(--border-light);
         }
 
-        nav {
-            display: flex;
-            gap: 28px;
-        }
-
-        nav a {
-            font-size: 0.95rem;
-            font-weight: 500;
-            color: var(--text-muted);
-            transition: var(--transition);
-        }
-
-        nav a:hover {
-            color: var(--accent);
-        }
-
-        .btn-header {
-            background: var(--accent);
-            color: #000;
-            font-weight: 700;
-            padding: 8px 18px;
-            border-radius: 8px;
-            transition: var(--transition);
-            font-size: 0.9rem;
-        }
-
-        .btn-header:hover {
-            box-shadow: 0 0 15px var(--accent-glow);
-            transform: translateY(-1px);
-        }
-
-        /* --- Hero Секция --- */
-        .hero {
-            padding: 150px 0 90px;
-            background: radial-gradient(circle at 50% 20%, rgba(67, 218, 193, 0.08) 0%, transparent 60%);
-            text-align: center;
-        }
-
-        .tag {
-            display: inline-block;
-            padding: 6px 16px;
-            background: rgba(67, 218, 193, 0.1);
-            border: 1px solid var(--accent);
-            color: var(--accent);
-            border-radius: 30px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 24px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .hero h1 {
-            font-size: clamp(2.2rem, 5vw, 3.8rem);
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 20px;
-        }
-
-        .hero h1 span {
-            color: var(--accent);
-        }
-
-        .hero p {
-            font-size: 1.15rem;
-            color: var(--text-muted);
-            max-width: 720px;
-            margin: 0 auto 36px;
-        }
-
-        .hero-btns {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn-primary {
-            background: var(--accent);
-            color: #000;
-            font-weight: 700;
-            padding: 14px 32px;
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: var(--transition);
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn-primary:hover {
-            box-shadow: 0 0 25px var(--accent-glow);
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            color: var(--text-main);
-            font-weight: 600;
-            padding: 14px 32px;
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: var(--transition);
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-            background: var(--bg-card-hover);
-        }
-
-        /* --- Секции общие --- */
-        section {
-            padding: 80px 0;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .section-title h2 {
-            font-size: 2.2rem;
-            font-weight: 800;
-            margin-bottom: 12px;
-        }
-
-        .section-title p {
-            color: var(--text-muted);
-            font-size: 1rem;
-        }
-
-        /* --- Карточки Услуг (Наклейки) --- */
-        .grid-4 {
+        .header-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 24px;
-        }
-
-        .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 28px;
-            transition: var(--transition);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card:hover {
-            border-color: var(--accent);
-            transform: translateY(-4px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .card-icon {
-            width: 48px;
-            height: 48px;
-            background: rgba(67, 218, 193, 0.1);
-            border-radius: 10px;
-            display: flex;
+            grid-template-columns: 1fr auto 1fr;
             align-items: center;
-            justify-content: center;
-            color: var(--accent);
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            font-weight: bold;
-        }
-
-        .card h3 {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-
-        .card ul {
-            list-style: none;
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        .card ul li {
-            position: relative;
-            padding-left: 20px;
-            margin-bottom: 8px;
-        }
-
-        .card ul li::before {
-            content: "•";
-            color: var(--accent);
-            position: absolute;
-            left: 0;
-            font-weight: bold;
-        }
-
-        /* --- Секция Печать на холсте --- */
-        .canvas-section {
-            background: radial-gradient(circle at 10% 50%, rgba(67, 218, 193, 0.05) 0%, transparent 50%);
-        }
-
-        .canvas-box {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 40px;
-        }
-
-        .canvas-info h3 {
-            font-size: 1.8rem;
-            margin-bottom: 16px;
-            font-weight: 700;
-        }
-
-        .canvas-specs {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin-top: 24px;
-        }
-
-        .spec-item {
-            background: var(--bg-main);
-            padding: 16px;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-        }
-
-        .spec-item .title {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            display: block;
-            margin-bottom: 4px;
-        }
-
-        .spec-item .value {
-            font-weight: 700;
-            color: var(--accent);
-            font-size: 1rem;
-        }
-
-        /* --- Как заказать (Шаги) --- */
-        .steps-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 20px;
         }
 
-        .step-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 24px;
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--soft-white);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            transition: color 0.3s ease;
             position: relative;
         }
 
-        .step-number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: rgba(67, 218, 193, 0.2);
+        .nav-link:hover { color: var(--tiffany-bright); }
+        .nav-link::after {
+            content: '';
             position: absolute;
-            top: 15px;
-            right: 20px;
+            bottom: -6px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--tiffany);
+            transition: width 0.3s var(--ease);
+            box-shadow: 0 0 10px var(--tiffany);
         }
+        .nav-link:hover::after { width: 100%; }
 
-        .step-card h4 {
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-            margin-top: 10px;
-        }
-
-        .step-card p {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-
-        .order-note {
-            margin-top: 30px;
-            text-align: center;
-            background: rgba(67, 218, 193, 0.05);
-            border: 1px dashed var(--accent);
-            padding: 16px;
-            border-radius: 8px;
-            font-size: 0.95rem;
-        }
-
-        /* --- Отзывы и Контакты --- */
-        .contact-box {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-        }
-
-        .contact-details {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            padding: 36px;
-            border-radius: var(--radius);
-        }
-
-        .contact-item {
-            margin-bottom: 24px;
-        }
-
-        .contact-item .label {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 4px;
-            display: block;
-        }
-
-        .contact-item .val {
-            font-size: 1.15rem;
-            font-weight: 700;
-        }
-
-        .contact-item .val a {
-            color: var(--accent);
-        }
-
-        .map-box {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .map-placeholder {
-            width: 100%;
-            height: 250px;
-            background: #1a2029;
-            border-radius: 8px;
+        /* Central Big Logo */
+        .header-logo {
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--text-muted);
-            border: 1px solid var(--border);
-            margin-bottom: 16px;
+            text-decoration: none;
         }
 
-        /* --- Подвал (Footer) --- */
-        footer {
-            padding: 30px 0;
+        .header-logo img {
+            height: 64px;
+            width: auto;
+            filter: drop-shadow(0 0 18px rgba(67, 218, 193, 0.4));
+            transition: transform 0.4s var(--ease);
+        }
+
+        .header-logo:hover img {
+            transform: scale(1.06);
+        }
+
+        .header-quick-actions {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* =========================================================
+           PREMIUM SOCIAL & MESSENGER BUTTONS
+           ========================================================= */
+        .btn-social-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            align-items: center;
+        }
+
+        .btn-social {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 14px 24px;
+            border-radius: var(--radius-md);
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--white);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-light);
+            backdrop-filter: blur(16px);
+            transition: all 0.35s var(--ease);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-social svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-social:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn-social:hover svg {
+            transform: scale(1.15) rotate(-4deg);
+        }
+
+        /* Specific Brand Accent Styles */
+        .btn-vk-group {
+            background: linear-gradient(135deg, rgba(0, 119, 255, 0.15), rgba(0, 85, 204, 0.25));
+            border-color: rgba(0, 119, 255, 0.35);
+            color: #ffffff;
+        }
+        .btn-vk-group:hover {
+            border-color: #0077ff;
+            box-shadow: 0 12px 30px rgba(0, 119, 255, 0.35);
+            background: linear-gradient(135deg, rgba(0, 119, 255, 0.3), rgba(0, 85, 204, 0.4));
+        }
+
+        .btn-vk-direct {
+            background: linear-gradient(135deg, rgba(43, 136, 240, 0.12), rgba(0, 102, 212, 0.22));
+            border-color: rgba(43, 136, 240, 0.3);
+            color: #ffffff;
+        }
+        .btn-vk-direct:hover {
+            border-color: #2b88f0;
+            box-shadow: 0 12px 30px rgba(43, 136, 240, 0.3);
+            background: linear-gradient(135deg, rgba(43, 136, 240, 0.25), rgba(0, 102, 212, 0.35));
+        }
+
+        .btn-tg {
+            background: linear-gradient(135deg, rgba(67, 218, 193, 0.18), rgba(18, 129, 114, 0.28));
+            border-color: var(--border);
+            color: var(--tiffany-bright);
+        }
+        .btn-tg:hover {
+            border-color: var(--tiffany-bright);
+            box-shadow: 0 12px 30px var(--tiffany-glow);
+            background: linear-gradient(135deg, rgba(67, 218, 193, 0.35), rgba(18, 129, 114, 0.5));
+            color: #ffffff;
+        }
+
+        .btn-wa {
+            background: linear-gradient(135deg, rgba(37, 211, 102, 0.12), rgba(18, 140, 62, 0.22));
+            border-color: rgba(37, 211, 102, 0.3);
+            color: #ffffff;
+        }
+        .btn-wa:hover {
+            border-color: #25d366;
+            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.35);
+            background: linear-gradient(135deg, rgba(37, 211, 102, 0.25), rgba(18, 140, 62, 0.4));
+        }
+
+        /* =========================================================
+           HERO SECTION
+           ========================================================= */
+        .hero {
+            padding: 90px 0 70px;
             text-align: center;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            border-top: 1px solid var(--border);
+            position: relative;
         }
 
-        /* --- Адаптивность --- */
-        @media (max-width: 768px) {
-            nav { display: none; }
-            .canvas-box, .contact-box { grid-template-columns: 1fr; }
-            .hero { padding: 120px 0 60px; }
-            .canvas-specs { grid-template-columns: 1fr; }
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 20px;
+            border-radius: 40px;
+            background: var(--tiffany-glass);
+            border: 1px solid var(--border);
+            color: var(--tiffany-bright);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            margin-bottom: 28px;
+            box-shadow: 0 0 20px rgba(67, 218, 193, 0.15);
+        }
+
+        .hero-title {
+            font-size: clamp(38px, 6vw, 70px);
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            margin-bottom: 24px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-title span {
+            background: linear-gradient(135deg, #72FFF6 0%, #43DAC1 50%, #15a894 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 40px rgba(67, 218, 193, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(16px, 2.2vw, 20px);
+            color: var(--muted);
+            max-width: 720px;
+            margin: 0 auto 44px;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .hero-social-block {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 70px;
+        }
+
+        /* Key Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .metric-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            padding: 28px;
+            border-radius: var(--radius-md);
+            backdrop-filter: blur(20px);
+            transition: all 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card:hover {
+            border-color: var(--border);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .metric-value {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--tiffany-bright);
+            margin-bottom: 6px;
+            letter-spacing: -0.02em;
+        }
+
+        .metric-label {
+            font-size: 13px;
+            color: var(--muted);
+            font-weight: 600;
+        }
+
+        /* =========================================================
+           MARQUEE BANNER
+           ========================================================= */
+        .marquee-wrapper {
+            width: 100%;
+            overflow: hidden;
+            padding: 22px 0;
+            background: rgba(67, 218, 193, 0.02);
+            border-top: 1px solid var(--border-light);
+            border-bottom: 1px solid var(--border-light);
+            margin: 50px 0 90px;
+        }
+
+        .marquee-content {
+            display: flex;
+            gap: 40px;
+            width: max-content;
+            animation: marquee 35s linear infinite;
+        }
+
+        .marquee-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--soft-white);
+            white-space: nowrap;
+        }
+
+        .marquee-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--tiffany);
+            box-shadow: 0 0 12px var(--tiffany);
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* =========================================================
+           SECTION HEADINGS
+           ========================================================= */
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-tag {
+            color: var(--tiffany);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .section-title {
+            font-size: clamp(28px, 4vw, 46px);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        /* =========================================================
+           SERVICES GRID
+           ========================================================= */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 28px;
+            margin-bottom: 100px;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            padding: 36px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            backdrop-filter: blur(20px);
+            position: relative;
+            transition: all 0.4s var(--ease);
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--tiffany), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .service-card:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--border);
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.6), 0 0 30px rgba(67, 218, 193, 0.08);
+        }
+
+        .service-card:hover::before { opacity: 1; }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            background: var(--tiffany-glass);
+            border: 1px solid var(--border);
+            display: grid;
+            place-items: center;
+            margin-bottom: 28px;
+            color: var(--tiffany-bright);
+        }
+
+        .service-icon svg { width: 30px; height: 30px; fill: currentColor; }
+
+        .service-title {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 14px;
+        }
+
+        .service-desc {
+            font-size: 14px;
+            color: var(--muted);
+            line-height: 1.65;
+            margin-bottom: 28px;
+        }
+
+        .service-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 30px;
+        }
+
+        .tag-pill {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 5px 12px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--soft-white);
+        }
+
+        .service-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .service-price {
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--tiffany-bright);
+        }
+
+        /* =========================================================
+           PORTFOLIO GALLERY
+           ========================================================= */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            margin-bottom: 100px;
+        }
+
+        .portfolio-card {
+            height: 320px;
+            border-radius: var(--radius-lg);
+            background: rgba(18, 28, 25, 0.8);
+            border: 1px solid var(--border-light);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 28px;
+            transition: all 0.4s var(--ease);
+        }
+
+        .portfolio-card:hover {
+            border-color: var(--tiffany);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .portfolio-tag {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            background: rgba(2, 4, 3, 0.75);
+            border: 1px solid var(--border);
+            color: var(--tiffany-bright);
+            font-size: 12px;
+            font-weight: 700;
+            backdrop-filter: blur(10px);
+        }
+
+        .portfolio-title {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+
+        .portfolio-sub {
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        /* =========================================================
+           VINYL TEXTURE PALETTE
+           ========================================================= */
+        .palette-section {
+            padding: 40px 0 100px;
+        }
+
+        .palette-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .palette-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .palette-card:hover {
+            border-color: var(--tiffany);
+            transform: translateY(-4px);
+        }
+
+        .swatch-circle {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            margin: 0 auto 16px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+        }
+
+        .palette-name {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .palette-type {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        /* =========================================================
+           INTERACTIVE EXPRESS FORM & FILE ATTACH
+           ========================================================= */
+        .calculator-box {
+            background: linear-gradient(135deg, rgba(14, 23, 21, 0.95), rgba(5, 12, 10, 0.98));
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 50px;
+            box-shadow: 0 30px 70px rgba(0,0,0,0.7);
+            margin-bottom: 100px;
+        }
+
+        .calc-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--soft-white);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 16px 20px;
+            border-radius: var(--radius-sm);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-light);
+            color: var(--white);
+            font-family: inherit;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--tiffany);
+            background: rgba(67, 218, 193, 0.04);
+        }
+
+        .file-upload-zone {
+            border: 2px dashed var(--border);
+            border-radius: var(--radius-sm);
+            padding: 24px;
+            text-align: center;
+            cursor: pointer;
+            background: rgba(67, 218, 193, 0.02);
+            transition: all 0.3s ease;
+        }
+
+        .file-upload-zone:hover {
+            border-color: var(--tiffany);
+            background: var(--tiffany-glass);
+        }
+
+        .file-upload-text {
+            font-size: 13px;
+            color: var(--tiffany-bright);
+            font-weight: 700;
+        }
+
+        /* =========================================================
+           CONTACTS SECTION WITH PROMINENT SOCIAL BUTTONS
+           ========================================================= */
+        .contacts-wrapper {
+            padding-bottom: 100px;
+        }
+
+        .contact-buttons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 20px;
+        }
+
+        .contact-btn-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-md);
+            padding: 26px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            text-decoration: none;
+            color: var(--white);
+            transition: all 0.35s var(--ease);
+        }
+
+        .contact-btn-card:hover {
+            border-color: var(--tiffany);
+            transform: translateY(-5px);
+            background: var(--bg-card-hover);
+        }
+
+        .contact-btn-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            background: var(--tiffany-glass);
+            display: grid;
+            place-items: center;
+            color: var(--tiffany-bright);
+            flex-shrink: 0;
+        }
+
+        .contact-btn-icon svg { width: 26px; height: 26px; fill: currentColor; }
+
+        .contact-title { font-size: 16px; font-weight: 800; }
+        .contact-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+        /* =========================================================
+           FOOTER
+           ========================================================= */
+        .footer {
+            padding: 45px 0;
+            border-top: 1px solid var(--border-light);
+            text-align: center;
+            font-size: 13px;
+            color: var(--muted);
+            letter-spacing: 0.05em;
+        }
+
+        /* Mobile Bottom Bar */
+        .mobile-bar {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            background: rgba(2, 4, 3, 0.94);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid var(--border-light);
+            padding: 12px 16px env(safe-area-inset-bottom);
+        }
+
+        .mobile-bar-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 900px) {
+            .nav-links { display: none; }
+            .header-grid { grid-template-columns: 1fr auto; }
+            .header-logo img { height: 48px; }
+            .calc-layout { grid-template-columns: 1fr; gap: 28px; }
+            .calculator-box { padding: 30px 20px; }
+            .hero { padding: 60px 0 40px; }
+            .mobile-bar { display: block; }
+            body { padding-bottom: 75px; }
+        }
+
+        @media (max-width: 520px) {
+            .btn-social-group { flex-direction: column; width: 100%; }
+            .btn-social { width: 100%; justify-content: center; }
+            .services-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Шапка -->
-    <header>
-        <div class="container header-content">
-            <div class="logo">
-                <span class="logo-badge">METIZ PROJECT</span>
+    <!-- Background Dynamic Grid & Cursor Aura -->
+    <div class="grid-backdrop"></div>
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <!-- =========================================================
+         HEADER / NAVIGATION
+         ========================================================= -->
+    <header class="header">
+        <div class="container header-grid">
+            <!-- Left Nav -->
+            <ul class="nav-links">
+                <li><a href="#services" class="nav-link">Услуги</a></li>
+                <li><a href="#portfolio" class="nav-link">Портфолио</a></li>
+                <li><a href="#palette" class="nav-link">Пленки</a></li>
+                <li><a href="#calculator" class="nav-link">Расчет</a></li>
+            </ul>
+
+            <!-- Center Logo -->
+            <a href="#" class="header-logo">
+                <img src="metiz-project-logo.png" alt="METIZ PROJECT">
+            </a>
+
+            <!-- Right Actions -->
+            <div class="header-quick-actions">
+                <a href="#contacts" class="btn-social btn-tg" style="padding: 10px 20px; font-size: 13px;">
+                    <svg viewBox="0 0 24 24"><path d="M21.7 3.25 2.95 10.48c-1.28.51-1.27 1.22-.23 1.54l4.81 1.5 1.84 5.63c.22.61.11.85.74.85.49 0 .71-.22.98-.48l2.34-2.27 4.86 3.59c.89.49 1.53.23 1.75-.83l3.12-14.69c.33-1.31-.5-1.9-1.46-1.57ZM8.26 13.15l10.94-6.9c.55-.34 1.06-.16.64.21l-8.9 8.04-.35 3.75-2.33-5.1Z"/></svg>
+                    Контакты
+                </a>
             </div>
-            <nav>
-                <a href="#stickers">Наклейки</a>
-                <a href="#canvas">Холсты</a>
-                <a href="#how-to">Как заказать</a>
-                <a href="#contacts">Контакты</a>
-            </nav>
-            <a href="https://t.me/metiz_project" target="_blank" class="btn-header">Заказать в Telegram</a>
         </div>
     </header>
 
-    <!-- Первый экран -->
+    <!-- =========================================================
+         HERO SECTION WITH REQUIRED SOCIAL BUTTONS
+         ========================================================= -->
     <section class="hero">
         <div class="container">
-            <span class="tag">Санкт-Петербург • Изготовление и Резка</span>
-            <h1>Наклейки на заказ и <br><span>печать на холсте</span></h1>
-            <p>Изготовление качественных виниловых наклеек для автомобилей, витрин и продукции. Плоттерная резка и яркая печать картин по вашим размерам.</p>
-            <div class="hero-btns">
-                <a href="https://wa.me/79650050990" target="_blank" class="btn-primary">Написать в WhatsApp</a>
-                <a href="https://t.me/metiz_project" target="_blank" class="btn-secondary">Написать в Telegram</a>
+            <div class="hero-tag">Студия брендирования • Санкт-Петербург</div>
+            
+            <h1 class="hero-title">
+                Плоттерная резка, <span>оклейка авто</span> и брендирование под ключ
+            </h1>
+
+            <p class="hero-subtitle">
+                Создаем виниловую графику премиального качества. Работаем с оригинальными пленками Oracal, векторизуем макеты и гарантируем идеальный контур.
+            </p>
+
+            <!-- REQUIRED SOCIAL & MESSENGER BUTTONS -->
+            <div class="hero-social-block">
+                <div class="btn-social-group">
+                    <!-- 1. Группа Вконтакте -->
+                    <a href="https://vk.ru/metiz_project" target="_blank" class="btn-social btn-vk-group">
+                        <svg viewBox="0 0 24 24"><path d="M13.07 18.75h1.56s.47-.05.71-.31c.22-.25.21-.72.21-.72s-.03-2.2.99-2.52c1-.31 2.28 2.13 3.64 3.07.98.68 1.73.53 1.73.53l3.47-.05s1.82-.11.96-1.55c-.07-.12-.51-1.06-2.64-3-2.23-2.03-1.93-1.7.76-5.21 1.64-2.15 2.3-3.46 2.09-4.02-.2-.54-1.43-.4-1.43-.4l-3.9.02s-.29-.04-.5.09c-.21.13-.34.43-.34.43s-.62 1.65-1.44 3.05c-1.74 2.96-2.44 3.12-2.73 2.93-.67-.43-.5-1.72-.5-2.64 0-2.87.43-4.07-.84-4.38-.42-.1-.73-.17-1.8-.18-1.37-.01-2.53.01-3.19.33-.44.21-.78.68-.57.71.26.03.86.16 1.18.59.41.55.4 1.78.4 1.78s.24 3.39-.55 3.81c-.54.29-1.28-.3-2.87-2.99-.81-1.38-1.42-2.9-1.42-2.9s-.12-.29-.33-.44c-.26-.19-.62-.25-.62-.25l-3.71.02s-.56.02-.77.26c-.18.21-.01.65-.01.65s2.9 6.79 6.19 10.22c3.02 3.15 6.45 2.94 6.45 2.94h1.56z"/></svg>
+                        Группа Вконтакте
+                    </a>
+
+                    <!-- 2. Написать Вконтакте -->
+                    <a href="https://vk.ru/im?sel=-10150150" target="_blank" class="btn-social btn-vk-direct">
+                        <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
+                        Написать Вконтакте
+                    </a>
+
+                    <!-- 3. Написать в Telegram -->
+                    <a href="https://t.me/metizproject" target="_blank" class="btn-social btn-tg">
+                        <svg viewBox="0 0 24 24"><path d="M21.7 3.25 2.95 10.48c-1.28.51-1.27 1.22-.23 1.54l4.81 1.5 1.84 5.63c.22.61.11.85.74.85.49 0 .71-.22.98-.48l2.34-2.27 4.86 3.59c.89.49 1.53.23 1.75-.83l3.12-14.69c.33-1.31-.5-1.9-1.46-1.57ZM8.26 13.15l10.94-6.9c.55-.34 1.06-.16.64.21l-8.9 8.04-.35 3.75-2.33-5.1Z"/></svg>
+                        Написать в Telegram
+                    </a>
+
+                    <!-- 4. Написать в WhatsApp -->
+                    <a href="https://wa.me/message/RDHE3F4PU2D3L1" target="_blank" class="btn-social btn-wa">
+                        <svg viewBox="0 0 24 24"><path d="M20.52 3.48A11.83 11.83 0 0 0 12.1 0C5.55 0 .22 5.33.22 11.88c0 2.09.55 4.13 1.6 5.93L.12 24l6.33-1.66a11.86 11.86 0 0 0 5.65 1.44h.01c6.54 0 11.87-5.33 11.87-11.88 0-3.17-1.23-6.14-3.46-8.42ZM12.11 21.76h-.01a9.84 9.84 0 0 1-5.02-1.37l-.36-.21-3.76.98 1-3.67-.23-.38a9.84 9.84 0 0 1-1.51-5.23C2.22 6.44 6.66 2 12.11 2c2.64 0 5.12 1.03 6.99 2.9a9.84 9.84 0 0 1 2.89 7c0 5.45-4.43 9.86-9.88 9.86Zm5.42-7.39c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.76-1.67-2.06-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.49 0 1.47 1.07 2.89 1.22 3.09.15.2 2.1 3.21 5.09 4.5.71.31 1.26.49 1.69.63.71.23 1.35.2 1.86.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35Z"/></svg>
+                        Написать в WhatsApp
+                    </a>
+                </div>
+            </div>
+
+            <!-- Metrics -->
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">2010</div>
+                    <div class="metric-label">Год основания производства</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">Oracal</div>
+                    <div class="metric-label">Немецкие премиум винилы</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">0.1 мм</div>
+                    <div class="metric-label">Точность плоттерного реза</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">СПб</div>
+                    <div class="metric-label">Самовывоз и Курьеры</div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Секция 1: Наклейки -->
-    <section id="stickers">
-        <div class="container">
-            <div class="section-title">
-                <h2>Изготовление наклеек и плоттерная резка</h2>
-                <p>Наклейки на любые поверхности из стойкого винила под ваши задачи</p>
+    <!-- =========================================================
+         MARQUEE BANNER
+         ========================================================= -->
+    <div class="marquee-wrapper">
+        <div class="marquee-content">
+            <div class="marquee-item">Наклейки на авто <span class="marquee-dot"></span></div>
+            <div class="marquee-item">Плоттерная резка винила <span class="marquee-dot"></span></div>
+            <div class="marquee-item">Брендирование витрин <span class="marquee-dot"></span></div>
+            <div class="marquee-item">Печать на холстах <span class="marquee-dot"></span></div>
+            <div class="marquee-item">Стикерпаки для бизнеса <span class="marquee-dot"></span></div>
+            <div class="marquee-item">Дрифт-ливреи <span class="marquee-dot"></span></div>
+            <!-- Duplication for infinite loop -->
+            <div class="marquee-item">Наклейки на авто <span class="marquee-dot"></span></div>
+            <div class="marquee-item">Плоттерная резка винила <span class="marquee-dot"></span></div>
+            <div class="marquee-item">Брендирование витрин <span class="marquee-dot"></span></div>
+            <div class="marquee-item">Печать на холстах <span class="marquee-dot"></span></div>
+            <div class="marquee-item">Стикерпаки для бизнеса <span class="marquee-dot"></span></div>
+            <div class="marquee-item">Дрифт-ливреи <span class="marquee-dot"></span></div>
+        </div>
+    </div>
+
+    <!-- =========================================================
+         SERVICES SECTION
+         ========================================================= -->
+    <section class="container" id="services">
+        <div class="section-header">
+            <span class="section-tag">Каталог решений</span>
+            <h2 class="section-title">Наши ключевые направления</h2>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <div>
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.04 3H5.81l1.04-3zM19 17H5v-4h14v4z"/></svg>
+                    </div>
+                    <h3 class="service-title">Автомобильный стайлинг</h3>
+                    <p class="service-desc">Наклейки на стекла, полосы на кузов, спонсорская оклейка, дрифт-графика и брендирование автопарков.</p>
+                    <div class="service-tags">
+                        <span class="tag-pill">Стекла</span>
+                        <span class="tag-pill">Кузов</span>
+                        <span class="tag-pill">Влагостойкость</span>
+                    </div>
+                </div>
+                <div class="service-bottom">
+                    <span class="service-price">от 500 ₽</span>
+                    <a href="https://t.me/metizproject" target="_blank" class="btn-social btn-tg" style="padding: 8px 16px; font-size: 12px;">Заказать</a>
+                </div>
             </div>
-            <div class="grid-4">
-                
-                <div class="card">
-                    <div class="card-icon">🚗</div>
-                    <h3>На авто и стекло</h3>
-                    <ul>
-                        <li>Реклама на заднее стекло</li>
-                        <li>Ники соцсетей и логотипы</li>
-                        <li>Полосы на лобовое стекло</li>
-                        <li>Наклейки на кузов и элементы</li>
-                    </ul>
-                </div>
 
-                <div class="card">
-                    <div class="card-icon">🏪</div>
-                    <h3>Для бизнеса и витрин</h3>
-                    <ul>
-                        <li>Оформление витрин и окон</li>
-                        <li>График работы и контакты</li>
-                        <li>Информационные надписи</li>
-                        <li>Акции и рекламная графика</li>
-                    </ul>
+            <div class="service-card">
+                <div>
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24"><path d="M9.64 7.64c.23-.5.36-1.05.36-1.64 0-2.21-1.79-4-4-4S2 3.79 2 6s1.79 4 4 4c.59 0 1.14-.13 1.64-.36L10 12l-2.36 2.36C7.14 14.13 6.59 14 6 14c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4c0-.59-.13-1.14-.36-1.64L12 14l7 7h3v-1L9.64 7.64zM6 8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm0 12c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm10-7.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+                    </div>
+                    <h3 class="service-title">Плоттерная резка винила</h3>
+                    <p class="service-desc">Высокоточная контурная резка цветных пленок Oracal. Изготовление сложных логотипов, надписей и векторных узоров.</p>
+                    <div class="service-tags">
+                        <span class="tag-pill">Oracal 641/751</span>
+                        <span class="tag-pill">Трафареты</span>
+                    </div>
                 </div>
-
-                <div class="card">
-                    <div class="card-icon">📦</div>
-                    <h3>Для товаров и упаковки</h3>
-                    <ul>
-                        <li>Брендирование коробок и пакетов</li>
-                        <li>Наклейки на стаканчики и тару</li>
-                        <li>Стикерпаки с вашим логотипом</li>
-                        <li>Фирменные маркировочные стикеры</li>
-                    </ul>
+                <div class="service-bottom">
+                    <span class="service-price">от 400 ₽/м²</span>
+                    <a href="https://t.me/metizproject" target="_blank" class="btn-social btn-tg" style="padding: 8px 16px; font-size: 12px;">Заказать</a>
                 </div>
+            </div>
 
-                <div class="card">
-                    <div class="card-icon">✂️</div>
-                    <h3>По вашим макетам</h3>
-                    <ul>
-                        <li>Резка по готовым векторным файлам</li>
-                        <li>Подготовка текста и надписей</li>
-                        <li>Подбор цвета и фактуры пленки</li>
-                        <li>Индивидуальный расчет размеров</li>
-                    </ul>
+            <div class="service-card">
+                <div>
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8h16v10zm-2-7h-3v2h3v-2z"/></svg>
+                    </div>
+                    <h3 class="service-title">Оформление витрин</h3>
+                    <p class="service-desc">Оклейка коммерческих пространств, входных групп, нанесение режима работы и акционных стикеров.</p>
+                    <div class="service-tags">
+                        <span class="tag-pill">Витрины</span>
+                        <span class="tag-pill">Режимы работы</span>
+                    </div>
                 </div>
-
+                <div class="service-bottom">
+                    <span class="service-price">от 1 500 ₽/м²</span>
+                    <a href="https://t.me/metizproject" target="_blank" class="btn-social btn-tg" style="padding: 8px 16px; font-size: 12px;">Заказать</a>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Секция 2: Холсты -->
-    <section id="canvas" class="canvas-section">
-        <div class="container">
-            <div class="canvas-box">
-                <div class="canvas-info">
-                    <span class="tag" style="margin-bottom: 12px;">Интерьерная печать</span>
-                    <h3>Печать ваших фотографий и картин на холсте</h3>
-                    <p>Превратите любимое фото, арт или репродукцию в качественную картину. Полностью готовое изделие с галерейной натяжкой на подрамник — останется только повесить на стену.</p>
-                    
-                    <div class="canvas-specs">
-                        <div class="spec-item">
-                            <span class="title">Материал</span>
-                            <span class="value">100% Натуральный хлопок</span>
+    <!-- =========================================================
+         PORTFOLIO GALLERY
+         ========================================================= -->
+    <section class="container" id="portfolio">
+        <div class="section-header">
+            <span class="section-tag">Проекты</span>
+            <h2 class="section-title">Примеры выполненных работ</h2>
+        </div>
+
+        <div class="portfolio-grid">
+            <div class="portfolio-card">
+                <div class="portfolio-tag">Volkswagen Tiguan</div>
+                <div class="portfolio-title">Комплексная плоттерная оклейка</div>
+                <div class="portfolio-sub">Матовый винил • Tiffany accents</div>
+            </div>
+            <div class="portfolio-card">
+                <div class="portfolio-tag">Ford Kuga</div>
+                <div class="portfolio-title">Графика на заднее стекло</div>
+                <div class="portfolio-sub">Белый Oracal 751 • Высокая стойкость</div>
+            </div>
+            <div class="portfolio-card">
+                <div class="portfolio-tag">Nissan Silvia S15</div>
+                <div class="portfolio-title">Дрифт-ливрея Rocket Boss</div>
+                <div class="portfolio-sub">Голографический хром + Плоттер</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================================
+         VINYL TEXTURES PALETTE
+         ========================================================= -->
+    <section class="container palette-section" id="palette">
+        <div class="section-header">
+            <span class="section-tag">Материалы</span>
+            <h2 class="section-title">Палитра виниловых пленок</h2>
+        </div>
+
+        <div class="palette-grid">
+            <div class="palette-card">
+                <div class="swatch-circle" style="background: #43DAC1; box-shadow: 0 0 20px rgba(67,218,193,0.5);"></div>
+                <div class="palette-name">Tiffany Blue</div>
+                <div class="palette-type">Фирменный глянец</div>
+            </div>
+            <div class="palette-card">
+                <div class="swatch-circle" style="background: linear-gradient(135deg, #ff00cc, #333399, #00ffcc);"></div>
+                <div class="palette-name">Holo Chrome</div>
+                <div class="palette-type">Голографик</div>
+            </div>
+            <div class="palette-card">
+                <div class="swatch-circle" style="background: #111111;"></div>
+                <div class="palette-name">Satin Black</div>
+                <div class="palette-type">Глубокий мат</div>
+            </div>
+            <div class="palette-card">
+                <div class="swatch-circle" style="background: linear-gradient(135deg, #eeeeee, #aaaaaa);"></div>
+                <div class="palette-name">Silver Metallic</div>
+                <div class="palette-type">Серебряный хром</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================================
+         EXPRESS FORM WITH FILE ATTACH
+         ========================================================= -->
+    <section class="container" id="calculator">
+        <div class="calculator-box">
+            <div class="calc-layout">
+                <div>
+                    <span class="section-tag">Быстрый просчет</span>
+                    <h2 class="section-title" style="text-align: left; margin-bottom: 16px;">Рассчитать проект</h2>
+                    <p style="color: var(--muted); font-size: 14px; line-height: 1.6; margin-bottom: 28px;">
+                        Выберите услугу, опишите идею или загрузите фото/макет. Наш дизайнер сформирует точную смету за 15 минут.
+                    </p>
+                    <div style="color: var(--tiffany-bright); font-size: 13px; font-weight: 700; display: flex; align-items: center; gap: 10px;">
+                        <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--tiffany); box-shadow: 0 0 10px var(--tiffany);"></span>
+                        Санкт-Петербург: Самовывоз или Курьер
+                    </div>
+                </div>
+
+                <div>
+                    <div style="margin-bottom: 18px;">
+                        <label class="form-label">Тип услуги</label>
+                        <select class="form-control" id="formService">
+                            <option>Наклейки на авто / стекла</option>
+                            <option>Плоттерная резка винила</option>
+                            <option>Оформление витрины / магазина</option>
+                            <option>Печать на холсте</option>
+                        </select>
+                    </div>
+
+                    <div style="margin-bottom: 18px;">
+                        <label class="form-label">Размеры или описание</label>
+                        <input type="text" class="form-control" id="formDetails" placeholder="Например: 60х20 см, белый Oracal...">
+                    </div>
+
+                    <div style="margin-bottom: 24px;">
+                        <label class="form-label">Прикрепить макет или фото</label>
+                        <div class="file-upload-zone" onclick="document.getElementById('fileInput').click()">
+                            <span class="file-upload-text" id="uploadStatus">+ Загрузить фото или макет (Vector/PNG/JPG)</span>
+                            <input type="file" id="fileInput" style="display: none;" onchange="updateFileName(this)">
                         </div>
-                        <div class="spec-item">
-                            <span class="title">Плотность</span>
-                            <span class="value">380 г/м² (выбеленный)</span>
-                        </div>
-                        <div class="spec-item">
-                            <span class="title">Фактура</span>
-                            <span class="value">Матовая (без бликов)</span>
-                        </div>
-                        <div class="spec-item">
-                            <span class="title">Оформление</span>
-                            <span class="value">Подрамник + Крепеж</span>
-                        </div>
                     </div>
-                </div>
-                <div style="text-align: center;">
-                    <div style="border: 2px dashed var(--accent); padding: 40px 20px; border-radius: var(--radius); background: rgba(11, 13, 16, 0.6);">
-                        <h4 style="font-size: 1.3rem; margin-bottom: 10px;">Есть фото или картинка?</h4>
-                        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px;">Пришлите изображение в мессенджер, и мы бесплатно проверим его качество для печати.</p>
-                        <a href="https://t.me/metiz_project" target="_blank" class="btn-primary" style="display: inline-block;">Отправить фото на проверку</a>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                        <button onclick="submitOrder('tg')" class="btn-social btn-tg" style="width: 100%;">
+                            В Telegram
+                        </button>
+                        <button onclick="submitOrder('vk')" class="btn-social btn-vk-direct" style="width: 100%;">
+                            Вконтакте
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Секция 3: Как заказать -->
-    <section id="how-to">
-        <div class="container">
-            <div class="section-title">
-                <h2>Как оформить заказ</h2>
-                <p>Простой и понятный процесс от идеи до готового изделия</p>
-            </div>
-            <div class="steps-grid">
-                <div class="step-card">
-                    <span class="step-number">01</span>
-                    <h4>Заявка</h4>
-                    <p>Присылаете размеры, текст, фото или готовый макет в сообщения WhatsApp или Telegram.</p>
+    <!-- =========================================================
+         ALL CONTACTS SECTION
+         ========================================================= -->
+    <section class="container contacts-wrapper" id="contacts">
+        <div class="section-header">
+            <span class="section-tag">Связь</span>
+            <h2 class="section-title">Все официальные каналы METIZ PROJECT</h2>
+        </div>
+
+        <div class="contact-buttons-grid">
+            <!-- 1. Группа Вконтакте -->
+            <a href="https://vk.ru/metiz_project" target="_blank" class="contact-btn-card">
+                <div class="contact-btn-icon">
+                    <svg viewBox="0 0 24 24"><path d="M13.07 18.75h1.56s.47-.05.71-.31c.22-.25.21-.72.21-.72s-.03-2.2.99-2.52c1-.31 2.28 2.13 3.64 3.07.98.68 1.73.53 1.73.53l3.47-.05s1.82-.11.96-1.55c-.07-.12-.51-1.06-2.64-3-2.23-2.03-1.93-1.7.76-5.21 1.64-2.15 2.3-3.46 2.09-4.02-.2-.54-1.43-.4-1.43-.4l-3.9.02s-.29-.04-.5.09c-.21.13-.34.43-.34.43s-.62 1.65-1.44 3.05c-1.74 2.96-2.44 3.12-2.73 2.93-.67-.43-.5-1.72-.5-2.64 0-2.87.43-4.07-.84-4.38-.42-.1-.73-.17-1.8-.18-1.37-.01-2.53.01-3.19.33-.44.21-.78.68-.57.71.26.03.86.16 1.18.59.41.55.4 1.78.4 1.78s.24 3.39-.55 3.81c-.54.29-1.28-.3-2.87-2.99-.81-1.38-1.42-2.9-1.42-2.9s-.12-.29-.33-.44c-.26-.19-.62-.25-.62-.25l-3.71.02s-.56.02-.77.26c-.18.21-.01.65-.01.65s2.9 6.79 6.19 10.22c3.02 3.15 6.45 2.94 6.45 2.94h1.56z"/></svg>
                 </div>
-                <div class="step-card">
-                    <span class="step-number">02</span>
-                    <h4>Расчет и макет</h4>
-                    <p>Согласовываем внешний вид, цвет пленки или параметры холста, точную стоимость и сроки.</p>
+                <div>
+                    <div class="contact-title">Группа Вконтакте</div>
+                    <div class="contact-sub">vk.ru/metiz_project</div>
                 </div>
-                <div class="step-card">
-                    <span class="step-number">03</span>
-                    <h4>Изготовление</h4>
-                    <p>Запуск в производство после согласования. Срок: от 1 часа до 5 рабочих дней.</p>
+            </a>
+
+            <!-- 2. Написать Вконтакте -->
+            <a href="https://vk.ru/im?sel=-10150150" target="_blank" class="contact-btn-card">
+                <div class="contact-btn-icon">
+                    <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
                 </div>
-                <div class="step-card">
-                    <span class="step-number">04</span>
-                    <h4>Выдача заказа</h4>
-                    <p>Сообщаем о готовности. Забираете самовывозом на парковке или заказываете доставку.</p>
+                <div>
+                    <div class="contact-title">Написать Вконтакте</div>
+                    <div class="contact-sub">Личные сообщения сообщества</div>
                 </div>
-            </div>
-            <div class="order-note">
-                💡 <b>Условия работы:</b> Все заказы запускаются в работу по 100% предоплате.
-            </div>
+            </a>
+
+            <!-- 3. Написать в Telegram -->
+            <a href="https://t.me/metizproject" target="_blank" class="contact-btn-card">
+                <div class="contact-btn-icon">
+                    <svg viewBox="0 0 24 24"><path d="M21.7 3.25 2.95 10.48c-1.28.51-1.27 1.22-.23 1.54l4.81 1.5 1.84 5.63c.22.61.11.85.74.85.49 0 .71-.22.98-.48l2.34-2.27 4.86 3.59c.89.49 1.53.23 1.75-.83l3.12-14.69c.33-1.31-.5-1.9-1.46-1.57ZM8.26 13.15l10.94-6.9c.55-.34 1.06-.16.64.21l-8.9 8.04-.35 3.75-2.33-5.1Z"/></svg>
+                </div>
+                <div>
+                    <div class="contact-title">Написать в Telegram</div>
+                    <div class="contact-sub">@metizproject (Быстрый ответ)</div>
+                </div>
+            </a>
+
+            <!-- 4. Написать в WhatsApp -->
+            <a href="https://wa.me/message/RDHE3F4PU2D3L1" target="_blank" class="contact-btn-card">
+                <div class="contact-btn-icon">
+                    <svg viewBox="0 0 24 24"><path d="M20.52 3.48A11.83 11.83 0 0 0 12.1 0C5.55 0 .22 5.33.22 11.88c0 2.09.55 4.13 1.6 5.93L.12 24l6.33-1.66a11.86 11.86 0 0 0 5.65 1.44h.01c6.54 0 11.87-5.33 11.87-11.88 0-3.17-1.23-6.14-3.46-8.42ZM12.11 21.76h-.01a9.84 9.84 0 0 1-5.02-1.37l-.36-.21-3.76.98 1-3.67-.23-.38a9.84 9.84 0 0 1-1.51-5.23C2.22 6.44 6.66 2 12.11 2c2.64 0 5.12 1.03 6.99 2.9a9.84 9.84 0 0 1 2.89 7c0 5.45-4.43 9.86-9.88 9.86Zm5.42-7.39c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.76-1.67-2.06-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.49 0 1.47 1.07 2.89 1.22 3.09.15.2 2.1 3.21 5.09 4.5.71.31 1.26.49 1.69.63.71.23 1.35.2 1.86.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35Z"/></svg>
+                </div>
+                <div>
+                    <div class="contact-title">Написать в WhatsApp</div>
+                    <div class="contact-sub">Чат с менеджером</div>
+                </div>
+            </a>
         </div>
     </section>
 
-    <!-- Секция 4: Контакты -->
-    <section id="contacts">
+    <!-- =========================================================
+         FOOTER
+         ========================================================= -->
+    <footer class="footer">
         <div class="container">
-            <div class="section-title">
-                <h2>Контакты и Самовывоз</h2>
-                <p>Работаем в Санкт-Петербурге</p>
-            </div>
-            <div class="contact-box">
-                <div class="contact-details">
-                    <div class="contact-item">
-                        <span class="label">Мессенджеры (только сообщения):</span>
-                        <div class="val">+7 (965) 005-09-90</div>
-                    </div>
-                    <div class="contact-item">
-                        <span class="label">Сообщество ВКонтакте:</span>
-                        <div class="val"><a href="https://vk.com/metiz_project" target="_blank">vk.com/metiz_project</a></div>
-                    </div>
-                    <div class="contact-item">
-                        <span class="label">Самовывоз (по договоренности):</span>
-                        <div class="val">г. Санкт-Петербург, парковка между Ленинским пр. 95к1 и 97к1</div>
-                    </div>
-                    <div style="display: flex; gap: 12px; margin-top: 24px;">
-                        <a href="https://t.me/metiz_project" target="_blank" class="btn-primary" style="flex: 1; text-align: center;">Telegram</a>
-                        <a href="https://wa.me/79650050990" target="_blank" class="btn-secondary" style="flex: 1; text-align: center;">WhatsApp</a>
-                    </div>
-                </div>
-
-                <div class="map-box">
-                    <div>
-                        <h4 style="margin-bottom: 8px;">Точка самовывоза на карте</h4>
-                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 16px;">Ленинский проспект, между домами 95к1 и 97к1</p>
-                    </div>
-                    <div class="map-placeholder">
-                        <a href="https://yandex.ru/navi/-/#CCUeiMHzHC" target="_blank" style="color: var(--accent); text-decoration: underline; font-weight: 600;">
-                            📍 Открыть точку в Яндекс.Навигаторе
-                        </a>
-                    </div>
-                    <p style="font-size: 0.85rem; color: var(--text-muted); text-align: center;">О готовности заказа мы сообщим вам лично перед выездом.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Подвал -->
-    <footer>
-        <div class="container">
-            <p>© 2026 METIZ PROJECT. Плоттерная резка, наклейки и печать на холсте в Санкт-Петербурге.</p>
+            <p>© METIZ PROJECT 2010–2026. Все права защищены. Санкт-Петербург.</p>
         </div>
     </footer>
 
+    <!-- =========================================================
+         MOBILE QUICK BAR WITH DIRECT ACTIONS
+         ========================================================= -->
+    <div class="mobile-bar">
+        <div class="mobile-bar-grid">
+            <a href="https://t.me/metizproject" target="_blank" class="btn-social btn-tg" style="padding: 12px; font-size: 13px;">
+                Telegram
+            </a>
+            <a href="https://vk.ru/im?sel=-10150150" target="_blank" class="btn-social btn-vk-direct" style="padding: 12px; font-size: 13px;">
+                Вконтакте
+            </a>
+        </div>
+    </div>
+
+    <!-- =========================================================
+         JAVASCRIPT
+         ========================================================= -->
+    <script>
+        // 1. Dynamic Cursor Aura
+        const cursorGlow = document.getElementById("cursorGlow");
+        if (window.matchMedia("(pointer:fine)").matches) {
+            let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
+            let curX = mouseX, curY = mouseY;
+
+            window.addEventListener("pointermove", (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            }, { passive: true });
+
+            function animateGlow() {
+                curX += (mouseX - curX) * 0.1;
+                curY += (mouseY - curY) * 0.1;
+                cursorGlow.style.left = `${curX}px`;
+                cursorGlow.style.top = `${curY}px`;
+                requestAnimationFrame(animateGlow);
+            }
+            animateGlow();
+        }
+
+        // 2. File Upload Display
+        function updateFileName(input) {
+            const status = document.getElementById('uploadStatus');
+            if (input.files && input.files[0]) {
+                status.textContent = `✓ Файл прикреплен: ${input.files[0].name}`;
+                status.style.color = '#72FFF6';
+            }
+        }
+
+        // 3. Quick Order Dispatcher
+        function submitOrder(platform) {
+            const service = document.getElementById("formService").value;
+            const details = document.getElementById("formDetails").value.trim();
+
+            let text = `Здравствуйте! Хочу сделать заказ в METIZ PROJECT.\nУслуга: ${service}`;
+            if (details) text += `\nДетали: ${details}`;
+
+            const encoded = encodeURIComponent(text);
+
+            if (platform === 'tg') {
+                window.open(`https://t.me/metizproject?text=${encoded}`, '_blank');
+            } else if (platform === 'vk') {
+                window.open(`https://vk.ru/im?sel=-10150150&text=${encoded}`, '_blank');
+            }
+        }
+    </script>
 </body>
 </html>
