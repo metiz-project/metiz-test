@@ -77,96 +77,6 @@
 
     .site { position: relative; z-index: 1; }
 
-    .nav {
-      position: fixed;
-      top: 14px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: min(calc(100% - 28px), var(--content));
-      z-index: 20;
-      border: 1px solid var(--line);
-      background: rgba(7,10,14,.72);
-      backdrop-filter: blur(18px) saturate(140%);
-      -webkit-backdrop-filter: blur(18px) saturate(140%);
-      border-radius: 18px;
-      box-shadow: 0 12px 40px rgba(0,0,0,.25);
-    }
-    .nav-inner {
-      min-height: 64px;
-      padding: 8px 12px 8px 18px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-    .nav-brand {
-      display: inline-flex;
-      align-items: center;
-      min-width: 0;
-    }
-    .nav-brand img {
-      width: auto;
-      height: 35px;
-      max-width: 150px;
-      object-fit: contain;
-    }
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .nav-links a {
-      padding: 10px 12px;
-      border-radius: 12px;
-      color: #cbd2d6;
-      font-size: 13px;
-      font-weight: 650;
-      letter-spacing: .02em;
-      transition: color .25s ease, background .25s ease, transform .25s ease;
-    }
-    .nav-links a:hover {
-      color: var(--text);
-      background: rgba(76,213,211,.08);
-      transform: translateY(-1px);
-    }
-    .menu-toggle {
-      display: none;
-      width: 44px;
-      height: 44px;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      color: var(--text);
-      background: rgba(255,255,255,.03);
-      cursor: pointer;
-    }
-    .menu-toggle span, .menu-toggle span::before, .menu-toggle span::after {
-      display: block;
-      width: 18px;
-      height: 2px;
-      margin: auto;
-      background: currentColor;
-      border-radius: 99px;
-      transition: transform .25s ease, opacity .25s ease;
-    }
-    .menu-toggle span { position: relative; }
-    .menu-toggle span::before, .menu-toggle span::after { content: ""; position: absolute; left: 0; }
-    .menu-toggle span::before { top: -6px; }
-    .menu-toggle span::after { top: 6px; }
-    .menu-toggle[aria-expanded="true"] span { background: transparent; }
-    .menu-toggle[aria-expanded="true"] span::before { transform: translateY(6px) rotate(45deg); }
-    .menu-toggle[aria-expanded="true"] span::after { transform: translateY(-6px) rotate(-45deg); }
-
-    main { position: relative; }
-    section { scroll-margin-top: 104px; }
-
-    .hero {
-      min-height: 100svh;
-      padding: 138px 20px 72px;
-      display: grid;
-      place-items: center;
-      text-align: center;
-      position: relative;
-    }
     .hero-inner { width: 100%; max-width: 1000px; min-width: 0; }
     .hero-logo {
       width: min(380px, 72vw);
@@ -558,43 +468,14 @@
     .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
     @media (max-width: 900px) {
-      .nav-links a { padding-inline: 9px; font-size: 12px; }
       .steps { grid-template-columns: repeat(2, 1fr); }
       .contact-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
     @media (max-width: 720px) {
-      .nav { top: 9px; width: calc(100% - 18px); }
-      .nav-inner { min-height: 58px; }
-      .nav-brand img { height: 30px; max-width: 130px; }
-      .menu-toggle { display: block; }
-      .nav-links {
-        position: absolute;
-        top: calc(100% + 8px);
-        left: 0;
-        right: 0;
-        padding: 9px;
-        display: grid;
-        gap: 4px;
-        border: 1px solid var(--line);
-        border-radius: 16px;
-        background: rgba(7,10,14,.96);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(-8px);
-        transition: opacity .25s ease, transform .25s ease, visibility .25s ease;
-      }
-      .nav-links.open {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-      }
-      .nav-links a { padding: 14px; font-size: 14px; }
       .hero {
         min-height: auto;
-        padding: 128px 16px 34px;
+        padding: 48px 16px 34px;
       }
       .hero-logo { width: min(330px, 76vw); max-height: 140px; }
       .hero-subtitle { margin-top: 16px; letter-spacing: .16em; }
@@ -662,27 +543,7 @@
   <div class="particles" aria-hidden="true" id="particles"></div>
 
   <div class="site">
-    <nav class="nav" aria-label="Основная навигация">
-      <div class="nav-inner">
-        <a class="nav-brand" href="#top" aria-label="METIZ PROJECT — на главную">
-          <img data-config-src="logo" alt="METIZ PROJECT">
-        </a>
-
-        <div class="nav-links" id="navLinks">
-          <a href="#stickers">Наклейки</a>
-          <a href="#canvas">Холсты</a>
-          <a href="#how-to-order">Как заказать</a>
-          <a href="#pickup">Самовывоз</a>
-          <a href="#contacts">Контакты</a>
-        </div>
-
-        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Открыть меню" aria-controls="navLinks" aria-expanded="false">
-          <span></span>
-        </button>
-      </div>
-    </nav>
-
-    <main>
+<main>
       <section class="hero" id="top" aria-labelledby="hero-title">
         <div class="hero-inner">
           <img class="hero-logo" data-config-src="logo" alt="Логотип METIZ PROJECT">
@@ -878,7 +739,6 @@
         });
       }
 
-      const menuToggle = document.getElementById("menuToggle");
       const navLinks = document.getElementById("navLinks");
 
       function closeMenu() {
