@@ -2,40 +2,19 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-
+    <title>Изготовление наклеек и печать на холсте | Metiz Project</title>
+    <meta name="description" content="Изготовление наклеек на заказ и печать изображений на холсте. Печатаем и режем под ваши задачи. Санкт-Петербург.">
     <meta name="theme-color" content="#080b0d">
+    <meta name="color-scheme" content="dark">
 
-    <meta name="description"
-          content="Изготовление наклеек на заказ и печать изображений на холсте. Печатаем и режем под ваши задачи.">
-
-    <meta name="keywords"
-          content="наклейки, изготовление наклеек, печать наклеек, печать на холсте, Санкт-Петербург">
-
-    <meta name="robots" content="index, follow">
-
-    <title>Изготовление наклеек и печать на холсте</title>
-
-    <!-- =========================================================
-         FAVICON
-         ========================================================= -->
     <link rel="icon" type="image/png" href="metiz-project-logo.png">
 
-    <!-- =========================================================
-         ШРИФТЫ
-         ========================================================= -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap"
-          rel="stylesheet">
-
     <style>
-
         /* =========================================================
-           ОСНОВНЫЕ ПЕРЕМЕННЫЕ
+           PREMIUM TIFFANY WEBSITE
+           Metiz Project
            ========================================================= */
 
         :root {
@@ -43,46 +22,31 @@
             --tiffany-rgb: 76, 213, 211;
 
             --bg: #07090b;
-            --bg-soft: #0b0f12;
-            --bg-card: rgba(18, 23, 26, 0.72);
+            --bg-soft: #0b0f11;
+            --bg-card: rgba(17, 22, 24, 0.72);
+            --bg-card-hover: rgba(21, 28, 30, 0.9);
 
-            --white: #f5f7f7;
-            --white-soft: #c9d0d0;
-            --muted: #7f898b;
+            --white: #f4f7f7;
+            --white-soft: #c8d0d0;
+            --muted: #879394;
 
-            --border: rgba(255,255,255,0.09);
-            --border-tiffany: rgba(76,213,211,0.28);
+            --border: rgba(255,255,255,0.085);
+            --border-tiffany: rgba(var(--tiffany-rgb),0.28);
 
-            --yellow: #ffd21f;
-            --yellow-dark: #f0b900;
+            --shadow: 0 25px 80px rgba(0,0,0,.45);
+            --shadow-tiffany: 0 15px 60px rgba(var(--tiffany-rgb),.12);
 
-            --radius-xl: 32px;
-            --radius-lg: 24px;
-            --radius-md: 18px;
+            --radius: 24px;
+            --radius-small: 15px;
 
-            --shadow:
-                0 30px 80px rgba(0,0,0,0.45);
-
-            --shadow-tiffany:
-                0 20px 70px rgba(76,213,211,0.16);
-
-            --max-width: 1240px;
-
-            --header-height: 82px;
-
-            --ease:
-                cubic-bezier(.22, .61, .36, 1);
+            --container: 1240px;
+            --nav-height: 78px;
         }
 
-
-        /* =========================================================
-           RESET
-           ========================================================= */
-
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
 
         html {
@@ -91,21 +55,22 @@
         }
 
         body {
-            min-height: 100vh;
-            overflow-x: hidden;
-
+            min-width: 320px;
             background:
-                radial-gradient(
-                    circle at 50% -20%,
-                    rgba(76,213,211,0.08),
-                    transparent 38%
-                ),
+                radial-gradient(circle at 50% -10%, rgba(var(--tiffany-rgb), .07), transparent 35%),
                 var(--bg);
-
             color: var(--white);
-
-            font-family: "Inter", Arial, sans-serif;
-
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                Helvetica,
+                Arial,
+                sans-serif;
+            overflow-x: hidden;
+            line-height: 1.5;
             -webkit-font-smoothing: antialiased;
             text-rendering: optimizeLegibility;
         }
@@ -119,11 +84,6 @@
             text-decoration: none;
         }
 
-        button,
-        a {
-            -webkit-tap-highlight-color: transparent;
-        }
-
         button {
             font: inherit;
         }
@@ -135,389 +95,334 @@
 
         ::selection {
             background: var(--tiffany);
-            color: #071011;
+            color: #061011;
         }
-
 
         /* =========================================================
            BACKGROUND
            ========================================================= */
 
-        .background {
+        .background-glow {
             position: fixed;
             inset: 0;
-
-            z-index: -10;
-
             pointer-events: none;
-
+            z-index: -3;
             overflow: hidden;
         }
 
-        .background-glow {
+        .background-glow::before,
+        .background-glow::after {
+            content: "";
             position: absolute;
-
-            width: 700px;
-            height: 700px;
-
+            width: 600px;
+            height: 600px;
             border-radius: 50%;
-
-            background:
-                radial-gradient(
-                    circle,
-                    rgba(76,213,211,0.055),
-                    transparent 68%
-                );
-
-            filter: blur(15px);
-
-            transform: translate(-50%, -50%);
-
-            transition:
-                transform 1.5s var(--ease);
+            filter: blur(120px);
+            opacity: .08;
         }
 
-        .particles {
-            position: absolute;
-            inset: 0;
-        }
-
-        .particle {
-            position: absolute;
-
-            width: var(--size);
-            height: var(--size);
-
-            left: var(--x);
-            top: var(--y);
-
-            border-radius: 50%;
-
+        .background-glow::before {
+            top: -300px;
+            left: 50%;
+            transform: translateX(-50%);
             background: var(--tiffany);
-
-            opacity: var(--opacity);
-
-            box-shadow:
-                0 0 14px rgba(76,213,211,0.35),
-                0 0 30px rgba(76,213,211,0.14);
-
-            animation:
-                particleFloat var(--duration) ease-in-out infinite alternate;
-
-            animation-delay: var(--delay);
         }
 
-        @keyframes particleFloat {
-
-            0% {
-                transform:
-                    translate3d(
-                        0,
-                        0,
-                        0
-                    )
-                    scale(1);
-            }
-
-            100% {
-                transform:
-                    translate3d(
-                        var(--move-x),
-                        var(--move-y),
-                        0
-                    )
-                    scale(1.2);
-            }
+        .background-glow::after {
+            right: -400px;
+            top: 35%;
+            background: var(--tiffany);
+            opacity: .035;
         }
 
-
-        /* =========================================================
-           CONTAINER
-           ========================================================= */
-
-        .container {
-            width: min(
-                calc(100% - 40px),
-                var(--max-width)
-            );
-
-            margin-inline: auto;
-        }
-
-
-        /* =========================================================
-           HEADER
-           ========================================================= */
-
-        .header {
+        #particles {
             position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -2;
+        }
 
+        /* =========================================================
+           NAVIGATION
+           ========================================================= */
+
+        .site-nav {
+            position: fixed;
             top: 0;
             left: 0;
             right: 0;
-
-            height: var(--header-height);
-
-            z-index: 100;
-
-            background:
-                linear-gradient(
-                    to bottom,
-                    rgba(7,9,11,0.88),
-                    rgba(7,9,11,0.55)
-                );
-
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
-
-            border-bottom:
-                1px solid rgba(255,255,255,0.045);
-
+            height: var(--nav-height);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
             transition:
-                background .4s ease,
-                border-color .4s ease;
+                background .45s ease,
+                border-color .45s ease,
+                box-shadow .45s ease,
+                backdrop-filter .45s ease;
+            border-bottom: 1px solid transparent;
         }
 
-        .header.scrolled {
-            background:
-                rgba(7,9,11,0.88);
-
-            border-bottom-color:
-                rgba(76,213,211,0.12);
+        .site-nav.scrolled {
+            background: rgba(7, 9, 11, .76);
+            backdrop-filter: blur(22px);
+            -webkit-backdrop-filter: blur(22px);
+            border-color: var(--border);
+            box-shadow: 0 10px 50px rgba(0,0,0,.18);
         }
 
-        .header-inner {
-            height: 100%;
-
+        .nav-inner {
+            width: min(var(--container), calc(100% - 40px));
+            margin: 0 auto;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 30px;
         }
 
-        .header-brand {
+        .nav-brand {
             display: flex;
             align-items: center;
-            gap: 11px;
-
-            font-family: "Manrope", sans-serif;
-
-            font-size: 13px;
-            font-weight: 700;
-
-            letter-spacing: .13em;
-            text-transform: uppercase;
+            min-width: 42px;
         }
 
-        .header-brand-dot {
-            width: 8px;
-            height: 8px;
-
-            border-radius: 50%;
-
-            background: var(--tiffany);
-
-            box-shadow:
-                0 0 14px rgba(76,213,211,.8);
+        .nav-brand img {
+            width: 42px;
+            height: 42px;
+            object-fit: contain;
+            transition: transform .35s ease, filter .35s ease;
         }
 
-        .nav {
+        .nav-brand:hover img {
+            transform: scale(1.07);
+            filter: drop-shadow(0 0 14px rgba(var(--tiffany-rgb), .45));
+        }
+
+        .nav-links {
             display: flex;
             align-items: center;
-            gap: 8px;
+            justify-content: center;
+            gap: 7px;
         }
 
-        .nav a {
+        .nav-link {
             position: relative;
-
-            padding: 11px 15px;
-
+            padding: 10px 15px;
             border-radius: 12px;
-
-            color: var(--white-soft);
-
+            color: var(--muted);
             font-size: 13px;
             font-weight: 600;
-
+            letter-spacing: .04em;
+            text-transform: uppercase;
             transition:
                 color .3s ease,
                 background .3s ease;
         }
 
-        .nav a::after {
+        .nav-link::after {
             content: "";
-
             position: absolute;
-
             left: 15px;
             right: 15px;
-            bottom: 6px;
-
+            bottom: 5px;
             height: 1px;
-
             background: var(--tiffany);
-
-            transform:
-                scaleX(0);
-
+            transform: scaleX(0);
             transform-origin: center;
-
-            transition:
-                transform .35s var(--ease);
+            transition: transform .3s ease;
         }
 
-        .nav a:hover {
+        .nav-link:hover {
             color: var(--white);
-
-            background:
-                rgba(255,255,255,.035);
+            background: rgba(255,255,255,.035);
         }
 
-        .nav a:hover::after {
-            transform:
-                scaleX(1);
+        .nav-link:hover::after {
+            transform: scaleX(1);
         }
 
+        .nav-contact {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 11px 18px;
+            border: 1px solid var(--border-tiffany);
+            border-radius: 12px;
+            color: var(--tiffany);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            transition:
+                background .3s ease,
+                color .3s ease,
+                box-shadow .3s ease,
+                transform .3s ease;
+        }
 
-        /* =========================================================
-           MOBILE MENU BUTTON
-           ========================================================= */
+        .nav-contact:hover {
+            background: var(--tiffany);
+            color: #061011;
+            box-shadow: 0 0 30px rgba(var(--tiffany-rgb), .22);
+            transform: translateY(-1px);
+        }
 
         .menu-toggle {
-            display: none;
-
             width: 46px;
             height: 46px;
-
-            border:
-                1px solid var(--border);
-
-            border-radius: 14px;
-
-            background:
-                rgba(255,255,255,.035);
-
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 5px;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            color: var(--white);
             cursor: pointer;
-
-            position: relative;
         }
 
         .menu-toggle span {
-            position: absolute;
-
-            width: 20px;
+            width: 19px;
             height: 1.5px;
-
-            left: 50%;
-
-            background: var(--white);
-
-            transform:
-                translateX(-50%);
-
-            transition:
-                transform .35s ease,
-                top .35s ease,
-                opacity .25s ease;
+            background: currentColor;
+            transition: transform .3s ease, opacity .3s ease;
         }
 
-        .menu-toggle span:nth-child(1) {
-            top: 17px;
+        .menu-toggle.active span:first-child {
+            transform: translateY(3.25px) rotate(45deg);
         }
 
-        .menu-toggle span:nth-child(2) {
-            top: 23px;
+        .menu-toggle.active span:last-child {
+            transform: translateY(-3.25px) rotate(-45deg);
         }
 
-        .menu-toggle span:nth-child(3) {
-            top: 29px;
-        }
-
-        .menu-toggle.active span:nth-child(1) {
-            top: 23px;
-
-            transform:
-                translateX(-50%)
-                rotate(45deg);
-        }
-
-        .menu-toggle.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .menu-toggle.active span:nth-child(3) {
-            top: 23px;
-
-            transform:
-                translateX(-50%)
-                rotate(-45deg);
-        }
-
-
-        /* =========================================================
-           MOBILE NAV
-           ========================================================= */
-
-        .mobile-nav {
+        .mobile-menu {
             position: fixed;
-
-            inset: var(--header-height) 0 0;
-
-            z-index: 99;
-
-            display: flex;
-            flex-direction: column;
-
-            padding: 30px 20px;
-
-            background:
-                rgba(7,9,11,.97);
-
+            inset: var(--nav-height) 0 0;
+            z-index: 999;
+            background: rgba(7,9,11,.96);
             backdrop-filter: blur(25px);
-
-            transform:
-                translateY(-15px);
-
+            -webkit-backdrop-filter: blur(25px);
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 45px 24px;
             opacity: 0;
             visibility: hidden;
-
+            pointer-events: none;
+            transform: translateY(-10px);
             transition:
                 opacity .35s ease,
-                transform .45s var(--ease),
-                visibility .35s ease;
+                visibility .35s ease,
+                transform .35s ease;
         }
 
-        .mobile-nav.active {
+        .mobile-menu.active {
             opacity: 1;
             visibility: visible;
-
-            transform:
-                translateY(0);
+            pointer-events: auto;
+            transform: translateY(0);
         }
 
-        .mobile-nav a {
-            padding: 20px 10px;
+        .mobile-menu-links {
+            width: min(450px, 100%);
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
 
-            border-bottom:
-                1px solid rgba(255,255,255,.07);
-
-            color: var(--white);
-
-            font-family: "Manrope", sans-serif;
-
-            font-size: 22px;
+        .mobile-menu-link {
+            padding: 20px;
+            border: 1px solid var(--border);
+            border-radius: 17px;
+            color: var(--white-soft);
+            text-align: center;
+            font-size: 15px;
             font-weight: 700;
-
-            transition:
-                color .3s ease,
-                padding-left .3s ease;
+            letter-spacing: .05em;
+            text-transform: uppercase;
+            transition: .3s ease;
         }
 
-        .mobile-nav a:hover {
+        .mobile-menu-link:hover {
             color: var(--tiffany);
-
-            padding-left: 18px;
+            border-color: var(--border-tiffany);
+            background: rgba(var(--tiffany-rgb), .045);
         }
 
+        /* =========================================================
+           COMMON
+           ========================================================= */
+
+        .container {
+            width: min(var(--container), calc(100% - 48px));
+            margin: 0 auto;
+        }
+
+        section {
+            position: relative;
+            scroll-margin-top: 100px;
+        }
+
+        .section {
+            padding: 130px 0;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--tiffany);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 28px;
+            height: 1px;
+            background: var(--tiffany);
+            box-shadow: 0 0 12px rgba(var(--tiffany-rgb), .45);
+        }
+
+        .section-title {
+            max-width: 850px;
+            font-size: clamp(38px, 5vw, 68px);
+            line-height: .98;
+            letter-spacing: -.045em;
+            font-weight: 750;
+        }
+
+        .section-title span {
+            color: var(--tiffany);
+        }
+
+        .section-description {
+            max-width: 730px;
+            margin-top: 25px;
+            color: var(--muted);
+            font-size: 17px;
+            line-height: 1.75;
+        }
+
+        .glass-card {
+            background: linear-gradient(
+                145deg,
+                rgba(255,255,255,.045),
+                rgba(255,255,255,.015)
+            );
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
 
         /* =========================================================
            HERO
@@ -525,1322 +430,1006 @@
 
         .hero {
             min-height: 100svh;
-
-            position: relative;
-
+            padding: calc(var(--nav-height) + 45px) 0 70px;
             display: flex;
             align-items: center;
-            justify-content: center;
-
-            padding:
-                calc(var(--header-height) + 60px)
-                0
-                70px;
-
             text-align: center;
         }
 
-        .hero-content {
+        .hero-inner {
             width: 100%;
-            max-width: 1000px;
-
-            margin-inline: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .logo-wrap {
+        .hero-logo-wrap {
             position: relative;
-
             width: min(430px, 72vw);
-
-            margin:
-                0 auto 20px;
+            margin-bottom: 22px;
+            animation: heroLogoIn 1.2s cubic-bezier(.16,1,.3,1) both;
         }
 
-        .logo-wrap::before {
+        .hero-logo-wrap::before {
             content: "";
-
             position: absolute;
-
-            width: 65%;
-            height: 65%;
-
-            top: 50%;
-            left: 50%;
-
-            transform:
-                translate(-50%, -50%);
-
-            background:
-                rgba(76,213,211,.10);
-
-            filter: blur(50px);
-
+            inset: 25% -20%;
+            background: var(--tiffany);
+            opacity: .10;
+            filter: blur(75px);
             border-radius: 50%;
-
             z-index: -1;
-
-            animation:
-                logoGlow 4s ease-in-out infinite alternate;
+            animation: logoGlow 4s ease-in-out infinite;
         }
 
-        @keyframes logoGlow {
-
-            from {
-                opacity: .4;
-                transform:
-                    translate(-50%, -50%)
-                    scale(.9);
-            }
-
-            to {
-                opacity: .85;
-                transform:
-                    translate(-50%, -50%)
-                    scale(1.12);
-            }
-        }
-
-        .main-logo {
+        .hero-logo {
             width: 100%;
             height: auto;
-
             object-fit: contain;
-
             filter:
-                drop-shadow(
-                    0 0 22px rgba(76,213,211,.15)
-                );
-
-            animation:
-                logoReveal 1.2s var(--ease) both;
+                drop-shadow(0 0 12px rgba(var(--tiffany-rgb), .15));
+            animation: logoFloat 5s ease-in-out infinite;
         }
 
-        @keyframes logoReveal {
-
-            from {
-                opacity: 0;
-                transform:
-                    translateY(18px)
-                    scale(.96);
-            }
-
-            to {
-                opacity: 1;
-                transform:
-                    translateY(0)
-                    scale(1);
-            }
-        }
-
-        .city {
+        .hero-location {
+            position: relative;
             display: inline-block;
-
-            margin-bottom: 27px;
-
-            font-family: "Manrope", sans-serif;
-
-            font-size: 14px;
+            margin-bottom: 26px;
+            font-size: 13px;
             font-weight: 700;
-
-            letter-spacing: .22em;
+            letter-spacing: .2em;
             text-transform: uppercase;
-
-            color: #fff;
-
-            animation:
-                fadeUp .9s .15s var(--ease) both;
+            color: var(--white);
+            animation: fadeUp .9s .18s cubic-bezier(.16,1,.3,1) both;
         }
 
-        .city span {
-            background:
-                linear-gradient(
-                    90deg,
-                    #fff 0%,
-                    var(--tiffany) 40%,
-                    #fff 70%,
-                    var(--tiffany) 100%
-                );
-
-            background-size: 220% auto;
-
+        .hero-location span {
+            background: linear-gradient(
+                90deg,
+                #fff 0%,
+                #fff 35%,
+                var(--tiffany) 50%,
+                #fff 65%,
+                #fff 100%
+            );
+            background-size: 250% 100%;
             -webkit-background-clip: text;
             background-clip: text;
-
             color: transparent;
-
-            animation:
-                shimmer 5s linear infinite;
-        }
-
-        @keyframes shimmer {
-            to {
-                background-position:
-                    220% center;
-            }
+            animation: textShimmer 4s linear infinite;
         }
 
         .hero-title {
-            max-width: 900px;
-
-            margin:
-                0 auto 20px;
-
-            font-family: "Manrope", sans-serif;
-
-            font-size:
-                clamp(
-                    32px,
-                    5vw,
-                    70px
-                );
-
-            line-height: 1.02;
-
-            letter-spacing:
-                -.045em;
-
+            max-width: 1020px;
+            font-size: clamp(38px, 6.7vw, 88px);
+            line-height: .94;
+            letter-spacing: -.055em;
             font-weight: 800;
-
-            animation:
-                fadeUp 1s .25s var(--ease) both;
+            animation: fadeUp .9s .28s cubic-bezier(.16,1,.3,1) both;
         }
 
         .hero-title .accent {
             color: var(--tiffany);
-
-            text-shadow:
-                0 0 40px rgba(76,213,211,.18);
+            text-shadow: 0 0 35px rgba(var(--tiffany-rgb), .12);
         }
 
         .hero-subtitle {
-            max-width: 600px;
-
-            margin:
-                0 auto 45px;
-
+            max-width: 650px;
+            margin-top: 24px;
             color: var(--muted);
-
-            font-size:
-                clamp(14px, 1.5vw, 17px);
-
+            font-size: 16px;
             line-height: 1.7;
-
-            animation:
-                fadeUp 1s .35s var(--ease) both;
+            animation: fadeUp .9s .4s cubic-bezier(.16,1,.3,1) both;
         }
 
-        @keyframes fadeUp {
-
-            from {
-                opacity: 0;
-
-                transform:
-                    translateY(22px);
-            }
-
-            to {
-                opacity: 1;
-
-                transform:
-                    translateY(0);
-            }
-        }
-
-
-        /* =========================================================
-           MAIN SERVICE BUTTONS
-           ========================================================= */
-
-        .service-buttons {
-            width: 100%;
-
+        .hero-services {
+            width: min(920px, 100%);
             display: grid;
-
-            grid-template-columns:
-                repeat(2, minmax(0, 1fr));
-
+            grid-template-columns: repeat(2, minmax(0,1fr));
             gap: 18px;
-
-            animation:
-                fadeUp 1s .45s var(--ease) both;
+            margin-top: 46px;
+            animation: fadeUp 1s .52s cubic-bezier(.16,1,.3,1) both;
         }
 
         .service-button {
             position: relative;
-
-            min-height: 110px;
-
+            min-height: 170px;
             display: flex;
             align-items: center;
             justify-content: center;
-
-            padding: 24px;
-
             overflow: hidden;
-
-            border:
-                1px solid
-                rgba(76,213,211,.30);
-
-            border-radius:
-                var(--radius-lg);
-
+            padding: 30px;
+            border: 1px solid rgba(var(--tiffany-rgb), .35);
+            border-radius: 25px;
             background:
                 linear-gradient(
-                    135deg,
-                    rgba(76,213,211,.13),
-                    rgba(76,213,211,.035)
+                    145deg,
+                    rgba(var(--tiffany-rgb), .14),
+                    rgba(var(--tiffany-rgb), .045)
                 );
-
             color: var(--white);
-
-            font-family: "Manrope", sans-serif;
-
-            font-size:
-                clamp(13px, 1.4vw, 17px);
-
-            font-weight: 800;
-
-            letter-spacing: .05em;
-
-            text-align: center;
-
             cursor: pointer;
-
+            text-align: center;
+            font-size: clamp(16px, 2vw, 21px);
+            font-weight: 800;
+            letter-spacing: .035em;
             box-shadow:
-                0 15px 50px rgba(0,0,0,.25);
-
+                0 18px 55px rgba(0,0,0,.25),
+                inset 0 1px 0 rgba(255,255,255,.06);
             transition:
-                transform .45s var(--ease),
-                border-color .4s ease,
-                background .4s ease,
+                transform .45s cubic-bezier(.16,1,.3,1),
+                border-color .35s ease,
+                background .35s ease,
                 box-shadow .45s ease;
         }
 
         .service-button::before {
             content: "";
-
             position: absolute;
-
-            inset: 0;
-
-            background:
-                linear-gradient(
-                    120deg,
-                    transparent 25%,
-                    rgba(255,255,255,.13) 50%,
-                    transparent 75%
-                );
-
-            transform:
-                translateX(-120%);
-
-            transition:
-                transform .8s var(--ease);
+            inset: -100%;
+            background: linear-gradient(
+                110deg,
+                transparent 35%,
+                rgba(255,255,255,.14) 50%,
+                transparent 65%
+            );
+            transform: translateX(-50%) rotate(12deg);
+            transition: transform .9s ease;
         }
 
         .service-button::after {
             content: "";
-
             position: absolute;
-
-            width: 150px;
-            height: 150px;
-
+            width: 180px;
+            height: 180px;
+            right: -90px;
+            bottom: -100px;
             border-radius: 50%;
-
-            background:
-                rgba(76,213,211,.14);
-
-            filter: blur(35px);
-
-            right: -70px;
-            bottom: -80px;
-
-            transition:
-                transform .5s var(--ease);
+            background: var(--tiffany);
+            filter: blur(65px);
+            opacity: .11;
+            transition: opacity .4s ease, transform .4s ease;
         }
 
         .service-button:hover {
-            transform:
-                translateY(-7px)
-                scale(1.015);
-
-            border-color:
-                rgba(76,213,211,.75);
-
+            transform: translateY(-8px) scale(1.015);
+            border-color: rgba(var(--tiffany-rgb), .72);
             background:
                 linear-gradient(
-                    135deg,
-                    rgba(76,213,211,.22),
-                    rgba(76,213,211,.065)
+                    145deg,
+                    rgba(var(--tiffany-rgb), .19),
+                    rgba(var(--tiffany-rgb), .07)
                 );
-
             box-shadow:
-                var(--shadow-tiffany);
+                0 28px 80px rgba(0,0,0,.36),
+                0 0 55px rgba(var(--tiffany-rgb), .10),
+                inset 0 1px 0 rgba(255,255,255,.08);
         }
 
         .service-button:hover::before {
-            transform:
-                translateX(120%);
+            transform: translateX(70%) rotate(12deg);
         }
 
         .service-button:hover::after {
-            transform:
-                scale(1.5);
+            opacity: .25;
+            transform: scale(1.3);
         }
 
         .service-button:active {
-            transform:
-                translateY(-2px)
-                scale(.985);
+            transform: translateY(-2px) scale(.99);
         }
 
-
-        /* =========================================================
-           SECTION
-           ========================================================= */
-
-        section {
-            position: relative;
-
-            scroll-margin-top:
-                calc(var(--header-height) + 30px);
-        }
-
-        .section {
-            padding:
-                120px 0;
-        }
-
-        .section-label {
-            display: inline-flex;
+        .scroll-indicator {
+            margin-top: 55px;
+            display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 10px;
-
-            margin-bottom: 22px;
-
-            color: var(--tiffany);
-
-            font-family: "Manrope", sans-serif;
-
-            font-size: 12px;
-            font-weight: 800;
-
+            gap: 9px;
+            color: var(--muted);
+            font-size: 9px;
             letter-spacing: .2em;
             text-transform: uppercase;
+            animation: fadeUp 1s .7s both;
         }
 
-        .section-label::before {
+        .scroll-line {
+            width: 1px;
+            height: 44px;
+            overflow: hidden;
+            background: rgba(255,255,255,.12);
+            position: relative;
+        }
+
+        .scroll-line::after {
             content: "";
-
-            width: 28px;
-            height: 1px;
-
+            position: absolute;
+            left: 0;
+            top: -100%;
+            width: 100%;
+            height: 55%;
             background: var(--tiffany);
-
-            box-shadow:
-                0 0 10px rgba(76,213,211,.6);
+            animation: scrollLine 2s ease-in-out infinite;
         }
-
-        .section-title {
-            max-width: 850px;
-
-            margin-bottom: 22px;
-
-            font-family: "Manrope", sans-serif;
-
-            font-size:
-                clamp(
-                    32px,
-                    5vw,
-                    58px
-                );
-
-            line-height: 1.03;
-
-            letter-spacing:
-                -.045em;
-
-            font-weight: 800;
-        }
-
-        .section-description {
-            max-width: 780px;
-
-            color: var(--white-soft);
-
-            font-size:
-                clamp(15px, 1.5vw, 18px);
-
-            line-height: 1.85;
-        }
-
-        .section-description p + p {
-            margin-top: 14px;
-        }
-
 
         /* =========================================================
-           SERVICE SECTION CARD
+           SERVICE SECTIONS
            ========================================================= */
 
         .service-section {
-            padding-top: 70px;
+            padding: 135px 0;
         }
 
         .service-header {
             display: grid;
-
-            grid-template-columns:
-                1fr .75fr;
-
-            gap: 60px;
-
+            grid-template-columns: minmax(0, .95fr) minmax(0, .8fr);
+            gap: 70px;
             align-items: end;
-
-            margin-bottom: 60px;
+            margin-bottom: 65px;
         }
 
-        .service-intro {
-            padding-bottom: 4px;
+        .service-number {
+            color: rgba(var(--tiffany-rgb), .4);
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: .18em;
+            margin-bottom: 18px;
         }
 
-        .service-badge {
-            justify-self: end;
+        .service-content {
+            display: grid;
+            grid-template-columns: minmax(0, 1.4fr) minmax(280px, .6fr);
+            gap: 22px;
+            align-items: stretch;
+        }
 
-            width: 180px;
-            height: 180px;
+        .description-card {
+            padding: 45px;
+            min-height: 100%;
+        }
 
+        .description-card h3 {
+            font-size: 22px;
+            letter-spacing: -.02em;
+            margin-bottom: 20px;
+        }
+
+        .editable-text {
+            color: var(--white-soft);
+            font-size: 16px;
+            line-height: 1.85;
+            white-space: pre-line;
+        }
+
+        .editable-text strong {
+            color: var(--tiffany);
+            font-weight: 700;
+        }
+
+        .side-feature {
+            position: relative;
+            overflow: hidden;
+            min-height: 300px;
+            padding: 35px;
             display: flex;
-            align-items: center;
-            justify-content: center;
-
-            border:
-                1px solid
-                var(--border-tiffany);
-
-            border-radius: 50%;
-
+            flex-direction: column;
+            justify-content: flex-end;
             background:
                 radial-gradient(
-                    circle,
-                    rgba(76,213,211,.11),
-                    transparent 65%
-                );
-
-            box-shadow:
-                inset 0 0 50px rgba(76,213,211,.035);
-
-            color: var(--tiffany);
-
-            font-family: "Manrope", sans-serif;
-
-            font-size: 12px;
-            font-weight: 800;
-
-            letter-spacing: .15em;
-            text-align: center;
-
-            text-transform: uppercase;
-
-            animation:
-                slowRotate 15s linear infinite;
+                    circle at 80% 20%,
+                    rgba(var(--tiffany-rgb), .16),
+                    transparent 45%
+                ),
+                linear-gradient(145deg, #101719, #0a0d0f);
         }
 
-        @keyframes slowRotate {
-            from {
-                transform: rotate(0deg);
-            }
-
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-
-        /* =========================================================
-           PROCESS
-           ========================================================= */
-
-        .process {
-            display: grid;
-
-            grid-template-columns:
-                repeat(5, minmax(0, 1fr));
-
-            gap: 12px;
-
-            margin-top: 60px;
-        }
-
-        .process-card {
-            min-height: 210px;
-
-            position: relative;
-
-            padding: 28px 22px;
-
-            border:
-                1px solid var(--border);
-
-            border-radius:
-                var(--radius-md);
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(255,255,255,.045),
-                    rgba(255,255,255,.018)
-                );
-
-            overflow: hidden;
-
-            transition:
-                transform .45s var(--ease),
-                border-color .4s ease,
-                background .4s ease;
-        }
-
-        .process-card::after {
+        .side-feature::before {
             content: "";
-
             position: absolute;
-
-            left: 0;
-            bottom: 0;
-
-            width: 0;
-            height: 2px;
-
-            background:
-                var(--tiffany);
-
+            width: 180px;
+            height: 180px;
+            top: -80px;
+            right: -60px;
+            border: 1px solid rgba(var(--tiffany-rgb), .2);
+            border-radius: 50%;
             box-shadow:
-                0 0 16px rgba(76,213,211,.6);
-
-            transition:
-                width .5s var(--ease);
+                0 0 0 35px rgba(var(--tiffany-rgb), .025),
+                0 0 0 70px rgba(var(--tiffany-rgb), .015);
         }
 
-        .process-card:hover {
-            transform:
-                translateY(-8px);
-
-            border-color:
-                rgba(76,213,211,.3);
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(76,213,211,.07),
-                    rgba(255,255,255,.018)
-                );
-        }
-
-        .process-card:hover::after {
-            width: 100%;
-        }
-
-        .process-number {
-            margin-bottom: 50px;
-
+        .side-feature-icon {
+            position: absolute;
+            top: 32px;
+            left: 35px;
+            width: 58px;
+            height: 58px;
+            display: grid;
+            place-items: center;
+            border-radius: 17px;
             color: var(--tiffany);
-
-            font-family: "Manrope", sans-serif;
-
-            font-size: 12px;
-            font-weight: 800;
-
-            letter-spacing: .13em;
+            background: rgba(var(--tiffany-rgb), .07);
+            border: 1px solid rgba(var(--tiffany-rgb), .2);
         }
 
-        .process-title {
-            color: var(--white);
-
-            font-family: "Manrope", sans-serif;
-
-            font-size: 15px;
-            font-weight: 700;
-
-            line-height: 1.4;
+        .side-feature-icon svg {
+            width: 28px;
+            height: 28px;
         }
 
+        .side-feature h4 {
+            position: relative;
+            font-size: 25px;
+            line-height: 1.1;
+            letter-spacing: -.03em;
+        }
+
+        .side-feature p {
+            position: relative;
+            margin-top: 10px;
+            color: var(--muted);
+            font-size: 13px;
+        }
 
         /* =========================================================
-           ORDER AREA
+           ORDER STEPS
            ========================================================= */
 
-        .order-area {
+        .steps-block {
+            margin-top: 75px;
+        }
+
+        .steps-title {
+            margin-bottom: 28px;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            color: var(--tiffany);
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0,1fr));
+            gap: 10px;
+        }
+
+        .step {
             position: relative;
+            min-height: 170px;
+            padding: 26px 22px;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            background: rgba(255,255,255,.018);
+            transition:
+                transform .4s cubic-bezier(.16,1,.3,1),
+                border-color .3s ease,
+                background .3s ease;
+        }
 
-            margin-top: 50px;
+        .step:hover {
+            transform: translateY(-6px);
+            border-color: var(--border-tiffany);
+            background: rgba(var(--tiffany-rgb), .035);
+        }
 
-            padding: 45px;
+        .step-number {
+            display: block;
+            margin-bottom: 35px;
+            color: var(--tiffany);
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: .1em;
+        }
 
-            border:
-                1px solid
-                var(--border-tiffany);
+        .step p {
+            color: var(--white-soft);
+            font-size: 14px;
+            line-height: 1.55;
+        }
 
-            border-radius:
-                var(--radius-xl);
+        /* =========================================================
+           CONTACT / ORDER CTA
+           ========================================================= */
 
+        .order-block {
+            margin-top: 45px;
+            padding: 48px;
+            border-radius: 28px;
+            border: 1px solid rgba(var(--tiffany-rgb), .22);
             background:
+                radial-gradient(
+                    circle at 85% 20%,
+                    rgba(var(--tiffany-rgb), .11),
+                    transparent 35%
+                ),
                 linear-gradient(
                     135deg,
-                    rgba(76,213,211,.09),
-                    rgba(255,255,255,.025)
+                    rgba(var(--tiffany-rgb), .055),
+                    rgba(255,255,255,.018)
                 );
-
-            overflow: hidden;
+            box-shadow: var(--shadow-tiffany);
         }
 
-        .order-area::before {
-            content: "";
-
-            position: absolute;
-
-            width: 320px;
-            height: 320px;
-
-            right: -150px;
-            top: -170px;
-
-            border-radius: 50%;
-
-            background:
-                rgba(76,213,211,.10);
-
-            filter: blur(50px);
+        .order-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+            margin-bottom: 30px;
         }
 
-        .order-area h3 {
-            position: relative;
-
-            margin-bottom: 28px;
-
-            font-family: "Manrope", sans-serif;
-
-            font-size:
-                clamp(24px, 3vw, 38px);
-
-            letter-spacing:
-                -.035em;
+        .order-heading h3 {
+            font-size: clamp(25px, 3vw, 38px);
+            letter-spacing: -.04em;
         }
 
+        .order-heading p {
+            color: var(--muted);
+            font-size: 13px;
+            max-width: 390px;
+        }
 
-        /* =========================================================
-           SOCIAL BUTTONS
-           ========================================================= */
-
-        .social-grid {
-            position: relative;
-
+        .social-buttons {
             display: grid;
-
-            grid-template-columns:
-                repeat(4, minmax(0, 1fr));
-
-            gap: 12px;
+            grid-template-columns: repeat(4, minmax(0,1fr));
+            gap: 10px;
         }
 
         .social-button {
             min-height: 58px;
-
             display: flex;
             align-items: center;
             justify-content: center;
-
             gap: 11px;
-
-            padding: 14px 18px;
-
-            border:
-                1px solid
-                rgba(255,255,255,.10);
-
-            border-radius: 15px;
-
-            background:
-                rgba(0,0,0,.20);
-
-            color: var(--white);
-
-            font-size: 13px;
+            padding: 15px 18px;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: rgba(0,0,0,.18);
+            color: var(--white-soft);
+            font-size: 12px;
             font-weight: 700;
-
+            letter-spacing: .02em;
             cursor: pointer;
-
             transition:
-                transform .35s var(--ease),
+                transform .3s ease,
+                color .3s ease,
                 border-color .3s ease,
                 background .3s ease,
-                color .3s ease;
+                box-shadow .3s ease;
+        }
+
+        .social-button svg {
+            width: 20px;
+            height: 20px;
+            flex: 0 0 auto;
         }
 
         .social-button:hover {
-            transform:
-                translateY(-4px);
-
-            border-color:
-                rgba(76,213,211,.5);
-
-            background:
-                rgba(76,213,211,.09);
-
+            transform: translateY(-3px);
             color: var(--tiffany);
+            border-color: var(--border-tiffany);
+            background: rgba(var(--tiffany-rgb), .05);
+            box-shadow: 0 12px 35px rgba(0,0,0,.2);
         }
 
-        .social-icon {
-            width: 21px;
-            height: 21px;
-
-            flex:
-                0 0 21px;
+        .social-button.disabled {
+            opacity: .38;
+            cursor: not-allowed;
         }
 
-
-        /* =========================================================
-           DIVIDER
-           ========================================================= */
-
-        .section-divider {
-            width: 100%;
-            height: 1px;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    transparent,
-                    rgba(76,213,211,.25),
-                    transparent
-                );
+        .social-button.disabled:hover {
+            transform: none;
+            color: var(--white-soft);
+            border-color: var(--border);
+            background: rgba(0,0,0,.18);
+            box-shadow: none;
         }
-
 
         /* =========================================================
            PICKUP
            ========================================================= */
 
         .pickup-section {
-            padding:
-                110px 0 90px;
+            padding: 125px 0 110px;
         }
 
         .pickup-card {
             position: relative;
-
-            padding:
-                clamp(35px, 6vw, 70px);
-
-            border:
-                1px solid
-                rgba(255,210,31,.18);
-
-            border-radius:
-                var(--radius-xl);
-
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(255,210,31,.07),
-                    rgba(255,255,255,.025)
-                );
-
             overflow: hidden;
+            padding: clamp(40px, 7vw, 80px);
+            text-align: center;
+            border: 1px solid rgba(255,193,7,.22);
+            border-radius: 32px;
+            background:
+                radial-gradient(
+                    circle at 50% 0%,
+                    rgba(255,193,7,.055),
+                    transparent 42%
+                ),
+                linear-gradient(145deg, rgba(255,255,255,.035), rgba(255,255,255,.012));
+            box-shadow: var(--shadow);
+        }
+
+        .pickup-card::before,
+        .pickup-card::after {
+            content: "";
+            position: absolute;
+            width: 230px;
+            height: 230px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,193,7,.08);
+            pointer-events: none;
         }
 
         .pickup-card::before {
-            content: "";
+            left: -145px;
+            top: -145px;
+        }
 
-            position: absolute;
-
-            width: 500px;
-            height: 500px;
-
-            right: -280px;
-            top: -250px;
-
-            border-radius: 50%;
-
-            background:
-                rgba(255,210,31,.08);
-
-            filter: blur(60px);
+        .pickup-card::after {
+            right: -145px;
+            bottom: -145px;
         }
 
         .pickup-label {
-            position: relative;
-
-            display: inline-block;
-
-            margin-bottom: 20px;
-
-            color: var(--yellow);
-
-            font-family: "Manrope", sans-serif;
-
-            font-size: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 13px;
+            border-radius: 100px;
+            border: 1px solid rgba(255,193,7,.18);
+            color: #ffd75b;
+            font-size: 10px;
             font-weight: 800;
-
-            letter-spacing: .18em;
-
+            letter-spacing: .17em;
             text-transform: uppercase;
+            margin-bottom: 20px;
         }
 
         .pickup-title {
-            position: relative;
-
-            margin-bottom: 10px;
-
-            font-family: "Manrope", sans-serif;
-
-            font-size:
-                clamp(32px, 5vw, 60px);
-
-            line-height: 1;
-
-            letter-spacing:
-                -.045em;
-
+            font-size: clamp(34px, 5vw, 66px);
+            line-height: .98;
+            letter-spacing: -.05em;
             font-weight: 800;
         }
 
-        .pickup-main {
-            position: relative;
-
-            margin-bottom: 25px;
-
-            font-family: "Manrope", sans-serif;
-
-            font-size:
-                clamp(20px, 2.5vw, 30px);
-
-            font-weight: 700;
+        .pickup-title span {
+            display: block;
+            margin-top: 8px;
+            color: #ffd75b;
         }
 
         .pickup-address {
-            position: relative;
-
-            max-width: 750px;
-
-            margin-bottom: 35px;
-
+            max-width: 700px;
+            margin: 25px auto 0;
             color: var(--white-soft);
-
             font-size: 16px;
-
             line-height: 1.75;
         }
 
         .route-button {
             position: relative;
-
+            margin-top: 35px;
             min-height: 66px;
-
             display: inline-flex;
             align-items: center;
             justify-content: center;
-
             gap: 13px;
-
-            padding:
-                0 30px;
-
+            padding: 0 29px;
             border: 0;
-
             border-radius: 16px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    var(--yellow),
-                    #ffb700
-                );
-
-            color: #151100;
-
-            font-family: "Manrope", sans-serif;
-
-            font-size: 14px;
-            font-weight: 800;
-
-            letter-spacing: .04em;
-
-            box-shadow:
-                0 18px 50px rgba(255,210,31,.13);
-
+            background: linear-gradient(135deg, #ffdc43, #ffb700);
+            color: #171000;
+            font-size: 13px;
+            font-weight: 900;
+            letter-spacing: .05em;
             cursor: pointer;
-
+            box-shadow:
+                0 14px 45px rgba(255,183,0,.18),
+                inset 0 1px 0 rgba(255,255,255,.45);
             transition:
-                transform .4s var(--ease),
-                box-shadow .4s ease,
-                filter .3s ease;
+                transform .35s cubic-bezier(.16,1,.3,1),
+                box-shadow .35s ease;
         }
 
         .route-button:hover {
-            transform:
-                translateY(-5px)
-                scale(1.02);
-
+            transform: translateY(-5px) scale(1.015);
             box-shadow:
-                0 25px 70px rgba(255,210,31,.22);
-
-            filter:
-                brightness(1.05);
+                0 22px 60px rgba(255,183,0,.26),
+                inset 0 1px 0 rgba(255,255,255,.55);
         }
 
         .route-button:active {
-            transform:
-                translateY(-1px)
-                scale(.98);
+            transform: translateY(-1px);
         }
 
-        .route-icon {
+        .route-button svg {
             width: 27px;
             height: 27px;
         }
-
 
         /* =========================================================
            FOOTER
            ========================================================= */
 
-        .footer {
-            padding:
-                55px 0 30px;
-
-            border-top:
-                1px solid
-                rgba(255,255,255,.06);
-
-            text-align: center;
+        footer {
+            position: relative;
+            padding: 55px 0 30px;
+            border-top: 1px solid var(--border);
+            background: rgba(0,0,0,.18);
         }
 
-        .footer-actions {
+        .footer-main {
             display: flex;
-
-            justify-content: center;
             align-items: center;
-
+            justify-content: center;
             flex-wrap: wrap;
-
-            gap: 12px;
-
-            margin-bottom: 32px;
+            gap: 10px;
         }
 
         .footer-button {
             min-height: 48px;
-
             display: inline-flex;
             align-items: center;
             justify-content: center;
-
             gap: 9px;
-
-            padding:
-                0 19px;
-
-            border:
-                1px solid
-                rgba(255,255,255,.10);
-
-            border-radius: 13px;
-
-            background:
-                rgba(255,255,255,.035);
-
+            padding: 0 17px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,.025);
             color: var(--white-soft);
-
-            font-size: 12px;
-            font-weight: 700;
-
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: .05em;
+            text-transform: uppercase;
             cursor: pointer;
-
-            transition:
-                transform .3s ease,
-                color .3s ease,
-                border-color .3s ease,
-                background .3s ease;
+            transition: .3s ease;
         }
 
         .footer-button:hover {
-            transform:
-                translateY(-3px);
-
-            color: var(--white);
-
-            border-color:
-                rgba(76,213,211,.35);
-
-            background:
-                rgba(76,213,211,.06);
+            transform: translateY(-2px);
+            color: var(--tiffany);
+            border-color: var(--border-tiffany);
+            background: rgba(var(--tiffany-rgb), .045);
         }
 
         .footer-button.share {
-            border-color:
-                rgba(54,190,82,.32);
-
-            background:
-                rgba(54,190,82,.09);
-
-            color:
-                #6ee984;
+            color: #78d98b;
+            border-color: rgba(120,217,139,.2);
         }
 
         .footer-button.share:hover {
-            border-color:
-                rgba(54,190,82,.65);
-
-            background:
-                rgba(54,190,82,.14);
+            color: #9df3ad;
+            border-color: rgba(120,217,139,.45);
+            background: rgba(120,217,139,.05);
         }
 
         .footer-company {
-            margin-bottom: 10px;
-
+            width: 100%;
+            margin-top: 32px;
+            text-align: center;
             color: var(--white);
-
-            font-family: "Manrope", sans-serif;
-
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 800;
-
             letter-spacing: .12em;
-
             text-transform: uppercase;
         }
 
         .copyright {
-            color: #5d6668;
-
-            font-size: 11px;
-
-            line-height: 1.6;
+            margin-top: 14px;
+            text-align: center;
+            color: #5f696a;
+            font-size: 10px;
+            letter-spacing: .05em;
         }
 
-
         /* =========================================================
-           REVEAL ANIMATION
+           REVEAL ANIMATIONS
            ========================================================= */
 
         .reveal {
             opacity: 0;
-
-            transform:
-                translateY(35px);
-
+            transform: translateY(30px);
             transition:
-                opacity .9s var(--ease),
-                transform .9s var(--ease);
+                opacity .8s cubic-bezier(.16,1,.3,1),
+                transform .8s cubic-bezier(.16,1,.3,1);
         }
 
         .reveal.visible {
             opacity: 1;
-
-            transform:
-                translateY(0);
+            transform: translateY(0);
         }
 
+        .reveal-delay-1 {
+            transition-delay: .08s;
+        }
+
+        .reveal-delay-2 {
+            transition-delay: .16s;
+        }
+
+        .reveal-delay-3 {
+            transition-delay: .24s;
+        }
+
+        /* =========================================================
+           KEYFRAMES
+           ========================================================= */
+
+        @keyframes heroLogoIn {
+            from {
+                opacity: 0;
+                transform: translateY(-25px) scale(.92);
+                filter: blur(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                filter: blur(0);
+            }
+        }
+
+        @keyframes logoFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-6px);
+            }
+        }
+
+        @keyframes logoGlow {
+            0%, 100% {
+                opacity: .07;
+                transform: scale(.95);
+            }
+            50% {
+                opacity: .13;
+                transform: scale(1.06);
+            }
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes textShimmer {
+            0% {
+                background-position: 200% 0;
+            }
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        @keyframes scrollLine {
+            0% {
+                top: -60%;
+            }
+            60%, 100% {
+                top: 110%;
+            }
+        }
 
         /* =========================================================
            RESPONSIVE
            ========================================================= */
 
         @media (max-width: 1050px) {
-
-            .nav {
-                display: none;
+            .nav-links {
+                gap: 0;
             }
 
-            .menu-toggle {
-                display: block;
+            .nav-link {
+                padding-left: 11px;
+                padding-right: 11px;
+                font-size: 11px;
             }
 
             .service-header {
                 grid-template-columns: 1fr;
-                gap: 30px;
+                gap: 25px;
             }
 
-            .service-badge {
-                justify-self: start;
-
-                width: 130px;
-                height: 130px;
+            .service-content {
+                grid-template-columns: 1fr;
             }
 
-            .process {
-                grid-template-columns:
-                    repeat(3, minmax(0, 1fr));
+            .steps {
+                grid-template-columns: repeat(3, minmax(0,1fr));
             }
 
-            .social-grid {
-                grid-template-columns:
-                    repeat(2, minmax(0, 1fr));
+            .social-buttons {
+                grid-template-columns: repeat(2, minmax(0,1fr));
             }
         }
 
-
-        @media (max-width: 700px) {
-
+        @media (max-width: 760px) {
             :root {
-                --header-height: 70px;
+                --nav-height: 68px;
             }
 
             .container {
-                width:
-                    min(
-                        calc(100% - 28px),
-                        var(--max-width)
-                    );
+                width: min(var(--container), calc(100% - 30px));
             }
 
-            .header-brand {
-                font-size: 11px;
+            .site-nav {
+                height: var(--nav-height);
+            }
+
+            .nav-inner {
+                width: calc(100% - 30px);
+            }
+
+            .nav-links,
+            .nav-contact {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
             }
 
             .hero {
-                padding:
-                    calc(var(--header-height) + 35px)
-                    0
-                    50px;
+                padding-top: calc(var(--nav-height) + 35px);
+                padding-bottom: 55px;
             }
 
-            .logo-wrap {
-                width: min(340px, 76vw);
+            .hero-logo-wrap {
+                width: min(340px, 78vw);
+                margin-bottom: 16px;
             }
 
-            .city {
-                font-size: 11px;
-
-                margin-bottom: 22px;
+            .hero-location {
+                margin-bottom: 20px;
+                font-size: 10px;
             }
 
             .hero-title {
-                font-size:
-                    clamp(
-                        28px,
-                        9vw,
-                        46px
-                    );
+                font-size: clamp(34px, 10.5vw, 55px);
             }
 
             .hero-subtitle {
-                margin-bottom: 30px;
-
-                font-size: 13px;
+                margin-top: 18px;
+                font-size: 14px;
             }
 
             /*
-             * ВАЖНО:
-             * На мобильном две основные кнопки остаются
-             * горизонтально, согласно финальному требованию.
-             */
-            .service-buttons {
-                grid-template-columns:
-                    repeat(2, minmax(0, 1fr));
-
+               ВАЖНО:
+               На мобильных две главные кнопки остаются горизонтальными.
+            */
+            .hero-services {
+                grid-template-columns: repeat(2, minmax(0,1fr));
                 gap: 9px;
+                margin-top: 32px;
             }
 
             .service-button {
-                min-height: 88px;
-
-                padding: 14px 8px;
-
-                border-radius: 15px;
-
-                font-size:
-                    clamp(10px, 2.7vw, 13px);
-
-                letter-spacing: .025em;
+                min-height: 125px;
+                padding: 18px 10px;
+                border-radius: 18px;
+                font-size: 11px;
+                letter-spacing: .015em;
             }
 
-            .section {
-                padding:
-                    75px 0;
+            .scroll-indicator {
+                margin-top: 38px;
             }
 
+            .section,
             .service-section {
-                padding-top: 50px;
+                padding: 85px 0;
             }
 
             .section-title {
-                font-size:
-                    clamp(30px, 10vw, 44px);
+                font-size: clamp(36px, 11vw, 52px);
             }
 
             .section-description {
                 font-size: 14px;
+                line-height: 1.7;
+            }
 
+            .service-header {
+                margin-bottom: 40px;
+            }
+
+            .description-card {
+                padding: 28px 23px;
+            }
+
+            .description-card h3 {
+                font-size: 19px;
+            }
+
+            .editable-text {
+                font-size: 14px;
                 line-height: 1.75;
             }
 
-            .process {
-                grid-template-columns:
-                    repeat(2, minmax(0, 1fr));
-
-                gap: 9px;
-
-                margin-top: 40px;
+            .side-feature {
+                min-height: 245px;
+                padding: 27px;
             }
 
-            .process-card {
-                min-height: 175px;
-
-                padding: 20px 16px;
+            .side-feature-icon {
+                top: 25px;
+                left: 27px;
             }
 
-            .process-number {
-                margin-bottom: 35px;
-
-                font-size: 10px;
+            .side-feature h4 {
+                font-size: 22px;
             }
 
-            .process-title {
-                font-size: 13px;
+            .steps-block {
+                margin-top: 55px;
             }
 
-            .order-area {
-                margin-top: 35px;
+            .steps {
+                grid-template-columns: repeat(2, minmax(0,1fr));
+                gap: 8px;
+            }
 
-                padding: 25px 18px;
+            .step {
+                min-height: 150px;
+                padding: 20px 17px;
+                border-radius: 15px;
+            }
 
+            .step-number {
+                margin-bottom: 27px;
+            }
+
+            .step p {
+                font-size: 12px;
+            }
+
+            .order-block {
+                padding: 28px 20px;
                 border-radius: 22px;
             }
 
-            .order-area h3 {
+            .order-heading {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+                margin-bottom: 22px;
+            }
+
+            .order-heading h3 {
                 font-size: 25px;
             }
 
-            .social-grid {
-                grid-template-columns:
-                    1fr;
+            .social-buttons {
+                grid-template-columns: repeat(2, minmax(0,1fr));
+                gap: 7px;
             }
 
             .social-button {
-                min-height: 55px;
+                min-height: 57px;
+                padding: 12px 7px;
+                gap: 7px;
+                font-size: 9px;
+            }
+
+            .social-button svg {
+                width: 17px;
+                height: 17px;
             }
 
             .pickup-section {
-                padding:
-                    70px 0 60px;
+                padding: 80px 0 75px;
             }
 
             .pickup-card {
-                padding: 30px 20px;
-
-                border-radius: 22px;
-            }
-
-            .pickup-title {
-                font-size:
-                    clamp(34px, 12vw, 50px);
-            }
-
-            .pickup-main {
-                font-size: 21px;
+                padding: 45px 20px;
+                border-radius: 24px;
             }
 
             .pickup-address {
@@ -1849,64 +1438,62 @@
 
             .route-button {
                 width: 100%;
+                max-width: 360px;
             }
 
-            .footer-actions {
-                flex-direction: column;
+            footer {
+                padding-top: 40px;
+            }
 
-                align-items: stretch;
+            .footer-main {
+                gap: 7px;
             }
 
             .footer-button {
-                width: 100%;
-            }
-
-            .footer {
-                padding-top: 40px;
-            }
-        }
-
-
-        @media (max-width: 380px) {
-
-            .container {
-                width:
-                    calc(100% - 22px);
-            }
-
-            .service-button {
-                min-height: 82px;
-
+                padding: 0 12px;
+                min-height: 45px;
                 font-size: 9px;
             }
 
-            .process-title {
+            .footer-company {
+                margin-top: 26px;
                 font-size: 12px;
             }
         }
 
+        @media (max-width: 390px) {
+            .hero-services {
+                gap: 7px;
+            }
 
-        /* =========================================================
-           REDUCE MOTION
-           ========================================================= */
+            .service-button {
+                min-height: 115px;
+                padding: 15px 7px;
+                font-size: 10px;
+            }
+
+            .social-button {
+                font-size: 8px;
+            }
+        }
 
         @media (prefers-reduced-motion: reduce) {
-
             *,
             *::before,
             *::after {
                 animation-duration: .01ms !important;
                 animation-iteration-count: 1 !important;
-
                 scroll-behavior: auto !important;
-
                 transition-duration: .01ms !important;
             }
-        }
 
+            .reveal {
+                opacity: 1;
+                transform: none;
+            }
+        }
     </style>
 </head>
-
 
 <body>
 
@@ -1914,108 +1501,76 @@
          BACKGROUND
          ========================================================= -->
 
-    <div class="background" aria-hidden="true">
-
-        <div class="background-glow" id="backgroundGlow"></div>
-
-        <div class="particles" id="particles"></div>
-
-    </div>
+    <div class="background-glow"></div>
+    <canvas id="particles" aria-hidden="true"></canvas>
 
 
     <!-- =========================================================
-         HEADER
+         NAVIGATION
          ========================================================= -->
 
-    <header class="header" id="header">
+    <header class="site-nav" id="siteNav">
+        <div class="nav-inner">
 
-        <div class="container header-inner">
-
-            <a href="#top"
-               class="header-brand"
-               aria-label="На главную">
-
-                <span class="header-brand-dot"></span>
-
-                <span id="headerBrand">
-                    БРЕНД
-                </span>
-
+            <a href="#top" class="nav-brand" aria-label="На главную">
+                <img src="metiz-project-logo.png" alt="Metiz Project">
             </a>
 
-
-            <nav class="nav"
-                 aria-label="Основная навигация">
-
-                <a href="#stickers">
-                    Наклейки
-                </a>
-
-                <a href="#canvas">
-                    Холсты
-                </a>
-
-                <a href="#order">
-                    Как заказать
-                </a>
-
-                <a href="#pickup">
-                    Самовывоз
-                </a>
-
-                <a href="#contacts">
-                    Контакты
-                </a>
-
+            <nav class="nav-links" aria-label="Основная навигация">
+                <a href="#stickers" class="nav-link">Наклейки</a>
+                <a href="#canvas" class="nav-link">Холсты</a>
+                <a href="#how-to-order" class="nav-link">Как заказать</a>
+                <a href="#pickup" class="nav-link">Самовывоз</a>
+                <a href="#contacts" class="nav-link">Контакты</a>
             </nav>
 
+            <a href="#contacts" class="nav-contact">
+                Связаться
+            </a>
 
-            <button class="menu-toggle"
-                    id="menuToggle"
-                    type="button"
-                    aria-label="Открыть меню"
-                    aria-expanded="false">
-
+            <button
+                class="menu-toggle"
+                id="menuToggle"
+                aria-label="Открыть меню"
+                aria-expanded="false"
+            >
                 <span></span>
                 <span></span>
-                <span></span>
-
             </button>
 
         </div>
-
     </header>
 
 
     <!-- =========================================================
-         MOBILE NAV
+         MOBILE MENU
          ========================================================= -->
 
-    <nav class="mobile-nav"
-         id="mobileNav"
-         aria-label="Мобильная навигация">
+    <div class="mobile-menu" id="mobileMenu">
+        <nav class="mobile-menu-links">
 
-        <a href="#stickers">
-            Наклейки
-        </a>
+            <a href="#stickers" class="mobile-menu-link">
+                Наклейки
+            </a>
 
-        <a href="#canvas">
-            Холсты
-        </a>
+            <a href="#canvas" class="mobile-menu-link">
+                Холсты
+            </a>
 
-        <a href="#order">
-            Как заказать
-        </a>
+            <a href="#how-to-order" class="mobile-menu-link">
+                Как заказать
+            </a>
 
-        <a href="#pickup">
-            Самовывоз
-        </a>
+            <a href="#pickup" class="mobile-menu-link">
+                Самовывоз
+            </a>
 
-        <a href="#contacts">
-            Контакты
-        </a>
+            <a href="#contacts" class="mobile-menu-link">
+                Контакты
+            </a>
 
-    </nav>
+        </nav>
+    </div>
 
 
     <!-- =========================================================
@@ -2024,86 +1579,69 @@
 
     <main id="top">
 
-
         <!-- =====================================================
              HERO
              ===================================================== -->
 
-        <section class="hero">
+        <section class="hero" aria-label="Главный экран">
 
             <div class="container">
+                <div class="hero-inner">
 
-                <div class="hero-content">
-
-                    <div class="logo-wrap">
-
+                    <div class="hero-logo-wrap">
                         <img
-                            id="mainLogo"
-                            class="main-logo"
                             src="metiz-project-logo.png"
-                            alt="Логотип компании"
+                            alt="Metiz Project"
+                            class="hero-logo"
                         >
-
                     </div>
 
-
-                    <div class="city">
-                        <span id="cityText">
-                            Санкт-Петербург
-                        </span>
+                    <div class="hero-location">
+                        <span id="heroLocation">Санкт-Петербург</span>
                     </div>
-
 
                     <h1 class="hero-title">
-
                         <span id="heroTitle">
                             ПЕЧАТАЕМ И РЕЖЕМ
+                            <span class="accent">ПОД ВАШИ ЗАДАЧИ</span>
                         </span>
-
-                        <br>
-
-                        <span class="accent"
-                              id="heroTitleAccent">
-                            ПОД ВАШИ ЗАДАЧИ
-                        </span>
-
                     </h1>
 
-
-                    <p class="hero-subtitle"
-                       id="heroSubtitle">
-
-                        Изготавливаем наклейки и печатаем изображения
-                        на холсте под задачи наших клиентов.
-
+                    <p class="hero-subtitle" id="heroSubtitle">
+                        Изготовление наклеек на заказ и печать изображений на холсте.
+                        От идеи до готового заказа.
                     </p>
 
+                    <div class="hero-services">
 
-                    <div class="service-buttons">
-
-                        <a href="#stickers"
-                           class="service-button">
-
+                        <button
+                            class="service-button"
+                            data-scroll="#stickers"
+                            type="button"
+                        >
                             <span id="stickersButtonText">
                                 ИЗГОТОВЛЕНИЕ НАКЛЕЕК
                             </span>
+                        </button>
 
-                        </a>
-
-
-                        <a href="#canvas"
-                           class="service-button">
-
+                        <button
+                            class="service-button"
+                            data-scroll="#canvas"
+                            type="button"
+                        >
                             <span id="canvasButtonText">
                                 ПЕЧАТЬ НА ХОЛСТЕ
                             </span>
-
-                        </a>
+                        </button>
 
                     </div>
 
-                </div>
+                    <div class="scroll-indicator">
+                        <span>Scroll</span>
+                        <div class="scroll-line"></div>
+                    </div>
 
+                </div>
             </div>
 
         </section>
@@ -2113,239 +1651,229 @@
              STICKERS
              ===================================================== -->
 
-        <section class="section service-section"
-                 id="stickers">
+        <section
+            class="service-section"
+            id="stickers"
+            aria-labelledby="stickersTitle"
+        >
 
             <div class="container">
 
                 <div class="service-header reveal">
 
-                    <div class="service-intro">
-
-                        <div class="section-label">
+                    <div>
+                        <div class="eyebrow">
                             Направление 01
                         </div>
 
-                        <h2 class="section-title">
-                            Изготовление<br>
-                            наклеек
+                        <div class="service-number">
+                            / 01
+                        </div>
+
+                        <h2 class="section-title" id="stickersTitle">
+                            Изготовление
+                            <span>наклеек</span>
                         </h2>
-
-                        <div class="section-description"
-                             id="stickersDescription">
-
-                            <p>
-                                Здесь размещается описание услуги
-                                по изготовлению наклеек.
-                            </p>
-
-                            <p>
-                                Вы можете самостоятельно заменить
-                                этот текст в блоке настроек сайта.
-                            </p>
-
-                        </div>
-
                     </div>
 
-
-                    <div class="service-badge"
-                         aria-hidden="true">
-
-                        STICKERS
-
-                    </div>
+                    <p class="section-description" id="stickersIntro">
+                        Наклейки на заказ под конкретные задачи —
+                        от вашего макета или примера до готового изделия.
+                    </p>
 
                 </div>
 
 
-                <!-- PROCESS -->
+                <div class="service-content">
 
-                <div class="process reveal"
-                     id="stickerProcess">
+                    <article class="glass-card description-card reveal">
 
-                    <article class="process-card">
+                        <h3>
+                            Изготовление наклеек на заказ
+                        </h3>
 
-                        <div class="process-number">
-                            01
-                        </div>
+                        <div
+                            class="editable-text"
+                            id="stickersDescription"
+                        >
+                            Изготавливаем наклейки на заказ по вашему эскизу,
+                            макету или примеру.
 
-                        <div class="process-title">
-                            Отправьте макет или напишите,
-                            что нужно изготовить
-                        </div>
+                            Возможны печать и резка под конкретные задачи клиента.
 
-                    </article>
+                            Вы можете отправить готовый макет или описать,
+                            что необходимо изготовить. После этого мы уточним
+                            детали, необходимые для выполнения заказа.
 
+                            Подготовьте изображение, макет или пример того,
+                            что вы хотите получить, и свяжитесь с нами удобным
+                            способом.
 
-                    <article class="process-card">
-
-                        <div class="process-number">
-                            02
-                        </div>
-
-                        <div class="process-title">
-                            Мы уточним детали заказа
-                        </div>
-
-                    </article>
-
-
-                    <article class="process-card">
-
-                        <div class="process-number">
-                            03
-                        </div>
-
-                        <div class="process-title">
-                            Согласуем изготовление
+                            Текст этого блока можно полностью заменить
+                            самостоятельно в настройках сайта.
                         </div>
 
                     </article>
 
 
-                    <article class="process-card">
+                    <article class="glass-card side-feature reveal reveal-delay-1">
 
-                        <div class="process-number">
-                            04
+                        <div class="side-feature-icon">
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                aria-hidden="true"
+                            >
+                                <path d="M4 7.5h16M4 12h16M4 16.5h10"/>
+                                <rect x="3" y="3" width="18" height="18" rx="4"/>
+                            </svg>
                         </div>
 
-                        <div class="process-title">
-                            Изготавливаем заказ
-                        </div>
+                        <h4>
+                            Печатаем.
+                            <br>
+                            Режем.
+                            <br>
+                            Создаём под задачу.
+                        </h4>
 
-                    </article>
-
-
-                    <article class="process-card">
-
-                        <div class="process-number">
-                            05
-                        </div>
-
-                        <div class="process-title">
-                            Вы забираете готовый заказ
-                        </div>
+                        <p>
+                            Ваш макет — наша отправная точка.
+                        </p>
 
                     </article>
 
                 </div>
 
 
-                <!-- ORDER -->
+                <!-- ORDER STEPS -->
 
-                <div class="order-area reveal"
-                     id="order">
+                <div
+                    class="steps-block"
+                    id="how-to-order"
+                >
 
-                    <h3>
-                        ЗАКАЗАТЬ НАКЛЕЙКИ
-                    </h3>
+                    <div class="steps-title reveal">
+                        Как заказать наклейки
+                    </div>
+
+                    <div class="steps">
+
+                        <article class="step reveal">
+                            <span class="step-number">01</span>
+                            <p>
+                                Отправьте макет или напишите,
+                                что нужно изготовить
+                            </p>
+                        </article>
+
+                        <article class="step reveal reveal-delay-1">
+                            <span class="step-number">02</span>
+                            <p>
+                                Мы уточним детали заказа
+                            </p>
+                        </article>
+
+                        <article class="step reveal reveal-delay-2">
+                            <span class="step-number">03</span>
+                            <p>
+                                Согласуем изготовление
+                            </p>
+                        </article>
+
+                        <article class="step reveal reveal-delay-3">
+                            <span class="step-number">04</span>
+                            <p>
+                                Изготавливаем заказ
+                            </p>
+                        </article>
+
+                        <article class="step reveal">
+                            <span class="step-number">05</span>
+                            <p>
+                                Вы забираете готовый заказ
+                            </p>
+                        </article>
+
+                    </div>
+
+                </div>
 
 
-                    <div class="social-grid"
-                         id="stickerContacts">
+                <!-- STICKERS CONTACT -->
 
-                        <!-- VK -->
+                <div
+                    class="order-block reveal"
+                    id="contacts"
+                >
 
-                        <a class="social-button"
-                           id="stickerVkLink"
-                           href="#"
-                           target="_blank"
-                           rel="noopener noreferrer">
+                    <div class="order-heading">
 
-                            <svg class="social-icon"
-                                 viewBox="0 0 24 24"
-                                 fill="none"
-                                 aria-hidden="true">
+                        <h3>
+                            Заказать наклейки
+                        </h3>
 
-                                <path
-                                    d="M3 6.5C3.2 5.4 3.7 5 4.8 5h2.7c.7 0 1 .3 1.2 1 .5 1.5 1.2 3 2.3 4.2.4.5.7.7.9.7.2 0 .3-.2.3-.7V7.1c0-.7-.2-.9-.9-1.1V5h4.4c.5 0 .7.2.7.6v4.7c0 .3.1.5.3.5.2 0 .5-.2.8-.6 1.1-1.3 1.9-2.8 2.4-4.4.2-.6.5-.8 1.1-.8H22c.6 0 .8.3.6.9-.6 2-1.5 3.8-2.8 5.5-.3.4-.4.7-.4.9 0 .2.1.4.5.7 1.3 1.1 2.3 2.2 3.1 3.4.4.6.2 1.1-.5 1.1h-2.8c-.8 0-1.2-.2-1.7-.8-.8-1-1.7-1.9-2.7-2.7-.4-.3-.7-.4-.9-.4-.3 0-.4.2-.4.7v1.8c0 1-.3 1.4-1.3 1.4-3.5 0-6.3-2-8.3-5.1C3.8 9.6 3.2 8 3 6.5Z"
-                                    fill="currentColor"/>
+                        <p>
+                            Выберите удобный способ связи
+                            и отправьте информацию о заказе.
+                        </p>
 
+                    </div>
+
+                    <div class="social-buttons">
+
+                        <a
+                            href="#"
+                            class="social-button"
+                            data-link="VK_LINK"
+                            aria-label="Написать во ВКонтакте"
+                        >
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M13.1 18c.5 0 .7-.3.7-.8 0-1.5.7-2.3 1.9-2.3.6 0 1.3.4 2 1.2.8.9 1.1 1.3 1.7 2.1 1.3.3-.2.5-.6.5-1.1 0-.2-.1-.5-.2-.7-.2-.4-.7-1-1.5-1.8-.8-.8-1.1-1.1-1.1-1.5 0-.3.2-.7.6-1.2.6-.8 1.1-1.5 1.4-2.1.3-.6.5-1.1.5-1.5 0-.4-.2-.7-.7-.7h-1.9c-.5 0-.7.2-.9.7-.4 1.2-1 2.3-1.7 3.2-.7.9-1.2 1.3-1.5 1.3-.2 0-.3-.1-.3-.4V7.5c0-.7-.2-1-.8-1H9.1c-.3 0-.5.1-.7.3-.2.2-.2.4 0 .6.3.3.5.7.5 1.4v3.1c0 .6-.1.8-.4.8-.5 0-1.1-.6-1.7-1.7-.6-1.1-1.1-2.3-1.5-3.6-.1-.5-.4-.8-.9-.8H2.5c-.5 0-.7.3-.5.8.5 1.6 1.2 3.2 2.2 4.7 1 1.6 2.1 2.8 3.3 3.7 1.2.9 2.5 1.4 3.8 1.6.7.1 1.3.1 1.8.1z"/>
                             </svg>
-
-                            <span>
-                                Написать во ВКонтакте
-                            </span>
-
+                            <span>Написать во ВКонтакте</span>
                         </a>
 
 
-                        <!-- TELEGRAM -->
-
-                        <a class="social-button"
-                           id="stickerTelegramLink"
-                           href="#"
-                           target="_blank"
-                           rel="noopener noreferrer">
-
-                            <svg class="social-icon"
-                                 viewBox="0 0 24 24"
-                                 fill="none"
-                                 aria-hidden="true">
-
-                                <path
-                                    d="M21.5 4.5 18.4 19c-.2 1-.8 1.2-1.6.8l-4.7-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.8 8.7-7.9c.4-.4-.1-.6-.6-.2L6.5 13 1.9 11.6c-1-.3-1-1 .2-1.5L20 3c.9-.3 1.7.2 1.5 1.5Z"
-                                    fill="currentColor"/>
-
+                        <a
+                            href="#"
+                            class="social-button"
+                            data-link="TELEGRAM_LINK"
+                            aria-label="Написать в Telegram"
+                        >
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M21.4 3.2 18.1 20c-.2 1.2-.9 1.5-1.8.9l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5.1 9.3-8.4c.4-.4-.1-.6-.6-.2L5.5 13.6.6 12c-1.1-.3-1.1-1 .2-1.5L20 2.9c.9-.3 1.7.2 1.4.3z"/>
                             </svg>
-
-                            <span>
-                                Написать в Telegram
-                            </span>
-
+                            <span>Написать в Telegram</span>
                         </a>
 
 
-                        <!-- WHATSAPP -->
-
-                        <a class="social-button"
-                           id="stickerWhatsappLink"
-                           href="#"
-                           target="_blank"
-                           rel="noopener noreferrer">
-
-                            <svg class="social-icon"
-                                 viewBox="0 0 24 24"
-                                 fill="none"
-                                 aria-hidden="true">
-
-                                <path
-                                    d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.7-1.2A9 9 0 1 0 12 3Zm0 16.2a7.2 7.2 0 0 1-3.7-1l-.3-.2-2.8.7.7-2.7-.2-.3A7.2 7.2 0 1 1 12 19.2Zm4-5.4c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1-.2.2-.6.8-.7.9-.1.2-.3.2-.5.1-1.5-.7-2.5-1.2-3.5-2.8-.3-.5.3-.5.8-1.6.1-.2.1-.4 0-.5l-.4-1.1c-.1-.3-.3-.3-.5-.3h-.4c-.2 0-.5.1-.7.3-.8.8-1 2-.2 3.1 1.1 1.6 2.1 2.3 3.8 3.1.6.3 1.1.4 1.5.3.5-.1 1.4-.6 1.6-1.2.2-.6.2-1.1.1-1.2-.1-.1-.3-.1-.5-.2Z"
-                                    fill="currentColor"/>
-
+                        <a
+                            href="#"
+                            class="social-button"
+                            data-link="WHATSAPP_LINK"
+                            aria-label="Написать в WhatsApp"
+                        >
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+                                <path d="M20 11.5a8.2 8.2 0 0 1-12.1 7.2L4 20l1.3-3.7A8.2 8.2 0 1 1 20 11.5Z"/>
+                                <path d="M8.5 8.7c.2-.3.4-.3.7-.3h.5c.2 0 .4.1.5.4l.7 1.7c.1.2 0 .4-.1.6l-.5.6c.6 1.1 1.4 1.8 2.5 2.3l.6-.7c.1-.2.3-.2.5-.1l1.7.8c.2.1.3.3.2.6-.2.7-.7 1.2-1.4 1.4-.8.2-2.2-.3-3.7-1.5-1.3-1-2.3-2.2-2.8-3.4-.4-.9-.4-1.7-.1-2.4l.7-1Z"/>
                             </svg>
-
-                            <span>
-                                Написать в WhatsApp
-                            </span>
-
+                            <span>Написать в WhatsApp</span>
                         </a>
 
 
-                        <!-- VK GROUP -->
-
-                        <a class="social-button"
-                           id="stickerVkGroupLink"
-                           href="#"
-                           target="_blank"
-                           rel="noopener noreferrer">
-
-                            <svg class="social-icon"
-                                 viewBox="0 0 24 24"
-                                 fill="none"
-                                 aria-hidden="true">
-
-                                <path
-                                    d="M12 4c-4.7 0-8 3.3-8 8s3.3 8 8 8 8-3.3 8-8-3.3-8-8-8Zm3.8 8.8c.3.3.8.7 1.1 1.2.3.4.2.8-.3.8h-1.1c-.4 0-.6-.1-.8-.4-.4-.5-.8-.9-1.3-1.2-.2-.1-.3-.1-.4-.1-.1 0-.2.1-.2.3v.9c0 .3-.1.5-.5.5-1.4 0-2.5-.8-3.3-2-.7-1-1-1.7-1.2-2.4-.1-.4 0-.5.4-.5h1.1c.3 0 .4.1.5.4.2.6.5 1.2.9 1.7.2.3.4.5.5.5.1 0 .2-.1.2-.4V10c0-.3-.1-.4-.4-.5V9h1.7c.2 0 .3.1.3.3v1.9c0 .1.1.2.1.2.1 0 .2-.1.3-.2.4-.5.7-1.1.9-1.8.1-.2.2-.3.4-.3h1.1c.2 0 .3.1.2.4-.2.8-.6 1.5-1.1 2.1-.1.2-.2.3-.2.4s.1.2.3.3Z"
-                                    fill="currentColor"/>
-
+                        <a
+                            href="#"
+                            class="social-button"
+                            data-link="VK_GROUP_LINK"
+                            aria-label="Вступить в группу ВКонтакте"
+                        >
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M13.1 18c.5 0 .7-.3.7-.8 0-1.5.7-2.3 1.9-2.3.6 0 1.3.4 2 1.2.8.9 1.1 1.3 1.7 2.1 1.3.3-.2.5-.6.5-1.1 0-.2-.1-.5-.2-.7-.2-.4-.7-1-1.5-1.8-.8-.8-1.1-1.1-1.1-1.5 0-.3.2-.7.6-1.2.6-.8 1.1-1.5 1.4-2.1.3-.6.5-1.1.5-1.5 0-.4-.2-.7-.7-.7h-1.9c-.5 0-.7.2-.9.7-.4 1.2-1 2.3-1.7 3.2-.7.9-1.2 1.3-1.5 1.3-.2 0-.3-.1-.3-.4V7.5c0-.7-.2-1-.8-1H9.1c-.3 0-.5.1-.7.3-.2.2-.2.4 0 .6.3.3.5.7.5 1.4v3.1c0 .6-.1.8-.4.8-.5 0-1.1-.6-1.7-1.7-.6-1.1-1.1-2.3-1.5-3.6-.1-.5-.4-.8-.9-.8H2.5c-.5 0-.7.3-.5.8.5 1.6 1.2 3.2 2.2 4.7 1 1.6 2.1 2.8 3.3 3.7 1.2.9 2.5 1.4 3.8 1.6.7.1 1.3.1 1.8.1z"/>
                             </svg>
-
-                            <span>
-                                Вступить в группу ВКонтакте
-                            </span>
-
+                            <span>Вступить в группу ВКонтакте</span>
                         </a>
 
                     </div>
@@ -2355,242 +1883,233 @@
             </div>
 
         </section>
-
-
-        <div class="section-divider"></div>
 
 
         <!-- =====================================================
              CANVAS
              ===================================================== -->
 
-        <section class="section service-section"
-                 id="canvas">
+        <section
+            class="service-section"
+            id="canvas"
+            aria-labelledby="canvasTitle"
+        >
 
             <div class="container">
 
                 <div class="service-header reveal">
 
-                    <div class="service-intro">
+                    <div>
 
-                        <div class="section-label">
+                        <div class="eyebrow">
                             Направление 02
                         </div>
 
-                        <h2 class="section-title">
-                            Печать<br>
-                            на холсте
+                        <div class="service-number">
+                            / 02
+                        </div>
+
+                        <h2 class="section-title" id="canvasTitle">
+                            Печать
+                            <span>на холсте</span>
                         </h2>
 
-                        <div class="section-description"
-                             id="canvasDescription">
-
-                            <p>
-                                Здесь размещается описание услуги
-                                по печати изображений на холсте.
-                            </p>
-
-                            <p>
-                                Вы можете самостоятельно заменить
-                                этот текст в блоке настроек сайта.
-                            </p>
-
-                        </div>
-
                     </div>
 
-
-                    <div class="service-badge"
-                         aria-hidden="true">
-
-                        CANVAS
-
-                    </div>
+                    <p
+                        class="section-description"
+                        id="canvasIntro"
+                    >
+                        Печать фотографий, картин и изображений
+                        на холсте под ваш заказ.
+                    </p>
 
                 </div>
 
 
-                <!-- PROCESS -->
+                <div class="service-content">
 
-                <div class="process reveal">
+                    <article class="glass-card description-card reveal">
 
-                    <article class="process-card">
+                        <h3>
+                            Печать фотографий и изображений на холсте
+                        </h3>
 
-                        <div class="process-number">
-                            01
-                        </div>
+                        <div
+                            class="editable-text"
+                            id="canvasDescription"
+                        >
+                            Можно заказать печать фотографии,
+                            картины или другого изображения на холсте.
 
-                        <div class="process-title">
-                            Отправьте фотографию
-                            или изображение
-                        </div>
+                            Вы можете отправить готовое изображение,
+                            которое хотите напечатать, и сообщить
+                            необходимые параметры заказа.
 
-                    </article>
+                            После получения информации мы обсудим детали,
+                            согласуем заказ и изготовим готовый холст.
 
-
-                    <article class="process-card">
-
-                        <div class="process-number">
-                            02
-                        </div>
-
-                        <div class="process-title">
-                            Обсудим размеры
-                        </div>
-
-                    </article>
-
-
-                    <article class="process-card">
-
-                        <div class="process-number">
-                            03
-                        </div>
-
-                        <div class="process-title">
-                            Согласуем заказ
+                            Текст этого блока можно полностью заменить
+                            самостоятельно в настройках сайта.
                         </div>
 
                     </article>
 
 
-                    <article class="process-card">
+                    <article class="glass-card side-feature reveal reveal-delay-1">
 
-                        <div class="process-number">
-                            04
+                        <div class="side-feature-icon">
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                aria-hidden="true"
+                            >
+                                <rect x="3" y="3" width="18" height="18" rx="3"/>
+                                <circle cx="8.5" cy="8.5" r="1.5"/>
+                                <path d="m21 15-5-5L5 21"/>
+                            </svg>
                         </div>
 
-                        <div class="process-title">
-                            Изготавливаем холст
-                        </div>
+                        <h4>
+                            Фотографии.
+                            <br>
+                            Картины.
+                            <br>
+                            Ваши изображения.
+                        </h4>
 
-                    </article>
-
-
-                    <article class="process-card">
-
-                        <div class="process-number">
-                            05
-                        </div>
-
-                        <div class="process-title">
-                            Вы забираете готовый заказ
-                        </div>
+                        <p>
+                            Превращаем изображение в готовый интерьерный объект.
+                        </p>
 
                     </article>
 
                 </div>
 
 
-                <!-- ORDER -->
+                <!-- CANVAS ORDER -->
 
-                <div class="order-area reveal"
-                     id="canvasOrder">
+                <div class="steps-block">
 
-                    <h3>
-                        ЗАКАЗАТЬ ПЕЧАТЬ НА ХОЛСТЕ
-                    </h3>
+                    <div class="steps-title reveal">
+                        Как заказать холст
+                    </div>
+
+                    <div class="steps">
+
+                        <article class="step reveal">
+                            <span class="step-number">01</span>
+                            <p>
+                                Отправьте фотографию
+                                или изображение
+                            </p>
+                        </article>
+
+                        <article class="step reveal reveal-delay-1">
+                            <span class="step-number">02</span>
+                            <p>
+                                Обсудим необходимые параметры
+                            </p>
+                        </article>
+
+                        <article class="step reveal reveal-delay-2">
+                            <span class="step-number">03</span>
+                            <p>
+                                Согласуем заказ
+                            </p>
+                        </article>
+
+                        <article class="step reveal reveal-delay-3">
+                            <span class="step-number">04</span>
+                            <p>
+                                Изготавливаем холст
+                            </p>
+                        </article>
+
+                        <article class="step reveal">
+                            <span class="step-number">05</span>
+                            <p>
+                                Вы забираете готовый заказ
+                            </p>
+                        </article>
+
+                    </div>
+
+                </div>
 
 
-                    <div class="social-grid">
+                <!-- CANVAS CONTACT -->
 
-                        <!-- VK -->
+                <div class="order-block reveal">
 
-                        <a class="social-button"
-                           id="canvasVkLink"
-                           href="#"
-                           target="_blank"
-                           rel="noopener noreferrer">
+                    <div class="order-heading">
 
-                            <svg class="social-icon"
-                                 viewBox="0 0 24 24"
-                                 fill="none">
+                        <h3>
+                            Заказать печать на холсте
+                        </h3>
 
-                                <path
-                                    d="M3 6.5C3.2 5.4 3.7 5 4.8 5h2.7c.7 0 1 .3 1.2 1 .5 1.5 1.2 3 2.3 4.2.4.5.7.7.9.7.2 0 .3-.2.3-.7V7.1c0-.7-.2-.9-.9-1.1V5h4.4c.5 0 .7.2.7.6v4.7c0 .3.1.5.3.5.2 0 .5-.2.8-.6 1.1-1.3 1.9-2.8 2.4-4.4.2-.6.5-.8 1.1-.8H22c.6 0 .8.3.6.9-.6 2-1.5 3.8-2.8 5.5-.3.4-.4.7-.4.9 0 .2.1.4.5.7 1.3 1.1 2.3 2.2 3.1 3.4.4.6.2 1.1-.5 1.1h-2.8c-.8 0-1.2-.2-1.7-.8-.8-1-1.7-1.9-2.7-2.7-.4-.3-.7-.4-.9-.4-.3 0-.4.2-.4.7v1.8c0 1-.3 1.4-1.3 1.4-3.5 0-6.3-2-8.3-5.1C3.8 9.6 3.2 8 3 6.5Z"
-                                    fill="currentColor"/>
+                        <p>
+                            Выберите удобный способ связи
+                            и отправьте изображение или информацию
+                            о заказе.
+                        </p>
 
+                    </div>
+
+                    <div class="social-buttons">
+
+                        <a
+                            href="#"
+                            class="social-button"
+                            data-link="VK_LINK"
+                            aria-label="Написать во ВКонтакте"
+                        >
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M13.1 18c.5 0 .7-.3.7-.8 0-1.5.7-2.3 1.9-2.3.6 0 1.3.4 2 1.2.8.9 1.1 1.3 1.7 2.1 1.3.3-.2.5-.6.5-1.1 0-.2-.1-.5-.2-.7-.2-.4-.7-1-1.5-1.8-.8-.8-1.1-1.1-1.1-1.5 0-.3.2-.7.6-1.2.6-.8 1.1-1.5 1.4-2.1.3-.6.5-1.1.5-1.5 0-.4-.2-.7-.7-.7h-1.9c-.5 0-.7.2-.9.7-.4 1.2-1 2.3-1.7 3.2-.7.9-1.2 1.3-1.5 1.3-.2 0-.3-.1-.3-.4V7.5c0-.7-.2-1-.8-1H9.1c-.3 0-.5.1-.7.3-.2.2-.2.4 0 .6.3.3.5.7.5 1.4v3.1c0 .6-.1.8-.4.8-.5 0-1.1-.6-1.7-1.7-.6-1.1-1.1-2.3-1.5-3.6-.1-.5-.4-.8-.9-.8H2.5c-.5 0-.7.3-.5.8.5 1.6 1.2 3.2 2.2 4.7 1 1.6 2.1 2.8 3.3 3.7 1.2.9 2.5 1.4 3.8 1.6.7.1 1.3.1 1.8.1z"/>
                             </svg>
-
-                            <span>
-                                Написать во ВКонтакте
-                            </span>
-
+                            <span>Написать во ВКонтакте</span>
                         </a>
 
 
-                        <!-- TELEGRAM -->
-
-                        <a class="social-button"
-                           id="canvasTelegramLink"
-                           href="#"
-                           target="_blank"
-                           rel="noopener noreferrer">
-
-                            <svg class="social-icon"
-                                 viewBox="0 0 24 24"
-                                 fill="none">
-
-                                <path
-                                    d="M21.5 4.5 18.4 19c-.2 1-.8 1.2-1.6.8l-4.7-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.8 8.7-7.9c.4-.4-.1-.6-.6-.2L6.5 13 1.9 11.6c-1-.3-1-1 .2-1.5L20 3c.9-.3 1.7.2 1.5 1.5Z"
-                                    fill="currentColor"/>
-
+                        <a
+                            href="#"
+                            class="social-button"
+                            data-link="TELEGRAM_LINK"
+                            aria-label="Написать в Telegram"
+                        >
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M21.4 3.2 18.1 20c-.2 1.2-.9 1.5-1.8.9l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5.1 9.3-8.4c.4-.4-.1-.6-.6-.2L5.5 13.6.6 12c-1.1-.3-1.1-1 .2-1.5L20 2.9c.9-.3 1.7.2 1.4.3z"/>
                             </svg>
-
-                            <span>
-                                Написать в Telegram
-                            </span>
-
+                            <span>Написать в Telegram</span>
                         </a>
 
 
-                        <!-- WHATSAPP -->
-
-                        <a class="social-button"
-                           id="canvasWhatsappLink"
-                           href="#"
-                           target="_blank"
-                           rel="noopener noreferrer">
-
-                            <svg class="social-icon"
-                                 viewBox="0 0 24 24"
-                                 fill="none">
-
-                                <path
-                                    d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.7-1.2A9 9 0 1 0 12 3Zm0 16.2a7.2 7.2 0 0 1-3.7-1l-.3-.2-2.8.7.7-2.7-.2-.3A7.2 7.2 0 1 1 12 19.2Zm4-5.4c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1-.2.2-.6.8-.7.9-.1.2-.3.2-.5.1-1.5-.7-2.5-1.2-3.5-2.8-.3-.5.3-.5.8-1.6.1-.2.1-.4 0-.5l-.4-1.1c-.1-.3-.3-.3-.5-.3h-.4c-.2 0-.5.1-.7.3-.8.8-1 2-.2 3.1 1.1 1.6 2.1 2.3 3.8 3.1.6.3 1.1.4 1.5.3.5-.1 1.4-.6 1.6-1.2.2-.6.2-1.1.1-1.2-.1-.1-.3-.1-.5-.2Z"
-                                    fill="currentColor"/>
-
+                        <a
+                            href="#"
+                            class="social-button"
+                            data-link="WHATSAPP_LINK"
+                            aria-label="Написать в WhatsApp"
+                        >
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+                                <path d="M20 11.5a8.2 8.2 0 0 1-12.1 7.2L4 20l1.3-3.7A8.2 8.2 0 1 1 20 11.5Z"/>
+                                <path d="M8.5 8.7c.2-.3.4-.3.7-.3h.5c.2 0 .4.1.5.4l.7 1.7c.1.2 0 .4-.1.6l-.5.6c.6 1.1 1.4 1.8 2.5 2.3l.6-.7c.1-.2.3-.2.5-.1l1.7.8c.2.1.3.3.2.6-.2.7-.7 1.2-1.4 1.4-.8.2-2.2-.3-3.7-1.5-1.3-1-2.3-2.2-2.8-3.4-.4-.9-.4-1.7-.1-2.4l.7-1Z"/>
                             </svg>
-
-                            <span>
-                                Написать в WhatsApp
-                            </span>
-
+                            <span>Написать в WhatsApp</span>
                         </a>
 
 
-                        <!-- VK GROUP -->
-
-                        <a class="social-button"
-                           id="canvasVkGroupLink"
-                           href="#"
-                           target="_blank"
-                           rel="noopener noreferrer">
-
-                            <svg class="social-icon"
-                                 viewBox="0 0 24 24"
-                                 fill="none">
-
-                                <path
-                                    d="M12 4c-4.7 0-8 3.3-8 8s3.3 8 8 8 8-3.3 8-8-3.3-8-8-8Zm3.8 8.8c.3.3.8.7 1.1 1.2.3.4.2.8-.3.8h-1.1c-.4 0-.6-.1-.8-.4-.4-.5-.8-.9-1.3-1.2-.2-.1-.3-.1-.4-.1-.1 0-.2.1-.2.3v.9c0 .3-.1.5-.5.5-1.4 0-2.5-.8-3.3-2-.7-1-1-1.7-1.2-2.4-.1-.4 0-.5.4-.5h1.1c.3 0 .4.1.5.4.2.6.5 1.2.9 1.7.2.3.4.5.5.5.1 0 .2-.1.2-.4V10c0-.3-.1-.4-.4-.5V9h1.7c.2 0 .3.1.3.3v1.9c0 .1.1.2.1.2.1 0 .2-.1.3-.2.4-.5.7-1.1.9-1.8.1-.2.2-.3.4-.3h1.1c.2 0 .3.1.2.4-.2.8-.6 1.5-1.1 2.1-.1.2-.2.3-.2.4s.1.2.3.3Z"
-                                    fill="currentColor"/>
-
+                        <a
+                            href="#"
+                            class="social-button"
+                            data-link="VK_GROUP_LINK"
+                            aria-label="Вступить в группу ВКонтакте"
+                        >
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M13.1 18c.5 0 .7-.3.7-.8 0-1.5.7-2.3 1.9-2.3.6 0 1.3.4 2 1.2.8.9 1.1 1.3 1.7 2.1 1.3.3-.2.5-.6.5-1.1 0-.2-.1-.5-.2-.7-.2-.4-.7-1-1.5-1.8-.8-.8-1.1-1.1-1.1-1.5 0-.3.2-.7.6-1.2.6-.8 1.1-1.5 1.4-2.1.3-.6.5-1.1.5-1.5 0-.4-.2-.7-.7-.7h-1.9c-.5 0-.7.2-.9.7-.4 1.2-1 2.3-1.7 3.2-.7.9-1.2 1.3-1.5 1.3-.2 0-.3-.1-.3-.4V7.5c0-.7-.2-1-.8-1H9.1c-.3 0-.5.1-.7.3-.2.2-.2.4 0 .6.3.3.5.7.5 1.4v3.1c0 .6-.1.8-.4.8-.5 0-1.1-.6-1.7-1.7-.6-1.1-1.1-2.3-1.5-3.6-.1-.5-.4-.8-.9-.8H2.5c-.5 0-.7.3-.5.8.5 1.6 1.2 3.2 2.2 4.7 1 1.6 2.1 2.8 3.3 3.7 1.2.9 2.5 1.4 3.8 1.6.7.1 1.3.1 1.8.1z"/>
                             </svg>
-
-                            <span>
-                                Вступить в группу ВКонтакте
-                            </span>
-
+                            <span>Вступить в группу ВКонтакте</span>
                         </a>
 
                     </div>
@@ -2602,72 +2121,55 @@
         </section>
 
 
-        <div class="section-divider"></div>
-
-
         <!-- =====================================================
              PICKUP
              ===================================================== -->
 
-        <section class="pickup-section"
-                 id="pickup">
+        <section
+            class="pickup-section"
+            id="pickup"
+            aria-labelledby="pickupTitle"
+        >
 
             <div class="container">
 
                 <div class="pickup-card reveal">
 
                     <div class="pickup-label">
-                        Получение заказа
+                        Самовывоз
                     </div>
 
-                    <h2 class="pickup-title">
-                        ЗАБИРАЙТЕ
-                        <br>
-                        ГОТОВЫЙ ЗАКАЗ
+                    <h2 class="pickup-title" id="pickupTitle">
+                        Забирайте
+                        <span>готовый заказ</span>
                     </h2>
 
-                    <div class="pickup-main">
-                        Только самовывоз
-                    </div>
-
-                    <p class="pickup-address"
-                       id="pickupAddress">
-
-                        Санкт-Петербург, парковка между
-                        Ленинским пр. 95к1 и 97к1
-
+                    <p class="pickup-address" id="pickupAddress">
+                        Только самовывоз.<br>
+                        Санкт-Птербург, парковка между Ленинским пп. 95к1 и 97к1
                     </p>
 
-
-                    <a id="routeButton"
-                       class="route-button"
-                       href="#"
-                       target="_blank"
-                       rel="noopener noreferrer">
-
-                        <!-- Yandex Navigator icon -->
-
-                        <svg class="route-icon"
-                             viewBox="0 0 32 32"
-                             fill="none"
-                             aria-hidden="true">
-
-                            <circle
-                                cx="16"
-                                cy="16"
-                                r="15"
-                                fill="#FFCC00"/>
-
+                    <a
+                        href="https://yandex.ru/maps/-/CThrBHy2"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="route-button"
+                        id="routeButton"
+                    >
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
                             <path
-                                d="M18.5 7.5h-3.1c-3.2 0-5.2 2-5.2 4.8 0 2.1 1.1 3.7 3 4.4L10.8 24h3.5l2.8-6.5h1.3V24h3.1V7.5h-3Zm0 7.2h-1.3c-2 0-3.3-.8-3.3-2.4 0-1.5 1-2.3 2.7-2.3h1.9v4.7Z"
-                                fill="#111"/>
-
+                                d="M12 21s7-6.1 7-12A7 7 0 1 0 5 9c0 5.9 7 12 7 12Z"
+                                fill="#E21C2A"
+                            />
+                            <path
+                                d="M12 12.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
+                                fill="#fff"
+                            />
                         </svg>
 
                         <span>
                             ПОСТРОИТЬ МАРШРУТ
                         </span>
-
                     </a>
 
                 </div>
@@ -2676,7 +2178,6 @@
 
         </section>
 
-
     </main>
 
 
@@ -2684,122 +2185,61 @@
          FOOTER
          ========================================================= -->
 
-    <footer class="footer"
-            id="contacts">
+    <footer>
 
         <div class="container">
 
-            <div class="footer-actions">
+            <div class="footer-main">
 
-                <a class="footer-button"
-                   href="#stickers">
-
-                    <svg width="18"
-                         height="18"
-                         viewBox="0 0 24 24"
-                         fill="none">
-
-                        <path
-                            d="M4 5h16v14H4z"
-                            stroke="currentColor"
-                            stroke-width="1.7"/>
-
-                        <path
-                            d="m7 9 3 3 2-2 5 5"
-                            stroke="currentColor"
-                            stroke-width="1.7"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"/>
-
+                <a
+                    href="#contacts"
+                    class="footer-button"
+                >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+                        <path d="M21 11.5a8.5 8.5 0 0 1-12.5 7.4L4 20l1.2-4A8.5 8.5 0 1 1 21 11.5Z"/>
+                        <path d="M8.5 8.5h.01M12 8.5h.01M15.5 8.5h.01"/>
                     </svg>
-
                     Связаться
-
                 </a>
 
 
-                <a class="footer-button"
-                   href="#pickup">
-
-                    <svg width="18"
-                         height="18"
-                         viewBox="0 0 24 24"
-                         fill="none">
-
-                        <path
-                            d="M12 21s7-6.1 7-12a7 7 0 1 0-14 0c0 5.9 7 12 7 12Z"
-                            stroke="currentColor"
-                            stroke-width="1.7"/>
-
-                        <circle
-                            cx="12"
-                            cy="9"
-                            r="2.2"
-                            stroke="currentColor"
-                            stroke-width="1.7"/>
-
+                <a
+                    href="#pickup"
+                    class="footer-button"
+                >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+                        <path d="M12 21s7-6.1 7-12A7 7 0 1 0 5 9c0 5.9 7 12 7 12Z"/>
+                        <circle cx="12" cy="9" r="2.5"/>
                     </svg>
-
                     Самовывоз
-
                 </a>
 
 
-                <button class="footer-button share"
-                        id="shareButton"
-                        type="button">
-
-                    <svg width="18"
-                         height="18"
-                         viewBox="0 0 24 24"
-                         fill="none">
-
-                        <circle
-                            cx="18"
-                            cy="5"
-                            r="2.3"
-                            stroke="currentColor"
-                            stroke-width="1.7"/>
-
-                        <circle
-                            cx="6"
-                            cy="12"
-                            r="2.3"
-                            stroke="currentColor"
-                            stroke-width="1.7"/>
-
-                        <circle
-                            cx="18"
-                            cy="19"
-                            r="2.3"
-                            stroke="currentColor"
-                            stroke-width="1.7"/>
-
-                        <path
-                            d="m8 11 7.7-4.5M8 13l7.7 4.5"
-                            stroke="currentColor"
-                            stroke-width="1.7"/>
-
+                <button
+                    type="button"
+                    class="footer-button share"
+                    id="shareButton"
+                >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <circle cx="18" cy="5" r="2.5"/>
+                        <circle cx="6" cy="12" r="2.5"/>
+                        <circle cx="18" cy="19" r="2.5"/>
+                        <path d="m8.2 10.8 7.6-4.4M8.2 13.2l7.6 4.4"/>
                     </svg>
-
-                    Поделиться этим сайтом
-
+                    <span id="shareText">
+                        Поделиться этим сайтом
+                    </span>
                 </button>
 
             </div>
 
 
-            <div class="footer-company"
-                 id="footerCompany">
-
-                НАЗВАНИЕ КОМПАНИИ
-
+            <div class="footer-company" id="companyName">
+                METIZ PROJECT
             </div>
 
-
             <div class="copyright">
-                © <span id="currentYear"></span>
-                Все права защищены.
+                © <span id="copyrightYear"></span> Все права защищены.
             </div>
 
         </div>
@@ -2807,63 +2247,38 @@
     </footer>
 
 
-
     <!-- =========================================================
-         =========================================================
-                     JAVASCRIPT
-         =========================================================
+         JAVASCRIPT
          ========================================================= -->
 
     <script>
 
-        /*
-        ============================================================
-        ================= НАСТРОЙКИ САЙТА ==========================
-        ============================================================
+        // =========================================================
+        // ================= НАСТРОЙКИ САЙТА =======================
+        // =========================================================
 
-        ВСЕ ОСНОВНЫЕ ДАННЫЕ САЙТА СОБРАНЫ ЗДЕСЬ.
+        const SITE_CONFIG = {
 
-        Вам не нужно искать ссылки и тексты по всему коду.
+            // -----------------------------------------------------
+            // ОСНОВНАЯ ИНФОРМАЦИЯ
+            // -----------------------------------------------------
 
-        Просто замените значения ниже.
+            COMPANY_NAME: "METIZ PROJECT",
 
-        ============================================================
-        */
+            LOGO: "metiz-project-logo.png",
 
-
-        const CONFIG = {
-
-            /* =====================================================
-               ОСНОВНЫЕ ДАННЫЕ
-               ===================================================== */
-
-            COMPANY_NAME:
-                "НАЗВАНИЕ КОМПАНИИ",
-
-            LOGO:
-                "metiz-project-logo.png",
-
-
-            /* =====================================================
-               ГЛАВНЫЙ ЭКРАН
-               ===================================================== */
-
-            CITY:
-                "Санкт-Петербург",
+            LOCATION: "Санкт-Петербург",
 
             HERO_TITLE:
-                "ПЕЧАТАЕМ И РЕЖЕМ",
-
-            HERO_TITLE_ACCENT:
-                "ПОД ВАШИ ЗАДАЧИ",
+                "ПЕЧАТАЕМ И РЕЖЕМ ПОД ВАШИ ЗАДАЧИ",
 
             HERO_SUBTITLE:
-                "Изготавливаем наклейки и печатаем изображения на холсте под задачи наших клиентов.",
+                "Изготовление наклеек на заказ и печать изображений на холсте. От идеи до готового заказа.",
 
 
-            /* =====================================================
-               НАЗВАНИЯ ОСНОВНЫХ КНОПОК
-               ===================================================== */
+            // -----------------------------------------------------
+            // КНОПКИ ГЛАВНОГО ЭКРАНА
+            // -----------------------------------------------------
 
             STICKERS_BUTTON:
                 "ИЗГОТОВЛЕНИЕ НАКЛЕЕК",
@@ -2872,373 +2287,290 @@
                 "ПЕЧАТЬ НА ХОЛСТЕ",
 
 
-            /* =====================================================
-               ОПИСАНИЕ НАКЛЕЕК
-               =====================================================
+            // -----------------------------------------------------
+            // ТЕКСТ РАЗДЕЛА НАКЛЕЕК
+            // -----------------------------------------------------
 
-               Здесь можно писать обычный HTML.
+            STICKERS_INTRO:
+                "Наклейки на заказ под конкретные задачи — от вашего макета или примера до готового изделия.",
 
-               Например:
+            STICKERS_DESCRIPTION:
+`Изготавливаем наклейки на заказ по вашему эскизу, макету или примеру.
 
-               <p>Первый абзац.</p>
-               <p>Второй абзац.</p>
+Возможны печать и резка под конкретные задачи клиента.
 
-            ===================================================== */
+Вы можете отправить готовый макет или описать, что необходимо изготовить. После этого мы уточним детали, необходимые для выполнения заказа.
 
-            STICKERS_DESCRIPTION: `
-                <p>
-                    Изготавливаем наклейки на заказ под конкретные
-                    задачи клиента.
-                </p>
+Подготовьте изображение, макет или пример того, что вы хотите получить, и свяжитесь с нами удобным способом.
 
-                <p>
-                    Можно предоставить собственный макет, эскиз,
-                    пример или описание того, что необходимо изготовить.
-                    Возможна печать и резка.
-                </p>
-
-                <p>
-                    Перед изготовлением согласовываются необходимые
-                    детали заказа и подготовка макета.
-                </p>
-            `,
+Текст этого блока можно полностью заменить самостоятельно в настройках сайта.`,
 
 
-            /* =====================================================
-               ОПИСАНИЕ ХОЛСТОВ
-               ===================================================== */
+            // -----------------------------------------------------
+            // ТЕКСТ РАЗДЕЛА ХОЛСТОВ
+            // -----------------------------------------------------
 
-            CANVAS_DESCRIPTION: `
-                <p>
-                    Печатаем фотографии, картины и другие изображения
-                    на холсте.
-                </p>
+            CANVAS_INTRO:
+                "Печать фотографий, картин и изображений на холсте под ваш заказ.",
 
-                <p>
-                    Вы можете предоставить собственную фотографию,
-                    картинку или изображение для печати.
-                </p>
+            CANVAS_DESCRIPTION:
+`Можно заказать печать фотографии, картины или другого изображения на холсте.
 
-                <p>
-                    Все необходимые детали заказа можно предварительно
-                    обсудить и согласовать.
-                </p>
-            `,
+Вы можете отправить готовое изображение, которое хотите напечатать, и сообщить необходимые параметры заказа.
+
+После получения информации мы обсудим детали, согласуем заказ и изготовим готовый холст.
+
+Текст этого блока можно полностью заменить самостоятельно в настройках сайта.`,
 
 
-            /* =====================================================
-               АДРЕС САМОВЫВОЗА
-               ===================================================== */
+            // -----------------------------------------------------
+            // САМОПОЛУЧЕНИЕ
+            // -----------------------------------------------------
 
-            PICKUP_ADDRESS:
-                "Санкт-Петербург, парковка между Ленинским пр. 95к1 и 97к1",
+            PICKUP_TEXT:
+                "Только самовывоз.\nСанкт-Птербург, парковка между Ленинским пп. 95к1 и 97к1",
 
 
-            /* =====================================================
-               ССЫЛКА ЯНДЕКС НАВИГАТОРА
-               ===================================================== */
+            // -----------------------------------------------------
+            // ССЫЛКИ
+            //
+            // ВСТАВЬТЕ СЮДА СВОИ РЕАЛЬНЫЕ ССЫЛКИ.
+            //
+            // Например:
+            // VK_LINK: "https://vk.com/...",
+            // -----------------------------------------------------
+
+            VK_LINK: "",
+
+            VK_GROUP_LINK: "",
+
+            TELEGRAM_LINK: "",
+
+            WHATSAPP_LINK: "",
 
             YANDEX_NAVIGATOR_LINK:
-                "https://yandex.ru/maps/-/CThrBHy2",
-
-
-            /* =====================================================
-               СОЦИАЛЬНЫЕ ССЫЛКИ
-               =====================================================
-
-               ВАЖНО:
-
-               Сейчас здесь стоят пустые значения.
-
-               Вставьте сюда СВОИ реальные ссылки.
-
-            ===================================================== */
-
-            VK_LINK:
-                "",
-
-            VK_GROUP_LINK:
-                "",
-
-            TELEGRAM_LINK:
-                "",
-
-            WHATSAPP_LINK:
-                ""
+                "https://yandex.ru/maps/-/CThrBHy2"
 
         };
 
 
-        /*
-        ============================================================
-        ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
-        ============================================================
-        */
+        // =========================================================
+        // ЗАПУСК НАСТРОЕК
+        // =========================================================
+
+        document.addEventListener("DOMContentLoaded", () => {
+
+            applySiteConfig();
+
+            initNavigation();
+
+            initMobileMenu();
+
+            initRevealAnimations();
+
+            initParticles();
+
+            initShare();
+
+            initLinks();
+
+            initYear();
+
+        });
 
 
-        function setText(id, value) {
+        // =========================================================
+        // ПРИМЕНЕНИЕ НАСТРОЕК
+        // =========================================================
 
-            const element =
-                document.getElementById(id);
+        function applySiteConfig() {
 
-            if (element) {
-                element.textContent = value;
-            }
-        }
-
-
-        function setHTML(id, value) {
-
-            const element =
-                document.getElementById(id);
-
-            if (element) {
-                element.innerHTML = value;
-            }
-        }
-
-
-        function setLink(id, value) {
-
-            const element =
-                document.getElementById(id);
-
-            if (!element) return;
-
-            if (value && value.trim() !== "") {
-
-                element.href = value;
-
-                element.style.pointerEvents = "auto";
-                element.style.opacity = "1";
-
-            } else {
-
-                /*
-                 * Если ссылка ещё не указана,
-                 * кнопка остаётся визуально активной,
-                 * но не ведёт на несуществующий адрес.
-                 */
-
-                element.href = "#";
-
-                element.addEventListener(
-                    "click",
-                    function(event) {
-
-                        event.preventDefault();
-
-                    },
-                    {
-                        once: false
-                    }
+            const logoElements =
+                document.querySelectorAll(
+                    ".hero-logo, .nav-brand img"
                 );
+
+            logoElements.forEach(img => {
+                img.src = SITE_CONFIG.LOGO;
+            });
+
+
+            const heroLocation =
+                document.getElementById("heroLocation");
+
+            if (heroLocation) {
+                heroLocation.textContent =
+                    SITE_CONFIG.LOCATION;
             }
+
+
+            const heroTitle =
+                document.getElementById("heroTitle");
+
+            if (heroTitle) {
+
+                const title =
+                    SITE_CONFIG.HERO_TITLE;
+
+                const words = title.split(" ");
+
+                const splitIndex =
+                    Math.max(
+                        1,
+                        Math.floor(words.length * .55)
+                    );
+
+                const firstPart =
+                    words.slice(0, splitIndex).join(" ");
+
+                const secondPart =
+                    words.slice(splitIndex).join(" ");
+
+                heroTitle.innerHTML =
+                    `${escapeHTML(firstPart)}
+                    <span class="accent">
+                        ${escapeHTML(secondPart)}
+                    </span>`;
+            }
+
+
+            const heroSubtitle =
+                document.getElementById("heroSubtitle");
+
+            if (heroSubtitle) {
+                heroSubtitle.textContent =
+                    SITE_CONFIG.HERO_SUBTITLE;
+            }
+
+
+            const stickersButtonText =
+                document.getElementById(
+                    "stickersButtonText"
+                );
+
+            if (stickersButtonText) {
+                stickersButtonText.textContent =
+                    SITE_CONFIG.STICKERS_BUTTON;
+            }
+
+
+            const canvasButtonText =
+                document.getElementById(
+                    "canvasButtonText"
+                );
+
+            if (canvasButtonText) {
+                canvasButtonText.textContent =
+                    SITE_CONFIG.CANVAS_BUTTON;
+            }
+
+
+            const stickersIntro =
+                document.getElementById(
+                    "stickersIntro"
+                );
+
+            if (stickersIntro) {
+                stickersIntro.textContent =
+                    SITE_CONFIG.STICKERS_INTRO;
+            }
+
+
+            const stickersDescription =
+                document.getElementById(
+                    "stickersDescription"
+                );
+
+            if (stickersDescription) {
+                stickersDescription.textContent =
+                    SITE_CONFIG.STICKERS_DESCRIPTION;
+            }
+
+
+            const canvasIntro =
+                document.getElementById(
+                    "canvasIntro"
+                );
+
+            if (canvasIntro) {
+                canvasIntro.textContent =
+                    SITE_CONFIG.CANVAS_INTRO;
+            }
+
+
+            const canvasDescription =
+                document.getElementById(
+                    "canvasDescription"
+                );
+
+            if (canvasDescription) {
+                canvasDescription.textContent =
+                    SITE_CONFIG.CANVAS_DESCRIPTION;
+            }
+
+
+            const companyName =
+                document.getElementById(
+                    "companyName"
+                );
+
+            if (companyName) {
+                companyName.textContent =
+                    SITE_CONFIG.COMPANY_NAME;
+            }
+
+
+            const pickupAddress =
+                document.getElementById(
+                    "pickupAddress"
+                );
+
+            if (pickupAddress) {
+                pickupAddress.innerHTML =
+                    escapeHTML(
+                        SITE_CONFIG.PICKUP_TEXT
+                    ).replace(
+                        /\n/g,
+                        "<br>"
+                    );
+            }
+
+
+            const routeButton =
+                document.getElementById(
+                    "routeButton"
+                );
+
+            if (routeButton) {
+                routeButton.href =
+                    SITE_CONFIG.YANDEX_NAVIGATOR_LINK;
+            }
+
         }
 
 
-        /*
-        ============================================================
-        ПРИМЕНЯЕМ НАСТРОЙКИ
-        ============================================================
-        */
+        // =========================================================
+        // НАВИГАЦИЯ
+        // =========================================================
 
+        function initNavigation() {
 
-        setText(
-            "headerBrand",
-            CONFIG.COMPANY_NAME
-        );
+            document.querySelectorAll(
+                "[data-scroll]"
+            ).forEach(button => {
 
-
-        setText(
-            "cityText",
-            CONFIG.CITY
-        );
-
-
-        setText(
-            "heroTitle",
-            CONFIG.HERO_TITLE
-        );
-
-
-        setText(
-            "heroTitleAccent",
-            CONFIG.HERO_TITLE_ACCENT
-        );
-
-
-        setText(
-            "heroSubtitle",
-            CONFIG.HERO_SUBTITLE
-        );
-
-
-        setText(
-            "stickersButtonText",
-            CONFIG.STICKERS_BUTTON
-        );
-
-
-        setText(
-            "canvasButtonText",
-            CONFIG.CANVAS_BUTTON
-        );
-
-
-        setHTML(
-            "stickersDescription",
-            CONFIG.STICKERS_DESCRIPTION
-        );
-
-
-        setHTML(
-            "canvasDescription",
-            CONFIG.CANVAS_DESCRIPTION
-        );
-
-
-        setText(
-            "pickupAddress",
-            CONFIG.PICKUP_ADDRESS
-        );
-
-
-        setText(
-            "footerCompany",
-            CONFIG.COMPANY_NAME
-        );
-
-
-        /*
-        ============================================================
-        ЛОГОТИП
-        ============================================================
-        */
-
-        const mainLogo =
-            document.getElementById("mainLogo");
-
-        if (mainLogo) {
-
-            mainLogo.src =
-                CONFIG.LOGO;
-
-        }
-
-
-        /*
-        ============================================================
-        СОЦИАЛЬНЫЕ ССЫЛКИ
-        ============================================================
-        */
-
-
-        setLink(
-            "stickerVkLink",
-            CONFIG.VK_LINK
-        );
-
-        setLink(
-            "stickerTelegramLink",
-            CONFIG.TELEGRAM_LINK
-        );
-
-        setLink(
-            "stickerWhatsappLink",
-            CONFIG.WHATSAPP_LINK
-        );
-
-        setLink(
-            "stickerVkGroupLink",
-            CONFIG.VK_GROUP_LINK
-        );
-
-
-        setLink(
-            "canvasVkLink",
-            CONFIG.VK_LINK
-        );
-
-        setLink(
-            "canvasTelegramLink",
-            CONFIG.TELEGRAM_LINK
-        );
-
-        setLink(
-            "canvasWhatsappLink",
-            CONFIG.WHATSAPP_LINK
-        );
-
-        setLink(
-            "canvasVkGroupLink",
-            CONFIG.VK_GROUP_LINK
-        );
-
-
-        /*
-        ============================================================
-        ЯНДЕКС НАВИГАТОР
-        ============================================================
-        */
-
-        setLink(
-            "routeButton",
-            CONFIG.YANDEX_NAVIGATOR_LINK
-        );
-
-
-        /*
-        ============================================================
-        ТЕКУЩИЙ ГОД
-        ============================================================
-        */
-
-        document.getElementById(
-            "currentYear"
-        ).textContent =
-            new Date().getFullYear();
-
-
-        /*
-        ============================================================
-        ПЛАВНАЯ НАВИГАЦИЯ
-        ============================================================
-        */
-
-        document
-            .querySelectorAll('a[href^="#"]')
-            .forEach(function(link) {
-
-                link.addEventListener(
+                button.addEventListener(
                     "click",
-                    function(event) {
-
-                        const targetId =
-                            this.getAttribute("href");
-
-                        if (
-                            !targetId ||
-                            targetId === "#"
-                        ) {
-                            return;
-                        }
+                    () => {
 
                         const target =
                             document.querySelector(
-                                targetId
+                                button.dataset.scroll
                             );
 
                         if (!target) return;
 
-                        event.preventDefault();
-
-                        target.scrollIntoView({
-                            behavior: "smooth",
-                            block: "start"
-                        });
-
-                        closeMobileMenu();
+                        smoothScrollTo(target);
 
                     }
                 );
@@ -3246,55 +2578,166 @@
             });
 
 
-        /*
-        ============================================================
-        MOBILE MENU
-        ============================================================
-        */
+            document.querySelectorAll(
+                'a[href^="#"]'
+            ).forEach(link => {
 
-        const menuToggle =
-            document.getElementById(
-                "menuToggle"
+                link.addEventListener(
+                    "click",
+                    event => {
+
+                        const href =
+                            link.getAttribute("href");
+
+                        if (
+                            !href ||
+                            href === "#"
+                        ) {
+                            return;
+                        }
+
+                        const target =
+                            document.querySelector(
+                                href
+                            );
+
+                        if (!target) return;
+
+                        event.preventDefault();
+
+                        closeMobileMenu();
+
+                        smoothScrollTo(target);
+
+                    }
+                );
+
+            });
+
+
+            const nav =
+                document.getElementById(
+                    "siteNav"
+                );
+
+            window.addEventListener(
+                "scroll",
+                () => {
+
+                    if (window.scrollY > 25) {
+                        nav.classList.add("scrolled");
+                    } else {
+                        nav.classList.remove("scrolled");
+                    }
+
+                },
+                { passive: true }
             );
 
-        const mobileNav =
-            document.getElementById(
-                "mobileNav"
+        }
+
+
+        function smoothScrollTo(element) {
+
+            const navHeight =
+                document.querySelector(
+                    ".site-nav"
+                )?.offsetHeight || 0;
+
+            const targetPosition =
+                element.getBoundingClientRect().top +
+                window.scrollY -
+                navHeight -
+                15;
+
+            window.scrollTo({
+                top: targetPosition,
+                behavior: "smooth"
+            });
+
+        }
+
+
+        // =========================================================
+        // MOBILE MENU
+        // =========================================================
+
+        function initMobileMenu() {
+
+            const toggle =
+                document.getElementById(
+                    "menuToggle"
+                );
+
+            const menu =
+                document.getElementById(
+                    "mobileMenu"
+                );
+
+            if (!toggle || !menu) return;
+
+            toggle.addEventListener(
+                "click",
+                () => {
+
+                    const active =
+                        menu.classList.toggle(
+                            "active"
+                        );
+
+                    toggle.classList.toggle(
+                        "active",
+                        active
+                    );
+
+                    toggle.setAttribute(
+                        "aria-expanded",
+                        active
+                    );
+
+                    document.body.classList.toggle(
+                        "menu-open",
+                        active
+                    );
+
+                }
             );
 
+            menu.querySelectorAll("a").forEach(
+                link => {
 
-        function openMobileMenu() {
+                    link.addEventListener(
+                        "click",
+                        () => {
+                            closeMobileMenu();
+                        }
+                    );
 
-            menuToggle.classList.add(
-                "active"
+                }
             );
 
-            mobileNav.classList.add(
-                "active"
-            );
-
-            menuToggle.setAttribute(
-                "aria-expanded",
-                "true"
-            );
-
-            document.body.classList.add(
-                "menu-open"
-            );
         }
 
 
         function closeMobileMenu() {
 
-            menuToggle.classList.remove(
-                "active"
-            );
+            const toggle =
+                document.getElementById(
+                    "menuToggle"
+                );
 
-            mobileNav.classList.remove(
-                "active"
-            );
+            const menu =
+                document.getElementById(
+                    "mobileMenu"
+                );
 
-            menuToggle.setAttribute(
+            if (!toggle || !menu) return;
+
+            menu.classList.remove("active");
+
+            toggle.classList.remove("active");
+
+            toggle.setAttribute(
                 "aria-expanded",
                 "false"
             );
@@ -3302,492 +2745,137 @@
             document.body.classList.remove(
                 "menu-open"
             );
-        }
-
-
-        menuToggle.addEventListener(
-            "click",
-            function() {
-
-                const isOpen =
-                    mobileNav.classList.contains(
-                        "active"
-                    );
-
-                if (isOpen) {
-                    closeMobileMenu();
-                } else {
-                    openMobileMenu();
-                }
-
-            }
-        );
-
-
-        /*
-        ============================================================
-        ЗАКРЫТИЕ МЕНЮ ПО ESC
-        ============================================================
-        */
-
-        document.addEventListener(
-            "keydown",
-            function(event) {
-
-                if (
-                    event.key === "Escape"
-                ) {
-                    closeMobileMenu();
-                }
-
-            }
-        );
-
-
-        /*
-        ============================================================
-        HEADER ПО SCROLL
-        ============================================================
-        */
-
-        const header =
-            document.getElementById(
-                "header"
-            );
-
-
-        function updateHeader() {
-
-            if (window.scrollY > 30) {
-
-                header.classList.add(
-                    "scrolled"
-                );
-
-            } else {
-
-                header.classList.remove(
-                    "scrolled"
-                );
-
-            }
 
         }
 
 
-        window.addEventListener(
-            "scroll",
-            updateHeader,
-            {
-                passive: true
+        // =========================================================
+        // SCROLL REVEAL
+        // =========================================================
+
+        function initRevealAnimations() {
+
+            const elements =
+                document.querySelectorAll(
+                    ".reveal"
+                );
+
+            if (
+                !("IntersectionObserver" in window)
+            ) {
+
+                elements.forEach(
+                    element =>
+                        element.classList.add(
+                            "visible"
+                        )
+                );
+
+                return;
             }
-        );
 
 
-        updateHeader();
+            const observer =
+                new IntersectionObserver(
+                    entries => {
 
+                        entries.forEach(
+                            entry => {
 
-        /*
-        ============================================================
-        REVEAL ANIMATIONS
-        ============================================================
-        */
+                                if (
+                                    entry.isIntersecting
+                                ) {
 
-        const revealElements =
-            document.querySelectorAll(
-                ".reveal"
-            );
+                                    entry.target.classList.add(
+                                        "visible"
+                                    );
 
+                                    observer.unobserve(
+                                        entry.target
+                                    );
 
-        const revealObserver =
-            new IntersectionObserver(
-                function(entries) {
-
-                    entries.forEach(
-                        function(entry) {
-
-                            if (
-                                entry.isIntersecting
-                            ) {
-
-                                entry.target.classList.add(
-                                    "visible"
-                                );
-
-                                revealObserver.unobserve(
-                                    entry.target
-                                );
+                                }
 
                             }
-
-                        }
-                    );
-
-                },
-                {
-                    threshold: 0.12,
-                    rootMargin:
-                        "0px 0px -40px 0px"
-                }
-            );
-
-
-        revealElements.forEach(
-            function(element) {
-
-                revealObserver.observe(
-                    element
-                );
-
-            }
-        );
-
-
-        /*
-        ============================================================
-        TIFFANY PARTICLES
-        ============================================================
-        */
-
-        const particlesContainer =
-            document.getElementById(
-                "particles"
-            );
-
-
-        function random(min, max) {
-
-            return Math.random()
-                * (max - min)
-                + min;
-
-        }
-
-
-        const particleCount =
-            window.innerWidth < 600
-                ? 34
-                : 58;
-
-
-        for (
-            let i = 0;
-            i < particleCount;
-            i++
-        ) {
-
-            const particle =
-                document.createElement(
-                    "span"
-                );
-
-            particle.className =
-                "particle";
-
-
-            const size =
-                random(2, 7);
-
-
-            particle.style.setProperty(
-                "--size",
-                size + "px"
-            );
-
-
-            particle.style.setProperty(
-                "--x",
-                random(0, 100) + "%"
-            );
-
-
-            particle.style.setProperty(
-                "--y",
-                random(0, 100) + "%"
-            );
-
-
-            particle.style.setProperty(
-                "--opacity",
-                random(.18, .72)
-            );
-
-
-            particle.style.setProperty(
-                "--duration",
-                random(5, 13) + "s"
-            );
-
-
-            particle.style.setProperty(
-                "--delay",
-                random(-12, 0) + "s"
-            );
-
-
-            particle.style.setProperty(
-                "--move-x",
-                random(-90, 90) + "px"
-            );
-
-
-            particle.style.setProperty(
-                "--move-y",
-                random(-100, 100) + "px"
-            );
-
-
-            particlesContainer.appendChild(
-                particle
-            );
-
-        }
-
-
-        /*
-        ============================================================
-        ЛЁГКИЙ PARALLAX ФОНОВОГО СВЕЧЕНИЯ
-        ============================================================
-        */
-
-        const backgroundGlow =
-            document.getElementById(
-                "backgroundGlow"
-            );
-
-
-        let mouseX = 0;
-        let mouseY = 0;
-
-        let targetX = 0;
-        let targetY = 0;
-
-
-        if (
-            window.matchMedia(
-                "(pointer: fine)"
-            ).matches
-        ) {
-
-            window.addEventListener(
-                "mousemove",
-                function(event) {
-
-                    targetX =
-                        (
-                            event.clientX /
-                            window.innerWidth
-                        ) - .5;
-
-                    targetY =
-                        (
-                            event.clientY /
-                            window.innerHeight
-                        ) - .5;
-
-                },
-                {
-                    passive: true
-                }
-            );
-
-
-            function animateGlow() {
-
-                mouseX +=
-                    (targetX - mouseX)
-                    * .04;
-
-                mouseY +=
-                    (targetY - mouseY)
-                    * .04;
-
-
-                backgroundGlow.style.transform =
-                    `
-                    translate(
-                        calc(-50% + ${mouseX * 90}px),
-                        calc(-50% + ${mouseY * 90}px)
-                    )
-                    `;
-
-
-                requestAnimationFrame(
-                    animateGlow
-                );
-
-            }
-
-
-            animateGlow();
-
-        }
-
-
-        /*
-        ============================================================
-        SHARE
-        ============================================================
-        */
-
-        const shareButton =
-            document.getElementById(
-                "shareButton"
-            );
-
-
-        shareButton.addEventListener(
-            "click",
-            async function() {
-
-                const shareData = {
-
-                    title:
-                        document.title,
-
-                    text:
-                        CONFIG.COMPANY_NAME,
-
-                    url:
-                        window.location.href
-
-                };
-
-
-                /*
-                 * Современное мобильное /
-                 * браузерное меню Share.
-                 */
-
-                if (
-                    navigator.share
-                ) {
-
-                    try {
-
-                        await navigator.share(
-                            shareData
                         );
 
-                    } catch (error) {
-
-                        /*
-                         * Пользователь мог просто
-                         * закрыть окно Share.
-                         */
-
+                    },
+                    {
+                        threshold: .12,
+                        rootMargin: "0px 0px -50px 0px"
                     }
-
-                    return;
-
-                }
+                );
 
 
-                /*
-                 * Fallback для браузеров,
-                 * где navigator.share отсутствует.
-                 */
+            elements.forEach(
+                element =>
+                    observer.observe(element)
+            );
 
-                try {
-
-                    await navigator.clipboard.writeText(
-                        window.location.href
-                    );
+        }
 
 
-                    const originalText =
-                        shareButton.innerHTML;
+        // =========================================================
+        // SOCIAL LINKS
+        // =========================================================
+
+        function initLinks() {
+
+            const linkMap = {
+
+                VK_LINK:
+                    SITE_CONFIG.VK_LINK,
+
+                VK_GROUP_LINK:
+                    SITE_CONFIG.VK_GROUP_LINK,
+
+                TELEGRAM_LINK:
+                    SITE_CONFIG.TELEGRAM_LINK,
+
+                WHATSAPP_LINK:
+                    SITE_CONFIG.WHATSAPP_LINK
+
+            };
 
 
-                    shareButton.innerHTML =
-                        `
-                        <svg width="18"
-                             height="18"
-                             viewBox="0 0 24 24"
-                             fill="none">
+            document.querySelectorAll(
+                "[data-link]"
+            ).forEach(link => {
 
-                            <path
-                                d="m5 12 4 4L19 6"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"/>
+                const key =
+                    link.dataset.link;
 
-                        </svg>
-
-                        Ссылка скопирована
-                        `;
-
-
-                    setTimeout(
-                        function() {
-
-                            shareButton.innerHTML =
-                                originalText;
-
-                        },
-                        1800
-                    );
-
-
-                } catch (error) {
-
-                    alert(
-                        "Скопируйте адрес страницы из адресной строки браузера."
-                    );
-
-                }
-
-            }
-        );
-
-
-        /*
-        ============================================================
-        ЗАЩИТА ОТ НЕЖЕЛАТЕЛЬНОГО ПЕРЕХОДА
-        ДЛЯ ПУСТЫХ СОЦИАЛЬНЫХ ССЫЛОК
-        ============================================================
-        */
-
-
-        const emptyLinks = [
-
-            "stickerVkLink",
-            "stickerTelegramLink",
-            "stickerWhatsappLink",
-            "stickerVkGroupLink",
-
-            "canvasVkLink",
-            "canvasTelegramLink",
-            "canvasWhatsappLink",
-            "canvasVkGroupLink"
-
-        ];
-
-
-        emptyLinks.forEach(
-            function(id) {
-
-                const element =
-                    document.getElementById(id);
-
-                if (!element) return;
-
-
-                const href =
-                    element.getAttribute(
-                        "href"
-                    );
+                const url =
+                    linkMap[key];
 
 
                 if (
-                    !href ||
-                    href === "#"
+                    typeof url === "string" &&
+                    url.trim() !== ""
                 ) {
 
-                    element.addEventListener(
+                    link.href = url;
+
+                    link.target = "_blank";
+
+                    link.rel =
+                        "noopener noreferrer";
+
+                    link.classList.remove(
+                        "disabled"
+                    );
+
+                } else {
+
+                    link.href = "#";
+
+                    link.classList.add(
+                        "disabled"
+                    );
+
+                    link.addEventListener(
                         "click",
-                        function(event) {
+                        event => {
 
                             event.preventDefault();
 
@@ -3796,49 +2884,462 @@
 
                 }
 
-            }
-        );
+            });
+
+        }
 
 
-        /*
-        ============================================================
-        ПЕРЕХОД К НАЧАЛУ ПО КЛИКУ НА ЛОГОТИП В HEADER
-        ============================================================
-        */
+        // =========================================================
+        // SHARE
+        // =========================================================
 
-        const headerBrand =
-            document.querySelector(
-                ".header-brand"
+        function initShare() {
+
+            const button =
+                document.getElementById(
+                    "shareButton"
+                );
+
+            const text =
+                document.getElementById(
+                    "shareText"
+                );
+
+            if (!button) return;
+
+
+            button.addEventListener(
+                "click",
+                async () => {
+
+                    const shareData = {
+
+                        title:
+                            SITE_CONFIG.COMPANY_NAME,
+
+                        text:
+                            SITE_CONFIG.HERO_TITLE,
+
+                        url:
+                            window.location.href
+
+                    };
+
+
+                    if (
+                        navigator.share
+                    ) {
+
+                        try {
+
+                            await navigator.share(
+                                shareData
+                            );
+
+                        } catch (error) {
+
+                            if (
+                                error.name !==
+                                "AbortError"
+                            ) {
+
+                                fallbackShare();
+
+                            }
+
+                        }
+
+                    } else {
+
+                        fallbackShare();
+
+                    }
+
+                }
             );
 
 
-        headerBrand.addEventListener(
-            "click",
-            function(event) {
+            async function fallbackShare() {
 
-                event.preventDefault();
+                try {
 
-                window.scrollTo({
+                    await navigator.clipboard.writeText(
+                        window.location.href
+                    );
 
-                    top: 0,
+                    if (text) {
 
-                    behavior: "smooth"
+                        const original =
+                            text.textContent;
 
-                });
+                        text.textContent =
+                            "Ссылка скопирована";
+
+                        setTimeout(
+                            () => {
+                                text.textContent =
+                                    original;
+                            },
+                            1800
+                        );
+
+                    }
+
+                } catch (error) {
+
+                    window.prompt(
+                        "Скопируйте ссылку:",
+                        window.location.href
+                    );
+
+                }
 
             }
-        );
+
+        }
 
 
-        /*
-        ============================================================
-        ГОТОВО
-        ============================================================
-        */
+        // =========================================================
+        // PARTICLES
+        // =========================================================
 
-        console.log(
-            "Premium website initialized."
-        );
+        function initParticles() {
+
+            const canvas =
+                document.getElementById(
+                    "particles"
+                );
+
+            if (!canvas) return;
+
+            const ctx =
+                canvas.getContext("2d");
+
+            if (!ctx) return;
+
+
+            let width = 0;
+
+            let height = 0;
+
+            let particles = [];
+
+
+            const isReducedMotion =
+                window.matchMedia(
+                    "(prefers-reduced-motion: reduce)"
+                ).matches;
+
+
+            const config = {
+
+                color: "#4CD5D3",
+
+                density:
+                    window.innerWidth < 600
+                        ? 22
+                        : 45,
+
+                minRadius: 1.1,
+
+                maxRadius: 3.7,
+
+                minSpeed: .08,
+
+                maxSpeed: .28
+
+            };
+
+
+            function resize() {
+
+                const dpr =
+                    Math.min(
+                        window.devicePixelRatio || 1,
+                        2
+                    );
+
+                width =
+                    window.innerWidth;
+
+                height =
+                    window.innerHeight;
+
+                canvas.width =
+                    width * dpr;
+
+                canvas.height =
+                    height * dpr;
+
+                canvas.style.width =
+                    width + "px";
+
+                canvas.style.height =
+                    height + "px";
+
+                ctx.setTransform(
+                    dpr,
+                    0,
+                    0,
+                    dpr,
+                    0,
+                    0
+                );
+
+
+                createParticles();
+
+            }
+
+
+            function random(min, max) {
+
+                return Math.random() *
+                    (max - min) +
+                    min;
+
+            }
+
+
+            function createParticles() {
+
+                particles = [];
+
+                const count =
+                    config.density;
+
+                for (
+                    let i = 0;
+                    i < count;
+                    i++
+                ) {
+
+                    particles.push({
+
+                        x:
+                            Math.random() *
+                            width,
+
+                        y:
+                            Math.random() *
+                            height,
+
+                        radius:
+                            random(
+                                config.minRadius,
+                                config.maxRadius
+                            ),
+
+                        speedX:
+                            random(
+                                -config.maxSpeed,
+                                config.maxSpeed
+                            ),
+
+                        speedY:
+                            random(
+                                -config.maxSpeed,
+                                config.maxSpeed
+                            ),
+
+                        opacity:
+                            random(
+                                .16,
+                                .65
+                            ),
+
+                        pulse:
+                            Math.random() *
+                            Math.PI * 2
+
+                    });
+
+                }
+
+            }
+
+
+            function draw() {
+
+                ctx.clearRect(
+                    0,
+                    0,
+                    width,
+                    height
+                );
+
+
+                particles.forEach(
+                    particle => {
+
+                        particle.pulse += .007;
+
+                        const opacity =
+                            particle.opacity *
+                            (
+                                .72 +
+                                Math.sin(
+                                    particle.pulse
+                                ) * .28
+                            );
+
+
+                        ctx.beginPath();
+
+                        ctx.arc(
+                            particle.x,
+                            particle.y,
+                            particle.radius,
+                            0,
+                            Math.PI * 2
+                        );
+
+
+                        ctx.fillStyle =
+                            hexToRgba(
+                                config.color,
+                                opacity
+                            );
+
+                        ctx.shadowBlur =
+                            particle.radius * 7;
+
+                        ctx.shadowColor =
+                            config.color;
+
+                        ctx.fill();
+
+                        ctx.shadowBlur = 0;
+
+
+                        if (!isReducedMotion) {
+
+                            particle.x +=
+                                particle.speedX;
+
+                            particle.y +=
+                                particle.speedY;
+
+
+                            if (
+                                particle.x <
+                                -10
+                            ) {
+                                particle.x =
+                                    width + 10;
+                            }
+
+                            if (
+                                particle.x >
+                                width + 10
+                            ) {
+                                particle.x = -10;
+                            }
+
+                            if (
+                                particle.y <
+                                -10
+                            ) {
+                                particle.y =
+                                    height + 10;
+                            }
+
+                            if (
+                                particle.y >
+                                height + 10
+                            ) {
+                                particle.y = -10;
+                            }
+
+                        }
+
+                    }
+                );
+
+
+                if (!isReducedMotion) {
+
+                    requestAnimationFrame(draw);
+
+                }
+
+            }
+
+
+            function hexToRgba(
+                hex,
+                alpha
+            ) {
+
+                const clean =
+                    hex.replace("#", "");
+
+                const bigint =
+                    parseInt(clean, 16);
+
+                const r =
+                    (bigint >> 16) & 255;
+
+                const g =
+                    (bigint >> 8) & 255;
+
+                const b =
+                    bigint & 255;
+
+                return `rgba(${r},${g},${b},${alpha})`;
+
+            }
+
+
+            window.addEventListener(
+                "resize",
+                resize,
+                { passive: true }
+            );
+
+
+            resize();
+
+            draw();
+
+        }
+
+
+        // =========================================================
+        // YEAR
+        // =========================================================
+
+        function initYear() {
+
+            const year =
+                document.getElementById(
+                    "copyrightYear"
+                );
+
+            if (year) {
+
+                year.textContent =
+                    new Date().getFullYear();
+
+            }
+
+        }
+
+
+        // =========================================================
+        // HTML ESCAPE
+        // =========================================================
+
+        function escapeHTML(value) {
+
+            return String(value)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+
+        }
 
     </script>
 
