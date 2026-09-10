@@ -1,366 +1,1566 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" class="dark scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>METIZ PROJECT — Печать, наклейки, плоттерная резка</title>
-    <meta name="description" content="METIZ PROJECT — изготовление наклеек, плоттерная резка, брендирование автомобилей и реклама в Санкт-Петербурге.">
-    <meta name="theme-color" content="#080c0b">
+    <title>METIZ PROJECT — Наклейки, плоттерная резка, брендирование авто | Санкт-Петербург</title>
+    <meta name="description" content="METIZ PROJECT — Изготовление наклеек, плоттерная резка винила, брендирование автомобилей, оформление витрин и печать на холсте в Санкт-Петербурге.">
+    <meta name="theme-color" content="#030605">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@600;700;800&family=Caveat:wght@700&family=Russo+One&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        tiffany: {
+                            DEFAULT: '#4cd5d3',
+                            bright: '#72fff6',
+                            dark: '#159c9b',
+                            glow: 'rgba(76, 213, 211, 0.45)',
+                            soft: 'rgba(76, 213, 211, 0.08)'
+                        },
+                        darkbg: {
+                            DEFAULT: '#030605',
+                            card: '#08110f',
+                            surface: '#0d1a17'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                        russo: ['Russo One', 'sans-serif'],
+                        hand: ['Caveat', 'cursive']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <style>
         :root {
             --tiffany: #4cd5d3;
-            --tiffany-hover: #6df9f0;
-            --tiffany-glow: rgba(76, 213, 211, 0.25);
-            --bg-dark: #080c0b;
-            --bg-card: rgba(255, 255, 255, 0.035);
-            --bg-card-hover: rgba(255, 255, 255, 0.07);
-            --border: rgba(255, 255, 255, 0.08);
-            --border-tiffany: rgba(76, 213, 211, 0.35);
-            --text-main: #ffffff;
-            --text-muted: #94a3a0;
-            --radius: 16px;
-            --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            --tiffany-bright: #72fff6;
+            --tiffany-dark: #159c9b;
+            --tiffany-glow: rgba(76, 213, 211, 0.35);
+            --bg-main: #030605;
+            --bg-secondary: #07100e;
         }
 
         body {
-            font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            line-height: 1.5;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            background-color: var(--bg-main);
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            perspective: 1000px;
+        }
+
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: rgba(13, 26, 23, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(76, 213, 211, 0.18);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            transform-style: preserve-3d;
+            will-change: transform;
+        }
+
+        .glass-card-hover {
+            transition: border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass-card-hover:hover {
+            border-color: rgba(76, 213, 211, 0.6);
+            box-shadow: 0 20px 45px rgba(76, 213, 211, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+        }
+
+        /* 3D Tilt Card Container */
+        .tilt-card {
+            transition: transform 0.15s ease-out;
+        }
+
+        /* Glowing Accent Text & Borders */
+        .tiffany-text-glow {
+            text-shadow: 0 0 18px rgba(76, 213, 211, 0.6), 0 0 35px rgba(76, 213, 211, 0.3);
+        }
+
+        .tiffany-border-glow {
+            box-shadow: 0 0 20px rgba(76, 213, 211, 0.4);
+        }
+
+        /* Animated Glowing Line Sheen for City Badge */
+        .sheen-badge {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sheen-badge::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -150%;
+            width: 100%;
+            height: 200%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(114, 255, 246, 0.4),
+                transparent
+            );
+            transform: rotate(25deg);
+            animation: sheenMove 4s infinite;
+        }
+
+        @keyframes sheenMove {
+            0% { left: -150%; }
+            30% { left: 150%; }
+            100% { left: 150%; }
+        }
+
+        /* Ambient Cyber Grid Overlay */
+        .bg-cyber-grid {
             background-image: 
-                radial-gradient(circle at 50% 0%, rgba(76, 213, 211, 0.12), transparent 45%),
-                radial-gradient(circle at 90% 90%, rgba(76, 213, 211, 0.04), transparent 35%);
-            background-attachment: fixed;
-            -webkit-font-smoothing: antialiased;
+                linear-gradient(rgba(76, 213, 211, 0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(76, 213, 211, 0.035) 1px, transparent 1px);
+            background-size: 40px 40px;
         }
 
-        .container {
-            width: 100%;
-            max-width: 860px;
-            padding: 48px 20px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 36px;
+        /* Custom Tiffany Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #030605;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #159c9b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4cd5d3;
         }
 
-        /* HEADER */
-        header {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            gap: 16px;
+        /* Dynamic Ticker Marquee */
+        @keyframes marquee {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-50%, 0, 0); }
+        }
+        .animate-marquee {
+            animation: marquee 20s linear infinite;
+        }
+        .animate-marquee:hover {
+            animation-play-state: paused;
         }
 
-        .logo-wrap {
-            max-width: 290px;
-            width: 100%;
-            display: flex;
-            justify-content: center;
+        /* Material Textures for Live Visualizer */
+        .holographic-foil {
+            background: linear-gradient(135deg, 
+                #ff007f 0%, 
+                #7f00ff 20%, 
+                #00d4ff 40%, 
+                #00ff66 60%, 
+                #ffea00 80%, 
+                #ff007f 100%
+            );
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: holoShift 4s ease infinite;
+            filter: drop-shadow(0 0 10px rgba(114, 255, 246, 0.45));
         }
 
-        .logo-wrap img {
-            width: 100%;
-            height: auto;
-            object-fit: contain;
-            filter: drop-shadow(0 0 16px var(--tiffany-glow));
+        @keyframes holoShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        .location-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 11px;
-            letter-spacing: 0.22em;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            font-weight: 700;
+        .chrome-metal {
+            background: linear-gradient(180deg, #ffffff 0%, #a1a1a1 45%, #ffffff 50%, #444444 75%, #d1d1d1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 2px 8px rgba(255, 255, 255, 0.35));
         }
 
-        .status-dot {
-            width: 6px;
-            height: 6px;
-            background-color: var(--tiffany);
+        .neon-glow-material {
+            color: #72fff6;
+            text-shadow: 0 0 10px #4cd5d3, 0 0 25px #4cd5d3, 0 0 50px #159c9b;
+        }
+
+        /* Status Online Pulse */
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.4; transform: scale(0.9); }
+            50% { opacity: 1; transform: scale(1.15); }
+        }
+        .pulse-online {
+            animation: pulseGlow 2s ease-in-out infinite;
+        }
+
+        /* Dynamic Cursor Follow Glow Spotlight */
+        #cursor-glow {
+            pointer-events: none;
+            position: fixed;
+            width: 450px;
+            height: 450px;
             border-radius: 50%;
-            box-shadow: 0 0 8px var(--tiffany);
+            background: radial-gradient(circle, rgba(76, 213, 211, 0.15) 0%, rgba(76, 213, 211, 0) 70%);
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s;
+            z-index: 1;
         }
 
-        /* HERO */
-        .hero {
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
+        /* Before / After Slider Styling */
+        .ba-slider {
+            position: relative;
+            user-select: none;
+            overflow: hidden;
+        }
+        .ba-resize {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 50%;
+            overflow: hidden;
+        }
+        .ba-handle {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 4px;
+            background: #72fff6;
+            box-shadow: 0 0 12px rgba(114, 255, 246, 0.8);
+            cursor: ew-resize;
+            transform: translateX(-50%);
         }
 
-        .hero h1 {
-            font-size: clamp(26px, 5.5vw, 40px);
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            line-height: 1.15;
-        }
-
-        .hero h1 span {
-            color: var(--tiffany);
-        }
-
-        .hero p {
-            color: var(--text-muted);
-            font-size: clamp(14px, 2.5vw, 16px);
-            max-width: 520px;
-        }
-
-        /* SECTION TITLE */
-        .section-title {
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            color: var(--tiffany);
-            text-align: center;
-            margin-bottom: -12px;
-        }
-
-        /* SERVICES GRID */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 16px;
-        }
-
-        .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 24px;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            transition: var(--transition);
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .card:hover {
-            background: var(--bg-card-hover);
-            border-color: var(--border-tiffany);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 18px var(--tiffany-glow);
-        }
-
-        .card-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 10px;
-            background: rgba(76, 213, 211, 0.1);
-            color: var(--tiffany);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 6px;
-        }
-
-        .card-icon svg {
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
-        }
-
-        .card h3 {
-            font-size: 17px;
-            font-weight: 700;
-        }
-
-        .card p {
-            font-size: 13px;
-            color: var(--text-muted);
-            line-height: 1.5;
-        }
-
-        /* BUTTONS / CONTACTS */
-        .buttons-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 12px;
-        }
-
-        .btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 16px 20px;
-            border-radius: 14px;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 700;
-            transition: var(--transition);
-            border: 1px solid var(--border);
-            background: var(--bg-card);
-            color: var(--text-main);
-        }
-
-        .btn-primary {
-            background: var(--tiffany);
-            color: #030605;
-            border-color: var(--tiffany);
-            box-shadow: 0 4px 20px var(--tiffany-glow);
-        }
-
-        .btn-primary:hover {
-            background: var(--tiffany-hover);
-            border-color: var(--tiffany-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(76, 213, 211, 0.4);
-        }
-
-        .btn-secondary:hover {
-            background: var(--bg-card-hover);
-            border-color: var(--border-tiffany);
-            color: var(--tiffany);
-            transform: translateY(-2px);
-        }
-
-        .btn svg {
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
-            flex-shrink: 0;
-        }
-
-        /* FOOTER */
-        footer {
-            text-align: center;
-            padding-top: 20px;
-            font-size: 11px;
-            color: var(--text-muted);
-            border-top: 1px solid var(--border);
-            letter-spacing: 0.1em;
-        }
-
-        /* MOBILE ADJUSTMENTS */
-        @media (max-width: 600px) {
-            .container {
-                padding: 28px 16px;
-                gap: 28px;
-            }
-
-            .logo-wrap {
-                max-width: 230px;
-            }
-
-            .grid, .buttons-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .card {
-                padding: 20px;
-            }
-
-            .btn {
-                padding: 14px 18px;
-            }
+        /* Magnetic button transition */
+        .magnetic-btn {
+            transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+            will-change: transform;
         }
     </style>
 </head>
-<body>
+<body class="relative min-h-screen bg-darkbg text-white selection:bg-tiffany selection:text-black">
 
-    <div class="container">
+    <!-- CURSOR SPOTLIGHT GLOW -->
+    <div id="cursor-glow" class="hidden md:block"></div>
 
-        <!-- HEADER / LOGO -->
-        <header>
-            <div class="logo-wrap">
-                <img src="metiz-project-logo.png" alt="METIZ PROJECT">
+    <!-- BACKGROUND PARTICLES CANVAS -->
+    <canvas id="bg-canvas" class="fixed inset-0 pointer-events-none z-0 opacity-50"></canvas>
+    
+    <!-- CYBER GRID OVERLAY -->
+    <div class="fixed inset-0 bg-cyber-grid pointer-events-none z-0 opacity-40"></div>
+    <div class="fixed top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-tiffany/10 rounded-full blur-[180px] pointer-events-none z-0"></div>
+
+    <!-- INTRO SPLASH SCREEN -->
+    <div id="intro-splash" class="fixed inset-0 z-[9999] bg-[#030605] flex flex-col items-center justify-center transition-opacity duration-700 pointer-events-auto">
+        <div class="relative flex flex-col items-center p-6 text-center max-w-sm">
+            <div id="intro-logo" class="w-72 sm:w-96 transition-all duration-700 transform scale-90 opacity-0 flex justify-center items-center">
+                <img src="metiz-project-logo.png" 
+                     alt="METIZ PROJECT Logo" 
+                     class="max-h-24 w-auto object-contain drop-shadow-[0_0_25px_rgba(76,213,211,0.5)]"
+                     onerror="this.onerror=null; this.parentNode.innerHTML='<svg viewBox=\'0 0 460 110\' class=\'w-full h-auto drop-shadow-[0_0_25px_rgba(76,213,211,0.4)]\'><path d=\'M 65 15 A 45 45 0 1 0 65 95\' fill=\'none\' stroke=\'#4cd5d3\' stroke-width=\'12\' stroke-linecap=\'round\'/><text x=\'35\' y=\'68\' font-family=\'Russo One, sans-serif\' font-size=\'44\' fill=\'#72fff6\' font-style=\'italic\'>Metiz</text><line x1=\'125\' y1=\'78\' x2=\'335\' y2=\'78\' stroke=\'#4cd5d3\' stroke-width=\'4\' stroke-linecap=\'round\'/><text x=\'215\' y=\'68\' font-family=\'Space Grotesk, sans-serif\' font-weight=\'700\' font-size=\'38\' fill=\'#ffffff\' letter-spacing=\'3\'>PROJECT</text><path d=\'M 395 95 A 45 45 0 1 0 395 15\' fill=\'none\' stroke=\'#4cd5d3\' stroke-width=\'12\' stroke-linecap=\'round\'/></svg>';">
             </div>
-            <div class="location-badge">
-                <span class="status-dot"></span>
-                Санкт-Петербург
+            <div id="intro-sub" class="mt-4 text-[10px] sm:text-xs font-bold tracking-[0.3em] text-tiffany/90 uppercase opacity-0 transition-all duration-500 delay-300">
+                САНКТ-ПЕТЕРБУРГ • ПЕЧАТЬ И ПЛОТТЕРНАЯ РЕЗКА
             </div>
-        </header>
-
-        <!-- HERO -->
-        <section class="hero">
-            <h1>ПЕЧАТЬ И ПЛОТТЕРНАЯ РЕЗКА <span>ПОД ВАШИ ЗАДАЧИ</span></h1>
-            <p>Изготовление наклеек, брендирование транспорта, витрин и интерьерная печать любой сложности.</p>
-        </section>
-
-        <!-- SERVICES -->
-        <div class="section-title">Наши услуги</div>
-        <section class="grid">
-
-            <div class="card">
-                <div class="card-icon">
-                    <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 10h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z"/></svg>
-                </div>
-                <h3>Плоттерная резка</h3>
-                <p>Вырезка элементов любой формы из виниловой пленки для авто, витрин и рекламы.</p>
+            <div id="intro-bar" class="w-36 h-1 bg-tiffany/20 rounded-full mt-6 overflow-hidden opacity-0">
+                <div class="h-full bg-tiffany animate-pulse"></div>
             </div>
-
-            <div class="card">
-                <div class="card-icon">
-                    <svg viewBox="0 0 24 24"><path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/></svg>
-                </div>
-                <h3>Печать наклеек</h3>
-                <p>Индивидуальные стикеры, наклейки на продукцию, упаковку и кузов автомобиля.</p>
-            </div>
-
-            <div class="card">
-                <div class="card-icon">
-                    <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>
-                </div>
-                <h3>Брендирование</h3>
-                <p>Оклейка коммерческого и личного транспорта, оформление магазинов и витрин.</p>
-            </div>
-
-            <div class="card">
-                <div class="card-icon">
-                    <svg viewBox="0 0 24 24"><path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H3V5h18v14zm-10-7l-2.03 2.71L7.5 12 4.5 16h15l-4.5-6z"/></svg>
-                </div>
-                <h3>Картины на холсте</h3>
-                <p>Интерьерная печать фотографий и картин на качественном натуральном холсте.</p>
-            </div>
-
-        </section>
-
-        <!-- CONTACTS -->
-        <div class="section-title">Связаться с нами</div>
-        <section class="buttons-grid">
-
-            <a href="https://vk.ru/metiz_project" target="_blank" rel="noopener" class="btn btn-primary">
-                <svg viewBox="0 0 24 24"><path d="M13.07 18.75h1.56s.47-.05.71-.31c.22-.25.21-.72.21-.72s-.03-2.2.99-2.52c1-.31 2.28 2.13 3.64 3.07.98.68 1.73.53 1.73.53l3.47-.05s1.82-.11.96-1.55c-.07-.12-.51-1.06-2.64-3-2.23-2.03-1.93-1.7.76-5.21 1.64-2.15 2.3-3.46 2.09-4.02-.2-.54-1.43-.4-1.43-.4l-3.9.02s-.29-.04-.5.09c-.21.13-.34.43-.34.43s-.62 1.65-1.44 3.05c-1.74 2.96-2.44 3.12-2.73 2.93-.67-.43-.5-1.72-.5-2.64 0-2.87.43-4.07-.84-4.38-.42-.1-.73-.17-1.8-.18-1.37-.01-2.53.01-3.19.33-.44.21-.78.68-.57.71.26.03.86.16 1.18.59.41.55.4 1.78.4 1.78s.24 3.39-.55 3.81c-.54.29-1.28-.3-2.87-2.99-.81-1.38-1.42-2.9-1.42-2.9s-.12-.29-.33-.44c-.26-.19-.62-.25-.62-.25l-3.71.02s-.56.02-.77.26c-.18.21-.01.65-.01.65s2.9 6.79 6.19 10.22c3.02 3.15 6.45 2.94 6.45 2.94h1.56z"/></svg>
-                Группа ВКонтакте
-            </a>
-
-            <a href="https://t.me/metizproject" target="_blank" rel="noopener" class="btn btn-secondary">
-                <svg viewBox="0 0 24 24"><path d="M21.7 3.25 2.95 10.48c-1.28.51-1.27 1.22-.23 1.54l4.81 1.5 1.84 5.63c.22.61.11.85.74.85.49 0 .71-.22.98-.48l2.34-2.27 4.86 3.59c.89.49 1.53.23 1.75-.83l3.12-14.69c.33-1.31-.5-1.9-1.46-1.57ZM8.26 13.15l10.94-6.9c.55-.34 1.06-.16.64.21l-8.9 8.04-.35 3.75-2.33-5.1Z"/></svg>
-                Telegram
-            </a>
-
-            <a href="https://wa.me/message/RDHE3F4PU2D3L1" target="_blank" rel="noopener" class="btn btn-secondary">
-                <svg viewBox="0 0 24 24"><path d="M20.52 3.48A11.83 11.83 0 0 0 12.1 0C5.55 0 .22 5.33.22 11.88c0 2.09.55 4.13 1.6 5.93L.12 24l6.33-1.66a11.86 11.86 0 0 0 5.65 1.44h.01c6.54 0 11.87-5.33 11.87-11.88 0-3.17-1.23-6.14-3.46-8.42ZM12.11 21.76h-.01a9.84 9.84 0 0 1-5.02-1.37l-.36-.21-3.76.98 1-3.67-.23-.38a9.84 9.84 0 0 1-1.51-5.23C2.22 6.44 6.66 2 12.11 2c2.64 0 5.12 1.03 6.99 2.9a9.84 9.84 0 0 1 2.89 7c0 5.45-4.43 9.86-9.88 9.86Zm5.42-7.39c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.76-1.67-2.06-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.49 0 1.47 1.07 2.89 1.22 3.09.15.2 2.1 3.21 5.09 4.5.71.31 1.26.49 1.69.63.71.23 1.35.2 1.86.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35Z"/></svg>
-                WhatsApp
-            </a>
-
-        </section>
-
-        <!-- FOOTER -->
-        <footer>
-            © METIZ PROJECT 2010–2026
-        </footer>
-
+        </div>
     </div>
 
+    <!-- HEADER NAVBAR -->
+    <header class="sticky top-0 z-40 w-full glass-card border-b border-tiffany/20 bg-darkbg/85 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Logo Link -->
+            <a href="#" class="flex items-center gap-3 group">
+                <img src="metiz-project-logo.png" 
+                     alt="METIZ PROJECT" 
+                     class="h-9 sm:h-12 w-auto object-contain transition-transform group-hover:scale-105 drop-shadow-[0_0_12px_rgba(76,213,211,0.3)]"
+                     onerror="this.onerror=null; this.parentNode.innerHTML='<svg viewBox=\'0 0 460 110\' class=\'h-9 sm:h-11 w-auto transition-transform group-hover:scale-105\'><path d=\'M 65 15 A 45 45 0 1 0 65 95\' fill=\'none\' stroke=\'#4cd5d3\' stroke-width=\'12\' stroke-linecap=\'round\'/><text x=\'35\' y=\'68\' font-family=\'Russo One, sans-serif\' font-size=\'44\' fill=\'#72fff6\' font-style=\'italic\'>Metiz</text><line x1=\'125\' y1=\'78\' x2=\'335\' y2=\'78\' stroke=\'#4cd5d3\' stroke-width=\'4\' stroke-linecap=\'round\'/><text x=\'215\' y=\'68\' font-family=\'Space Grotesk, sans-serif\' font-weight=\'700\' font-size=\'38\' fill=\'#ffffff\' letter-spacing=\'3\'>PROJECT</text><path d=\'M 395 95 A 45 45 0 1 0 395 15\' fill=\'none\' stroke=\'#4cd5d3\' stroke-width=\'12\' stroke-linecap=\'round\'/></svg>';">
+            </a>
+
+            <!-- Navigation Links (Desktop) -->
+            <nav class="hidden md:flex items-center gap-8 text-xs font-semibold uppercase tracking-widest text-gray-300">
+                <a href="#services" class="hover:text-tiffany transition-colors">Услуги</a>
+                <a href="#calculator" class="hover:text-tiffany transition-colors flex items-center gap-1.5">
+                    <span class="text-tiffany"><i class="fa-solid fa-calculator"></i></span> Калькулятор
+                </a>
+                <a href="#visualizer" class="hover:text-tiffany transition-colors flex items-center gap-1.5">
+                    <span class="text-tiffany-bright"><i class="fa-solid fa-wand-magic-sparkles"></i></span> Примерка
+                </a>
+                <a href="#portfolio" class="hover:text-tiffany transition-colors">Портфолио</a>
+                <a href="#location" class="hover:text-tiffany transition-colors">Контакты</a>
+                <a href="#faq" class="hover:text-tiffany transition-colors">FAQ</a>
+            </nav>
+
+            <!-- Actions Right -->
+            <div class="flex items-center gap-3 sm:gap-4">
+                <!-- Sound Micro-feedback Toggle -->
+                <button id="sound-toggle" type="button" title="Переключить звуковой отклик" class="w-9 h-9 rounded-xl bg-darkbg-card border border-white/10 hover:border-tiffany/40 flex items-center justify-center text-xs text-gray-400 hover:text-tiffany transition-all">
+                    <i class="fa-solid fa-volume-xmark" id="sound-icon"></i>
+                </button>
+
+                <!-- Status Badge -->
+                <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-tiffany/10 border border-tiffany/30 text-[11px] font-bold tracking-wider text-tiffany shadow-[0_0_10px_rgba(76,213,211,0.15)]">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 pulse-online"></span>
+                    <span>ONLINE • СПб</span>
+                </div>
+
+                <!-- CTA Button -->
+                <a href="#calculator" class="relative group px-4 sm:px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider bg-tiffany text-black hover:bg-tiffany-bright transition-all shadow-[0_0_20px_rgba(76,213,211,0.35)] hover:shadow-[0_0_30px_rgba(114,255,246,0.6)] active:scale-95 flex items-center gap-2">
+                    <i class="fa-solid fa-paper-plane text-sm"></i>
+                    <span>Рассчитать</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="relative z-10 space-y-24 pb-28 md:pb-16">
+
+        <!-- HERO SECTION -->
+        <section class="relative pt-12 pb-6 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col items-center text-center">
+            
+            <!-- City Location Badge with Sheen Effect -->
+            <div class="sheen-badge inline-flex items-center gap-2 px-5 py-2 rounded-full bg-darkbg-card border border-tiffany/40 text-xs font-semibold text-tiffany tracking-widest uppercase mb-6 shadow-[0_0_20px_rgba(76,213,211,0.2)]">
+                <i class="fa-solid fa-location-dot text-tiffany"></i>
+                <span>Санкт-Петербург & Ленинградская область</span>
+            </div>
+
+            <!-- Main Title Banner -->
+            <h1 class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.08] max-w-5xl">
+                ПЕЧАТАЕМ И РЕЖЕМ <br>
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-tiffany via-tiffany-bright to-emerald-300 tiffany-text-glow">
+                    ПОД ВАШИ ЗАДАЧИ
+                </span>
+            </h1>
+
+            <!-- Subheading -->
+            <p class="mt-6 text-sm sm:text-base md:text-lg text-gray-300 max-w-2xl font-light leading-relaxed">
+                Индивидуальное изготовление брендовых наклеек, точнейшая плоттерная резка винила, оклейка автотранспорта, оформление витрин и печать арт-картин на холсте.
+            </p>
+
+            <!-- Quick Action Social & Contact Buttons Bar (Magnetic & Tilt support) -->
+            <div class="mt-8 w-full max-w-md sm:max-w-4xl grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
+                <a href="https://vk.ru/metiz_project" target="_blank" rel="noopener" class="magnetic-btn tilt-card glass-card glass-card-hover p-4 rounded-2xl flex flex-col items-center justify-center gap-2 group text-white">
+                    <div class="w-10 h-10 rounded-xl bg-blue-600/20 text-blue-400 border border-blue-500/30 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+                        <i class="fa-brands fa-vk"></i>
+                    </div>
+                    <span class="text-[11px] font-semibold">Группа ВКонтакте</span>
+                </a>
+
+                <a href="https://vk.ru/im?sel=-10150150" target="_blank" rel="noopener" class="magnetic-btn tilt-card glass-card glass-card-hover p-4 rounded-2xl flex flex-col items-center justify-center gap-2 group text-white">
+                    <div class="w-10 h-10 rounded-xl bg-blue-500/20 text-blue-300 border border-blue-400/30 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-comments"></i>
+                    </div>
+                    <span class="text-[11px] font-semibold">Сообщения VK</span>
+                </a>
+
+                <a href="https://t.me/metizproject" target="_blank" rel="noopener" class="magnetic-btn tilt-card glass-card glass-card-hover p-4 rounded-2xl flex flex-col items-center justify-center gap-2 group text-white">
+                    <div class="w-10 h-10 rounded-xl bg-sky-500/20 text-sky-400 border border-sky-400/30 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+                        <i class="fa-brands fa-telegram"></i>
+                    </div>
+                    <span class="text-[11px] font-semibold">Telegram</span>
+                </a>
+
+                <a href="https://wa.me/message/RDHE3F4PU2D3L1" target="_blank" rel="noopener" class="magnetic-btn tilt-card glass-card glass-card-hover p-4 rounded-2xl flex flex-col items-center justify-center gap-2 group text-white">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </div>
+                    <span class="text-[11px] font-semibold">WhatsApp</span>
+                </a>
+
+                <button type="button" onclick="openOrderModal('Индивидуальный заказ')" class="magnetic-btn tilt-card glass-card glass-card-hover p-4 rounded-2xl flex flex-col items-center justify-center gap-2 group text-white border-tiffany/40 bg-tiffany/5">
+                    <div class="w-10 h-10 rounded-xl bg-tiffany/20 text-tiffany-bright border border-tiffany/40 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-vial-circle-check"></i>
+                    </div>
+                    <span class="text-[11px] font-semibold text-tiffany">Заказать</span>
+                </button>
+
+                <a href="#location" class="magnetic-btn tilt-card glass-card glass-card-hover p-4 rounded-2xl flex flex-col items-center justify-center gap-2 group text-white">
+                    <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-store"></i>
+                    </div>
+                    <span class="text-[11px] font-semibold">Самовывоз</span>
+                </a>
+            </div>
+
+            <!-- Stats Bar -->
+            <div class="mt-12 w-full max-w-4xl grid grid-cols-2 md:grid-cols-4 gap-4 p-4 rounded-2xl glass-card border border-white/10 tilt-card">
+                <div class="text-center p-2">
+                    <div class="text-2xl sm:text-3xl font-extrabold text-tiffany font-display">14+</div>
+                    <div class="text-[11px] text-gray-400 font-medium uppercase tracking-wider mt-1">Лет на рынке</div>
+                </div>
+                <div class="text-center p-2">
+                    <div class="text-2xl sm:text-3xl font-extrabold text-tiffany font-display">от 15 мин</div>
+                    <div class="text-[11px] text-gray-400 font-medium uppercase tracking-wider mt-1">Скорость резки</div>
+                </div>
+                <div class="text-center p-2">
+                    <div class="text-2xl sm:text-3xl font-extrabold text-tiffany font-display">100%</div>
+                    <div class="text-[11px] text-gray-400 font-medium uppercase tracking-wider mt-1">Точность плоттера</div>
+                </div>
+                <div class="text-center p-2">
+                    <div class="text-2xl sm:text-3xl font-extrabold text-tiffany font-display">50 000+</div>
+                    <div class="text-[11px] text-gray-400 font-medium uppercase tracking-wider mt-1">Выполненных заказов</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTINUOUS ANIMATED TEXT MARQUEE TRACK -->
+        <div class="w-full overflow-hidden py-3 bg-darkbg-card/90 border-y border-tiffany/20 backdrop-blur-md">
+            <div class="flex whitespace-nowrap animate-marquee">
+                <div class="flex items-center gap-6 text-xs font-bold tracking-[0.2em] text-gray-300 uppercase px-4">
+                    <span>Изготовление наклеек на заказ</span> <i class="fa-solid fa-sparkles text-[8px] text-tiffany"></i>
+                    <span>Фото и картины на холсте</span> <i class="fa-solid fa-sparkles text-[8px] text-tiffany"></i>
+                    <span>Реклама на транспорте</span> <i class="fa-solid fa-sparkles text-[8px] text-tiffany"></i>
+                    <span>Наклейки на кузов</span> <i class="fa-solid fa-sparkles text-[8px] text-tiffany"></i>
+                    <span>Наклейки на продукцию</span> <i class="fa-solid fa-sparkles text-[8px] text-tiffany"></i>
+                    <span>Реклама на стекла авто</span> <i class="fa-solid fa-sparkles text-[8px] text-tiffany"></i>
+                    <span>Ваши идеи</span> <i class="fa-solid fa-sparkles text-[8px] text-tiffany"></i>
+                    <span>Автомобили</span> <i class="fa-solid fa-sparkles text-[8px] text-tiffany"></i>
+                    <span>Витрины</span> <i class="fa-solid fa-sparkles text-[8px] text-tiffany"></i>
+                    <span>Магазины</span> <i class="fa-solid fa-sparkles text-[8px] text-tiffany"></i>
+                    <span>Реклама</span> <i class="fa-solid fa-sparkles text-[8px] text-tiffany"></i>
+                    <span>Наклейки</span> <i class="fa-solid fa-sparkles text-[8px] text-tiffany"></i>
+                    <span>Печать</span> <i class="fa-solid fa-sparkles text-[8px] text-tiffany"></i>
+                    <span>Брендирование</span> <i class="fa-solid fa-sparkles text-[8px] text-tiffany"></i>
+                </div>
+                <div class="flex items-center gap-6 text-xs font-bold tracking-[0.2em] text-gray-300 uppercase px-4">
+                    <span>Изготовление наклеек на заказ</span> <i class="fa-solid fa-sparkles text-[8px] text-tiffany"></i>
+                    <span>Фото и картины на холсте</span> <i class="fa-solid fa-sparkles text-[8px] text-tiffany"></i>
+                    <span>Реклама на транспорте</span> <i class="fa-solid fa-sparkles text-[8px] text-tiffany"></i>
+                    <span>Наклейки на кузов</span> <i class="fa-solid fa-sparkles text-[8px] text-tiffany"></i>
+                    <span>Наклейки на продукцию</span> <i class="fa-solid fa-sparkles text-[8px] text-tiffany"></i>
+                    <span>Реклама на стекла авто</span> <i class="fa-solid fa-sparkles text-[8px] text-tiffany"></i>
+                    <span>Ваши идеи</span> <i class="fa-solid fa-sparkles text-[8px] text-tiffany"></i>
+                    <span>Автомобили</span> <i class="fa-solid fa-sparkles text-[8px] text-tiffany"></i>
+                    <span>Витрины</span> <i class="fa-solid fa-sparkles text-[8px] text-tiffany"></i>
+                    <span>Магазины</span> <i class="fa-solid fa-sparkles text-[8px] text-tiffany"></i>
+                    <span>Реклама</span> <i class="fa-solid fa-sparkles text-[8px] text-tiffany"></i>
+                    <span>Наклейки</span> <i class="fa-solid fa-sparkles text-[8px] text-tiffany"></i>
+                    <span>Печать</span> <i class="fa-solid fa-sparkles text-[8px] text-tiffany"></i>
+                    <span>Брендирование</span> <i class="fa-solid fa-sparkles text-[8px] text-tiffany"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- ONLINE PRICE CALCULATOR SECTION -->
+        <section id="calculator" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24">
+            <div class="glass-card p-6 sm:p-10 rounded-3xl border border-tiffany/30 relative overflow-hidden shadow-2xl">
+                <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-tiffany/15 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+                    <div>
+                        <div class="text-xs font-bold text-tiffany uppercase tracking-widest mb-1 flex items-center gap-2">
+                            <i class="fa-solid fa-bolt text-tiffany-bright"></i> Онлайн Расчет 24/7
+                        </div>
+                        <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight">
+                            Калькулятор стоимости заказа
+                        </h2>
+                    </div>
+                    <p class="text-xs sm:text-sm text-gray-400 max-w-md">
+                        Выберите услугу, размер и тип материала. Расчет выполняется в режиме реального времени с учетом скидки за тираж!
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    <!-- Controls Form Left -->
+                    <div class="lg:col-span-7 space-y-6">
+                        
+                        <!-- 1. Service Selection -->
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-3">1. Выберите тип работы</label>
+                            <div class="grid grid-cols-2 gap-3" id="calc-services">
+                                <button type="button" data-service="plotter" class="calc-btn-service p-3.5 rounded-xl text-left border border-tiffany/40 bg-tiffany/10 text-tiffany font-semibold text-xs flex items-center gap-3 transition-all">
+                                    <i class="fa-solid fa-scissors text-base"></i>
+                                    <div>
+                                        <div>Плоттерная резка</div>
+                                        <div class="text-[10px] opacity-70 font-normal">Векторные контуры</div>
+                                    </div>
+                                </button>
+                                <button type="button" data-service="printcut" class="calc-btn-service p-3.5 rounded-xl text-left border border-white/10 bg-darkbg-card text-gray-300 hover:border-tiffany/30 font-semibold text-xs flex items-center gap-3 transition-all">
+                                    <i class="fa-solid fa-print text-base"></i>
+                                    <div>
+                                        <div>Печать + резка</div>
+                                        <div class="text-[10px] opacity-70 font-normal">Цветные стикеры</div>
+                                    </div>
+                                </button>
+                                <button type="button" data-service="autobrand" class="calc-btn-service p-3.5 rounded-xl text-left border border-white/10 bg-darkbg-card text-gray-300 hover:border-tiffany/30 font-semibold text-xs flex items-center gap-3 transition-all">
+                                    <i class="fa-solid fa-car text-base"></i>
+                                    <div>
+                                        <div>Брендинг авто</div>
+                                        <div class="text-[10px] opacity-70 font-normal">Наклейки кузов/стекло</div>
+                                    </div>
+                                </button>
+                                <button type="button" data-service="canvas" class="calc-btn-service p-3.5 rounded-xl text-left border border-white/10 bg-darkbg-card text-gray-300 hover:border-tiffany/30 font-semibold text-xs flex items-center gap-3 transition-all">
+                                    <i class="fa-solid fa-palette text-base"></i>
+                                    <div>
+                                        <div>Печать на холсте</div>
+                                        <div class="text-[10px] opacity-70 font-normal">Картины на подрамнике</div>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 2. Material Selection -->
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-3">2. Материал пленки / основы</label>
+                            <select id="calc-material" class="w-full p-3.5 rounded-xl bg-darkbg-card border border-white/15 text-sm text-gray-200 focus:border-tiffany focus:outline-none transition-colors">
+                                <option value="standard">Стандартный немецкий винил (Матовый/Глянцевый)</option>
+                                <option value="cast">Литая автомобильная пленка повышенной стойкости</option>
+                                <option value="holographic">Голографическая пленка (Радужный перелив)</option>
+                                <option value="reflective">Светоотражающая пленка (Glow in Dark)</option>
+                                <option value="chrome">Премиум Хром / Золото / Металлик</option>
+                                <option value="canvas_standard">Натуральный хлопковый холст (380г/м²)</option>
+                            </select>
+                        </div>
+
+                        <!-- 3. Dimensions Input -->
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-2">Ширина (см)</label>
+                                <input type="number" id="calc-width" value="30" min="5" max="500" class="w-full p-3.5 rounded-xl bg-darkbg-card border border-white/15 text-sm text-gray-200 focus:border-tiffany focus:outline-none transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-2">Высота (см)</label>
+                                <input type="number" id="calc-height" value="20" min="5" max="500" class="w-full p-3.5 rounded-xl bg-darkbg-card border border-white/15 text-sm text-gray-200 focus:border-tiffany focus:outline-none transition-colors">
+                            </div>
+                        </div>
+
+                        <!-- 4. Quantity Slider -->
+                        <div>
+                            <div class="flex justify-between text-xs font-bold uppercase tracking-wider text-gray-300 mb-2">
+                                <span>Тираж (количество)</span>
+                                <span id="calc-qty-val" class="text-tiffany font-extrabold text-sm">10 шт</span>
+                            </div>
+                            <input type="range" id="calc-qty" min="1" max="500" value="10" class="w-full h-2 bg-darkbg-card rounded-lg appearance-none cursor-pointer accent-tiffany">
+                            <div class="flex justify-between text-[10px] text-gray-500 mt-1">
+                                <span>1 шт</span>
+                                <span>50 шт (-20%)</span>
+                                <span>200+ шт (-35%)</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Live Estimate Box Right -->
+                    <div class="lg:col-span-5 flex flex-col justify-between p-6 rounded-2xl bg-darkbg-card/90 border border-tiffany/20 shadow-xl">
+                        <div>
+                            <div class="text-xs font-bold tracking-widest text-gray-400 uppercase border-b border-white/10 pb-3 mb-4">
+                                Итоговый расчет
+                            </div>
+
+                            <div class="space-y-3 text-xs sm:text-sm text-gray-300">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-400">Услуга:</span>
+                                    <span id="summary-service" class="font-semibold text-white">Плоттерная резка</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-400">Габариты 1 шт:</span>
+                                    <span id="summary-size" class="font-semibold text-white">30 x 20 см</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-400">Материал:</span>
+                                    <span id="summary-material" class="font-semibold text-white">Стандарт винил</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-400">Тираж:</span>
+                                    <span id="summary-qty" class="font-semibold text-white">10 шт</span>
+                                </div>
+                                <div class="flex justify-between text-emerald-400">
+                                    <span>Примененная скидка:</span>
+                                    <span id="summary-discount" class="font-bold">10%</span>
+                                </div>
+                            </div>
+
+                            <!-- Total Price Display -->
+                            <div class="mt-8 pt-4 border-t border-white/10 text-center">
+                                <div class="text-xs text-gray-400 uppercase tracking-widest font-semibold">Примерная стоимость:</div>
+                                <div id="calc-total-price" class="text-4xl sm:text-5xl font-black text-tiffany font-display mt-2 tiffany-text-glow">
+                                    1 350 ₽
+                                </div>
+                                <div class="text-[11px] text-gray-500 mt-1">
+                                    ~ <span id="calc-price-per-unit">135</span> ₽ за штуку
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="mt-8 space-y-3">
+                            <button id="btn-send-tg" type="button" class="w-full py-3.5 px-4 rounded-xl font-bold text-xs uppercase tracking-wider bg-tiffany text-black hover:bg-tiffany-bright transition-all shadow-lg flex items-center justify-center gap-2">
+                                <i class="fa-brands fa-telegram text-base"></i>
+                                <span>Отправить расчет в Telegram</span>
+                            </button>
+                            <button id="btn-copy-calc" type="button" class="w-full py-3 px-4 rounded-xl font-semibold text-xs uppercase tracking-wider bg-white/5 border border-white/10 hover:bg-white/10 text-gray-300 transition-all flex items-center justify-center gap-2">
+                                <i class="fa-regular fa-copy"></i>
+                                <span>Скопировать детали</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LIVE STICKER VISUALIZER WIDGET -->
+        <section id="visualizer" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24">
+            <div class="glass-card p-6 sm:p-10 rounded-3xl border border-tiffany/20">
+                
+                <div class="text-center max-w-2xl mx-auto mb-10">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-tiffany/10 border border-tiffany/30 text-tiffany text-xs font-bold uppercase tracking-widest mb-3">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Интерактивный примерщик
+                    </div>
+                    <h2 class="text-2xl sm:text-4xl font-extrabold">
+                        Примерка вашей наклейки
+                    </h2>
+                    <p class="text-xs sm:text-sm text-gray-400 mt-2">
+                        Напишите свой текст, подберите шрифт и эффект пленки прямо сейчас!
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    
+                    <!-- Visualizer Canvas Preview Box Left -->
+                    <div class="lg:col-span-7">
+                        <div class="relative w-full h-72 sm:h-96 rounded-2xl bg-gradient-to-br from-gray-950 via-gray-900 to-black border border-white/10 overflow-hidden flex items-center justify-center p-6 shadow-2xl group">
+                            
+                            <!-- Surface texture background toggle indicator -->
+                            <div class="absolute inset-0 bg-cyber-grid opacity-30"></div>
+                            
+                            <div class="absolute top-4 left-4 text-[10px] text-gray-500 font-mono">ПОВЕРХНОСТЬ: СТЕКЛО / КУЗОВ / НУТРО</div>
+                            <div class="absolute bottom-4 right-4 text-[10px] text-tiffany/60 font-mono">METIZ LIVE PREVIEW v2.5</div>
+
+                            <!-- Dynamic Text Output Element -->
+                            <div id="visualizer-text-output" class="relative text-center break-all text-3xl sm:text-5xl font-extrabold uppercase transition-all duration-300 transform group-hover:scale-105 neon-glow-material">
+                                METIZ PROJECT
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Visualizer Controls Right -->
+                    <div class="lg:col-span-5 space-y-5 glass-card p-6 rounded-2xl border-white/10">
+                        
+                        <!-- Text Input -->
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-2">Текст наклейки</label>
+                            <input type="text" id="vis-text-input" value="METIZ PROJECT" maxlength="40" class="w-full p-3.5 rounded-xl bg-darkbg-card border border-white/15 text-sm text-white focus:border-tiffany focus:outline-none transition-colors">
+                        </div>
+
+                        <!-- Font Selection -->
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-2">Шрифт</label>
+                            <div class="grid grid-cols-2 gap-2" id="vis-fonts">
+                                <button type="button" data-font="font-sans" class="vis-btn-font p-2.5 rounded-lg border border-tiffany/40 bg-tiffany/10 text-tiffany font-sans text-xs font-bold">Inter Clean</button>
+                                <button type="button" data-font="font-russo" class="vis-btn-font p-2.5 rounded-lg border border-white/10 bg-darkbg-card text-gray-300 font-russo text-xs">Russo Sport</button>
+                                <button type="button" data-font="font-display" class="vis-btn-font p-2.5 rounded-lg border border-white/10 bg-darkbg-card text-gray-300 font-display text-xs">Space Techno</button>
+                                <button type="button" data-font="font-hand" class="vis-btn-font p-2.5 rounded-lg border border-white/10 bg-darkbg-card text-gray-300 font-hand text-base">Caveat Script</button>
+                            </div>
+                        </div>
+
+                        <!-- Material Effect Style -->
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-2">Эффект пленки</label>
+                            <div class="grid grid-cols-2 gap-2" id="vis-materials">
+                                <button type="button" data-style="neon-glow-material" class="vis-btn-mat p-2.5 rounded-lg border border-tiffany/40 bg-tiffany/10 text-tiffany text-xs font-bold">Тиффани Неон</button>
+                                <button type="button" data-style="holographic-foil" class="vis-btn-mat p-2.5 rounded-lg border border-white/10 bg-darkbg-card text-gray-300 text-xs font-bold">Голография</button>
+                                <button type="button" data-style="chrome-metal" class="vis-btn-mat p-2.5 rounded-lg border border-white/10 bg-darkbg-card text-gray-300 text-xs font-bold">Хром / Металл</button>
+                                <button type="button" data-style="text-white drop-shadow-[0_4px_10px_rgba(255,255,255,0.3)]" class="vis-btn-mat p-2.5 rounded-lg border border-white/10 bg-darkbg-card text-gray-300 text-xs font-bold">Глянцевый Белый</button>
+                            </div>
+                        </div>
+
+                        <!-- Text Size Slider -->
+                        <div>
+                            <div class="flex justify-between text-xs font-bold uppercase text-gray-300 mb-1">
+                                <span>Масштаб шрифта</span>
+                                <span id="vis-size-val" class="text-tiffany">100%</span>
+                            </div>
+                            <input type="range" id="vis-size-slider" min="50" max="180" value="100" class="w-full h-2 bg-darkbg-card rounded-lg appearance-none cursor-pointer accent-tiffany">
+                        </div>
+
+                        <button id="btn-vis-order" type="button" class="w-full py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider bg-tiffany text-black hover:bg-tiffany-bright transition-all shadow-lg flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-check"></i> Заказать этот дизайн
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICES & PORTFOLIO SHOWCASE -->
+        <section id="services" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                <div>
+                    <div class="text-xs font-bold text-tiffany uppercase tracking-widest mb-1">Каталог Услуг</div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold">Что мы создаем</h2>
+                </div>
+                
+                <!-- Category Filters -->
+                <div class="flex flex-wrap gap-2" id="portfolio-filters">
+                    <button type="button" data-filter="all" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-tiffany text-black shadow-[0_0_15px_rgba(76,213,211,0.3)]">Все</button>
+                    <button type="button" data-filter="auto" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-darkbg-card border border-white/10 text-gray-300 hover:border-tiffany/30">Авто & Брендинг</button>
+                    <button type="button" data-filter="plotter" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-darkbg-card border border-white/10 text-gray-300 hover:border-tiffany/30">Плоттерная Резка</button>
+                    <button type="button" data-filter="stickers" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-darkbg-card border border-white/10 text-gray-300 hover:border-tiffany/30">Наклейки & Печать</button>
+                    <button type="button" data-filter="canvas" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-darkbg-card border border-white/10 text-gray-300 hover:border-tiffany/30">Холсты</button>
+                </div>
+            </div>
+
+            <!-- Cards Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="portfolio-grid">
+                
+                <!-- Card 1 -->
+                <div class="portfolio-item glass-card glass-card-hover rounded-3xl overflow-hidden group border-white/10" data-category="auto">
+                    <div class="h-52 bg-gradient-to-br from-teal-950 via-darkbg-card to-gray-900 relative flex items-center justify-center overflow-hidden">
+                        <i class="fa-solid fa-car text-6xl text-tiffany/30 group-hover:scale-125 transition-transform duration-500"></i>
+                        <div class="absolute inset-0 bg-gradient-to-t from-darkbg-card to-transparent"></div>
+                        <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-tiffany/20 text-tiffany border border-tiffany/30 text-[10px] font-bold uppercase">Автоспорт / Стрит</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold">Брендирование автомобилей</h3>
+                        <p class="text-xs text-gray-400 mt-2 leading-relaxed">
+                            Наклейки на лобовое стекло, боковые полосы, логотипы спонсоров, полная оклейка кузова литыми автопленками.
+                        </p>
+                        <div class="mt-4 flex items-center justify-between pt-4 border-t border-white/10">
+                            <span class="text-tiffany font-bold text-sm">от 500 ₽</span>
+                            <button type="button" onclick="openOrderModal('Брендирование авто')" class="text-xs font-semibold uppercase text-gray-300 hover:text-tiffany flex items-center gap-1">
+                                Подробнее <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="portfolio-item glass-card glass-card-hover rounded-3xl overflow-hidden group border-white/10" data-category="plotter">
+                    <div class="h-52 bg-gradient-to-br from-emerald-950 via-darkbg-card to-gray-900 relative flex items-center justify-center overflow-hidden">
+                        <i class="fa-solid fa-scissors text-6xl text-emerald-400/30 group-hover:scale-125 transition-transform duration-500"></i>
+                        <div class="absolute inset-0 bg-gradient-to-t from-darkbg-card to-transparent"></div>
+                        <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[10px] font-bold uppercase">Точность 0.1мм</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold">Плоттерная резка пленки</h3>
+                        <p class="text-xs text-gray-400 mt-2 leading-relaxed">
+                            Вырезка люминесцентных, светоотражающих и матовых виниловых пленок по вашим векторным макетам.
+                        </p>
+                        <div class="mt-4 flex items-center justify-between pt-4 border-t border-white/10">
+                            <span class="text-tiffany font-bold text-sm">от 300 ₽/м²</span>
+                            <button type="button" onclick="openOrderModal('Плоттерная резка')" class="text-xs font-semibold uppercase text-gray-300 hover:text-tiffany flex items-center gap-1">
+                                Подробнее <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="portfolio-item glass-card glass-card-hover rounded-3xl overflow-hidden group border-white/10" data-category="stickers">
+                    <div class="h-52 bg-gradient-to-br from-purple-950 via-darkbg-card to-gray-900 relative flex items-center justify-center overflow-hidden">
+                        <i class="fa-solid fa-tags text-6xl text-purple-400/30 group-hover:scale-125 transition-transform duration-500"></i>
+                        <div class="absolute inset-0 bg-gradient-to-t from-darkbg-card to-transparent"></div>
+                        <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 text-[10px] font-bold uppercase">Тиражи от 10 шт</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold">Печать стикеров & наклеек</h3>
+                        <p class="text-xs text-gray-400 mt-2 leading-relaxed">
+                            Полноцветная печать с контурной резкой на стикерпаки, продукцию, упаковку и брендирование товаров.
+                        </p>
+                        <div class="mt-4 flex items-center justify-between pt-4 border-t border-white/10">
+                            <span class="text-tiffany font-bold text-sm">от 5 ₽/шт</span>
+                            <button type="button" onclick="openOrderModal('Печать стикеров')" class="text-xs font-semibold uppercase text-gray-300 hover:text-tiffany flex items-center gap-1">
+                                Подробнее <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="portfolio-item glass-card glass-card-hover rounded-3xl overflow-hidden group border-white/10" data-category="auto">
+                    <div class="h-52 bg-gradient-to-br from-cyan-950 via-darkbg-card to-gray-900 relative flex items-center justify-center overflow-hidden">
+                        <i class="fa-solid fa-store text-6xl text-cyan-400/30 group-hover:scale-125 transition-transform duration-500"></i>
+                        <div class="absolute inset-0 bg-gradient-to-t from-darkbg-card to-transparent"></div>
+                        <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 text-[10px] font-bold uppercase">Витрины & Реклама</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold">Оформление витрин и режимов</h3>
+                        <p class="text-xs text-gray-400 mt-2 leading-relaxed">
+                            Рекламное оформление коммерческих помещений, режим работы, акционные наклейки на окна и двери.
+                        </p>
+                        <div class="mt-4 flex items-center justify-between pt-4 border-t border-white/10">
+                            <span class="text-tiffany font-bold text-sm">от 1 200 ₽</span>
+                            <button type="button" onclick="openOrderModal('Оформление витрин')" class="text-xs font-semibold uppercase text-gray-300 hover:text-tiffany flex items-center gap-1">
+                                Подробнее <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="portfolio-item glass-card glass-card-hover rounded-3xl overflow-hidden group border-white/10" data-category="canvas">
+                    <div class="h-52 bg-gradient-to-br from-amber-950 via-darkbg-card to-gray-900 relative flex items-center justify-center overflow-hidden">
+                        <i class="fa-solid fa-palette text-6xl text-amber-400/30 group-hover:scale-125 transition-transform duration-500"></i>
+                        <div class="absolute inset-0 bg-gradient-to-t from-darkbg-card to-transparent"></div>
+                        <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[10px] font-bold uppercase">Натуральный Холст</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold">Печать фото и картин</h3>
+                        <p class="text-xs text-gray-400 mt-2 leading-relaxed">
+                            Интерьерная печать высочайшего разрешения на 100% хлопковом холсте с натяжкой на деревянный подрамник.
+                        </p>
+                        <div class="mt-4 flex items-center justify-between pt-4 border-t border-white/10">
+                            <span class="text-tiffany font-bold text-sm">от 1 500 ₽</span>
+                            <button type="button" onclick="openOrderModal('Печать на холсте')" class="text-xs font-semibold uppercase text-gray-300 hover:text-tiffany flex items-center gap-1">
+                                Подробнее <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="portfolio-item glass-card glass-card-hover rounded-3xl overflow-hidden group border-white/10" data-category="stickers">
+                    <div class="h-52 bg-gradient-to-br from-pink-950 via-darkbg-card to-gray-900 relative flex items-center justify-center overflow-hidden">
+                        <i class="fa-solid fa-gem text-6xl text-pink-400/30 group-hover:scale-125 transition-transform duration-500"></i>
+                        <div class="absolute inset-0 bg-gradient-to-t from-darkbg-card to-transparent"></div>
+                        <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-pink-500/20 text-pink-300 border border-pink-500/30 text-[10px] font-bold uppercase">Премиум Эксклюзив</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold">Голография & Светоотражайки</h3>
+                        <p class="text-xs text-gray-400 mt-2 leading-relaxed">
+                            Стикеры премиум-сегмента: бензиновые переливы, зеркальный хром, текстурные карбоновые плёнки.
+                        </p>
+                        <div class="mt-4 flex items-center justify-between pt-4 border-t border-white/10">
+                            <span class="text-tiffany font-bold text-sm">от 450 ₽</span>
+                            <button type="button" onclick="openOrderModal('Эксклюзивные наклейки')" class="text-xs font-semibold uppercase text-gray-300 hover:text-tiffany flex items-center gap-1">
+                                Подробнее <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- BEFORE/AFTER SHOWCASE SLIDER -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-card p-6 sm:p-10 rounded-3xl border border-white/10">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+                    <div>
+                        <div class="text-xs font-bold text-tiffany uppercase tracking-widest mb-1 flex items-center gap-2">
+                            <i class="fa-solid fa-sliders"></i> Преображение
+                        </div>
+                        <h2 class="text-2xl sm:text-4xl font-extrabold">Результаты оклейки авто</h2>
+                    </div>
+                    <p class="text-xs sm:text-sm text-gray-400 max-w-md">
+                        Передвигайте ползунок, чтобы оценить разницу до и после нанесения виниловой оклейки.
+                    </p>
+                </div>
+
+                <div id="ba-slider-container" class="ba-slider w-full h-80 sm:h-[420px] rounded-2xl border border-white/10 overflow-hidden shadow-2xl relative">
+                    <!-- AFTER IMAGE (Background Overlay) -->
+                    <div class="absolute inset-0 bg-gradient-to-r from-emerald-900/60 via-darkbg-card to-cyan-950 flex items-center justify-center text-center p-6">
+                        <div class="space-y-2">
+                            <span class="px-3 py-1 rounded-full bg-tiffany/20 text-tiffany font-extrabold text-xs uppercase tracking-widest border border-tiffany/30">ПОСЛЕ ОКЛЕЙКИ</span>
+                            <h3 class="text-2xl sm:text-4xl font-extrabold text-white">Премиум Брендирование</h3>
+                            <p class="text-xs text-tiffany">Защита кузова + Яркий спонсорский дизайн</p>
+                        </div>
+                    </div>
+
+                    <!-- BEFORE IMAGE (Resized Foreground) -->
+                    <div id="ba-resize-layer" class="ba-resize bg-gradient-to-r from-gray-950 via-gray-900 to-gray-800 flex items-center justify-center text-center p-6 border-r border-tiffany/40">
+                        <div class="space-y-2 w-max">
+                            <span class="px-3 py-1 rounded-full bg-white/10 text-gray-300 font-extrabold text-xs uppercase tracking-widest border border-white/20">ДО ОКЛЕЙКИ</span>
+                            <h3 class="text-2xl sm:text-4xl font-extrabold text-gray-400">Стандартный Кузов</h3>
+                            <p class="text-xs text-gray-500">Заводской вид без акцентов</p>
+                        </div>
+                    </div>
+
+                    <!-- HANDLE BAR -->
+                    <div id="ba-handle-bar" class="ba-handle">
+                        <div class="w-8 h-8 rounded-full bg-tiffany text-black flex items-center justify-center absolute top-1/2 -left-3.5 -translate-y-1/2 shadow-lg text-xs font-bold">
+                            <i class="fa-solid fa-arrows-left-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LOCATION & MAP SECTION -->
+        <section id="location" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24">
+            <div class="glass-card p-6 sm:p-10 rounded-3xl border border-tiffany/20 relative overflow-hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    
+                    <!-- Left Info -->
+                    <div class="lg:col-span-5 space-y-6">
+                        <div>
+                            <div class="text-xs font-bold text-tiffany uppercase tracking-widest mb-1 flex items-center gap-2">
+                                <i class="fa-solid fa-map-pin"></i> Самовывоз & Производство
+                            </div>
+                            <h2 class="text-2xl sm:text-4xl font-extrabold">Как нас найти</h2>
+                        </div>
+
+                        <div class="space-y-4 text-xs sm:text-sm text-gray-300">
+                            <div class="flex items-start gap-3">
+                                <div class="w-9 h-9 rounded-xl bg-tiffany/10 text-tiffany border border-tiffany/30 flex items-center justify-center shrink-0 mt-0.5">
+                                    <i class="fa-solid fa-location-dot text-base"></i>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-white">Адрес производства</div>
+                                    <div class="text-gray-400 mt-0.5">г. Санкт-Петербург, Невский район / Доставка по всей РФ</div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-3">
+                                <div class="w-9 h-9 rounded-xl bg-tiffany/10 text-tiffany border border-tiffany/30 flex items-center justify-center shrink-0 mt-0.5">
+                                    <i class="fa-regular fa-clock text-base"></i>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-white">Режим работы</div>
+                                    <div class="text-gray-400 mt-0.5">Понедельник — Суббота: 10:00 – 20:00</div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-3">
+                                <div class="w-9 h-9 rounded-xl bg-tiffany/10 text-tiffany border border-tiffany/30 flex items-center justify-center shrink-0 mt-0.5">
+                                    <i class="fa-solid fa-truck-fast text-base"></i>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-white">Способы получения</div>
+                                    <div class="text-gray-400 mt-0.5">Самовывоз, Курьер Яндекс, СДЭК, Почта России</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-4 border-t border-white/10 flex flex-wrap gap-3">
+                            <a href="https://t.me/metizproject" target="_blank" rel="noopener" class="px-5 py-3 rounded-xl font-bold text-xs uppercase tracking-wider bg-sky-500 text-white hover:bg-sky-400 transition-all flex items-center gap-2">
+                                <i class="fa-brands fa-telegram text-base"></i>
+                                <span>Написать менеджеру</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Right Mockup Map View -->
+                    <div class="lg:col-span-7 h-72 sm:h-96 rounded-2xl bg-gradient-to-br from-darkbg-card via-gray-900 to-black border border-white/15 relative overflow-hidden flex items-center justify-center shadow-2xl">
+                        <div class="absolute inset-0 bg-cyber-grid opacity-50"></div>
+                        
+                        <!-- Stylized Map Pin Indicator -->
+                        <div class="relative z-10 text-center space-y-3">
+                            <div class="w-16 h-16 rounded-full bg-tiffany/20 border-2 border-tiffany flex items-center justify-center mx-auto text-tiffany text-2xl pulse-online shadow-[0_0_30px_rgba(76,213,211,0.6)]">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <div class="text-base font-extrabold text-white">METIZ PROJECT STUDIO</div>
+                                <div class="text-xs text-tiffany font-mono">Санкт-Петербург • Схема проезда у менеджера</div>
+                            </div>
+                            <a href="https://t.me/metizproject" target="_blank" rel="noopener" class="inline-block px-4 py-2 rounded-lg bg-white/10 hover:bg-tiffany hover:text-black border border-white/20 text-xs font-semibold transition-all">
+                                Запросить геолокацию в TG
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- REVIEWS & FAQ SECTION -->
+        <section id="faq" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                
+                <!-- FAQ Accordion Left -->
+                <div class="lg:col-span-7 space-y-4">
+                    <div class="mb-6">
+                        <div class="text-xs font-bold text-tiffany uppercase tracking-widest mb-1">База Знаний</div>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold">Частые вопросы (FAQ)</h2>
+                    </div>
+
+                    <!-- FAQ Item 1 -->
+                    <div class="glass-card rounded-2xl border border-white/10 overflow-hidden">
+                        <button type="button" class="faq-toggle w-full p-5 text-left font-bold text-sm sm:text-base flex items-center justify-between gap-4 hover:text-tiffany transition-colors">
+                            <span>В каком формате отправлять макет для резки?</span>
+                            <i class="fa-solid fa-chevron-down text-xs transition-transform"></i>
+                        </button>
+                        <div class="faq-content hidden px-5 pb-5 text-xs sm:text-sm text-gray-400 leading-relaxed border-t border-white/5 pt-3">
+                            Макеты принимаются в векторных форматах: <strong>CorelDRAW (.cdr)</strong>, <strong>Adobe Illustrator (.ai, .eps)</strong> или <strong>.svg</strong>. Все шрифты должны быть переведены в кривые, а контуры реза — замкнутыми линиями.
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 2 -->
+                    <div class="glass-card rounded-2xl border border-white/10 overflow-hidden">
+                        <button type="button" class="faq-toggle w-full p-5 text-left font-bold text-sm sm:text-base flex items-center justify-between gap-4 hover:text-tiffany transition-colors">
+                            <span>Каковы сроки изготовления заказа?</span>
+                            <i class="fa-solid fa-chevron-down text-xs transition-transform"></i>
+                        </button>
+                        <div class="faq-content hidden px-5 pb-5 text-xs sm:text-sm text-gray-400 leading-relaxed border-t border-white/5 pt-3">
+                            Простая плоттерная резка по готовому макету часто выполняется <strong>в день обращения (от 15 до 60 минут)</strong>. Печать с защитной ламинацией и сушкой занимает 1–2 рабочих дня.
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 3 -->
+                    <div class="glass-card rounded-2xl border border-white/10 overflow-hidden">
+                        <button type="button" class="faq-toggle w-full p-5 text-left font-bold text-sm sm:text-base flex items-center justify-between gap-4 hover:text-tiffany transition-colors">
+                            <span>Как забрать заказ или есть ли доставка?</span>
+                            <i class="fa-solid fa-chevron-down text-xs transition-transform"></i>
+                        </button>
+                        <div class="faq-content hidden px-5 pb-5 text-xs sm:text-sm text-gray-400 leading-relaxed border-t border-white/5 pt-3">
+                            Вы можете самостоятельно забрать заказ из нашего производства в Санкт-Петербурге, либо заказать экспресс-доставку Яндекс.Такси / СДЭК по СПб и всей России.
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 4 -->
+                    <div class="glass-card rounded-2xl border border-white/10 overflow-hidden">
+                        <button type="button" class="faq-toggle w-full p-5 text-left font-bold text-sm sm:text-base flex items-center justify-between gap-4 hover:text-tiffany transition-colors">
+                            <span>Выдерживают ли наклейки мойку высокого давления?</span>
+                            <i class="fa-solid fa-chevron-down text-xs transition-transform"></i>
+                        </button>
+                        <div class="faq-content hidden px-5 pb-5 text-xs sm:text-sm text-gray-400 leading-relaxed border-t border-white/5 pt-3">
+                            Да! Мы используем высококлассные европейские литые автомобильные пленки, которые переносят бесконтактную мойку, мороз, солевые реагенты и активный ультрафиолет.
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Reviews Right -->
+                <div class="lg:col-span-5 glass-card p-6 rounded-3xl border-tiffany/20 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-2 text-amber-400 mb-2 text-sm">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <span class="text-xs font-bold text-white ml-2">4.9 / 5.0 (ВКонтакте)</span>
+                        </div>
+                        <h3 class="text-xl font-extrabold mb-4">Отзывы клиентов</h3>
+
+                        <div class="space-y-4">
+                            <div class="p-4 rounded-2xl bg-darkbg-card border border-white/5 text-xs space-y-2">
+                                <div class="flex justify-between font-bold text-gray-200">
+                                    <span>Алексей (Drive2 СПб)</span>
+                                    <span class="text-gray-500 font-normal">2 дня назад</span>
+                                </div>
+                                <p class="text-gray-400">
+                                    «Заказывал наклейку на лобовое стекло и плоттерную резку для автоклуба. Сделали за полчаса, качество винила топ!»
+                                </p>
+                            </div>
+
+                            <div class="p-4 rounded-2xl bg-darkbg-card border border-white/5 text-xs space-y-2">
+                                <div class="flex justify-between font-bold text-gray-200">
+                                    <span>Елена (Coffee Shop)</span>
+                                    <span class="text-gray-500 font-normal">Неделю назад</span>
+                                </div>
+                                <p class="text-gray-400">
+                                    «Оформляли витрину кофейни к открытию. Ребята помогли доработать макет и наклеили всё идеально ровно без пузырей.»
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-white/10 text-center">
+                        <a href="https://vk.ru/metiz_project" target="_blank" rel="noopener" class="text-xs font-bold text-tiffany hover:underline inline-flex items-center gap-2">
+                            <span>Читать еще 120+ отзывов во ВКонтакте</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="relative z-10 border-t border-tiffany/20 bg-darkbg-card/90 pt-12 pb-24 md:pb-12 text-xs text-gray-400">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8 items-center text-center md:text-left">
+            <div>
+                <img src="metiz-project-logo.png" 
+                     alt="METIZ PROJECT" 
+                     class="h-8 w-auto mx-auto md:mx-0 mb-3 object-contain"
+                     onerror="this.onerror=null; this.parentNode.innerHTML='<svg viewBox=\'0 0 460 110\' class=\'h-8 w-auto mx-auto md:mx-0 mb-3\'><path d=\'M 65 15 A 45 45 0 1 0 65 95\' fill=\'none\' stroke=\'#4cd5d3\' stroke-width=\'12\' stroke-linecap=\'round\'/><text x=\'35\' y=\'68\' font-family=\'Russo One, sans-serif\' font-size=\'44\' fill=\'#72fff6\' font-style=\'italic\'>Metiz</text><line x1=\'125\' y1=\'78\' x2=\'335\' y2=\'78\' stroke=\'#4cd5d3\' stroke-width=\'4\' stroke-linecap=\'round\'/><text x=\'215\' y=\'68\' font-family=\'Space Grotesk, sans-serif\' font-weight=\'700\' font-size=\'38\' fill=\'#ffffff\' letter-spacing=\'3\'>PROJECT</text><path d=\'M 395 95 A 45 45 0 1 0 395 15\' fill=\'none\' stroke=\'#4cd5d3\' stroke-width=\'12\' stroke-linecap=\'round\'/></svg>';">
+                <p class="text-[11px] text-gray-500">
+                    Премиальное изготовление наклеек, плоттерная резка и оклейка в Санкт-Петербурге.
+                </p>
+            </div>
+
+            <div class="text-center">
+                <div class="font-bold text-white mb-2 uppercase tracking-wider">Контакты и Связь</div>
+                <div class="space-y-1">
+                    <div>Санкт-Петербург, Россия</div>
+                    <div class="text-tiffany font-semibold">Пн–Сб: 10:00 – 20:00</div>
+                </div>
+            </div>
+
+            <div class="text-center md:text-right space-y-2">
+                <div class="flex justify-center md:justify-end gap-3 text-lg">
+                    <a href="https://vk.ru/metiz_project" target="_blank" rel="noopener" class="w-9 h-9 rounded-full bg-white/5 hover:bg-tiffany hover:text-black flex items-center justify-center transition-all"><i class="fa-brands fa-vk"></i></a>
+                    <a href="https://t.me/metizproject" target="_blank" rel="noopener" class="w-9 h-9 rounded-full bg-white/5 hover:bg-tiffany hover:text-black flex items-center justify-center transition-all"><i class="fa-brands fa-telegram"></i></a>
+                    <a href="https://wa.me/message/RDHE3F4PU2D3L1" target="_blank" rel="noopener" class="w-9 h-9 rounded-full bg-white/5 hover:bg-tiffany hover:text-black flex items-center justify-center transition-all"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+                <div class="text-[10px] text-gray-600">© METIZ PROJECT 2010–2026. Все права защищены.</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MOBILE STICKY BOTTOM APP BAR -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 z-50 glass-card border-t border-tiffany/20 bg-darkbg/95 backdrop-blur-lg px-4 py-2.5 flex items-center justify-around shadow-2xl">
+        <a href="#services" class="flex flex-col items-center gap-1 text-[10px] font-semibold text-gray-400 hover:text-tiffany">
+            <i class="fa-solid fa-layer-group text-base"></i>
+            <span>Услуги</span>
+        </a>
+        <a href="#calculator" class="flex flex-col items-center gap-1 text-[10px] font-semibold text-tiffany">
+            <i class="fa-solid fa-calculator text-base"></i>
+            <span>Расчет</span>
+        </a>
+        <a href="#visualizer" class="flex flex-col items-center gap-1 text-[10px] font-semibold text-tiffany-bright">
+            <i class="fa-solid fa-wand-magic-sparkles text-base"></i>
+            <span>Примерка</span>
+        </a>
+        <a href="https://t.me/metizproject" target="_blank" rel="noopener" class="flex flex-col items-center gap-1 text-[10px] font-semibold text-sky-400">
+            <i class="fa-brands fa-telegram text-base"></i>
+            <span>Telegram</span>
+        </a>
+    </div>
+
+    <!-- CUSTOM ORDER MODAL -->
+    <div id="order-modal" class="fixed inset-0 z-[999] bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
+        <div class="glass-card p-6 sm:p-8 rounded-3xl max-w-md w-full border border-tiffany/30 relative">
+            <button type="button" onclick="closeOrderModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="text-xs font-bold text-tiffany uppercase tracking-widest mb-1">Быстрый заказ</div>
+            <h3 id="modal-service-title" class="text-xl font-extrabold text-white mb-4">Детали заказа</h3>
+            
+            <p class="text-xs text-gray-300 mb-6 leading-relaxed">
+                Отправьте нам описание вашего заказа в удобный мессенджер. Мы оперативно подготовим макет и подскажем по стоимости!
+            </p>
+
+            <div class="space-y-3">
+                <a id="modal-btn-tg" href="https://t.me/metizproject" target="_blank" rel="noopener" class="w-full py-3.5 px-4 rounded-xl font-bold text-xs uppercase tracking-wider bg-sky-500 text-white hover:bg-sky-400 transition-all flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-telegram text-base"></i>
+                    <span>Написать в Telegram</span>
+                </a>
+                <a id="modal-btn-wa" href="https://wa.me/message/RDHE3F4PU2D3L1" target="_blank" rel="noopener" class="w-full py-3.5 px-4 rounded-xl font-bold text-xs uppercase tracking-wider bg-emerald-500 text-white hover:bg-emerald-400 transition-all flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-base"></i>
+                    <span>Написать в WhatsApp</span>
+                </a>
+                <a href="https://vk.ru/im?sel=-10150150" target="_blank" rel="noopener" class="w-full py-3.5 px-4 rounded-xl font-bold text-xs uppercase tracking-wider bg-blue-600 text-white hover:bg-blue-500 transition-all flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-vk text-base"></i>
+                    <span>Сообщение ВКонтакте</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="fixed bottom-20 md:bottom-8 right-6 z-[1000] glass-card px-5 py-3 rounded-2xl border border-tiffany/40 text-tiffany text-xs font-bold flex items-center gap-3 shadow-2xl transition-all duration-300 transform translate-y-10 opacity-0 pointer-events-none">
+        <i class="fa-solid fa-circle-check text-base"></i>
+        <span id="toast-text">Детали расчета скопированы!</span>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            // 3D TILT EFFECT & GYROSCOPE SUPPORT FOR CARDS
+            const tiltCards = document.querySelectorAll('.tilt-card');
+
+            function applyTilt(card, mouseX, mouseY) {
+                const rect = card.getBoundingClientRect();
+                const x = mouseX - rect.left - rect.width / 2;
+                const y = mouseY - rect.top - rect.height / 2;
+                const rotateX = (-y / (rect.height / 2)) * 8;
+                const rotateY = (x / (rect.width / 2)) * 8;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+            }
+
+            tiltCards.forEach(card => {
+                card.addEventListener('mousemove', (e) => applyTilt(card, e.clientX, e.clientY));
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
+                });
+            });
+
+            // Gyroscope Mobile Tilt
+            if (window.DeviceOrientationEvent) {
+                window.addEventListener('deviceorientation', (e) => {
+                    if (window.innerWidth > 768) return;
+                    const gamma = e.gamma || 0;
+                    const beta = e.beta || 0;
+                    
+                    const rotX = Math.min(Math.max((beta - 40) / 4, -8), 8);
+                    const rotY = Math.min(Math.max(gamma / 4, -8), 8);
+
+                    tiltCards.forEach(card => {
+                        card.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+                    });
+                });
+            }
+
+            // MAGNETIC BUTTON EFFECT
+            const magneticBtns = document.querySelectorAll('.magnetic-btn');
+            magneticBtns.forEach(btn => {
+                btn.addEventListener('mousemove', (e) => {
+                    const rect = btn.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+                });
+                btn.addEventListener('mouseleave', () => {
+                    btn.style.transform = 'translate(0px, 0px)';
+                });
+            });
+
+            // SOUND MICRO-FEEDBACK ENGINE
+            let soundEnabled = false;
+            const soundBtn = document.getElementById('sound-toggle');
+            const soundIcon = document.getElementById('sound-icon');
+            
+            let audioCtx = null;
+            function playClickSound() {
+                if (!soundEnabled) return;
+                try {
+                    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(580, audioCtx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.05);
+                    gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.05);
+                } catch(e){}
+            }
+
+            soundBtn.addEventListener('click', () => {
+                soundEnabled = !soundEnabled;
+                if (soundEnabled) {
+                    soundIcon.className = "fa-solid fa-volume-high text-tiffany";
+                    showToast('Звуковой отклик включен');
+                    playClickSound();
+                } else {
+                    soundIcon.className = "fa-solid fa-volume-xmark";
+                    showToast('Звуковой отклик выключен');
+                }
+            });
+
+            document.querySelectorAll('button, a').forEach(el => {
+                el.addEventListener('click', () => playClickSound());
+            });
+
+            // INTRO SPLASH ENGINE
+            const introSplash = document.getElementById("intro-splash");
+            const introLogo = document.getElementById("intro-logo");
+            const introSub = document.getElementById("intro-sub");
+            const introBar = document.getElementById("intro-bar");
+
+            setTimeout(() => {
+                introLogo.classList.remove("opacity-0", "scale-90");
+                introLogo.classList.add("opacity-100", "scale-100");
+            }, 100);
+
+            setTimeout(() => {
+                introSub.classList.remove("opacity-0");
+                introBar.classList.remove("opacity-0");
+            }, 400);
+
+            setTimeout(() => {
+                introSplash.classList.add("opacity-0");
+                setTimeout(() => {
+                    introSplash.style.display = "none";
+                }, 700);
+            }, 1600);
+
+            // CURSOR SPOTLIGHT ENGINE
+            const cursorGlow = document.getElementById('cursor-glow');
+            window.addEventListener('mousemove', (e) => {
+                cursorGlow.style.left = e.clientX + 'px';
+                cursorGlow.style.top = e.clientY + 'px';
+            });
+
+            // CANVAS NEON FLOATING PARTICLES ENGINE
+            const canvas = document.getElementById('bg-canvas');
+            const ctx = canvas.getContext('2d');
+            let width, height, particles = [];
+
+            function initCanvas() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+                particles = [];
+                const count = Math.min(110, Math.floor(width / 12));
+                
+                for (let i = 0; i < count; i++) {
+                    particles.push({
+                        x: Math.random() * width,
+                        y: Math.random() * height,
+                        r: Math.random() * 2.2 + 0.5,
+                        alpha: Math.random() * 0.6 + 0.15,
+                        vx: (Math.random() - 0.5) * 0.35,
+                        vy: (Math.random() - 0.5) * 0.35
+                    });
+                }
+            }
+
+            function animateParticles() {
+                ctx.clearRect(0, 0, width, height);
+
+                particles.forEach(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+
+                    if (p.x < 0) p.x = width;
+                    if (p.x > width) p.x = 0;
+                    if (p.y < 0) p.y = height;
+                    if (p.y > height) p.y = 0;
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(76, 213, 211, ${p.alpha})`;
+                    ctx.shadowBlur = 10;
+                    ctx.shadowColor = '#4cd5d3';
+                    ctx.fill();
+                    ctx.shadowBlur = 0;
+                });
+
+                requestAnimationFrame(animateParticles);
+            }
+
+            initCanvas();
+            animateParticles();
+            window.addEventListener('resize', initCanvas);
+
+            // CALCULATOR ENGINE
+            const state = {
+                service: 'plotter',
+                serviceName: 'Плоттерная резка',
+                material: 'standard',
+                materialName: 'Стандартный винил',
+                width: 30,
+                height: 20,
+                qty: 10
+            };
+
+            const rates = {
+                plotter: { basePriceSqM: 450 },
+                printcut: { basePriceSqM: 850 },
+                autobrand: { basePriceSqM: 1400 },
+                canvas: { basePriceSqM: 2800 }
+            };
+
+            const matMultipliers = {
+                standard: 1.0,
+                cast: 1.5,
+                holographic: 1.8,
+                reflective: 1.9,
+                chrome: 2.2,
+                canvas_standard: 1.0
+            };
+
+            const serviceButtons = document.querySelectorAll('.calc-btn-service');
+            const matSelect = document.getElementById('calc-material');
+            const widthInput = document.getElementById('calc-width');
+            const heightInput = document.getElementById('calc-height');
+            const qtySlider = document.getElementById('calc-qty');
+
+            function updateCalculator() {
+                state.width = Math.max(5, parseFloat(widthInput.value) || 5);
+                state.height = Math.max(5, parseFloat(heightInput.value) || 5);
+                state.qty = parseInt(qtySlider.value) || 1;
+                state.material = matSelect.value;
+                state.materialName = matSelect.options[matSelect.selectedIndex].text;
+
+                document.getElementById('calc-qty-val').innerText = `${state.qty} шт`;
+
+                const areaSqM = (state.width / 100) * (state.height / 100);
+                const baseSqM = rates[state.service].basePriceSqM;
+                const matMult = matMultipliers[state.material] || 1.0;
+
+                let discount = 0;
+                if (state.qty >= 200) discount = 0.35;
+                else if (state.qty >= 50) discount = 0.20;
+                else if (state.qty >= 10) discount = 0.10;
+
+                let singleCost = areaSqM * baseSqM * matMult;
+                if (singleCost < 30) singleCost = 30;
+
+                let totalCost = singleCost * state.qty * (1 - discount);
+                if (totalCost < 300) totalCost = 300;
+
+                const unitFinalCost = Math.round(totalCost / state.qty);
+
+                document.getElementById('summary-service').innerText = state.serviceName;
+                document.getElementById('summary-size').innerText = `${state.width} x ${state.height} см`;
+                document.getElementById('summary-material').innerText = state.materialName.split('(')[0];
+                document.getElementById('summary-qty').innerText = `${state.qty} шт`;
+                document.getElementById('summary-discount').innerText = `${Math.round(discount * 100)}%`;
+                
+                document.getElementById('calc-total-price').innerText = `${Math.round(totalCost).toLocaleString('ru-RU')} ₽`;
+                document.getElementById('calc-price-per-unit').innerText = `${unitFinalCost}`;
+            }
+
+            serviceButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    serviceButtons.forEach(b => {
+                        b.classList.remove('border-tiffany/40', 'bg-tiffany/10', 'text-tiffany');
+                        b.classList.add('border-white/10', 'bg-darkbg-card', 'text-gray-300');
+                    });
+                    btn.classList.remove('border-white/10', 'bg-darkbg-card', 'text-gray-300');
+                    btn.classList.add('border-tiffany/40', 'bg-tiffany/10', 'text-tiffany');
+
+                    state.service = btn.dataset.service;
+                    state.serviceName = btn.querySelector('div > div:first-child').innerText;
+                    updateCalculator();
+                });
+            });
+
+            matSelect.addEventListener('change', updateCalculator);
+            widthInput.addEventListener('input', updateCalculator);
+            heightInput.addEventListener('input', updateCalculator);
+            qtySlider.addEventListener('input', updateCalculator);
+
+            updateCalculator();
+
+            // COPY CALC DETAILS
+            document.getElementById('btn-copy-calc').addEventListener('click', () => {
+                const text = `Заказ METIZ PROJECT:\nУслуга: ${state.serviceName}\nРазмер: ${state.width}x${state.height} см\nМатериал: ${state.materialName}\nТираж: ${state.qty} шт\nИтого: ${document.getElementById('calc-total-price').innerText}`;
+                
+                const el = document.createElement('textarea');
+                el.value = text;
+                document.body.appendChild(el);
+                el.select();
+                document.execCommand('copy');
+                document.body.removeChild(el);
+
+                showToast('Детали расчета скопированы в буфер!');
+            });
+
+            document.getElementById('btn-send-tg').addEventListener('click', () => {
+                const msg = encodeURIComponent(`Здравствуйте! Хочу заказать:\n• Услуга: ${state.serviceName}\n• Размер: ${state.width}x${state.height} см\n• Тираж: ${state.qty} шт\n• Материал: ${state.materialName}`);
+                window.open(`https://t.me/metizproject?text=${msg}`, '_blank');
+            });
+
+            // STICKER VISUALIZER ENGINE
+            const visInput = document.getElementById('vis-text-input');
+            const visOutput = document.getElementById('visualizer-text-output');
+            const visFontBtns = document.querySelectorAll('.vis-btn-font');
+            const visMatBtns = document.querySelectorAll('.vis-btn-mat');
+            const visSlider = document.getElementById('vis-size-slider');
+
+            visInput.addEventListener('input', (e) => {
+                visOutput.innerText = e.target.value.toUpperCase() || 'METIZ PROJECT';
+            });
+
+            visFontBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    visFontBtns.forEach(b => {
+                        b.classList.remove('border-tiffany/40', 'bg-tiffany/10', 'text-tiffany');
+                        b.classList.add('border-white/10', 'bg-darkbg-card', 'text-gray-300');
+                    });
+                    btn.classList.remove('border-white/10', 'bg-darkbg-card', 'text-gray-300');
+                    btn.classList.add('border-tiffany/40', 'bg-tiffany/10', 'text-tiffany');
+
+                    visOutput.className = `relative text-center break-all text-3xl sm:text-5xl font-extrabold uppercase transition-all duration-300 transform group-hover:scale-105 ${btn.dataset.font} ${currentMatStyle}`;
+                });
+            });
+
+            let currentMatStyle = 'neon-glow-material';
+            visMatBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    visMatBtns.forEach(b => {
+                        b.classList.remove('border-tiffany/40', 'bg-tiffany/10', 'text-tiffany');
+                        b.classList.add('border-white/10', 'bg-darkbg-card', 'text-gray-300');
+                    });
+                    btn.classList.remove('border-white/10', 'bg-darkbg-card', 'text-gray-300');
+                    btn.classList.add('border-tiffany/40', 'bg-tiffany/10', 'text-tiffany');
+
+                    currentMatStyle = btn.dataset.style;
+                    const activeFontClass = document.querySelector('.vis-btn-font.border-tiffany\\/40')?.dataset.font || 'font-sans';
+                    visOutput.className = `relative text-center break-all text-3xl sm:text-5xl font-extrabold uppercase transition-all duration-300 transform group-hover:scale-105 ${activeFontClass} ${currentMatStyle}`;
+                });
+            });
+
+            visSlider.addEventListener('input', (e) => {
+                document.getElementById('vis-size-val').innerText = `${e.target.value}%`;
+                visOutput.style.fontSize = `${e.target.value / 32}rem`;
+            });
+
+            document.getElementById('btn-vis-order').addEventListener('click', () => {
+                const text = encodeURIComponent(`Здравствуйте! Хочу заказать индивидуальную наклейку со своим текстом: "${visInput.value}"`);
+                window.open(`https://t.me/metizproject?text=${text}`, '_blank');
+            });
+
+            // PORTFOLIO FILTER ENGINE
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const items = document.querySelectorAll('.portfolio-item');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => {
+                        b.classList.remove('bg-tiffany', 'text-black', 'shadow-[0_0_15px_rgba(76,213,211,0.3)]');
+                        b.classList.add('bg-darkbg-card', 'border', 'border-white/10', 'text-gray-300');
+                    });
+                    btn.classList.remove('bg-darkbg-card', 'border', 'border-white/10', 'text-gray-300');
+                    btn.classList.add('bg-tiffany', 'text-black', 'shadow-[0_0_15px_rgba(76,213,211,0.3)]');
+
+                    const filter = btn.dataset.filter;
+                    items.forEach(item => {
+                        if (filter === 'all' || item.dataset.category === filter) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // BEFORE / AFTER SLIDER ENGINE
+            const container = document.getElementById('ba-slider-container');
+            const resizeLayer = document.getElementById('ba-resize-layer');
+            const handleBar = document.getElementById('ba-handle-bar');
+            let isDraggingBA = false;
+
+            function setPosBA(x) {
+                const rect = container.getBoundingClientRect();
+                let posX = x - rect.left;
+                if (posX < 0) posX = 0;
+                if (posX > rect.width) posX = rect.width;
+                const percentage = (posX / rect.width) * 100;
+                resizeLayer.style.width = percentage + '%';
+                handleBar.style.left = percentage + '%';
+            }
+
+            container.addEventListener('mousedown', (e) => { isDraggingBA = true; setPosBA(e.clientX); });
+            window.addEventListener('mouseup', () => { isDraggingBA = false; });
+            window.addEventListener('mousemove', (e) => { if (isDraggingBA) setPosBA(e.clientX); });
+
+            container.addEventListener('touchstart', (e) => { isDraggingBA = true; setPosBA(e.touches[0].clientX); });
+            window.addEventListener('touchend', () => { isDraggingBA = false; });
+            window.addEventListener('touchmove', (e) => { if (isDraggingBA) setPosBA(e.touches[0].clientX); });
+
+            // FAQ ACCORDION ENGINE
+            const faqToggles = document.querySelectorAll('.faq-toggle');
+            faqToggles.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const content = btn.nextElementSibling;
+                    const icon = btn.querySelector('i');
+                    content.classList.toggle('hidden');
+                    icon.classList.toggle('rotate-180');
+                });
+            });
+
+        });
+    </script>
 </body>
 </html>
