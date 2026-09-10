@@ -1,488 +1,1620 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Metiz Project | Идеальные формы</title>
+    <title>ART & VINYL STUDIO | Изготовление наклеек и фото на холсте</title>
+    <meta name="description" content="Премиальное изготовление автомобильных и рекламных наклеек, а также печать фотографий на холстах с готовым подрамником.">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Google Fonts Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        tiffany: {
+                            DEFAULT: '#4CD5D3',
+                            hover: '#38C4C2',
+                            light: '#72E3E1',
+                            dark: '#1F5E5D',
+                            glow: 'rgba(76, 213, 211, 0.35)',
+                            subtle: 'rgba(76, 213, 211, 0.12)'
+                        },
+                        darkbg: {
+                            900: '#0B0E14',
+                            800: '#121824',
+                            700: '#1A2333',
+                            600: '#232E42'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'tiffany-glow': '0 0 25px rgba(76, 213, 211, 0.25)',
+                        'tiffany-strong': '0 0 35px rgba(76, 213, 211, 0.45)',
+                        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom CSS Styles -->
     <style>
-        /* Базовые настройки и шрифты */
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap');
-
-        :root {
-            --tiffany: #4cd5d3;
-            --tiffany-hover: #3bc2c0;
-            --bg-dark: #0d0d0d;
-            --bg-section: #141414;
-            --text-light: #f5f5f5;
-            --text-gray: #a0a0a0;
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B0E14;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1A2333;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4CD5D3;
+        }
+        
+        /* Glassmorphism Styles */
+        .glass-panel {
+            background: rgba(18, 24, 36, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .glass-card {
+            background: rgba(26, 35, 51, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .glass-card:hover {
+            border-color: rgba(76, 213, 211, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px -10px rgba(76, 213, 211, 0.2);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Montserrat', sans-serif;
+        .glass-input {
+            background: rgba(11, 14, 20, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ffffff;
         }
 
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-light);
-            overflow-x: hidden;
+        .glass-input:focus {
+            border-color: #4CD5D3;
+            box-shadow: 0 0 15px rgba(76, 213, 211, 0.2);
+            outline: none;
         }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        /* Анимации */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Кнопки */
-        .btn {
-            display: inline-block;
-            padding: 15px 35px;
-            background-color: transparent;
-            color: var(--tiffany);
-            border: 2px solid var(--tiffany);
-            border-radius: 30px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .btn::before {
-            content: '';
+        /* Ambient Background Light Effects */
+        .ambient-glow-1 {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 100%;
-            background-color: var(--tiffany);
-            transition: all 0.4s ease;
-            z-index: -1;
-        }
-
-        .btn:hover::before {
-            width: 100%;
-        }
-
-        .btn:hover {
-            color: var(--bg-dark);
-            box-shadow: 0 0 20px rgba(76, 213, 211, 0.5);
-        }
-
-        /* Шапка (Header) */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 20px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(13, 13, 13, 0.9);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
-
-        .logo img {
-            max-height: 40px;
-            width: auto;
-        }
-
-        nav ul {
-            display: flex;
-            gap: 30px;
-        }
-
-        nav ul li a {
-            font-weight: 400;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: color 0.3s ease;
-        }
-
-        nav ul li a:hover {
-            color: var(--tiffany);
-        }
-
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 6px;
-        }
-
-        .menu-toggle span {
-            width: 30px;
-            height: 2px;
-            background-color: var(--text-light);
-            transition: 0.3s;
-        }
-
-        /* Главный экран (Hero) */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 0 5%;
-            background: radial-gradient(circle at center, #1a1a1a 0%, var(--bg-dark) 100%);
-            position: relative;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjQiIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSIvPjwvc3ZnPg==');
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(76, 213, 211, 0.15) 0%, rgba(11, 14, 20, 0) 70%);
+            pointer-events: none;
             z-index: 0;
         }
 
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 800px;
+        .ambient-glow-2 {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(41, 120, 160, 0.15) 0%, rgba(11, 14, 20, 0) 70%);
+            pointer-events: none;
+            z-index: 0;
         }
 
-        .hero-content h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            line-height: 1.2;
+        /* Glowing Text Accent */
+        .text-glow {
+            text-shadow: 0 0 20px rgba(76, 213, 211, 0.4);
         }
 
-        .hero-content h1 span {
-            color: var(--tiffany);
+        /* Animated Gradient Text */
+        .gradient-text {
+            background: linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 50%, #4CD5D3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .tiffany-gradient-text {
+            background: linear-gradient(135deg, #FFFFFF 20%, #4CD5D3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .hero-content p {
-            font-size: 1.2rem;
-            color: var(--text-gray);
-            margin-bottom: 40px;
-            line-height: 1.6;
+        /* Timeline Connector */
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            top: 24px;
+            left: 20px;
+            bottom: 24px;
+            width: 2px;
+            background: linear-gradient(to bottom, #4CD5D3, rgba(76, 213, 211, 0.1));
+            z-index: 0;
         }
 
-        /* Секция преимуществ / Услуг */
-        .features {
-            padding: 100px 5%;
-            background-color: var(--bg-section);
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 60px;
-        }
-
-        .section-title span {
-            color: var(--tiffany);
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-        }
-
-        .feature-card {
-            background: var(--bg-dark);
-            padding: 40px 30px;
-            border-radius: 15px;
-            border-bottom: 3px solid transparent;
-            transition: all 0.4s ease;
-        }
-
-        .feature-card:hover {
-            border-bottom: 3px solid var(--tiffany);
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .feature-icon {
-            width: 60px;
-            height: 60px;
-            background: rgba(76, 213, 211, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-            color: var(--tiffany);
-            font-size: 24px;
-        }
-
-        .feature-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-        }
-
-        .feature-card p {
-            color: var(--text-gray);
-            line-height: 1.6;
-        }
-
-        /* Контакты */
-        .contact {
-            padding: 100px 5%;
-            text-align: center;
-        }
-
-        .contact-wrap {
-            max-width: 600px;
-            margin: 0 auto;
-            background: var(--bg-section);
-            padding: 50px;
-            border-radius: 20px;
-            border: 1px solid rgba(76, 213, 211, 0.1);
-        }
-
-        .contact-wrap input, .contact-wrap textarea {
-            width: 100%;
-            padding: 15px;
-            margin-bottom: 20px;
-            background: var(--bg-dark);
-            border: 1px solid #333;
-            color: var(--text-light);
-            border-radius: 10px;
-            outline: none;
-            transition: border 0.3s ease;
-        }
-
-        .contact-wrap input:focus, .contact-wrap textarea:focus {
-            border-color: var(--tiffany);
-        }
-
-        /* Подвал */
-        footer {
-            background-color: #000;
-            padding: 30px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: var(--text-gray);
-            font-size: 0.9rem;
-        }
-
-        /* Мобильная адаптация */
-        @media (max-width: 768px) {
-            .menu-toggle {
-                display: flex;
-                z-index: 1001;
-            }
-
-            nav {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 100%;
-                height: 100vh;
-                background: var(--bg-dark);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                transition: right 0.4s ease;
-            }
-
-            nav.active {
-                right: 0;
-            }
-
-            nav ul {
-                flex-direction: column;
-                align-items: center;
-                gap: 40px;
-            }
-
-            nav ul li a {
-                font-size: 20px;
-            }
-
-            /* Анимация бургера */
-            .menu-toggle.active span:nth-child(1) {
-                transform: translateY(8px) rotate(45deg);
-                background-color: var(--tiffany);
-            }
-            .menu-toggle.active span:nth-child(2) {
-                opacity: 0;
-            }
-            .menu-toggle.active span:nth-child(3) {
-                transform: translateY(-8px) rotate(-45deg);
-                background-color: var(--tiffany);
-            }
-
-            .hero-content h1 {
-                font-size: 2.2rem;
-            }
-
-            .hero-content p {
-                font-size: 1rem;
-            }
-
-            .contact-wrap {
-                padding: 30px 20px;
-            }
-
-            footer {
-                flex-direction: column;
-                gap: 20px;
-                text-align: center;
+        @media (min-width: 1024px) {
+            .timeline-line-horizontal::before {
+                content: '';
+                position: absolute;
+                top: 28px;
+                left: 10%;
+                right: 10%;
+                height: 2px;
+                background: linear-gradient(to right, rgba(76, 213, 211, 0.1), #4CD5D3, rgba(76, 213, 211, 0.1));
+                z-index: 0;
             }
         }
     </style>
 </head>
-<body>
+<body class="bg-darkbg-900 text-slate-100 font-sans antialiased selection:bg-tiffany selection:text-darkbg-900 overflow-x-hidden">
 
-    <!-- Шапка -->
-    <header>
-        <div class="logo">
-            <!-- Обязательный логотип -->
-            <img src="metiz-project-logo.png" alt="Metiz Project Logo">
+    <!-- Header / Navigation Bar -->
+    <header id="mainHeader" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4 glass-panel border-b border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+            
+            <!-- Logo Section -->
+            <a href="#" class="flex items-center gap-3 group">
+                <!-- Editable Logo SVG / Container -->
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-tiffany to-teal-700 p-0.5 flex items-center justify-center shadow-tiffany-glow group-hover:scale-105 transition-transform">
+                    <div class="w-full h-full bg-darkbg-900 rounded-[10px] flex items-center justify-center">
+                        <i class="fa-solid fa-layer-group text-tiffany text-lg"></i>
+                    </div>
+                </div>
+                <div>
+                    <div class="font-heading font-extrabold text-lg tracking-wider text-white flex items-center gap-1.5">
+                        TIFFANY<span class="text-tiffany">PRINT</span>
+                    </div>
+                    <p class="text-[10px] text-slate-400 font-medium tracking-widest uppercase">Stickers & Canvas Studio</p>
+                </div>
+            </a>
+
+            <!-- Desktop Menu Navigation -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="#hero" class="text-slate-300 hover:text-tiffany transition-colors">Главная</a>
+                <a href="#stickers" class="text-slate-300 hover:text-tiffany transition-colors">Наклейки</a>
+                <a href="#canvases" class="text-slate-300 hover:text-tiffany transition-colors">Холсты</a>
+                <a href="#gallery" class="text-slate-300 hover:text-tiffany transition-colors">Наши работы</a>
+                <a href="#reviews" class="text-slate-300 hover:text-tiffany transition-colors">Отзывы</a>
+                <a href="#contacts" class="text-slate-300 hover:text-tiffany transition-colors">Контакты</a>
+            </nav>
+
+            <!-- Quick Action CTA -->
+            <div class="hidden lg:flex items-center gap-4">
+                <button onclick="openModal()" class="px-5 py-2.5 rounded-xl bg-tiffany text-darkbg-900 font-semibold text-sm hover:bg-tiffany-hover hover:shadow-tiffany-strong transition-all flex items-center gap-2 group">
+                    <i class="fa-solid fa-calculator text-xs transition-transform group-hover:rotate-12"></i>
+                    <span>Быстрый расчет</span>
+                </button>
+            </div>
+
+            <!-- Mobile Hamburger Button -->
+            <button id="mobileMenuBtn" aria-label="Открыть меню" class="md:hidden w-10 h-10 rounded-lg glass-card flex items-center justify-center text-tiffany hover:bg-darkbg-700 transition-colors">
+                <i class="fa-solid fa-bars text-xl" id="menuIcon"></i>
+            </button>
         </div>
-        
-        <nav id="navbar">
-            <ul>
-                <li><a href="#about">О нас</a></li>
-                <li><a href="#approach">Наш подход</a></li>
-                <li><a href="#contact">Связаться с нами</a></li>
-            </ul>
-        </nav>
 
-        <div class="menu-toggle" id="mobile-menu">
-            <span></span>
-            <span></span>
-            <span></span>
+        <!-- Mobile Menu Overlay -->
+        <div id="mobileMenu" class="hidden md:hidden absolute top-full left-0 right-0 glass-panel border-b border-slate-800 py-6 px-6 shadow-2xl transition-all">
+            <div class="flex flex-col gap-4 text-base font-medium">
+                <a href="#hero" class="mobile-nav-link text-slate-200 hover:text-tiffany transition-colors py-2 border-b border-slate-800/50">Главная</a>
+                <a href="#stickers" class="mobile-nav-link text-slate-200 hover:text-tiffany transition-colors py-2 border-b border-slate-800/50">Наклейки и реклама</a>
+                <a href="#canvases" class="mobile-nav-link text-slate-200 hover:text-tiffany transition-colors py-2 border-b border-slate-800/50">Холсты на заказ</a>
+                <a href="#gallery" class="mobile-nav-link text-slate-200 hover:text-tiffany transition-colors py-2 border-b border-slate-800/50">Галерея работ</a>
+                <a href="#reviews" class="mobile-nav-link text-slate-200 hover:text-tiffany transition-colors py-2 border-b border-slate-800/50">Отзывы клиентов</a>
+                <a href="#contacts" class="mobile-nav-link text-slate-200 hover:text-tiffany transition-colors py-2 border-b border-slate-800/50">Контакты и Самовывоз</a>
+                
+                <button onclick="openModal(); closeMobileMenu();" class="mt-2 w-full py-3 rounded-xl bg-tiffany text-darkbg-900 font-bold text-center hover:bg-tiffany-hover transition-colors shadow-tiffany-glow">
+                    Рассчитать стоимость
+                </button>
+            </div>
         </div>
     </header>
 
-    <!-- Главный экран -->
-    <section class="hero">
-        <div class="hero-content fade-in">
-            <h1>Искусство создания <span>идеальных форм</span></h1>
-            <p>Metiz Project — это синергия профессионализма, высоких стандартов качества и внимания к каждой детали вашего проекта.</p>
-            <a href="#contact" class="btn">Оставить заявку</a>
+    <!-- HERO SECTION -->
+    <section id="hero" class="relative min-h-screen pt-32 pb-20 flex items-center justify-center overflow-hidden">
+        <!-- Ambient Backlights -->
+        <div class="ambient-glow-1 top-10 -left-20"></div>
+        <div class="ambient-glow-2 bottom-10 -right-20"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Hero Left Text Content -->
+                <div class="lg:col-span-7 text-center lg:text-left space-y-8">
+                    
+                    <!-- Floating Tech Badge -->
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border border-tiffany/30 shadow-tiffany-glow">
+                        <span class="w-2 h-2 rounded-full bg-tiffany animate-ping"></span>
+                        <span class="text-xs font-semibold uppercase tracking-wider text-tiffany">Премиальная студия печати</span>
+                    </div>
+
+                    <!-- Main Catchy Heading -->
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-heading font-black tracking-tight leading-tight">
+                        Создаем стильный <br class="hidden sm:block"/>
+                        <span class="tiffany-gradient-text text-glow">автодизайн</span> и идеальные <br class="hidden sm:block"/>
+                        <span class="text-white">картины на холсте</span>
+                    </h1>
+
+                    <!-- Clear Subtitle Positioning -->
+                    <p class="text-slate-300 text-lg sm:text-xl font-normal max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        Изготавливаем высокоточные наклейки на авто, витрины и бизнес-объекты, а также создаем готовые картины по вашим фотографиям с качественной натяжкой на подрамник.
+                    </p>
+
+                    <!-- Split Direction Highlights -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 max-w-lg mx-auto lg:mx-0 text-left">
+                        <div class="glass-card p-4 rounded-xl flex items-start gap-3 border-l-2 border-l-tiffany">
+                            <i class="fa-solid fa-car text-tiffany text-xl mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-sm text-white">Наклейки и Реклама</h4>
+                                <p class="text-xs text-slate-400 mt-0.5">Авто, витрины, плоттерная резка, стикерпаки</p>
+                            </div>
+                        </div>
+                        <div class="glass-card p-4 rounded-xl flex items-start gap-3 border-l-2 border-l-tiffany">
+                            <i class="fa-solid fa-palette text-tiffany text-xl mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-sm text-white">Холсты на заказ</h4>
+                                <p class="text-xs text-slate-400 mt-0.5">Печать фото + натуральный подрамник + крепеж</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Two Main CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                        <a href="#stickers" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-tiffany text-darkbg-900 font-extrabold text-base hover:bg-tiffany-hover hover:shadow-tiffany-strong transition-all text-center flex items-center justify-center gap-3 group">
+                            <i class="fa-solid fa-car-side transition-transform group-hover:translate-x-1"></i>
+                            <span>Наклейки и реклама</span>
+                        </a>
+                        <a href="#canvases" class="w-full sm:w-auto px-8 py-4 rounded-xl glass-card text-white font-bold text-base hover:bg-darkbg-700 hover:border-tiffany/50 transition-all text-center flex items-center justify-center gap-3 group">
+                            <i class="fa-solid fa-frame transition-transform group-hover:scale-110 text-tiffany"></i>
+                            <span>Холсты на заказ</span>
+                        </a>
+                    </div>
+
+                    <!-- Trust Bar -->
+                    <div class="pt-6 border-t border-slate-800/80 grid grid-cols-3 gap-4 text-center lg:text-left">
+                        <div>
+                            <div class="text-2xl font-black text-tiffany font-heading">100%</div>
+                            <div class="text-xs text-slate-400 mt-0.5">Гарантия качества</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-black text-white font-heading">1-2 дня</div>
+                            <div class="text-xs text-slate-400 mt-0.5">Быстрое изготовление</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-black text-tiffany font-heading">4.9 ★</div>
+                            <div class="text-xs text-slate-400 mt-0.5">Оценка клиентов</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Hero Right Interactive Card Preview -->
+                <div class="lg:col-span-5">
+                    <div class="relative mx-auto max-w-md lg:max-w-none">
+                        <!-- Decorative Frame Glow -->
+                        <div class="absolute -inset-1 bg-gradient-to-r from-tiffany to-teal-600 rounded-3xl blur-xl opacity-30 animate-pulse"></div>
+                        
+                        <div class="relative glass-panel rounded-3xl p-6 overflow-hidden border border-slate-700/60 shadow-2xl">
+                            
+                            <!-- Switch Tab Header inside hero card -->
+                            <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-800">
+                                <span class="text-xs font-bold uppercase tracking-widest text-slate-400">Примеры наших продуктов</span>
+                                <div class="flex gap-1 bg-darkbg-900 p-1 rounded-lg border border-slate-800">
+                                    <button id="heroTabStickers" onclick="switchHeroTab('stickers')" class="px-3 py-1 rounded-md text-xs font-semibold bg-tiffany text-darkbg-900 transition-all">Наклейки</button>
+                                    <button id="heroTabCanvases" onclick="switchHeroTab('canvases')" class="px-3 py-1 rounded-md text-xs font-semibold text-slate-400 hover:text-white transition-all">Холсты</button>
+                                </div>
+                            </div>
+
+                            <!-- Sticker View Container -->
+                            <div id="heroContentStickers" class="space-y-4">
+                                <div class="relative h-64 rounded-2xl overflow-hidden group">
+                                    <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?q=80&w=800&auto=format&fit=crop" alt="Автомобильные наклейки" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-darkbg-900 via-transparent to-transparent opacity-80"></div>
+                                    <div class="absolute bottom-4 left-4 right-4">
+                                        <span class="text-xs font-semibold text-tiffany bg-darkbg-900/80 px-2.5 py-1 rounded-full border border-tiffany/30">Виниловая графика</span>
+                                        <h3 class="text-lg font-bold text-white mt-1">Оклейка кузова и брендинг</h3>
+                                    </div>
+                                </div>
+                                <div class="p-3 glass-card rounded-xl flex items-center justify-between text-xs">
+                                    <span class="text-slate-300"><i class="fa-solid fa-shield-halved text-tiffany mr-2"></i>Устойчивость к мойке и ультрафиолету</span>
+                                    <span class="text-tiffany font-bold">от 500 ₽</span>
+                                </div>
+                            </div>
+
+                            <!-- Canvas View Container (Hidden initially) -->
+                            <div id="heroContentCanvases" class="space-y-4 hidden">
+                                <div class="relative h-64 rounded-2xl overflow-hidden group">
+                                    <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?q=80&w=800&auto=format&fit=crop" alt="Картина на холсте" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-darkbg-900 via-transparent to-transparent opacity-80"></div>
+                                    <div class="absolute bottom-4 left-4 right-4">
+                                        <span class="text-xs font-semibold text-tiffany bg-darkbg-900/80 px-2.5 py-1 rounded-full border border-tiffany/30">Натуральный холст 380г</span>
+                                        <h3 class="text-lg font-bold text-white mt-1">Галерейная натяжка с подрамником</h3>
+                                    </div>
+                                </div>
+                                <div class="p-3 glass-card rounded-xl flex items-center justify-between text-xs">
+                                    <span class="text-slate-300"><i class="fa-solid fa-check text-tiffany mr-2"></i>Готовый комплект с креплением</span>
+                                    <span class="text-tiffany font-bold">от 1 200 ₽</span>
+                                </div>
+                            </div>
+
+                            <!-- Quick Action Trigger inside Card -->
+                            <button onclick="openModal()" class="mt-4 w-full py-3 rounded-xl border border-tiffany/40 text-tiffany font-bold text-sm hover:bg-tiffany hover:text-darkbg-900 transition-all text-center flex items-center justify-center gap-2">
+                                <span>Заказать по своему макету</span>
+                                <i class="fa-solid fa-arrow-right text-xs"></i>
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </section>
 
-    <!-- Секция подхода -->
-    <section id="approach" class="features">
-        <h2 class="section-title fade-in">Философия <span>Metiz Project</span></h2>
-        
-        <div class="features-grid">
-            <div class="feature-card fade-in">
-                <div class="feature-icon">✦</div>
-                <h3>Индивидуальность</h3>
-                <p>Мы не используем шаблонные методы. Каждая задача рассматривается как уникальный проект, требующий эксклюзивного решения и персонального внимания.</p>
-            </div>
+    <!-- SECTION 1 — STICKERS & ADVERTISING -->
+    <section id="stickers" class="py-24 relative bg-darkbg-800/50 border-t border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             
-            <div class="feature-card fade-in">
-                <div class="feature-icon">❖</div>
-                <h3>Инновации</h3>
-                <p>Современное технологическое оснащение позволяет нам воплощать в жизнь проекты любой сложности, гарантируя премиальный уровень исполнения.</p>
+            <!-- Section Title Header -->
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-tiffany/10 border border-tiffany/30 text-tiffany text-xs font-bold uppercase tracking-widest">
+                    <i class="fa-solid fa-car text-xs"></i> Направление №1
+                </div>
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-white">
+                    Наклейки и <span class="text-tiffany text-glow">рекламная продукция</span>
+                </h2>
+                <p class="text-slate-300 text-base sm:text-lg">
+                    Изготовление качественных виниловых наклеек для автомобилей, коммерческого транспорта, оформления витрин и брендирования бизнеса.
+                </p>
             </div>
-            
-            <div class="feature-card fade-in">
-                <div class="feature-icon">✧</div>
-                <h3>Безупречность</h3>
-                <p>Строгий контроль качества на каждом этапе работы. Наш приоритет — превзойти ваши ожидания и создать эстетически совершенный результат.</p>
+
+            <!-- Categories Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Category 1: Auto Stickers -->
+                <div class="glass-card rounded-2xl p-8 relative overflow-hidden group">
+                    <div class="w-14 h-14 rounded-2xl bg-tiffany/10 border border-tiffany/30 flex items-center justify-center text-tiffany text-2xl mb-6 group-hover:scale-110 group-hover:bg-tiffany group-hover:text-darkbg-900 transition-all">
+                        <i class="fa-solid fa-car-rear"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">🚗 Наклейки на автомобили</h3>
+                    <p class="text-slate-300 text-sm mb-4 leading-relaxed">
+                        Изготовление надписей, графики и логотипов для легковых авто, мотоциклов, спецтехники и коммерческих автопарков.
+                    </p>
+                    <ul class="space-y-2 text-xs text-slate-300 border-t border-slate-800 pt-4">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-tiffany"></i> На кузов, стекла, бампер и капот</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-tiffany"></i> Вырезка по контуру (плоттерная резка)</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-tiffany"></i> Устойчивы к автомойке и морозам</li>
+                    </ul>
+                </div>
+
+                <!-- Category 2: Business & Shops -->
+                <div class="glass-card rounded-2xl p-8 relative overflow-hidden group">
+                    <div class="w-14 h-14 rounded-2xl bg-tiffany/10 border border-tiffany/30 flex items-center justify-center text-tiffany text-2xl mb-6 group-hover:scale-110 group-hover:bg-tiffany group-hover:text-darkbg-900 transition-all">
+                        <i class="fa-solid fa-store"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">🏪 Для магазинов и бизнеса</h3>
+                    <p class="text-slate-300 text-sm mb-4 leading-relaxed">
+                        Информационные и рекламные стикеры: режим работы, акционные надписи, логотипы и графические указатели.
+                    </p>
+                    <ul class="space-y-2 text-xs text-slate-300 border-t border-slate-800 pt-4">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-tiffany"></i> Наклейки на входные двери и окна</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-tiffany"></i> Информационная и навигационная графика</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-tiffany"></i> Фирменные логотипы любых размеров</li>
+                    </ul>
+                </div>
+
+                <!-- Category 3: Storefronts -->
+                <div class="glass-card rounded-2xl p-8 relative overflow-hidden group">
+                    <div class="w-14 h-14 rounded-2xl bg-tiffany/10 border border-tiffany/30 flex items-center justify-center text-tiffany text-2xl mb-6 group-hover:scale-110 group-hover:bg-tiffany group-hover:text-darkbg-900 transition-all">
+                        <i class="fa-solid fa-window-maximize"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">🪟 Оформление витрин</h3>
+                    <p class="text-slate-300 text-sm mb-4 leading-relaxed">
+                        Полное или частичное оклеивание стеклянных поверхностей коммерческих помещений для привлечения клиентов.
+                    </p>
+                    <ul class="space-y-2 text-xs text-slate-300 border-t border-slate-800 pt-4">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-tiffany"></i> Магазины, салоны красоты, кафе</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-tiffany"></i> Офисы, шоурумы и мастерские</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-tiffany"></i> Перфорированная и матовая пленка</li>
+                    </ul>
+                </div>
+
+                <!-- Category 4: Advertising Products -->
+                <div class="glass-card rounded-2xl p-8 relative overflow-hidden group">
+                    <div class="w-14 h-14 rounded-2xl bg-tiffany/10 border border-tiffany/30 flex items-center justify-center text-tiffany text-2xl mb-6 group-hover:scale-110 group-hover:bg-tiffany group-hover:text-darkbg-900 transition-all">
+                        <i class="fa-solid fa-bullhorn"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">📢 Рекламная продукция</h3>
+                    <p class="text-slate-300 text-sm mb-4 leading-relaxed">
+                        Комплексное брендирование поверхностей и изготовление рекламной графики под ключ по вашим требованиям.
+                    </p>
+                    <ul class="space-y-2 text-xs text-slate-300 border-t border-slate-800 pt-4">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-tiffany"></i> Рекламные промо-наклейки</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-tiffany"></i> Декоративные брендированные пленки</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-tiffany"></i> Графика для выставочных стендов</li>
+                    </ul>
+                </div>
+
+                <!-- Category 5: Sticker Packs -->
+                <div class="glass-card rounded-2xl p-8 relative overflow-hidden group">
+                    <div class="w-14 h-14 rounded-2xl bg-tiffany/10 border border-tiffany/30 flex items-center justify-center text-tiffany text-2xl mb-6 group-hover:scale-110 group-hover:bg-tiffany group-hover:text-darkbg-900 transition-all">
+                        <i class="fa-solid fa-icons"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">🎨 Стикеры на заказ</h3>
+                    <p class="text-slate-300 text-sm mb-4 leading-relaxed">
+                        Печать авторских наборов стикеров и единичных оригинальных элементов с фигурной вырезкой по контуру.
+                    </p>
+                    <ul class="space-y-2 text-xs text-slate-300 border-t border-slate-800 pt-4">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-tiffany"></i> По вашему дизайну или макету</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-tiffany"></i> Для бренда, упаковок и подарков</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-tiffany"></i> Любые размеры и тиражи</li>
+                    </ul>
+                </div>
+
+                <!-- Custom Request CTA Box -->
+                <div class="glass-panel rounded-2xl p-8 flex flex-col justify-between border border-tiffany/30 bg-gradient-to-br from-tiffany/10 to-transparent">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-widest text-tiffany">Нужен индивидуальный макет?</span>
+                        <h3 class="text-2xl font-extrabold text-white mt-2 mb-3">Подготовим дизайн под ваши задачи</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            У вас нет готового файла? Пришлите фотографию, эскиз или опишите идею — наш дизайнер подготовит точный макет!
+                        </p>
+                    </div>
+                    <button onclick="openModalWithService('наклейки')" class="mt-6 w-full py-3.5 rounded-xl bg-tiffany text-darkbg-900 font-bold hover:bg-tiffany-hover hover:shadow-tiffany-glow transition-all text-center">
+                        Заказать наклейку
+                    </button>
+                </div>
+
             </div>
+
+            <!-- Process Timeline: How We Work -->
+            <div class="mt-24">
+                <div class="text-center mb-12">
+                    <h3 class="text-2xl sm:text-3xl font-heading font-extrabold text-white">Как происходит заказ наклеек</h3>
+                    <p class="text-slate-400 text-sm mt-2">5 прозрачных шагов от вашей идеи до готовой продукции</p>
+                </div>
+
+                <div class="relative timeline-line-horizontal">
+                    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 relative z-10">
+                        
+                        <!-- Step 1 -->
+                        <div class="glass-card p-6 rounded-2xl text-center space-y-3">
+                            <div class="w-12 h-12 rounded-full bg-tiffany text-darkbg-900 font-black text-lg flex items-center justify-center mx-auto shadow-tiffany-glow">
+                                01
+                            </div>
+                            <h4 class="font-bold text-white text-base">Идея или фото</h4>
+                            <p class="text-slate-400 text-xs">Вы отправляете нам изображение, логотип или задумку</p>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="glass-card p-6 rounded-2xl text-center space-y-3">
+                            <div class="w-12 h-12 rounded-full bg-darkbg-900 border-2 border-tiffany text-tiffany font-black text-lg flex items-center justify-center mx-auto">
+                                02
+                            </div>
+                            <h4 class="font-bold text-white text-base">Согласование</h4>
+                            <p class="text-slate-400 text-xs">Обсуждаем точный размер, цвет и виниловый материал</p>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="glass-card p-6 rounded-2xl text-center space-y-3">
+                            <div class="w-12 h-12 rounded-full bg-darkbg-900 border-2 border-tiffany text-tiffany font-black text-lg flex items-center justify-center mx-auto">
+                                03
+                            </div>
+                            <h4 class="font-bold text-white text-base">Расчет и макет</h4>
+                            <p class="text-slate-400 text-xs">Утверждаем итоговую стоимость и визуальный проект</p>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="glass-card p-6 rounded-2xl text-center space-y-3">
+                            <div class="w-12 h-12 rounded-full bg-darkbg-900 border-2 border-tiffany text-tiffany font-black text-lg flex items-center justify-center mx-auto">
+                                04
+                            </div>
+                            <h4 class="font-bold text-white text-base">Изготовление</h4>
+                            <p class="text-slate-400 text-xs">Печать и высокоточная плоттерная резка контуров</p>
+                        </div>
+
+                        <!-- Step 5 -->
+                        <div class="glass-card p-6 rounded-2xl text-center space-y-3">
+                            <div class="w-12 h-12 rounded-full bg-tiffany text-darkbg-900 font-black text-lg flex items-center justify-center mx-auto shadow-tiffany-glow">
+                                05
+                            </div>
+                            <h4 class="font-bold text-white text-base">Выдача заказа</h4>
+                            <p class="text-slate-400 text-xs">Забираете самовывозом или оформляем доставку</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Why Choose Us Grid -->
+            <div class="mt-20 glass-panel p-8 sm:p-12 rounded-3xl border border-slate-800">
+                <div class="text-center mb-10">
+                    <h3 class="text-2xl sm:text-3xl font-heading font-extrabold text-white">Почему выбирают нас</h3>
+                    <p class="text-slate-400 text-sm mt-2">Бескомпромиссный подход к качеству и деталям</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="flex items-start gap-4">
+                        <div class="text-tiffany text-2xl mt-1"><i class="fa-solid fa-gem"></i></div>
+                        <div>
+                            <h4 class="font-bold text-white text-sm">Премиум материалы</h4>
+                            <p class="text-slate-400 text-xs mt-1">Используем устойчивые плёнки немецких и европейских брендов.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="text-tiffany text-2xl mt-1"><i class="fa-solid fa-sliders"></i></div>
+                        <div>
+                            <h4 class="font-bold text-white text-sm">Индивидуальный подход</h4>
+                            <p class="text-slate-400 text-xs mt-1">Каждый заказ изготавливается строго под ваши размеры и требования.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="text-tiffany text-2xl mt-1"><i class="fa-solid fa-print"></i></div>
+                        <div>
+                            <h4 class="font-bold text-white text-sm">Современная печать</h4>
+                            <p class="text-slate-400 text-xs mt-1">Высокая детализация, сочные цвета и четкие контуры резки.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="text-tiffany text-2xl mt-1"><i class="fa-solid fa-comments"></i></div>
+                        <div>
+                            <h4 class="font-bold text-white text-sm">Консультация 24/7</h4>
+                            <p class="text-slate-400 text-xs mt-1">Подскажем какой материал и размер лучше выбрать без лишних переплат.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
-    <!-- Контакты -->
-    <section id="contact" class="contact">
-        <div class="contact-wrap fade-in">
-            <h2 class="section-title" style="margin-bottom: 20px;">Начать <span>проект</span></h2>
-            <p style="color: var(--text-gray); margin-bottom: 40px;">Оставьте свои контактные данные, и наши специалисты свяжутся с вами для обсуждения деталей.</p>
+    <!-- SECTION 2 — CUSTOM CANVASES -->
+    <section id="canvases" class="py-24 relative overflow-hidden">
+        <!-- Ambient Backlight -->
+        <div class="ambient-glow-1 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             
-            <form onsubmit="event.preventDefault();">
-                <input type="text" placeholder="Ваше имя" required>
-                <input type="tel" placeholder="Телефон" required>
-                <button type="submit" class="btn" style="width: 100%;">Отправить запрос</button>
-            </form>
+            <!-- Section Title Header -->
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-tiffany/10 border border-tiffany/30 text-tiffany text-xs font-bold uppercase tracking-widest">
+                    <i class="fa-solid fa-palette text-xs"></i> Направление №2
+                </div>
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-white">
+                    Печать фото на <span class="text-tiffany text-glow">холстах на заказ</span>
+                </h2>
+                <p class="text-slate-300 text-base sm:text-lg">
+                    Вы присылаете любимое фото или картину — мы превращаем её в готовое произведение искусства с деревянным подрамником и крепежом.
+                </p>
+            </div>
+
+            <!-- Concept Banner: Image -> Finished Art -->
+            <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-tiffany/30 mb-16 bg-gradient-to-r from-darkbg-800 via-darkbg-700 to-darkbg-800">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center text-center">
+                    <div class="space-y-2">
+                        <div class="text-3xl text-tiffany"><i class="fa-solid fa-image"></i></div>
+                        <h4 class="font-bold text-white text-lg">Ваша фотография</h4>
+                        <p class="text-xs text-slate-400">Семейный кадр, фото любимого авто, питомец или пейзаж</p>
+                    </div>
+                    <div class="text-2xl text-tiffany hidden md:block">
+                        <i class="fa-solid fa-arrow-right animate-pulse"></i>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="text-3xl text-tiffany"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                        <h4 class="font-bold text-white text-lg">Печать + Натяжка</h4>
+                        <p class="text-xs text-slate-400">Натуральный холст, сочные эко-краски и галерейная натяжка</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Canvas Breakdown 4 Pillars Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <!-- Pillar 1: High quality printing -->
+                <div class="glass-card rounded-2xl p-6 relative group flex flex-col justify-between">
+                    <div>
+                        <div class="h-44 rounded-xl overflow-hidden mb-6 relative">
+                            <img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?q=80&w=600&auto=format&fit=crop" alt="Печать на холсте" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-darkbg-900/40"></div>
+                            <span class="absolute top-3 left-3 bg-darkbg-900/80 backdrop-blur-md text-tiffany text-xs font-bold px-2.5 py-1 rounded-md border border-tiffany/30">01. Печать</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">🖼️ Печать высокого разрешения</h3>
+                        <p class="text-slate-300 text-xs leading-relaxed mb-4">
+                            Переносим изображения на натуральный плотный холст. Фотографии получаются насыщенными, четкими и глубокими.
+                        </p>
+                    </div>
+                    <div class="border-t border-slate-800 pt-3 text-[11px] text-slate-400">
+                        Подходит: семейные фото, портреты, авто, картины.
+                    </div>
+                </div>
+
+                <!-- Pillar 2: Natural Stretcher -->
+                <div class="glass-card rounded-2xl p-6 relative group flex flex-col justify-between">
+                    <div>
+                        <div class="h-44 rounded-xl overflow-hidden mb-6 relative">
+                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=600&auto=format&fit=crop" alt="Деревянный подрамник" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-darkbg-900/40"></div>
+                            <span class="absolute top-3 left-3 bg-darkbg-900/80 backdrop-blur-md text-tiffany text-xs font-bold px-2.5 py-1 rounded-md border border-tiffany/30">02. Каркас</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">🪵 Натуральный подрамник</h3>
+                        <p class="text-slate-300 text-xs leading-relaxed mb-4">
+                            Основа изготавливается из сухой обработанной сосны. Подрамник надежен, прочен и сохраняет геометрию со временем.
+                        </p>
+                    </div>
+                    <div class="border-t border-slate-800 pt-3 text-[11px] text-slate-400">
+                        Экологичная древесина высшего сорта.
+                    </div>
+                </div>
+
+                <!-- Pillar 3: Gallery Stretch -->
+                <div class="glass-card rounded-2xl p-6 relative group flex flex-col justify-between">
+                    <div>
+                        <div class="h-44 rounded-xl overflow-hidden mb-6 relative">
+                            <img src="https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?q=80&w=600&auto=format&fit=crop" alt="Галерейная натяжка" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-darkbg-900/40"></div>
+                            <span class="absolute top-3 left-3 bg-darkbg-900/80 backdrop-blur-md text-tiffany text-xs font-bold px-2.5 py-1 rounded-md border border-tiffany/30">03. Натяжка</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">🔨 Галерейная натяжка</h3>
+                        <p class="text-slate-300 text-xs leading-relaxed mb-4">
+                            Холст аккуратно натягивается вручную. Торцы картины остаются продолжением изображения, рамка не требуется.
+                        </p>
+                    </div>
+                    <div class="border-t border-slate-800 pt-3 text-[11px] text-slate-400">
+                        Современный музейный вид изделия.
+                    </div>
+                </div>
+
+                <!-- Pillar 4: Ready Fastening -->
+                <div class="glass-card rounded-2xl p-6 relative group flex flex-col justify-between">
+                    <div>
+                        <div class="h-44 rounded-xl overflow-hidden mb-6 relative">
+                            <img src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=600&auto=format&fit=crop" alt="Крепеж для картины" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-darkbg-900/40"></div>
+                            <span class="absolute top-3 left-3 bg-darkbg-900/80 backdrop-blur-md text-tiffany text-xs font-bold px-2.5 py-1 rounded-md border border-tiffany/30">04. Комплект</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">📌 Готовый крепеж</h3>
+                        <p class="text-slate-300 text-xs leading-relaxed mb-4">
+                            В комплект входит надёжное крепление ("крокодил" или подвес). Вам остается только повесить картину на стену.
+                        </p>
+                    </div>
+                    <div class="border-t border-slate-800 pt-3 text-[11px] text-slate-400">
+                        Готовый продукт прямо из упаковки.
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Step-by-Step Canvas Ordering Process -->
+            <div class="mt-20">
+                <div class="text-center mb-12">
+                    <h3 class="text-2xl sm:text-3xl font-heading font-extrabold text-white">Как заказать картину на холсте</h3>
+                    <p class="text-slate-400 text-sm mt-2">Простой путь от вашего снимка до интерьерного шедевра</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="glass-card p-5 rounded-xl border-l-4 border-l-tiffany flex items-center gap-4">
+                        <span class="text-2xl font-black text-tiffany font-heading">01</span>
+                        <div>
+                            <h4 class="font-bold text-white text-sm">Присылаете фото</h4>
+                            <p class="text-xs text-slate-400">В Telegram, WhatsApp или VK</p>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-5 rounded-xl border-l-4 border-l-tiffany flex items-center gap-4">
+                        <span class="text-2xl font-black text-tiffany font-heading">02</span>
+                        <div>
+                            <h4 class="font-bold text-white text-sm">Выбираем размер</h4>
+                            <p class="text-xs text-slate-400">От 30х40 см до 100х150 см</p>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-5 rounded-xl border-l-4 border-l-tiffany flex items-center gap-4">
+                        <span class="text-2xl font-black text-tiffany font-heading">03</span>
+                        <div>
+                            <h4 class="font-bold text-white text-sm">Подготовка файла</h4>
+                            <p class="text-xs text-slate-400">Проверка и улучшение качества</p>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-5 rounded-xl border-l-4 border-l-tiffany flex items-center gap-4">
+                        <span class="text-2xl font-black text-tiffany font-heading">04</span>
+                        <div>
+                            <h4 class="font-bold text-white text-sm">Печать на холсте</h4>
+                            <p class="text-xs text-slate-400">Высокоточная пигментная печать</p>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-5 rounded-xl border-l-4 border-l-tiffany flex items-center gap-4">
+                        <span class="text-2xl font-black text-tiffany font-heading">05</span>
+                        <div>
+                            <h4 class="font-bold text-white text-sm">Натяжка</h4>
+                            <p class="text-xs text-slate-400">Ручная установка на подрамник</p>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-5 rounded-xl border-l-4 border-l-tiffany flex items-center gap-4">
+                        <span class="text-2xl font-black text-tiffany font-heading">06</span>
+                        <div>
+                            <h4 class="font-bold text-white text-sm">Крепёж</h4>
+                            <p class="text-xs text-slate-400">Установка подлинных фурнитур</p>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-5 rounded-xl border-l-4 border-l-tiffany flex items-center gap-4 sm:col-span-2 lg:col-span-2 bg-gradient-to-r from-tiffany/20 to-transparent">
+                        <span class="text-2xl font-black text-tiffany font-heading">07</span>
+                        <div class="flex-1 flex items-center justify-between">
+                            <div>
+                                <h4 class="font-bold text-white text-sm">Забираете готовую картину!</h4>
+                                <p class="text-xs text-slate-300">Самовывоз или быстрая курьерская доставка</p>
+                            </div>
+                            <button onclick="openModalWithService('холст')" class="px-4 py-2 rounded-lg bg-tiffany text-darkbg-900 font-bold text-xs hover:bg-tiffany-hover transition-colors">
+                                Заказать холст
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
     </section>
 
-    <!-- Подвал -->
-    <footer>
-        <div class="footer-logo">
-            <img src="metiz-project-logo.png" alt="Metiz Project Logo" style="height: 30px;">
+    <!-- GALLERY SECTION -->
+    <section id="gallery" class="py-24 relative bg-darkbg-800/60 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            
+            <div class="text-center max-w-3xl mx-auto mb-12 space-y-4">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-tiffany/10 border border-tiffany/30 text-tiffany text-xs font-bold uppercase tracking-widest">
+                    <i class="fa-solid fa-images text-xs"></i> Портфолио
+                </div>
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-white">
+                    Галерея <span class="text-tiffany text-glow">готовых работ</span>
+                </h2>
+                <p class="text-slate-300 text-base">
+                    Оцените качество нашей печати, детализацию плоттерной резки и аккуратность сборки холстов.
+                </p>
+            </div>
+
+            <!-- Gallery Category Tabs -->
+            <div class="flex flex-wrap items-center justify-center gap-2 mb-10" id="galleryTabs">
+                <button onclick="filterGallery('all')" class="gallery-tab active-tab px-4 py-2 rounded-xl text-xs font-bold transition-all bg-tiffany text-darkbg-900 shadow-tiffany-glow">Все работы</button>
+                <button onclick="filterGallery('auto')" class="gallery-tab px-4 py-2 rounded-xl text-xs font-bold transition-all glass-card text-slate-300 hover:text-white">Автомобили</button>
+                <button onclick="filterGallery('photo')" class="gallery-tab px-4 py-2 rounded-xl text-xs font-bold transition-all glass-card text-slate-300 hover:text-white">Фотографии</button>
+                <button onclick="filterGallery('art')" class="gallery-tab px-4 py-2 rounded-xl text-xs font-bold transition-all glass-card text-slate-300 hover:text-white">Картины</button>
+                <button onclick="filterGallery('portrait')" class="gallery-tab px-4 py-2 rounded-xl text-xs font-bold transition-all glass-card text-slate-300 hover:text-white">Портреты</button>
+                <button onclick="filterGallery('interior')" class="gallery-tab px-4 py-2 rounded-xl text-xs font-bold transition-all glass-card text-slate-300 hover:text-white">Интерьер</button>
+                <button onclick="filterGallery('ads')" class="gallery-tab px-4 py-2 rounded-xl text-xs font-bold transition-all glass-card text-slate-300 hover:text-white">Реклама</button>
+                <button onclick="filterGallery('stickers')" class="gallery-tab px-4 py-2 rounded-xl text-xs font-bold transition-all glass-card text-slate-300 hover:text-white">Наклейки</button>
+                <button onclick="filterGallery('windows')" class="gallery-tab px-4 py-2 rounded-xl text-xs font-bold transition-all glass-card text-slate-300 hover:text-white">Витрины</button>
+            </div>
+
+            <!-- Gallery Masonry Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="galleryGrid">
+                
+                <!-- Gallery Item 1 -->
+                <div class="gallery-item auto stickers glass-card rounded-2xl overflow-hidden group cursor-pointer relative" onclick="openLightbox('https://images.unsplash.com/photo-1617814076367-b759c7d7e738?q=80&w=1200&auto=format&fit=crop', 'Виниловая оклейка кузова Porsche')">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?q=80&w=800&auto=format&fit=crop" alt="Оклейка авто" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-darkbg-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <span class="w-12 h-12 rounded-full bg-tiffany text-darkbg-900 flex items-center justify-center text-xl shadow-tiffany-strong">
+                                <i class="fa-solid fa-expand"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-4 flex items-center justify-between">
+                        <div>
+                            <span class="text-[10px] text-tiffany font-bold uppercase tracking-wider">Авто наклейки</span>
+                            <h4 class="text-sm font-bold text-white">Виниловая оклейка кузова GT3</h4>
+                        </div>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-slate-500 group-hover:text-tiffany transition-colors"></i>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 2 -->
+                <div class="gallery-item photo portrait art glass-card rounded-2xl overflow-hidden group cursor-pointer relative" onclick="openLightbox('https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1200&auto=format&fit=crop', 'Портрет на холсте 50x70 см')">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop" alt="Портрет на холсте" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-darkbg-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <span class="w-12 h-12 rounded-full bg-tiffany text-darkbg-900 flex items-center justify-center text-xl shadow-tiffany-strong">
+                                <i class="fa-solid fa-expand"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-4 flex items-center justify-between">
+                        <div>
+                            <span class="text-[10px] text-tiffany font-bold uppercase tracking-wider">Холст / Портрет</span>
+                            <h4 class="text-sm font-bold text-white">Студийный портрет 50х70 см</h4>
+                        </div>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-slate-500 group-hover:text-tiffany transition-colors"></i>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 3 -->
+                <div class="gallery-item windows ads glass-card rounded-2xl overflow-hidden group cursor-pointer relative" onclick="openLightbox('https://images.unsplash.com/photo-1513151233558-d860c5398176?q=80&w=1200&auto=format&fit=crop', 'Брендирование витрин бутика')">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?q=80&w=800&auto=format&fit=crop" alt="Брендирование витрин" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-darkbg-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <span class="w-12 h-12 rounded-full bg-tiffany text-darkbg-900 flex items-center justify-center text-xl shadow-tiffany-strong">
+                                <i class="fa-solid fa-expand"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-4 flex items-center justify-between">
+                        <div>
+                            <span class="text-[10px] text-tiffany font-bold uppercase tracking-wider">Витрины / Реклама</span>
+                            <h4 class="text-sm font-bold text-white">Оформление витрин шопинг-центра</h4>
+                        </div>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-slate-500 group-hover:text-tiffany transition-colors"></i>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 4 -->
+                <div class="gallery-item interior art glass-card rounded-2xl overflow-hidden group cursor-pointer relative" onclick="openLightbox('https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?q=80&w=1200&auto=format&fit=crop', 'Модульные картины в интерьере')">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?q=80&w=800&auto=format&fit=crop" alt="Интерьерный холст" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-darkbg-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <span class="w-12 h-12 rounded-full bg-tiffany text-darkbg-900 flex items-center justify-center text-xl shadow-tiffany-strong">
+                                <i class="fa-solid fa-expand"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-4 flex items-center justify-between">
+                        <div>
+                            <span class="text-[10px] text-tiffany font-bold uppercase tracking-wider">Интерьер / Картина</span>
+                            <h4 class="text-sm font-bold text-white">Интерьерная живопись 80х120 см</h4>
+                        </div>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-slate-500 group-hover:text-tiffany transition-colors"></i>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 5 -->
+                <div class="gallery-item auto stickers glass-card rounded-2xl overflow-hidden group cursor-pointer relative" onclick="openLightbox('https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1200&auto=format&fit=crop', 'Рекламная графическая надпись на борт')">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=800&auto=format&fit=crop" alt="Реклама на авто" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-darkbg-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <span class="w-12 h-12 rounded-full bg-tiffany text-darkbg-900 flex items-center justify-center text-xl shadow-tiffany-strong">
+                                <i class="fa-solid fa-expand"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-4 flex items-center justify-between">
+                        <div>
+                            <span class="text-[10px] text-tiffany font-bold uppercase tracking-wider">Автомобили / Стикеры</span>
+                            <h4 class="text-sm font-bold text-white">Наклейки и полосы на спорткар</h4>
+                        </div>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-slate-500 group-hover:text-tiffany transition-colors"></i>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 6 -->
+                <div class="gallery-item photo art glass-card rounded-2xl overflow-hidden group cursor-pointer relative" onclick="openLightbox('https://images.unsplash.com/photo-1579783902614-a3fb3927b675?q=80&w=1200&auto=format&fit=crop', 'Печать авторской репродукции')">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?q=80&w=800&auto=format&fit=crop" alt="Картина галерея" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-darkbg-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <span class="w-12 h-12 rounded-full bg-tiffany text-darkbg-900 flex items-center justify-center text-xl shadow-tiffany-strong">
+                                <i class="fa-solid fa-expand"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-4 flex items-center justify-between">
+                        <div>
+                            <span class="text-[10px] text-tiffany font-bold uppercase tracking-wider">Холсты / Репродукции</span>
+                            <h4 class="text-sm font-bold text-white">Печать авторской иллюстрации</h4>
+                        </div>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-slate-500 group-hover:text-tiffany transition-colors"></i>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
-        <div>
-            &copy; 2026 Metiz Project. Все права защищены.
+    </section>
+
+    <!-- REVIEWS SECTION -->
+    <section id="reviews" class="py-24 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-tiffany/10 border border-tiffany/30 text-tiffany text-xs font-bold uppercase tracking-widest">
+                    <i class="fa-solid fa-star text-xs"></i> Отзывы
+                </div>
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-white">
+                    Что говорят <span class="text-tiffany text-glow">наши клиенты</span>
+                </h2>
+                <p class="text-slate-300 text-base">
+                    Реальные впечатления от качества печати, скорости работы и обслуживания.
+                </p>
+            </div>
+
+            <!-- Reviews Grid Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Review Card 1 -->
+                <div class="glass-card p-8 rounded-2xl relative flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex text-amber-400 gap-1 text-sm">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span class="text-xs text-slate-400">12 мая 2026</span>
+                        </div>
+                        <p class="text-slate-300 text-sm leading-relaxed italic">
+                            «Заказывал комплект наклеек на заднее стекло и бока авто. Плоттерная резка идеальная, винил плотный, наклеился без пузырей. Прошел уже 5 моек — держится отлично!»
+                        </p>
+                    </div>
+                    <div class="pt-6 border-t border-slate-800/80 flex items-center gap-3 mt-6">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-tiffany to-teal-800 flex items-center justify-center font-bold text-darkbg-900">
+                            АM
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-white text-sm">Алексей М.</h4>
+                            <span class="text-[11px] text-tiffany">Заказ: Наклейки на авто</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review Card 2 -->
+                <div class="glass-card p-8 rounded-2xl relative flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex text-amber-400 gap-1 text-sm">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span class="text-xs text-slate-400">28 апреля 2026</span>
+                        </div>
+                        <p class="text-slate-300 text-sm leading-relaxed italic">
+                            «Подарила мужу холст с фотографией его машины 60х90 см. Качество печати просто космос! Детализация сочнейшая, подрамник ровный, крепление уже стояло. Муж в восторге!»
+                        </p>
+                    </div>
+                    <div class="pt-6 border-t border-slate-800/80 flex items-center gap-3 mt-6">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-purple-500 to-tiffany flex items-center justify-center font-bold text-white">
+                            ЕК
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-white text-sm">Екатерина К.</h4>
+                            <span class="text-[11px] text-tiffany">Заказ: Картина на холсте</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review Card 3 -->
+                <div class="glass-card p-8 rounded-2xl relative flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex text-amber-400 gap-1 text-sm">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span class="text-xs text-slate-400">5 февраля 2026</span>
+                        </div>
+                        <p class="text-slate-300 text-sm leading-relaxed italic">
+                            «Оформляли витрины для нашего салона красоты. Ребята быстро подготовили макет, приехали, аккуратно наклеили. Все точно по графику и без лишних вопросов.»
+                        </p>
+                    </div>
+                    <div class="pt-6 border-t border-slate-800/80 flex items-center gap-3 mt-6">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-tiffany to-blue-600 flex items-center justify-center font-bold text-darkbg-900">
+                            ДC
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-white text-sm">Дмитрий С.</h4>
+                            <span class="text-[11px] text-tiffany">Заказ: Оформление витрин</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CONTACTS & PICKUP SECTION -->
+    <section id="contacts" class="py-24 relative bg-darkbg-800/80 border-t border-slate-800">
+        <!-- Ambient Glow -->
+        <div class="ambient-glow-2 bottom-0 right-0"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-tiffany/10 border border-tiffany/30 text-tiffany text-xs font-bold uppercase tracking-widest">
+                    <i class="fa-solid fa-location-dot text-xs"></i> Контакты
+                </div>
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-white">
+                    Связаться с нами и <span class="text-tiffany text-glow">Самовывоз</span>
+                </h2>
+                <p class="text-slate-300 text-base">
+                    Напишите нам в удобный мессенджер для консультации или заберите готовый заказ лично.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                <!-- Social Channels Buttons (Left 6 Cols) -->
+                <div class="lg:col-span-6 space-y-6">
+                    <h3 class="text-2xl font-bold text-white font-heading mb-6">Выберите удобный способ связи</h3>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        
+                        <!-- 1. VK Group -->
+                        <a id="vkGroupBtn" href="#" target="_blank" rel="noopener noreferrer" class="glass-card p-5 rounded-2xl flex items-center gap-4 hover:border-tiffany transition-all group">
+                            <div class="w-12 h-12 rounded-xl bg-blue-600/20 text-blue-400 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                                <i class="fa-brands fa-vk"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">Группа ВКонтакте</h4>
+                                <p class="text-xs text-slate-400 mt-0.5">Новости и примеров работ</p>
+                            </div>
+                        </a>
+
+                        <!-- 2. VK Direct Message -->
+                        <a id="vkMessageBtn" href="#" target="_blank" rel="noopener noreferrer" class="glass-card p-5 rounded-2xl flex items-center gap-4 hover:border-tiffany transition-all group">
+                            <div class="w-12 h-12 rounded-xl bg-blue-500/20 text-blue-300 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-comment-dots"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">Написать ВКонтакте</h4>
+                                <p class="text-xs text-slate-400 mt-0.5">Личные сообщения группы</p>
+                            </div>
+                        </a>
+
+                        <!-- 3. Telegram -->
+                        <a id="telegramBtn" href="#" target="_blank" rel="noopener noreferrer" class="glass-card p-5 rounded-2xl flex items-center gap-4 hover:border-tiffany transition-all group">
+                            <div class="w-12 h-12 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                                <i class="fa-brands fa-telegram"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">Telegram</h4>
+                                <p class="text-xs text-slate-400 mt-0.5">Мгновенный ответ в чате</p>
+                            </div>
+                        </a>
+
+                        <!-- 4. WhatsApp -->
+                        <a id="whatsappBtn" href="#" target="_blank" rel="noopener noreferrer" class="glass-card p-5 rounded-2xl flex items-center gap-4 hover:border-tiffany transition-all group">
+                            <div class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">WhatsApp</h4>
+                                <p class="text-xs text-slate-400 mt-0.5">Быстрая отправка файлов</p>
+                            </div>
+                        </a>
+
+                    </div>
+
+                    <!-- Direct Phone Call Card -->
+                    <div class="glass-panel p-6 rounded-2xl flex items-center justify-between border border-tiffany/20 mt-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full bg-tiffany/20 text-tiffany flex items-center justify-center text-lg">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs text-slate-400">Прямой телефон студии</span>
+                                <div id="displayPhone" class="text-lg font-extrabold text-white"></div>
+                            </div>
+                        </div>
+                        <a id="phoneCallLink" href="#" class="px-4 py-2 rounded-xl bg-tiffany/10 border border-tiffany/40 text-tiffany font-bold text-xs hover:bg-tiffany hover:text-darkbg-900 transition-all">
+                            Позвонить
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Pickup & Yandex Navigator Block (Right 6 Cols) -->
+                <div class="lg:col-span-6">
+                    <div class="glass-panel p-8 rounded-3xl border border-tiffany/30 space-y-6 relative overflow-hidden shadow-2xl">
+                        
+                        <div class="flex items-center justify-between">
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-tiffany/10 text-tiffany text-xs font-bold uppercase tracking-wider">
+                                <i class="fa-solid fa-box-archive"></i> Точка выдачи
+                            </div>
+                            <span class="text-xs text-emerald-400 flex items-center gap-1.5 font-semibold">
+                                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> Открыто
+                            </span>
+                        </div>
+
+                        <div>
+                            <h3 class="text-2xl font-black text-white font-heading">Самовывоз заказов</h3>
+                            <p class="text-slate-300 text-sm mt-2 leading-relaxed">
+                                Забрать готовый заказ можно самостоятельно в нашей точке выдачи. Назовите номер заказа или имя при получении.
+                            </p>
+                        </div>
+
+                        <div class="space-y-3 pt-2 text-sm text-slate-200">
+                            <div class="flex items-start gap-3">
+                                <i class="fa-solid fa-map-pin text-tiffany mt-1"></i>
+                                <div>
+                                    <span class="text-xs text-slate-400 block">Адрес пункта выдачи:</span>
+                                    <span id="displayAddress" class="font-bold text-white"></span>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i class="fa-solid fa-clock text-tiffany mt-1"></i>
+                                <div>
+                                    <span class="text-xs text-slate-400 block">Режим работы:</span>
+                                    <span class="font-semibold text-white">Пн - Сб: с 10:00 до 20:00 (Вс - по записи)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Big Smart Yandex Navigator Button -->
+                        <div class="pt-4">
+                            <button onclick="openYandexNavigator()" class="w-full py-4 rounded-xl bg-amber-400 text-slate-900 font-extrabold text-base hover:bg-amber-300 transition-all shadow-lg flex items-center justify-center gap-3 group">
+                                <i class="fa-solid fa-compass text-lg transition-transform group-hover:rotate-45"></i>
+                                <span>Как нас найти (Яндекс Навигатор)</span>
+                            </button>
+                            <p class="text-[11px] text-slate-400 text-center mt-2">
+                                На смартфоне откроет Яндекс Навигатор, на ПК — Яндекс Карты
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER SECTION -->
+    <footer class="bg-darkbg-900 border-t border-slate-800/80 pt-16 pb-12 text-slate-400 text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-slate-800">
+                
+                <!-- Col 1: Brand Info -->
+                <div class="space-y-4">
+                    <a href="#" class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-xl bg-tiffany flex items-center justify-center text-darkbg-900 font-black text-lg">
+                            <i class="fa-solid fa-layer-group"></i>
+                        </div>
+                        <span class="font-heading font-extrabold text-lg text-white">TIFFANY<span class="text-tiffany">PRINT</span></span>
+                    </a>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Премиальная студия печати автомобильных и рекламных наклеек, плоттерной резки и интерьерной печати на холсте.
+                    </p>
+                    <div class="flex gap-3 text-lg">
+                        <a id="footerVk" href="#" class="w-8 h-8 rounded-lg glass-card flex items-center justify-center text-slate-300 hover:text-tiffany transition-colors"><i class="fa-brands fa-vk"></i></a>
+                        <a id="footerTg" href="#" class="w-8 h-8 rounded-lg glass-card flex items-center justify-center text-slate-300 hover:text-tiffany transition-colors"><i class="fa-brands fa-telegram"></i></a>
+                        <a id="footerWa" href="#" class="w-8 h-8 rounded-lg glass-card flex items-center justify-center text-slate-300 hover:text-tiffany transition-colors"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <!-- Col 2: Navigation Links -->
+                <div>
+                    <h4 class="font-bold text-white text-sm mb-4 uppercase tracking-wider">Навигация</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#hero" class="hover:text-tiffany transition-colors">Главный экран</a></li>
+                        <li><a href="#stickers" class="hover:text-tiffany transition-colors">Наклейки и реклама</a></li>
+                        <li><a href="#canvases" class="hover:text-tiffany transition-colors">Холсты на заказ</a></li>
+                        <li><a href="#gallery" class="hover:text-tiffany transition-colors">Галерея работ</a></li>
+                        <li><a href="#reviews" class="hover:text-tiffany transition-colors">Отзывы клиентов</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Services Summary -->
+                <div>
+                    <h4 class="font-bold text-white text-sm mb-4 uppercase tracking-wider">Услуги</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#stickers" class="hover:text-tiffany transition-colors">Наклейки на автомобили</a></li>
+                        <li><a href="#stickers" class="hover:text-tiffany transition-colors">Оформление витрин</a></li>
+                        <li><a href="#canvases" class="hover:text-tiffany transition-colors">Печать фото на холсте</a></li>
+                        <li><a href="#canvases" class="hover:text-tiffany transition-colors">Галерейная натяжка</a></li>
+                        <li><a href="#stickers" class="hover:text-tiffany transition-colors">Изготовление стикерпаков</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Contacts Shortcut -->
+                <div>
+                    <h4 class="font-bold text-white text-sm mb-4 uppercase tracking-wider">Контакты</h4>
+                    <div class="space-y-2 text-xs">
+                        <p id="footerAddress" class="text-slate-300"></p>
+                        <p id="footerPhone" class="text-tiffany font-bold"></p>
+                        <button onclick="openYandexNavigator()" class="mt-2 text-xs text-amber-400 hover:underline flex items-center gap-1.5">
+                            <i class="fa-solid fa-location-arrow"></i> Маршрут в Навигаторе
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Copyright Line -->
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+                <p>© 2026 TiffanyPrint Studio. Все права защищены.</p>
+                <p>Дизайн и технология: Modern Dark Tiffany Architecture</p>
+            </div>
         </div>
     </footer>
 
-    <!-- Скрипты для анимаций и мобильного меню -->
+    <!-- INTERACTIVE ORDER & ESTIMATOR MODAL -->
+    <div id="orderModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-darkbg-900/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="glass-panel w-full max-w-lg rounded-3xl p-6 sm:p-8 border border-tiffany/40 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            
+            <!-- Close Button -->
+            <button onclick="closeModal()" class="absolute top-5 right-5 w-9 h-9 rounded-full glass-card flex items-center justify-center text-slate-400 hover:text-white transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="mb-6">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-tiffany/10 text-tiffany text-xs font-bold uppercase tracking-wider mb-2">
+                    <i class="fa-solid fa-calculator"></i> Быстрый расчет & Заказ
+                </div>
+                <h3 class="text-2xl font-black text-white font-heading">Рассчитать стоимость</h3>
+                <p class="text-xs text-slate-400 mt-1">Заполните детали для мгновенного расчета</p>
+            </div>
+
+            <form id="calculatorForm" onsubmit="handleOrderSubmit(event)" class="space-y-5">
+                
+                <!-- Direction Selector -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 mb-2">Направление:</label>
+                    <div class="grid grid-cols-2 gap-3">
+                        <label class="cursor-pointer">
+                            <input type="radio" name="orderType" value="наклейка" checked onchange="toggleCalcFields()" class="peer sr-only">
+                            <div class="glass-card p-3 rounded-xl text-center text-xs font-bold text-slate-300 peer-checked:border-tiffany peer-checked:bg-tiffany/10 peer-checked:text-tiffany transition-all">
+                                🚗 Наклейка / Реклама
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="orderType" value="холст" onchange="toggleCalcFields()" class="peer sr-only">
+                            <div class="glass-card p-3 rounded-xl text-center text-xs font-bold text-slate-300 peer-checked:border-tiffany peer-checked:bg-tiffany/10 peer-checked:text-tiffany transition-all">
+                                🖼️ Картина на холсте
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Size Preset Selector -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 mb-2">Выберите размер:</label>
+                    <select id="sizeSelect" onchange="calculateEstimatedPrice()" class="w-full glass-input rounded-xl p-3 text-sm">
+                        <!-- Options populated by JS -->
+                    </select>
+                </div>
+
+                <!-- Custom Dimensions Input (Optional) -->
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-[11px] text-slate-400 mb-1">Ширина (см):</label>
+                        <input type="number" id="customWidth" placeholder="Напр. 50" oninput="calculateEstimatedPrice()" class="w-full glass-input rounded-xl p-2.5 text-xs">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] text-slate-400 mb-1">Высота (см):</label>
+                        <input type="number" id="customHeight" placeholder="Напр. 70" oninput="calculateEstimatedPrice()" class="w-full glass-input rounded-xl p-2.5 text-xs">
+                    </div>
+                </div>
+
+                <!-- User Contacts -->
+                <div class="space-y-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-300 mb-1">Ваше имя:</label>
+                        <input type="text" id="userName" required placeholder="Как к вам обращаться" class="w-full glass-input rounded-xl p-3 text-xs">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-300 mb-1">Телефон / Мессенджер:</label>
+                        <input type="tel" id="userPhone" required placeholder="+7 (___) ___-__-__" class="w-full glass-input rounded-xl p-3 text-xs">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-300 mb-1">Комментарий к заказу:</label>
+                        <textarea id="userComment" rows="2" placeholder="Опишите ваши пожелания или идею" class="w-full glass-input rounded-xl p-3 text-xs"></textarea>
+                    </div>
+                </div>
+
+                <!-- Estimated Price Box -->
+                <div class="glass-card p-4 rounded-xl flex items-center justify-between border border-tiffany/30 bg-tiffany/5">
+                    <div>
+                        <span class="text-[11px] text-slate-400 block">Ориентировочная стоимость:</span>
+                        <span id="calculatedPrice" class="text-xl font-black text-tiffany">от 800 ₽</span>
+                    </div>
+                    <span class="text-[10px] text-slate-400 max-w-[120px] text-right">Точный расчет согласует менеджер</span>
+                </div>
+
+                <!-- Submit Action Buttons -->
+                <div class="grid grid-cols-2 gap-3 pt-2">
+                    <button type="button" onclick="sendOrderViaMessenger('whatsapp')" class="py-3 rounded-xl bg-emerald-500 text-darkbg-900 font-bold text-xs hover:bg-emerald-400 transition-colors flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp
+                    </button>
+                    <button type="button" onclick="sendOrderViaMessenger('telegram')" class="py-3 rounded-xl bg-sky-500 text-darkbg-900 font-bold text-xs hover:bg-sky-400 transition-colors flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-telegram text-sm"></i> Telegram
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <!-- LIGHTBOX MODAL FOR GALLERY -->
+    <div id="lightboxModal" class="fixed inset-0 z-50 bg-darkbg-900/95 backdrop-blur-lg hidden flex-col items-center justify-center p-4">
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white text-3xl hover:text-tiffany transition-colors z-50">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="max-w-4xl max-h-[80vh] overflow-hidden rounded-2xl border border-slate-700 shadow-2xl">
+            <img id="lightboxImg" src="" alt="" class="max-w-full max-h-[75vh] object-contain mx-auto">
+        </div>
+        <p id="lightboxCaption" class="text-white font-bold text-base mt-4 text-center"></p>
+    </div>
+
+    <!-- JAVASCRIPT CONFIGURATION & INTERACTIVITY -->
     <script>
-        // Мобильное меню
-        const menuToggle = document.getElementById('mobile-menu');
-        const navbar = document.getElementById('navbar');
-        const navLinks = document.querySelectorAll('nav ul li a');
-
-        menuToggle.addEventListener('click', () => {
-            menuToggle.classList.toggle('active');
-            navbar.classList.toggle('active');
-        });
-
-        // Закрытие меню при клике на ссылку
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                menuToggle.classList.remove('active');
-                navbar.classList.remove('active');
-            });
-        });
-
-        // Анимация при скролле (Intersection Observer)
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.15
+        /* ==========================================================================
+           CONFIGURABLE CONSTANTS (EASY CUSTOMIZATION)
+           ========================================================================== */
+        const CONFIG = {
+            companyName: "TiffanyPrint Studio",
+            phone: "+7 (999) 000-00-00",
+            address: "г. Москва, ул. Автозаводская, д. 23, корп. 2",
+            coordinates: { lat: 55.706158, lon: 37.656911 }, // Example Moscow address coordinates
+            vkGroupUrl: "https://vk.com/club_example",
+            vkMessageUrl: "https://vk.com/im?sel=-12345678",
+            telegramUrl: "https://t.me/example_manager",
+            whatsappUrl: "https://wa.me/79990000000",
         };
 
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target); // Анимируем только один раз
+        /* ==========================================================================
+           INITIALIZE CONFIG ON PAGE LOAD
+           ========================================================================== */
+        window.addEventListener('DOMContentLoaded', () => {
+            // Apply contact config variables to UI elements
+            document.getElementById('displayPhone').innerText = CONFIG.phone;
+            document.getElementById('phoneCallLink').href = `tel:${CONFIG.phone.replace(/[^0-9+]/g, '')}`;
+            document.getElementById('displayAddress').innerText = CONFIG.address;
+            document.getElementById('footerAddress').innerText = CONFIG.address;
+            document.getElementById('footerPhone').innerText = CONFIG.phone;
+
+            // Set Social Button Links
+            document.getElementById('vkGroupBtn').href = CONFIG.vkGroupUrl;
+            document.getElementById('vkMessageBtn').href = CONFIG.vkMessageUrl;
+            document.getElementById('telegramBtn').href = CONFIG.telegramUrl;
+            document.getElementById('whatsappBtn').href = CONFIG.whatsappUrl;
+
+            document.getElementById('footerVk').href = CONFIG.vkGroupUrl;
+            document.getElementById('footerTg').href = CONFIG.telegramUrl;
+            document.getElementById('footerWa').href = CONFIG.whatsappUrl;
+
+            // Initialize calc sizes
+            toggleCalcFields();
+        });
+
+        /* ==========================================================================
+           MOBILE MENU CONTROLLER
+           ========================================================================== */
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuIcon = document.getElementById('menuIcon');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            if (mobileMenu.classList.contains('hidden')) {
+                menuIcon.className = 'fa-solid fa-bars text-xl';
+            } else {
+                menuIcon.className = 'fa-solid fa-xmark text-xl';
+            }
+        });
+
+        function closeMobileMenu() {
+            mobileMenu.classList.add('hidden');
+            menuIcon.className = 'fa-solid fa-bars text-xl';
+        }
+
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+
+        /* ==========================================================================
+           HERO CARD TAB SWITCHER
+           ========================================================================== */
+        function switchHeroTab(tab) {
+            const btnStickers = document.getElementById('heroTabStickers');
+            const btnCanvases = document.getElementById('heroTabCanvases');
+            const contentStickers = document.getElementById('heroContentStickers');
+            const contentCanvases = document.getElementById('heroContentCanvases');
+
+            if (tab === 'stickers') {
+                btnStickers.className = 'px-3 py-1 rounded-md text-xs font-semibold bg-tiffany text-darkbg-900 transition-all';
+                btnCanvases.className = 'px-3 py-1 rounded-md text-xs font-semibold text-slate-400 hover:text-white transition-all';
+                contentStickers.classList.remove('hidden');
+                contentCanvases.classList.add('hidden');
+            } else {
+                btnCanvases.className = 'px-3 py-1 rounded-md text-xs font-semibold bg-tiffany text-darkbg-900 transition-all';
+                btnStickers.className = 'px-3 py-1 rounded-md text-xs font-semibold text-slate-400 hover:text-white transition-all';
+                contentCanvases.classList.remove('hidden');
+                contentStickers.classList.add('hidden');
+            }
+        }
+
+        /* ==========================================================================
+           YANDEX NAVIGATOR SMART REDIRECT
+           ========================================================================== */
+        function openYandexNavigator() {
+            const lat = CONFIG.coordinates.lat;
+            const lon = CONFIG.coordinates.lon;
+            
+            // Check if mobile device
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            
+            if (isMobile) {
+                // Try opening Yandex Navigator app schema
+                const naviUrl = `yandexnavi://build_route_on_map?lat_to=${lat}&lon_to=${lon}`;
+                const webUrl = `https://yandex.ru/maps/?rtext=~${lat},${lon}&rtt=auto`;
+                
+                // Fallback mechanism
+                window.location.href = naviUrl;
+                setTimeout(() => {
+                    window.open(webUrl, '_blank');
+                }, 1500);
+            } else {
+                // Open desktop Yandex Maps web route
+                const webUrl = `https://yandex.ru/maps/?rtext=~${lat},${lon}&rtt=auto`;
+                window.open(webUrl, '_blank');
+            }
+        }
+
+        /* ==========================================================================
+           GALLERY FILTERING SYSTEM
+           ========================================================================== */
+        function filterGallery(category) {
+            const buttons = document.querySelectorAll('.gallery-tab');
+            buttons.forEach(btn => {
+                btn.className = 'gallery-tab px-4 py-2 rounded-xl text-xs font-bold transition-all glass-card text-slate-300 hover:text-white';
+            });
+            event.target.className = 'gallery-tab active-tab px-4 py-2 rounded-xl text-xs font-bold transition-all bg-tiffany text-darkbg-900 shadow-tiffany-glow';
+
+            const items = document.querySelectorAll('.gallery-item');
+            items.forEach(item => {
+                if (category === 'all' || item.classList.contains(category)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
                 }
             });
-        }, observerOptions);
+        }
 
-        document.querySelectorAll('.fade-in').forEach(element => {
-            observer.observe(element);
-        });
-        
-        // Запуск анимации первого экрана при загрузке
-        window.onload = () => {
-            setTimeout(() => {
-                document.querySelector('.hero-content').classList.add('visible');
-            }, 200);
-        };
+        /* ==========================================================================
+           LIGHTBOX MODAL
+           ========================================================================== */
+        function openLightbox(imgSrc, caption) {
+            document.getElementById('lightboxImg').src = imgSrc;
+            document.getElementById('lightboxCaption').innerText = caption;
+            const lightbox = document.getElementById('lightboxModal');
+            lightbox.classList.remove('hidden');
+            lightbox.classList.add('flex');
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightboxModal');
+            lightbox.classList.add('hidden');
+            lightbox.classList.remove('flex');
+        }
+
+        /* ==========================================================================
+           ORDER CALCULATOR & MODAL
+           ========================================================================== */
+        const orderModal = document.getElementById('orderModal');
+
+        function openModal() {
+            orderModal.classList.remove('opacity-0', 'pointer-events-none');
+            calculateEstimatedPrice();
+        }
+
+        function openModalWithService(serviceType) {
+            openModal();
+            const radios = document.getElementsByName('orderType');
+            for (let radio of radios) {
+                if (radio.value === serviceType) {
+                    radio.checked = true;
+                    toggleCalcFields();
+                    break;
+                }
+            }
+        }
+
+        function closeModal() {
+            orderModal.classList.add('opacity-0', 'pointer-events-none');
+        }
+
+        function toggleCalcFields() {
+            const orderType = document.querySelector('input[name="orderType"]:checked').value;
+            const sizeSelect = document.getElementById('sizeSelect');
+            sizeSelect.innerHTML = '';
+
+            if (orderType === 'наклейка') {
+                const options = [
+                    { text: 'Компактная (до 20х20 см)', price: 400 },
+                    { text: 'Стандарт (30х40 см)', price: 750 },
+                    { text: 'Большая графика (50х100 см)', price: 1800 },
+                    { text: 'Оклейка элемента кузова', price: 3500 },
+                    { text: 'Свой индивидуальный размер', price: 0 }
+                ];
+                options.forEach(opt => {
+                    const el = document.createElement('option');
+                    el.value = opt.price;
+                    el.innerText = opt.text;
+                    sizeSelect.appendChild(el);
+                });
+            } else {
+                const options = [
+                    { text: '30 х 40 см (Мини)', price: 1200 },
+                    { text: '40 х 60 см (Стандарт)', price: 1900 },
+                    { text: '50 х 70 см (Популярный)', price: 2600 },
+                    { text: '60 х 90 см (Большой)', price: 3800 },
+                    { text: '80 х 120 см (Премиум)', price: 5900 },
+                    { text: 'Свой индивидуальный размер', price: 0 }
+                ];
+                options.forEach(opt => {
+                    const el = document.createElement('option');
+                    el.value = opt.price;
+                    el.innerText = opt.text;
+                    sizeSelect.appendChild(el);
+                });
+            }
+            calculateEstimatedPrice();
+        }
+
+        function calculateEstimatedPrice() {
+            const sizeSelect = document.getElementById('sizeSelect');
+            const selectedPrice = parseInt(sizeSelect.value) || 0;
+            const width = parseInt(document.getElementById('customWidth').value) || 0;
+            const height = parseInt(document.getElementById('customHeight').value) || 0;
+            const priceDisplay = document.getElementById('calculatedPrice');
+
+            if (selectedPrice > 0) {
+                priceDisplay.innerText = `${selectedPrice.toLocaleString()} ₽`;
+            } else if (width > 0 && height > 0) {
+                // Rough custom area estimation
+                const areaSqM = (width * height) / 10000;
+                const calculated = Math.max(500, Math.round(areaSqM * 3500));
+                priceDisplay.innerText = `~${calculated.toLocaleString()} ₽`;
+            } else {
+                priceDisplay.innerText = 'от 500 ₽';
+            }
+        }
+
+        function sendOrderViaMessenger(messenger) {
+            const orderType = document.querySelector('input[name="orderType"]:checked').value;
+            const name = document.getElementById('userName').value || 'Заказчик';
+            const phone = document.getElementById('userPhone').value || 'Не указан';
+            const comment = document.getElementById('userComment').value || 'Без комментария';
+            const price = document.getElementById('calculatedPrice').innerText;
+
+            const text = `Здравствуйте! Хочу заказать (${orderType}).%0AИмя: ${encodeURIComponent(name)}%0AТелефон: ${encodeURIComponent(phone)}%0AОценка стоимости: ${encodeURIComponent(price)}%0AПожелания: ${encodeURIComponent(comment)}`;
+
+            if (messenger === 'whatsapp') {
+                window.open(`${CONFIG.whatsappUrl}?text=${text}`, '_blank');
+            } else if (messenger === 'telegram') {
+                window.open(`${CONFIG.telegramUrl}`, '_blank');
+            }
+        }
+
+        function handleOrderSubmit(e) {
+            e.preventDefault();
+            sendOrderViaMessenger('whatsapp');
+        }
     </script>
 </body>
 </html>
