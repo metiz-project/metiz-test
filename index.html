@@ -149,8 +149,6 @@ body {
 }
 
 
-/* intro grid */
-
 .intro::before {
 
     content: "";
@@ -186,8 +184,6 @@ body {
 
 /* =========================================================
    INTRO CONTENT
-   Логотип + ДОБРО ПОЖАЛОВАТЬ
-   двигаются как единый объект
    ========================================================= */
 
 .intro-content {
@@ -970,8 +966,6 @@ body {
 }
 
 
-/* Появление Санкт-Петербурга */
-
 .loaded .line.location-line {
 
     opacity: 1;
@@ -1057,10 +1051,6 @@ body {
 
 }
 
-
-/* =========================================================
-   АНИМАЦИЯ БЛИКА
-   ========================================================= */
 
 @keyframes locationShine {
 
@@ -1733,6 +1723,51 @@ body {
 
 
 /* =========================================================
+   VK GROUP — НОВЫЙ ТЕКСТ КНОПКИ
+   ========================================================= */
+
+.vk-group-content {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    justify-content: center;
+
+    gap: 3px;
+
+    line-height: 1;
+
+}
+
+
+.vk-group-title {
+
+    font-size: 14px;
+
+    font-weight: 900;
+
+    letter-spacing: -.01em;
+
+}
+
+
+.vk-group-subtitle {
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: .03em;
+
+    opacity: .62;
+
+}
+
+
+/* =========================================================
    OUTLINE BUTTONS
    ========================================================= */
 
@@ -1815,13 +1850,13 @@ body {
 .button.share-outline:hover {
 
     color:
-        #59ff00; /*----------------------------- цвет текста в кнопке ПОДЕЛИТЬСЯ */
+        #59ff00;
 
     background:
         transparent;
 
     border-color:
-        #59ff00; /*----------------------------- цвет неона в кнопке ПОДЕЛИТЬСЯ */
+        #59ff00;
 
     box-shadow:
 
@@ -2278,6 +2313,22 @@ body {
     }
 
 
+    .vk-group-title {
+
+        font-size:
+            13px;
+
+    }
+
+
+    .vk-group-subtitle {
+
+        font-size:
+            8px;
+
+    }
+
+
     .floating-word {
 
         display:
@@ -2470,6 +2521,22 @@ body {
 
         font-size:
             12px;
+
+    }
+
+
+    .vk-group-title {
+
+        font-size:
+            12px;
+
+    }
+
+
+    .vk-group-subtitle {
+
+        font-size:
+            7px;
 
     }
 
@@ -2747,8 +2814,16 @@ body {
 
                     </span>
 
-                    <span>
-                        Группа ВКонтакте
+                    <span class="vk-group-content">
+
+                        <span class="vk-group-title">
+                            Примеры работ и новости
+                        </span>
+
+                        <span class="vk-group-subtitle">
+                            Фото • Новинки • Обновления
+                        </span>
+
                     </span>
 
                 </a>
@@ -2996,10 +3071,6 @@ document.addEventListener(
         function startIntro() {
 
 
-            /* ---------------------------------------------
-               REDUCED MOTION
-               --------------------------------------------- */
-
             if (reducedMotion) {
 
                 intro.classList.add(
@@ -3021,58 +3092,27 @@ document.addEventListener(
             }
 
 
-            /* ---------------------------------------------
-               FIRST APPEARANCE
-               --------------------------------------------- */
-
             intro.classList.add(
                 "start"
             );
 
 
-            /*
-               Ждём появления логотипа,
-               затем рассчитываем ТОЧНУЮ
-               конечную позицию всего блока.
-            */
-
             setTimeout(
                 () => {
 
-
-                    /* -----------------------------------------
-                       FINAL LOGO POSITION
-                       ----------------------------------------- */
 
                     const target =
                         logoSlot.getBoundingClientRect();
 
 
-                    /*
-                       Высота всего стартового блока:
-                       логотип + отступ + ДОБРО ПОЖАЛОВАТЬ.
-                    */
-
                     const contentHeight =
                         introContent.getBoundingClientRect().height;
 
-
-                    /*
-                       Центр финального логотипа.
-                    */
 
                     const targetLogoCenterY =
                         target.top +
                         target.height / 2;
 
-
-                    /*
-                       Так как "ДОБРО ПОЖАЛОВАТЬ"
-                       находится под логотипом,
-                       центр всего intro-content
-                       должен находиться немного ниже
-                       центра самого логотипа.
-                    */
 
                     const contentCenterY =
                         targetLogoCenterY +
@@ -3092,12 +3132,6 @@ document.addEventListener(
                         contentCenterY -
                         window.innerHeight / 2;
 
-
-                    /*
-                       Размер одинаковый.
-                       Поэтому никакого скачка
-                       при масштабировании.
-                    */
 
                     const introWidth =
                         introLogo.getBoundingClientRect().width;
@@ -3130,10 +3164,6 @@ document.addEventListener(
                     );
 
 
-                    /* -----------------------------------------
-                       ПЕРЕЛЁТ
-                       ----------------------------------------- */
-
                     intro.classList.remove(
                         "start"
                     );
@@ -3143,26 +3173,13 @@ document.addEventListener(
                     );
 
 
-                    /* -----------------------------------------
-                       AFTER MOVE
-                       ----------------------------------------- */
-
                     setTimeout(
                         () => {
-
-                            /*
-                               Сначала показываем основной
-                               логотип уже на ТОЧНОЙ позиции.
-                            */
 
                             document.body.classList.add(
                                 "loaded"
                             );
 
-
-                            /*
-                               Затем убираем splash.
-                            */
 
                             setTimeout(
                                 () => {
@@ -3206,11 +3223,6 @@ document.addEventListener(
 
         }
 
-
-        /*
-           Небольшая задержка,
-           чтобы браузер успел рассчитать layout.
-        */
 
         setTimeout(
             startIntro,
@@ -3483,10 +3495,6 @@ document.addEventListener(
                     };
 
 
-                    /* -----------------------------------------
-                       НАТИВНОЕ МЕНЮ ПОДЕЛИТЬСЯ
-                       ----------------------------------------- */
-
                     if (
                         navigator.share
                     ) {
@@ -3499,11 +3507,6 @@ document.addEventListener(
 
                         }
                         catch (error) {
-
-                            /*
-                               Пользователь просто закрыл
-                               меню поделиться — ничего не делаем.
-                            */
 
                             if (
                                 error.name !==
@@ -3523,10 +3526,6 @@ document.addEventListener(
 
                     }
 
-
-                    /* -----------------------------------------
-                       FALLBACK
-                       ----------------------------------------- */
 
                     try {
 
@@ -3966,8 +3965,6 @@ document.addEventListener(
 
         /* =====================================================
            ORIENTATION CHANGE
-           Если телефон повернули во время intro,
-           пересчитываем конечную позицию.
            ===================================================== */
 
         window.addEventListener(
