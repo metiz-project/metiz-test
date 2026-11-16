@@ -184,10 +184,6 @@ body {
 }
 
 
-/* =========================================================
-   INTRO CONTENT
-   ========================================================= */
-
 .intro-content {
 
     position: absolute;
@@ -226,10 +222,6 @@ body {
 }
 
 
-/* =========================================================
-   INTRO LOGO
-   ========================================================= */
-
 .intro-logo {
 
     display: block;
@@ -246,10 +238,6 @@ body {
 
 }
 
-
-/* =========================================================
-   ДОБРО ПОЖАЛОВАТЬ
-   ========================================================= */
 
 .intro-welcome {
 
@@ -308,10 +296,6 @@ body {
 
 }
 
-
-/* =========================================================
-   INTRO APPEAR
-   ========================================================= */
 
 .intro.start .intro-content {
 
@@ -374,10 +358,6 @@ body {
 }
 
 
-/* =========================================================
-   INTRO MOVE
-   ========================================================= */
-
 .intro.move .intro-content {
 
     animation:
@@ -416,10 +396,6 @@ body {
 
 }
 
-
-/* =========================================================
-   INTRO FINISHED
-   ========================================================= */
 
 .intro.finished {
 
@@ -714,6 +690,8 @@ body {
 
     justify-content: center;
 
+    z-index: 5;
+
 }
 
 
@@ -749,8 +727,8 @@ body {
         0
 
         max(
-            28px,
-            env(safe-area-inset-bottom)
+            86px,
+            calc(env(safe-area-inset-bottom) + 72px)
         );
 
     transform-style:
@@ -980,10 +958,6 @@ body {
 }
 
 
-/* =========================================================
-   ТЕКСТ САНКТ-ПЕТЕРБУРГ
-   ========================================================= */
-
 .location-line span {
 
     position: relative;
@@ -1009,10 +983,6 @@ body {
 
 }
 
-
-/* =========================================================
-   СВЕТОВОЙ ПЕРЕЛИВ
-   ========================================================= */
 
 .location-line span::after {
 
@@ -1327,10 +1297,6 @@ body {
 }
 
 
-/* =========================================================
-   MARQUEE TRACK
-   ========================================================= */
-
 .marquee {
 
     display: flex;
@@ -1350,10 +1316,6 @@ body {
 
 }
 
-
-/* =========================================================
-   MARQUEE ITEM
-   ========================================================= */
 
 .marquee span {
 
@@ -1436,7 +1398,7 @@ body {
 
     flex-direction: column;
 
-    gap: 10px;
+    gap: 12px;
 
     perspective:
         1000px;
@@ -1519,7 +1481,9 @@ body {
 
     text-decoration: none;
 
-    overflow: hidden;
+    overflow: clip;
+
+    overflow-clip-margin: 20px;
 
     transform:
         translateZ(0);
@@ -1554,22 +1518,30 @@ body {
 
     inset: 0;
 
-    z-index: -1;
+    z-index: 1;
 
     background:
 
         linear-gradient(
             110deg,
             transparent 20%,
-            rgba(255,255,255,.2) 48%,
-            transparent 70%
+            rgba(255,255,255,.55) 46%,
+            rgba(180,255,250,.9) 50%,
+            rgba(255,255,255,.55) 54%,
+            transparent 78%
         );
 
     transform:
-        translateX(-130%);
+        translateX(-140%);
 
     transition:
-        transform .8s var(--ease);
+        transform 1s var(--ease);
+
+    pointer-events: none;
+
+    mix-blend-mode: screen;
+
+    opacity: .7;
 
 }
 
@@ -1582,7 +1554,7 @@ body {
 
     inset: 1px;
 
-    z-index: -1;
+    z-index: 0;
 
     border-radius: 16px;
 
@@ -1592,7 +1564,7 @@ body {
             circle at
             var(--mx, 50%)
             var(--my, 50%),
-            rgba(255,255,255,.14),
+            rgba(255,255,255,.16),
             transparent 35%
         );
 
@@ -1600,6 +1572,8 @@ body {
 
     transition:
         opacity .35s ease;
+
+    pointer-events: none;
 
 }
 
@@ -1611,19 +1585,26 @@ body {
         scale(1.008);
 
     border-color:
-        rgba(76,213,211,.55);
+        rgba(76,213,211,.6);
 
     box-shadow:
 
         0 16px 42px
         rgba(0,0,0,.28),
 
-        0 0 30px
-        rgba(76,213,211,.08),
+        0 0 34px
+        rgba(76,213,211,.22),
+
+        0 0 70px
+        rgba(76,213,211,.10),
+
+        inset
+        0 0 26px
+        rgba(76,213,211,.16),
 
         inset
         0 1px 0
-        rgba(255,255,255,.12);
+        rgba(255,255,255,.16);
 
 }
 
@@ -1631,7 +1612,7 @@ body {
 .button:hover::before {
 
     transform:
-        translateX(130%);
+        translateX(140%);
 
 }
 
@@ -1692,8 +1673,8 @@ body {
         linear-gradient(
             110deg,
             transparent 18%,
-            rgba(255,255,255,.42) 50%,
-            transparent 78%
+            rgba(255,255,255,.7) 50%,
+            transparent 82%
         );
 
 }
@@ -1721,13 +1702,16 @@ body {
         rgba(76,213,211,.22),
 
         0 0 32px
-        rgba(76,213,211,.12);
+        rgba(76,213,211,.12),
+
+        0 0 70px
+        rgba(76,213,211,.08);
 
 }
 
 
 /* =========================================================
-   VK GROUP — НОВЫЙ ТЕКСТ КНОПКИ
+   VK GROUP — ТЕКСТ КНОПКИ
    ========================================================= */
 
 .vk-group-content {
@@ -1775,8 +1759,6 @@ body {
    OUTLINE BUTTONS
    ========================================================= */
 
-/* Самовывоз */
-
 .button.pickup-outline {
 
     color:
@@ -1816,17 +1798,18 @@ body {
         0 16px 42px
         rgba(0,0,0,.28),
 
-        0 0 30px
-        rgba(76,213,211,.20),
+        0 0 34px
+        rgba(76,213,211,.28),
+
+        0 0 70px
+        rgba(76,213,211,.12),
 
         inset
-        0 0 20px
-        rgba(76,213,211,.05);
+        0 0 22px
+        rgba(76,213,211,.08);
 
 }
 
-
-/* Поделиться сайтом */
 
 .button.share-outline {
 
@@ -1867,12 +1850,15 @@ body {
         0 16px 42px
         rgba(0,0,0,.28),
 
-        0 0 30px
-        rgba(89,255,0,.20),
+        0 0 34px
+        rgba(89,255,0,.28),
+
+        0 0 70px
+        rgba(89,255,0,.12),
 
         inset
-        0 0 20px
-        rgba(89,255,0,.05);
+        0 0 22px
+        rgba(89,255,0,.08);
 
 }
 
@@ -1914,6 +1900,8 @@ body {
     transition:
         transform .45s var(--ease);
 
+    z-index: 2;
+
 }
 
 
@@ -1936,27 +1924,6 @@ body {
         translateY(-1px)
         rotate(-5deg)
         scale(1.08);
-
-}
-
-
-/* =========================================================
-   WORKS BUTTON
-   ========================================================= */
-
-.works {
-
-    min-height: 60px;
-
-    margin-top: 2px;
-
-    background:
-
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,.065),
-            rgba(255,255,255,.02)
-        );
 
 }
 
@@ -2295,7 +2262,7 @@ body {
             20px;
 
         gap:
-            9px;
+            11px;
 
     }
 
@@ -2581,7 +2548,8 @@ body {
 
 
     .cursor-glow,
-    #particles {
+    #particles,
+    #snowfall {
 
         display:
             none;
@@ -2593,7 +2561,7 @@ body {
 
 /* =========================================================
    =========================================================
-   NEW YEAR 2026 — ДЕКОР
+   NEW YEAR 2026 — БОГАТЫЙ ДЕКОР
    =========================================================
    ========================================================= */
 
@@ -2612,108 +2580,272 @@ body {
 
 
 /* ---------------------------------------------------------
-   1. СНЕЖНЫЕ ШАПКИ НА КНОПКАХ
+   СЕВЕРНОЕ СИЯНИЕ (AURORA)
    --------------------------------------------------------- */
 
-.button {
+.aurora {
 
-    overflow: clip;
-    overflow-clip-margin: 16px;
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: -8;
+
+    overflow: hidden;
+
+    opacity: .95;
 
 }
 
 
-.snow-cap {
+.aurora-band {
 
     position: absolute;
 
-    top: -9px;
-    left: 5%;
-    right: 5%;
+    border-radius: 50%;
 
-    height: 20px;
+    filter: blur(70px);
 
-    pointer-events: none;
-    z-index: 2;
+    will-change: transform, opacity;
+
+}
+
+
+.aurora-band.a {
+
+    width: 78vw;
+    height: 48vh;
+
+    top: -8%;
+    left: -22%;
 
     background:
 
         radial-gradient(
-            ellipse 44% 100% at 15% 100%,
-            #ffffff 0%,
-            #eefcff 56%,
-            rgba(238,252,255,0) 74%
-        ),
-
-        radial-gradient(
-            ellipse 52% 112% at 46% 100%,
-            #ffffff 0%,
-            #f6feff 58%,
-            rgba(246,254,255,0) 76%
-        ),
-
-        radial-gradient(
-            ellipse 44% 100% at 79% 100%,
-            #ffffff 0%,
-            #eefcff 56%,
-            rgba(238,252,255,0) 74%
+            ellipse at 40% 50%,
+            rgba(76,213,211,.55) 0%,
+            rgba(30,126,86,.22) 42%,
+            rgba(11,61,46,.08) 65%,
+            transparent 78%
         );
 
-    filter:
-
-        drop-shadow(
-            0 4px 7px
-            rgba(76,213,211,.45)
-        )
-
-        drop-shadow(
-            0 1px 2px
-            rgba(76,213,211,.35)
-        );
-
-    opacity: .96;
-
-    transition: transform .45s var(--ease);
+    animation:
+        auroraA 20s ease-in-out infinite alternate;
 
 }
 
 
-.button:hover .snow-cap {
+.aurora-band.b {
 
-    transform: translateY(-1px);
+    width: 68vw;
+    height: 42vh;
+
+    top: 8%;
+    right: -20%;
+
+    background:
+
+        radial-gradient(
+            ellipse at 55% 50%,
+            rgba(30,126,86,.55) 0%,
+            rgba(76,213,211,.22) 44%,
+            transparent 76%
+        );
+
+    animation:
+        auroraB 26s ease-in-out infinite alternate;
+
+}
+
+
+.aurora-band.c {
+
+    width: 60vw;
+    height: 34vh;
+
+    bottom: 4%;
+    left: 18%;
+
+    background:
+
+        radial-gradient(
+            ellipse at 50% 50%,
+            rgba(76,213,211,.4) 0%,
+            rgba(30,126,86,.18) 42%,
+            transparent 72%
+        );
+
+    animation:
+        auroraC 30s ease-in-out infinite alternate;
+
+}
+
+
+@keyframes auroraA {
+
+    0% {
+
+        transform:
+            translate(0, 0)
+            scale(1)
+            rotate(0deg);
+
+        opacity: .38;
+
+    }
+
+    100% {
+
+        transform:
+            translate(28%, 18%)
+            scale(1.35)
+            rotate(18deg);
+
+        opacity: .78;
+
+    }
+
+}
+
+
+@keyframes auroraB {
+
+    0% {
+
+        transform:
+            translate(0, 0)
+            scale(1);
+
+        opacity: .32;
+
+    }
+
+    100% {
+
+        transform:
+            translate(-22%, -12%)
+            scale(1.28)
+            rotate(-12deg);
+
+        opacity: .7;
+
+    }
+
+}
+
+
+@keyframes auroraC {
+
+    0% {
+
+        transform:
+            translate(-8%, -4%)
+            scale(1);
+
+        opacity: .24;
+
+    }
+
+    100% {
+
+        transform:
+            translate(14%, -10%)
+            scale(1.42);
+
+        opacity: .52;
+
+    }
 
 }
 
 
 /* ---------------------------------------------------------
-   2. ЁЛОВЫЕ ВЕТКИ С ИГРУШКАМИ
+   МОРОЗНЫЙ ИНЕЙ В НИЖНИХ УГЛАХ
    --------------------------------------------------------- */
 
-.xmas-branch {
+.frost {
 
     position: fixed;
 
-    top: 0;
+    bottom: 0;
 
     width:
         clamp(
-            150px,
-            20vw,
-            260px
+            180px,
+            24vw,
+            320px
         );
 
     height: auto;
 
     pointer-events: none;
 
-    z-index: 9980;
+    z-index: 3;
 
-    opacity: .92;
+    opacity: .55;
 
     filter:
         drop-shadow(
-            0 12px 30px
-            rgba(0,0,0,.5)
+            0 0 18px
+            rgba(180,255,250,.15)
+        );
+
+}
+
+
+.frost-left {
+
+    left: 0;
+
+}
+
+
+.frost-right {
+
+    right: 0;
+
+    transform: scaleX(-1);
+
+}
+
+
+/* ---------------------------------------------------------
+   ПЫШНЫЕ ЁЛОВЫЕ ВЕТКИ
+   --------------------------------------------------------- */
+
+.xmas-branch {
+
+    position: fixed;
+
+    top: -8px;
+
+    width:
+        clamp(
+            200px,
+            24vw,
+            320px
+        );
+
+    height: auto;
+
+    pointer-events: none;
+
+    z-index: 4;
+
+    opacity: .96;
+
+    filter:
+
+        drop-shadow(
+            0 14px 34px
+            rgba(0,0,0,.55)
+        )
+
+        drop-shadow(
+            0 0 22px
+            rgba(30,126,86,.18)
         );
 
 }
@@ -2721,16 +2853,30 @@ body {
 
 .branch-left {
 
-    left: 0;
+    left: -4px;
 
 }
 
 
 .branch-right {
 
-    right: 0;
+    right: -4px;
 
-    transform: scaleX(-1);
+}
+
+
+@media (max-width: 820px) {
+
+    .xmas-branch {
+
+        width:
+            clamp(
+                140px,
+                22vw,
+                220px
+            );
+
+    }
 
 }
 
@@ -2741,14 +2887,45 @@ body {
 
         width:
             clamp(
-                72px,
-                18vw,
-                130px
+                90px,
+                20vw,
+                140px
             );
 
-        top: -10px;
+        top: -12px;
 
-        opacity: .72;
+        opacity: .82;
+
+    }
+
+    .frost {
+
+        width:
+            clamp(
+                120px,
+                20vw,
+                200px
+            );
+
+        opacity: .4;
+
+    }
+
+}
+
+
+@media (max-width: 360px) {
+
+    .xmas-branch {
+
+        width:
+            clamp(
+                78px,
+                22vw,
+                110px
+            );
+
+        opacity: .7;
 
     }
 
@@ -2756,7 +2933,7 @@ body {
 
 
 /* ---------------------------------------------------------
-   3. СВЕТЯЩАЯСЯ ГИРЛЯНДА
+   ГИРЛЯНДА С БОКЕ-СВЕЧЕНИЕМ
    --------------------------------------------------------- */
 
 .garland {
@@ -2767,13 +2944,13 @@ body {
     left: 0;
 
     width: 100%;
-    height: 60px;
+    height: 96px;
 
     pointer-events: none;
 
-    z-index: 9985;
+    z-index: 6;
 
-    opacity: .95;
+    opacity: .98;
 
 }
 
@@ -2785,7 +2962,7 @@ body {
     inset: 0;
 
     width: 100%;
-    height: 100%;
+    height: 96px;
 
     display: block;
 
@@ -2796,72 +2973,176 @@ body {
 
     position: absolute;
 
-    width: 8px;
-    height: 8px;
+    width: 12px;
+    height: 16px;
 
-    border-radius: 50%;
+    border-radius:
+        50% 50% 50% 50% /
+        34% 34% 66% 66%;
 
     transform:
         translate(-50%, -50%);
 
     animation:
-        bulbGlow 2.8s ease-in-out infinite;
+        bulbGlow 3s ease-in-out infinite;
 
-    will-change: opacity;
+    will-change: opacity, filter;
+
+}
+
+
+.garland .bulb::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: -4px;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+
+    transform:
+        translateX(-50%);
+
+    border-radius: 1.5px;
+
+    background:
+        linear-gradient(#3d4a48, #1a2220);
+
+    box-shadow:
+        0 0 3px rgba(0,0,0,.8);
 
 }
 
 
 .garland .bulb.t {
 
-    background: #a9fffb;
+    background:
+
+        radial-gradient(
+            ellipse at 35% 25%,
+            #ffffff 0%,
+            #c8fffb 24%,
+            #4cd5d3 62%,
+            #0d6b6a 100%
+        );
 
     box-shadow:
-        0 0 8px 2px rgba(76,213,211,.85),
-        0 0 22px 8px rgba(76,213,211,.38);
+
+        0 0 10px 3px
+        rgba(76,213,211,.9),
+
+        0 0 26px 10px
+        rgba(76,213,211,.45),
+
+        0 0 60px 22px
+        rgba(76,213,211,.18);
 
 }
 
 
 .garland .bulb.g {
 
-    background: #ffe9a8;
+    background:
+
+        radial-gradient(
+            ellipse at 35% 25%,
+            #ffffff 0%,
+            #fff2c4 26%,
+            #ffd35c 62%,
+            #8a6516 100%
+        );
 
     box-shadow:
-        0 0 8px 2px rgba(255,214,120,.85),
-        0 0 22px 8px rgba(255,196,70,.32);
+
+        0 0 10px 3px
+        rgba(255,214,120,.95),
+
+        0 0 26px 10px
+        rgba(255,196,70,.5),
+
+        0 0 60px 22px
+        rgba(255,180,60,.2);
+
+}
+
+
+.garland .bulb.r {
+
+    background:
+
+        radial-gradient(
+            ellipse at 35% 25%,
+            #ffffff 0%,
+            #ffd0d0 24%,
+            #ff5252 60%,
+            #8a0a12 100%
+        );
+
+    box-shadow:
+
+        0 0 10px 3px
+        rgba(255,90,90,.9),
+
+        0 0 26px 10px
+        rgba(255,60,60,.45),
+
+        0 0 60px 22px
+        rgba(255,50,50,.18);
 
 }
 
 
 .garland .bulb.w {
 
-    background: #ffffff;
+    background:
+
+        radial-gradient(
+            ellipse at 35% 25%,
+            #ffffff 0%,
+            #ffffff 40%,
+            #dffcff 100%
+        );
 
     box-shadow:
-        0 0 8px 2px rgba(255,255,255,.85),
-        0 0 22px 8px rgba(210,245,255,.32);
+
+        0 0 10px 3px
+        rgba(255,255,255,.95),
+
+        0 0 26px 10px
+        rgba(220,250,255,.55),
+
+        0 0 60px 22px
+        rgba(200,240,255,.22);
 
 }
 
 
-.garland .bulb:nth-of-type(3n) {
+.garland .bulb:nth-of-type(4n) {
 
-    animation-delay: -.45s;
-
-}
-
-
-.garland .bulb:nth-of-type(3n+1) {
-
-    animation-delay: -1.15s;
+    animation-delay: -.55s;
 
 }
 
 
-.garland .bulb:nth-of-type(3n+2) {
+.garland .bulb:nth-of-type(4n+1) {
 
-    animation-delay: -1.9s;
+    animation-delay: -1.25s;
+
+}
+
+
+.garland .bulb:nth-of-type(4n+2) {
+
+    animation-delay: -2.0s;
+
+}
+
+
+.garland .bulb:nth-of-type(4n+3) {
+
+    animation-delay: -2.7s;
 
 }
 
@@ -2870,7 +3151,9 @@ body {
 
     0%,100% {
 
-        opacity: .42;
+        opacity: .45;
+
+        filter: brightness(.75) saturate(1.1);
 
     }
 
@@ -2878,55 +3161,291 @@ body {
 
         opacity: 1;
 
+        filter: brightness(1.25) saturate(1.35);
+
     }
 
 }
 
 
 /* ---------------------------------------------------------
-   4. ШАПКА САНТЫ НА ЛОГОТИПЕ
+   ШАПКА САНТЫ НА ЛОГОТИПЕ
    --------------------------------------------------------- */
 
 .santa-hat {
 
     position: absolute;
 
-    top: -16px;
-    right: 2%;
+    top: -22px;
+    right: -4%;
 
     width:
         clamp(
-            44px,
-            13vw,
-            64px
+            64px,
+            18vw,
+            96px
         );
 
     height: auto;
 
-    transform:
-        rotate(-7deg);
-
     pointer-events: none;
 
-    z-index: 3;
+    z-index: 6;
+
+    transform-origin: 65% 92%;
+
+    animation:
+
+        hatSwingIn
+        1.4s
+        cubic-bezier(.16,1,.3,1)
+        .6s
+        both,
+
+        hatSwingIdle
+        4.5s
+        ease-in-out
+        2s
+        infinite;
 
     filter:
 
         drop-shadow(
-            0 6px 10px
-            rgba(0,0,0,.5)
+            0 8px 14px
+            rgba(0,0,0,.55)
         )
 
         drop-shadow(
-            0 0 14px
-            rgba(255,90,90,.18)
+            0 0 16px
+            rgba(255,90,90,.22)
         );
 
 }
 
 
+@keyframes hatSwingIn {
+
+    0% {
+
+        opacity: 0;
+
+        transform:
+            rotate(-32deg)
+            translateY(-26px)
+            scale(.6);
+
+    }
+
+    100% {
+
+        opacity: 1;
+
+        transform:
+            rotate(-7deg)
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+
+@keyframes hatSwingIdle {
+
+    0%,100% {
+
+        transform: rotate(-7deg);
+
+    }
+
+    50% {
+
+        transform: rotate(-11deg);
+
+    }
+
+}
+
+
 /* ---------------------------------------------------------
-   5. СНЕГОПАД (CANVAS)
+   ПУХЛЫЕ СУГРОБЫ НА КНОПКАХ
+   --------------------------------------------------------- */
+
+.snow-cap {
+
+    position: absolute;
+
+    top: -14px;
+    left: 2%;
+    right: 2%;
+
+    height: 24px;
+
+    pointer-events: none;
+
+    z-index: 3;
+
+    background:
+
+        radial-gradient(
+            ellipse 26% 100% at 8% 100%,
+            #ffffff 0%,
+            #effaff 55%,
+            transparent 74%
+        ),
+
+        radial-gradient(
+            ellipse 30% 118% at 26% 100%,
+            #ffffff 0%,
+            #f5fdff 58%,
+            transparent 78%
+        ),
+
+        radial-gradient(
+            ellipse 34% 108% at 46% 100%,
+            #ffffff 0%,
+            #effaff 62%,
+            transparent 80%
+        ),
+
+        radial-gradient(
+            ellipse 32% 122% at 66% 100%,
+            #ffffff 0%,
+            #f5fdff 58%,
+            transparent 78%
+        ),
+
+        radial-gradient(
+            ellipse 28% 104% at 84% 100%,
+            #ffffff 0%,
+            #effaff 58%,
+            transparent 76%
+        ),
+
+        radial-gradient(
+            ellipse 22% 100% at 96% 100%,
+            #ffffff 0%,
+            #effaff 55%,
+            transparent 74%
+        );
+
+    filter:
+
+        drop-shadow(
+            0 4px 9px
+            rgba(76,213,211,.55)
+        )
+
+        drop-shadow(
+            0 1px 3px
+            rgba(76,213,211,.42)
+        );
+
+    opacity: .98;
+
+    transition: transform .45s var(--ease);
+
+}
+
+
+.snow-cap::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 100%;
+    left: 6%;
+    right: 6%;
+
+    height: 8px;
+
+    background:
+
+        linear-gradient(
+            to bottom,
+            #ffffff 0%,
+            rgba(233,250,255,.85) 42%,
+            rgba(233,250,255,0) 100%
+        );
+
+    clip-path:
+        polygon(
+            0% 0%,
+            6% 100%,
+            14% 22%,
+            22% 100%,
+            30% 0%,
+            38% 100%,
+            46% 20%,
+            54% 100%,
+            62% 0%,
+            70% 100%,
+            78% 22%,
+            86% 100%,
+            94% 0%,
+            100% 60%,
+            100% 0%
+        );
+
+    opacity: .9;
+
+    filter:
+        drop-shadow(
+            0 2px 3px
+            rgba(76,213,211,.45)
+        );
+
+}
+
+
+.snow-cap::after {
+
+    content: "";
+
+    position: absolute;
+
+    top: 3px;
+    left: 26%;
+
+    width: 6px;
+    height: 4px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            ellipse,
+            #ffffff 0%,
+            rgba(255,255,255,0) 72%
+        );
+
+    box-shadow:
+
+        46px 3px 5px -2px
+        rgba(255,255,255,.9),
+
+        88px -1px 4px -1px
+        rgba(255,255,255,.85),
+
+        128px 4px 6px -2px
+        rgba(255,255,255,.9);
+
+    opacity: .75;
+
+}
+
+
+.button:hover .snow-cap {
+
+    transform:
+        translateY(-1px);
+
+}
+
+
+/* ---------------------------------------------------------
+   СНЕГОПАД (CANVAS)
    --------------------------------------------------------- */
 
 #snowfall {
@@ -2946,7 +3465,7 @@ body {
 
 
 /* ---------------------------------------------------------
-   6. МОРОЗНЫЕ ИСКРЫ НА КНОПКАХ
+   ИСКРЫ И ФЕЙЕРВЕРК
    --------------------------------------------------------- */
 
 #sparkLayer {
@@ -2958,6 +3477,8 @@ body {
     pointer-events: none;
 
     z-index: 10000;
+
+    overflow: hidden;
 
 }
 
@@ -2973,6 +3494,14 @@ body {
 
     pointer-events: none;
 
+    animation:
+        sparkFly .9s cubic-bezier(.16,1,.3,1) forwards;
+
+}
+
+
+.spark.t {
+
     background:
         radial-gradient(
             circle,
@@ -2982,11 +3511,23 @@ body {
         );
 
     box-shadow:
-        0 0 8px
-        rgba(76,213,211,.9);
+        0 0 10px rgba(76,213,211,.9);
 
-    animation:
-        sparkFly .9s cubic-bezier(.16,1,.3,1) forwards;
+}
+
+
+.spark.g {
+
+    background:
+        radial-gradient(
+            circle,
+            #fff8d0 0%,
+            #ffd970 44%,
+            rgba(255,200,80,0) 76%
+        );
+
+    box-shadow:
+        0 0 10px rgba(255,214,120,.95);
 
 }
 
@@ -3007,7 +3548,7 @@ body {
 
         transform:
             translate(var(--dx, 0px), var(--dy, 0px))
-            scale(.15);
+            scale(.12);
 
         opacity: 0;
 
@@ -3016,50 +3557,8 @@ body {
 }
 
 
-/* Морозное ледяное сияние при наведении */
-
-.button:hover {
-
-    box-shadow:
-
-        0 16px 42px
-        rgba(0,0,0,.28),
-
-        0 0 30px
-        rgba(76,213,211,.20),
-
-        0 0 60px
-        rgba(76,213,211,.10),
-
-        inset
-        0 0 26px
-        rgba(76,213,211,.18),
-
-        inset
-        0 1px 0
-        rgba(255,255,255,.16);
-
-}
-
-
-.button:hover::after {
-
-    background:
-
-        radial-gradient(
-            circle at
-            var(--mx, 50%)
-            var(--my, 50%),
-            rgba(255,255,255,.2) 0%,
-            rgba(76,213,211,.16) 22%,
-            transparent 42%
-        );
-
-}
-
-
 /* ---------------------------------------------------------
-   7. БЕЙДЖ ОБРАТНОГО ОТСЧЁТА
+   БЕЙДЖ ОБРАТНОГО ОТСЧЁТА
    --------------------------------------------------------- */
 
 .countdown {
@@ -3195,19 +3694,6 @@ body {
 
 }
 
-
-/* Отступ снизу, чтобы бейдж не перекрывал футер */
-
-.card {
-
-    padding-bottom:
-        max(
-            86px,
-            calc(env(safe-area-inset-bottom) + 72px)
-        );
-
-}
-
 </style>
 
 </head>
@@ -3217,62 +3703,191 @@ body {
 
 
 <!-- =========================================================
-     SVG DEFS — ГРАДИЕНТЫ И ФИЛЬТРЫ ДЛЯ ВЕТОК
+     SVG DEFS — ГРАДИЕНТЫ И ФИЛЬТРЫ
      ========================================================= -->
 
 <svg class="svg-defs" aria-hidden="true" focusable="false">
 
     <defs>
 
-        <radialGradient id="goldOrn" cx="35%" cy="28%" r="78%">
+        <!-- ГРАДИЕНТЫ ДЛЯ ШАРОВ -->
 
-            <stop offset="0%" stop-color="#fff6d0"/>
+        <radialGradient id="ornGold" cx="34%" cy="26%" r="82%">
 
-            <stop offset="42%" stop-color="#efc963"/>
+            <stop offset="0%" stop-color="#fffbe2"/>
 
-            <stop offset="100%" stop-color="#8a6516"/>
+            <stop offset="22%" stop-color="#ffec9a"/>
 
-        </radialGradient>
+            <stop offset="56%" stop-color="#e0b83e"/>
 
-
-        <radialGradient id="tiffanyOrn" cx="35%" cy="28%" r="78%">
-
-            <stop offset="0%" stop-color="#d8fffd"/>
-
-            <stop offset="45%" stop-color="#4cd5d3"/>
-
-            <stop offset="100%" stop-color="#0d6b6a"/>
+            <stop offset="100%" stop-color="#6e4b0f"/>
 
         </radialGradient>
 
+        <radialGradient id="ornTiffany" cx="34%" cy="26%" r="82%">
 
-        <linearGradient id="hatRed" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#e5fffe"/>
 
-            <stop offset="0%" stop-color="#ff5f5f"/>
+            <stop offset="24%" stop-color="#a9fffb"/>
 
-            <stop offset="55%" stop-color="#e02020"/>
+            <stop offset="56%" stop-color="#4cd5d3"/>
 
-            <stop offset="100%" stop-color="#a80f16"/>
+            <stop offset="100%" stop-color="#0a5554"/>
+
+        </radialGradient>
+
+        <radialGradient id="ornRed" cx="34%" cy="26%" r="82%">
+
+            <stop offset="0%" stop-color="#ffdcdc"/>
+
+            <stop offset="22%" stop-color="#ff8a8a"/>
+
+            <stop offset="58%" stop-color="#e02020"/>
+
+            <stop offset="100%" stop-color="#6b0409"/>
+
+        </radialGradient>
+
+        <!-- ГРАДИЕНТЫ ШАПКИ -->
+
+        <linearGradient id="hatVelvet" x1="0" y1="0" x2="1" y2="1">
+
+            <stop offset="0%" stop-color="#ff6a6a"/>
+
+            <stop offset="38%" stop-color="#e02424"/>
+
+            <stop offset="100%" stop-color="#7a060d"/>
 
         </linearGradient>
 
+        <linearGradient id="hatFur" x1="0" y1="0" x2="0" y2="1">
+
+            <stop offset="0%" stop-color="#ffffff"/>
+
+            <stop offset="55%" stop-color="#f2fcff"/>
+
+            <stop offset="100%" stop-color="#cbe9ef"/>
+
+        </linearGradient>
+
+        <!-- ФИЛЬТРЫ СВЕЧЕНИЯ -->
 
         <filter id="softBlur" x="-40%" y="-40%" width="180%" height="180%">
 
-            <feGaussianBlur stdDeviation="9"/>
+            <feGaussianBlur stdDeviation="10"/>
 
         </filter>
-
 
         <filter id="glowBlur" x="-140%" y="-140%" width="380%" height="380%">
 
-            <feGaussianBlur stdDeviation="6"/>
+            <feGaussianBlur stdDeviation="7"/>
 
         </filter>
+
+        <!-- ИГОЛКИ -->
+
+        <g id="spray" stroke-linecap="round" fill="none">
+
+            <path d="M0 4 Q -2 -4 -6 -15" stroke="currentColor" stroke-width="2.6"/>
+
+            <path d="M0 4 Q -1 -5 -3 -17" stroke="currentColor" stroke-width="2.6"/>
+
+            <path d="M0 4 Q 0 -5 0 -18" stroke="currentColor" stroke-width="2.6"/>
+
+            <path d="M0 4 Q 1 -5 3 -17" stroke="currentColor" stroke-width="2.6"/>
+
+            <path d="M0 4 Q 2 -4 6 -15" stroke="currentColor" stroke-width="2.6"/>
+
+            <path d="M0 4 Q -3 -2 -9 -11" stroke="currentColor" stroke-width="2.3"/>
+
+            <path d="M0 4 Q 3 -2 9 -11" stroke="currentColor" stroke-width="2.3"/>
+
+            <path d="M0 4 Q -5 0 -12 -6" stroke="currentColor" stroke-width="2.1"/>
+
+            <path d="M0 4 Q 5 0 12 -6" stroke="currentColor" stroke-width="2.1"/>
+
+            <path d="M0 4 Q -1 0 -4 -9" stroke="currentColor" stroke-width="1.9"/>
+
+            <path d="M0 4 Q 1 0 4 -9" stroke="currentColor" stroke-width="1.9"/>
+
+        </g>
+
+        <!-- ШАР (используем через <use>, задаём через translate) -->
+
+        <g id="ornRedG">
+
+            <circle r="18" fill="#e02020" opacity=".3" filter="url(#glowBlur)"/>
+
+            <circle r="12" fill="url(#ornRed)"/>
+
+            <ellipse cx="-4" cy="-5" rx="3.2" ry="2.2" fill="#ffffff" opacity=".85"/>
+
+            <circle cx="-6" cy="-7" r="1.4" fill="#ffffff" opacity=".9"/>
+
+            <rect x="-3.5" y="-15" width="7" height="4" rx="1.4" fill="#ffd970"/>
+
+            <path d="M -2 -15 L -2 -22 M 2 -15 L 2 -22" stroke="rgba(255,255,255,.35)" stroke-width="1"/>
+
+        </g>
+
+        <g id="ornGoldG">
+
+            <circle r="20" fill="#ffd970" opacity=".28" filter="url(#glowBlur)"/>
+
+            <circle r="14" fill="url(#ornGold)"/>
+
+            <ellipse cx="-5" cy="-6" rx="3.8" ry="2.6" fill="#ffffff" opacity=".85"/>
+
+            <circle cx="-7" cy="-8" r="1.7" fill="#ffffff" opacity=".9"/>
+
+            <rect x="-4" y="-17" width="8" height="4" rx="1.4" fill="#ffd970"/>
+
+            <path d="M -2.5 -17 L -2.5 -24 M 2.5 -17 L 2.5 -24" stroke="rgba(255,255,255,.35)" stroke-width="1"/>
+
+        </g>
+
+        <g id="ornTiffanyG">
+
+            <circle r="16" fill="#4cd5d3" opacity=".32" filter="url(#glowBlur)"/>
+
+            <circle r="11" fill="url(#ornTiffany)"/>
+
+            <ellipse cx="-3.5" cy="-4" rx="2.8" ry="1.8" fill="#ffffff" opacity=".9"/>
+
+            <rect x="-3" y="-14" width="6" height="3.6" rx="1.3" fill="#a9fffb"/>
+
+            <path d="M -1.5 -14 L -1.5 -20 M 1.5 -14 L 1.5 -20" stroke="rgba(255,255,255,.35)" stroke-width="1"/>
+
+        </g>
+
+        <!-- КОНЧИК СНЕГА -->
+
+        <g id="snowTip">
+
+            <ellipse rx="3.2" ry="1.6" fill="#ffffff" opacity=".95"/>
+
+            <ellipse rx="5.5" ry="2.6" fill="#ffffff" opacity=".35"/>
+
+        </g>
 
     </defs>
 
 </svg>
+
+
+<!-- =========================================================
+     AURORA (СЕВЕРНОЕ СИЯНИЕ)
+     ========================================================= -->
+
+<div class="aurora" aria-hidden="true">
+
+    <div class="aurora-band a"></div>
+
+    <div class="aurora-band b"></div>
+
+    <div class="aurora-band c"></div>
+
+</div>
 
 
 <!-- =========================================================
@@ -3325,38 +3940,45 @@ body {
 
 
 <!-- =========================================================
-     НОВОГОДНЯЯ ГИРЛЯНДА СВЕРХУ
+     ГИРЛЯНДА С БОКЕ-СВЕЧЕНИЕМ
      ========================================================= -->
 
 <div class="garland" aria-hidden="true">
 
     <svg
         class="garland-wire"
-        viewBox="0 0 1200 60"
+        viewBox="0 0 1200 96"
         preserveAspectRatio="none"
         focusable="false"
     >
 
         <path
-            d="M0 10 Q600 50 1200 10"
+            d="M0 20 Q600 150 1200 20"
             fill="none"
-            stroke="rgba(180,255,250,.20)"
-            stroke-width="1.4"
+            stroke="rgba(120,220,210,.35)"
+            stroke-width="2.4"
+        />
+
+        <path
+            d="M0 20 Q600 150 1200 20"
+            fill="none"
+            stroke="rgba(120,220,210,.12)"
+            stroke-width="6"
         />
 
     </svg>
 
-    <span class="bulb t" style="left:8.333%; top:16px;"></span>
-    <span class="bulb g" style="left:16.667%; top:21px;"></span>
-    <span class="bulb w" style="left:25%; top:25px;"></span>
-    <span class="bulb t" style="left:33.333%; top:28px;"></span>
-    <span class="bulb g" style="left:41.667%; top:29px;"></span>
-    <span class="bulb w" style="left:50%; top:30px;"></span>
-    <span class="bulb t" style="left:58.333%; top:29px;"></span>
-    <span class="bulb g" style="left:66.667%; top:28px;"></span>
-    <span class="bulb w" style="left:75%; top:25px;"></span>
-    <span class="bulb t" style="left:83.333%; top:21px;"></span>
-    <span class="bulb g" style="left:91.667%; top:16px;"></span>
+    <span class="bulb t" style="left:4%;  top:32px;"></span>
+    <span class="bulb g" style="left:13%; top:42px;"></span>
+    <span class="bulb r" style="left:22%; top:50px;"></span>
+    <span class="bulb w" style="left:31%; top:55px;"></span>
+    <span class="bulb t" style="left:40%; top:58px;"></span>
+    <span class="bulb g" style="left:50%; top:59px;"></span>
+    <span class="bulb r" style="left:60%; top:58px;"></span>
+    <span class="bulb w" style="left:69%; top:55px;"></span>
+    <span class="bulb t" style="left:78%; top:50px;"></span>
+    <span class="bulb g" style="left:87%; top:42px;"></span>
+    <span class="bulb r" style="left:96%; top:32px;"></span>
 
 </div>
 
@@ -3367,150 +3989,148 @@ body {
 
 <svg
     class="xmas-branch branch-left"
-    viewBox="0 0 240 210"
+    viewBox="0 0 340 300"
     aria-hidden="true"
     focusable="false"
 >
 
+    <!-- ГЛУБОКАЯ ТЕНЬ -->
     <path
-        d="M-12 -14 Q 86 28 196 148"
-        stroke="#0a2a1e"
+        d="M-20 -20 Q 100 50 320 260"
+        stroke="#021410"
         stroke-width="46"
         stroke-linecap="round"
         fill="none"
-        opacity=".5"
+        opacity=".55"
         filter="url(#softBlur)"
     />
 
+    <!-- ОСНОВНОЙ СТЕБЕЛЬ -->
     <path
-        d="M-12 -14 Q 86 28 196 148"
-        stroke="#0c3325"
-        stroke-width="5"
+        d="M-20 -20 Q 100 50 320 260"
+        stroke="#041e16"
+        stroke-width="9"
         stroke-linecap="round"
         fill="none"
     />
 
-    <g
-        stroke="#0f4534"
-        stroke-width="3.2"
+    <path
+        d="M-20 -20 Q 100 50 320 260"
+        stroke="#0b3d2e"
+        stroke-width="4"
         stroke-linecap="round"
         fill="none"
-    >
-
-        <path d="M30 9 Q 16 -10 0 -18"/>
-        <path d="M30 9 Q 32 -14 30 -34"/>
-        <path d="M30 9 Q 48 -6 62 -14"/>
-        <path d="M30 9 Q 10 18 -6 26"/>
-        <path d="M30 9 Q 50 26 64 38"/>
-
-        <path d="M72 35 Q 56 16 38 8"/>
-        <path d="M72 35 Q 72 12 70 -10"/>
-        <path d="M72 35 Q 90 14 106 4"/>
-        <path d="M72 35 Q 52 42 36 50"/>
-        <path d="M72 35 Q 94 50 110 62"/>
-
-        <path d="M114 67 Q 96 48 76 40"/>
-        <path d="M114 67 Q 114 44 112 22"/>
-        <path d="M114 67 Q 132 46 150 36"/>
-        <path d="M114 67 Q 94 74 78 82"/>
-        <path d="M114 67 Q 136 82 152 94"/>
-
-        <path d="M156 105 Q 138 86 118 78"/>
-        <path d="M156 105 Q 156 82 154 60"/>
-        <path d="M156 105 Q 174 84 192 74"/>
-        <path d="M156 105 Q 136 112 120 120"/>
-        <path d="M156 105 Q 178 120 194 132"/>
-
-        <path d="M196 148 Q 186 130 174 120"/>
-        <path d="M196 148 Q 198 128 200 110"/>
-        <path d="M196 148 Q 210 134 222 124"/>
-        <path d="M196 148 Q 186 160 176 170"/>
-
-        <path d="M52 22 Q 40 6 26 -2"/>
-        <path d="M52 22 Q 66 4 80 -6"/>
-        <path d="M94 50 Q 80 36 64 30"/>
-        <path d="M94 50 Q 110 34 126 26"/>
-        <path d="M136 86 Q 122 72 106 64"/>
-        <path d="M136 86 Q 152 70 168 62"/>
-        <path d="M176 126 Q 162 112 146 104"/>
-        <path d="M176 126 Q 192 112 208 104"/>
-
-    </g>
-
-    <g>
-
-        <line
-            x1="58" y1="25" x2="58" y2="48"
-            stroke="rgba(255,255,255,.28)"
-            stroke-width="1"
-        />
-
-        <circle
-            cx="58" cy="58" r="16"
-            fill="#efc963"
-            opacity=".3"
-            filter="url(#glowBlur)"
-        />
-
-        <circle
-            cx="58" cy="58" r="10"
-            fill="url(#goldOrn)"
-        />
-
-        <ellipse
-            cx="54" cy="54" rx="3" ry="2"
-            fill="#ffffff" opacity=".7"
-        />
+    />
 
 
-        <line
-            x1="120" y1="74" x2="120" y2="96"
-            stroke="rgba(255,255,255,.28)"
-            stroke-width="1"
-        />
+    <!-- ЗАДНИЙ ТЁМНЫЙ СЛОЙ ИГОЛОК -->
+    <use href="#spray" color="#0b3d2e" transform="translate(0 0) rotate(-55) scale(1.15)"/>
+    <use href="#spray" color="#0b3d2e" transform="translate(0 0) rotate(-15) scale(1.15)"/>
+    <use href="#spray" color="#0b3d2e" transform="translate(0 0) rotate(25) scale(1.15)"/>
 
-        <circle
-            cx="120" cy="104" r="14"
-            fill="#4cd5d3"
-            opacity=".3"
-            filter="url(#glowBlur)"
-        />
+    <use href="#spray" color="#0b3d2e" transform="translate(40 16) rotate(-58) scale(1.2)"/>
+    <use href="#spray" color="#0b3d2e" transform="translate(40 16) rotate(-18) scale(1.2)"/>
+    <use href="#spray" color="#0b3d2e" transform="translate(40 16) rotate(22) scale(1.2)"/>
 
-        <circle
-            cx="120" cy="104" r="8.5"
-            fill="url(#tiffanyOrn)"
-        />
+    <use href="#spray" color="#0b3d2e" transform="translate(80 38) rotate(-55) scale(1.25)"/>
+    <use href="#spray" color="#0b3d2e" transform="translate(80 38) rotate(-15) scale(1.25)"/>
+    <use href="#spray" color="#0b3d2e" transform="translate(80 38) rotate(25) scale(1.25)"/>
 
-        <ellipse
-            cx="117" cy="101" rx="2.5" ry="1.6"
-            fill="#ffffff" opacity=".75"
-        />
+    <use href="#spray" color="#0b3d2e" transform="translate(120 62) rotate(-52) scale(1.25)"/>
+    <use href="#spray" color="#0b3d2e" transform="translate(120 62) rotate(-12) scale(1.25)"/>
+    <use href="#spray" color="#0b3d2e" transform="translate(120 62) rotate(28) scale(1.25)"/>
+
+    <use href="#spray" color="#0b3d2e" transform="translate(160 90) rotate(-48) scale(1.25)"/>
+    <use href="#spray" color="#0b3d2e" transform="translate(160 90) rotate(-8) scale(1.25)"/>
+    <use href="#spray" color="#0b3d2e" transform="translate(160 90) rotate(32) scale(1.25)"/>
+
+    <use href="#spray" color="#0b3d2e" transform="translate(200 122) rotate(-45) scale(1.22)"/>
+    <use href="#spray" color="#0b3d2e" transform="translate(200 122) rotate(-5) scale(1.22)"/>
+    <use href="#spray" color="#0b3d2e" transform="translate(200 122) rotate(35) scale(1.22)"/>
+
+    <use href="#spray" color="#0b3d2e" transform="translate(238 158) rotate(-42) scale(1.18)"/>
+    <use href="#spray" color="#0b3d2e" transform="translate(238 158) rotate(-2) scale(1.18)"/>
+    <use href="#spray" color="#0b3d2e" transform="translate(238 158) rotate(38) scale(1.18)"/>
+
+    <use href="#spray" color="#0b3d2e" transform="translate(272 200) rotate(-38) scale(1.12)"/>
+    <use href="#spray" color="#0b3d2e" transform="translate(272 200) rotate(2) scale(1.12)"/>
+    <use href="#spray" color="#0b3d2e" transform="translate(272 200) rotate(42) scale(1.12)"/>
+
+    <use href="#spray" color="#0b3d2e" transform="translate(300 244) rotate(-32) scale(1.05)"/>
+    <use href="#spray" color="#0b3d2e" transform="translate(300 244) rotate(8) scale(1.05)"/>
 
 
-        <line
-            x1="157" y1="107" x2="157" y2="128"
-            stroke="rgba(255,255,255,.28)"
-            stroke-width="1"
-        />
+    <!-- СРЕДНИЙ СЛОЙ ИГОЛОК -->
+    <use href="#spray" color="#145a3e" transform="translate(20 8) rotate(-45) scale(1.1)"/>
+    <use href="#spray" color="#145a3e" transform="translate(20 8) rotate(-5) scale(1.1)"/>
+    <use href="#spray" color="#145a3e" transform="translate(20 8) rotate(35) scale(1.1)"/>
 
-        <circle
-            cx="157" cy="138" r="17"
-            fill="#efc963"
-            opacity=".28"
-            filter="url(#glowBlur)"
-        />
+    <use href="#spray" color="#145a3e" transform="translate(60 28) rotate(-48) scale(1.15)"/>
+    <use href="#spray" color="#145a3e" transform="translate(60 28) rotate(-8) scale(1.15)"/>
+    <use href="#spray" color="#145a3e" transform="translate(60 28) rotate(32) scale(1.15)"/>
 
-        <circle
-            cx="157" cy="138" r="11"
-            fill="url(#goldOrn)"
-        />
+    <use href="#spray" color="#145a3e" transform="translate(100 50) rotate(-45) scale(1.2)"/>
+    <use href="#spray" color="#145a3e" transform="translate(100 50) rotate(-5) scale(1.2)"/>
+    <use href="#spray" color="#145a3e" transform="translate(100 50) rotate(35) scale(1.2)"/>
 
-        <ellipse
-            cx="153" cy="134" rx="3.2" ry="2.2"
-            fill="#ffffff" opacity=".7"
-        />
+    <use href="#spray" color="#145a3e" transform="translate(140 76) rotate(-42) scale(1.2)"/>
+    <use href="#spray" color="#145a3e" transform="translate(140 76) rotate(-2) scale(1.2)"/>
+    <use href="#spray" color="#145a3e" transform="translate(140 76) rotate(38) scale(1.2)"/>
 
-    </g>
+    <use href="#spray" color="#145a3e" transform="translate(180 106) rotate(-40) scale(1.18)"/>
+    <use href="#spray" color="#145a3e" transform="translate(180 106) rotate(0) scale(1.18)"/>
+    <use href="#spray" color="#145a3e" transform="translate(180 106) rotate(40) scale(1.18)"/>
+
+    <use href="#spray" color="#145a3e" transform="translate(218 140) rotate(-38) scale(1.15)"/>
+    <use href="#spray" color="#145a3e" transform="translate(218 140) rotate(2) scale(1.15)"/>
+
+    <use href="#spray" color="#145a3e" transform="translate(256 178) rotate(-35) scale(1.1)"/>
+    <use href="#spray" color="#145a3e" transform="translate(256 178) rotate(5) scale(1.1)"/>
+
+    <use href="#spray" color="#145a3e" transform="translate(286 220) rotate(-30) scale(1.05)"/>
+    <use href="#spray" color="#145a3e" transform="translate(286 220) rotate(10) scale(1.05)"/>
+
+
+    <!-- ПЕРЕДНИЙ СВЕТЛЫЙ СЛОЙ -->
+    <use href="#spray" color="#1e7e56" transform="translate(30 12) rotate(-35) scale(.95)"/>
+    <use href="#spray" color="#1e7e56" transform="translate(30 12) rotate(5) scale(.95)"/>
+
+    <use href="#spray" color="#1e7e56" transform="translate(70 34) rotate(-38) scale(1.0)"/>
+    <use href="#spray" color="#1e7e56" transform="translate(70 34) rotate(2) scale(1.0)"/>
+
+    <use href="#spray" color="#1e7e56" transform="translate(110 56) rotate(-35) scale(1.05)"/>
+    <use href="#spray" color="#1e7e56" transform="translate(110 56) rotate(5) scale(1.05)"/>
+
+    <use href="#spray" color="#1e7e56" transform="translate(150 82) rotate(-32) scale(1.05)"/>
+    <use href="#spray" color="#1e7e56" transform="translate(150 82) rotate(8) scale(1.05)"/>
+
+    <use href="#spray" color="#1e7e56" transform="translate(190 114) rotate(-30) scale(1.02)"/>
+    <use href="#spray" color="#1e7e56" transform="translate(190 114) rotate(10) scale(1.02)"/>
+
+    <use href="#spray" color="#1e7e56" transform="translate(228 150) rotate(-28) scale(1.0)"/>
+    <use href="#spray" color="#1e7e56" transform="translate(228 150) rotate(12) scale(1.0)"/>
+
+    <use href="#spray" color="#1e7e56" transform="translate(262 190) rotate(-25) scale(.95)"/>
+    <use href="#spray" color="#1e7e56" transform="translate(262 190) rotate(15) scale(.95)"/>
+
+
+    <!-- СНЕЖНЫЕ КОНЧИКИ -->
+    <use href="#snowTip" transform="translate(45 -30) rotate(-55)"/>
+    <use href="#snowTip" transform="translate(20 -18) rotate(-30)"/>
+    <use href="#snowTip" transform="translate(95 8) rotate(-40)"/>
+    <use href="#snowTip" transform="translate(140 -2) rotate(-15)"/>
+    <use href="#snowTip" transform="translate(190 45) rotate(-30)"/>
+    <use href="#snowTip" transform="translate(230 72) rotate(-10)"/>
+    <use href="#snowTip" transform="translate(280 130) rotate(0)"/>
+    <use href="#snowTip" transform="translate(325 195) rotate(10)"/>
+    <use href="#snowTip" transform="translate(160 35) rotate(-25)"/>
+    <use href="#snowTip" transform="translate(110 20) rotate(-15)"/>
+
+
+    <!-- ШАРЫ -->
+    <use href="#ornRedG" transform="translate(105 105)"/>
+    <use href="#ornGoldG" transform="translate(200 165)"/>
+    <use href="#ornTiffanyG" transform="translate(268 220)"/>
 
 </svg>
 
@@ -3521,148 +4141,243 @@ body {
 
 <svg
     class="xmas-branch branch-right"
-    viewBox="0 0 240 210"
+    viewBox="0 0 340 300"
     aria-hidden="true"
     focusable="false"
 >
 
     <path
-        d="M-12 -14 Q 86 28 196 148"
-        stroke="#0a2a1e"
+        d="M-20 -20 Q 100 50 320 260"
+        stroke="#021410"
         stroke-width="46"
         stroke-linecap="round"
         fill="none"
-        opacity=".5"
+        opacity=".55"
         filter="url(#softBlur)"
     />
 
     <path
-        d="M-12 -14 Q 86 28 196 148"
-        stroke="#0c3325"
-        stroke-width="5"
+        d="M-20 -20 Q 100 50 320 260"
+        stroke="#041e16"
+        stroke-width="9"
         stroke-linecap="round"
         fill="none"
     />
 
-    <g
-        stroke="#0f4534"
-        stroke-width="3.2"
+    <path
+        d="M-20 -20 Q 100 50 320 260"
+        stroke="#0b3d2e"
+        stroke-width="4"
         stroke-linecap="round"
         fill="none"
+    />
+
+
+    <use href="#spray" color="#0b3d2e" transform="translate(0 0) rotate(-55) scale(1.15)"/>
+    <use href="#spray" color="#0b3d2e" transform="translate(0 0) rotate(-15) scale(1.15)"/>
+    <use href="#spray" color="#0b3d2e" transform="translate(0 0) rotate(25) scale(1.15)"/>
+
+    <use href="#spray" color="#0b3d2e" transform="translate(40 16) rotate(-58) scale(1.2)"/>
+    <use href="#spray" color="#0b3d2e" transform="translate(40 16) rotate(-18) scale(1.2)"/>
+    <use href="#spray" color="#0b3d2e" transform="translate(40 16) rotate(22) scale(1.2)"/>
+
+    <use href="#spray" color="#0b3d2e" transform="translate(80 38) rotate(-55) scale(1.25)"/>
+    <use href="#spray" color="#0b3d2e" transform="translate(80 38) rotate(-15) scale(1.25)"/>
+    <use href="#spray" color="#0b3d2e" transform="translate(80 38) rotate(25) scale(1.25)"/>
+
+    <use href="#spray" color="#0b3d2e" transform="translate(120 62) rotate(-52) scale(1.25)"/>
+    <use href="#spray" color="#0b3d2e" transform="translate(120 62) rotate(-12) scale(1.25)"/>
+    <use href="#spray" color="#0b3d2e" transform="translate(120 62) rotate(28) scale(1.25)"/>
+
+    <use href="#spray" color="#0b3d2e" transform="translate(160 90) rotate(-48) scale(1.25)"/>
+    <use href="#spray" color="#0b3d2e" transform="translate(160 90) rotate(-8) scale(1.25)"/>
+    <use href="#spray" color="#0b3d2e" transform="translate(160 90) rotate(32) scale(1.25)"/>
+
+    <use href="#spray" color="#0b3d2e" transform="translate(200 122) rotate(-45) scale(1.22)"/>
+    <use href="#spray" color="#0b3d2e" transform="translate(200 122) rotate(-5) scale(1.22)"/>
+    <use href="#spray" color="#0b3d2e" transform="translate(200 122) rotate(35) scale(1.22)"/>
+
+    <use href="#spray" color="#0b3d2e" transform="translate(238 158) rotate(-42) scale(1.18)"/>
+    <use href="#spray" color="#0b3d2e" transform="translate(238 158) rotate(-2) scale(1.18)"/>
+    <use href="#spray" color="#0b3d2e" transform="translate(238 158) rotate(38) scale(1.18)"/>
+
+    <use href="#spray" color="#0b3d2e" transform="translate(272 200) rotate(-38) scale(1.12)"/>
+    <use href="#spray" color="#0b3d2e" transform="translate(272 200) rotate(2) scale(1.12)"/>
+    <use href="#spray" color="#0b3d2e" transform="translate(272 200) rotate(42) scale(1.12)"/>
+
+    <use href="#spray" color="#0b3d2e" transform="translate(300 244) rotate(-32) scale(1.05)"/>
+    <use href="#spray" color="#0b3d2e" transform="translate(300 244) rotate(8) scale(1.05)"/>
+
+
+    <use href="#spray" color="#145a3e" transform="translate(20 8) rotate(-45) scale(1.1)"/>
+    <use href="#spray" color="#145a3e" transform="translate(20 8) rotate(-5) scale(1.1)"/>
+    <use href="#spray" color="#145a3e" transform="translate(20 8) rotate(35) scale(1.1)"/>
+
+    <use href="#spray" color="#145a3e" transform="translate(60 28) rotate(-48) scale(1.15)"/>
+    <use href="#spray" color="#145a3e" transform="translate(60 28) rotate(-8) scale(1.15)"/>
+    <use href="#spray" color="#145a3e" transform="translate(60 28) rotate(32) scale(1.15)"/>
+
+    <use href="#spray" color="#145a3e" transform="translate(100 50) rotate(-45) scale(1.2)"/>
+    <use href="#spray" color="#145a3e" transform="translate(100 50) rotate(-5) scale(1.2)"/>
+    <use href="#spray" color="#145a3e" transform="translate(100 50) rotate(35) scale(1.2)"/>
+
+    <use href="#spray" color="#145a3e" transform="translate(140 76) rotate(-42) scale(1.2)"/>
+    <use href="#spray" color="#145a3e" transform="translate(140 76) rotate(-2) scale(1.2)"/>
+    <use href="#spray" color="#145a3e" transform="translate(140 76) rotate(38) scale(1.2)"/>
+
+    <use href="#spray" color="#145a3e" transform="translate(180 106) rotate(-40) scale(1.18)"/>
+    <use href="#spray" color="#145a3e" transform="translate(180 106) rotate(0) scale(1.18)"/>
+    <use href="#spray" color="#145a3e" transform="translate(180 106) rotate(40) scale(1.18)"/>
+
+    <use href="#spray" color="#145a3e" transform="translate(218 140) rotate(-38) scale(1.15)"/>
+    <use href="#spray" color="#145a3e" transform="translate(218 140) rotate(2) scale(1.15)"/>
+
+    <use href="#spray" color="#145a3e" transform="translate(256 178) rotate(-35) scale(1.1)"/>
+    <use href="#spray" color="#145a3e" transform="translate(256 178) rotate(5) scale(1.1)"/>
+
+    <use href="#spray" color="#145a3e" transform="translate(286 220) rotate(-30) scale(1.05)"/>
+    <use href="#spray" color="#145a3e" transform="translate(286 220) rotate(10) scale(1.05)"/>
+
+
+    <use href="#spray" color="#1e7e56" transform="translate(30 12) rotate(-35) scale(.95)"/>
+    <use href="#spray" color="#1e7e56" transform="translate(30 12) rotate(5) scale(.95)"/>
+
+    <use href="#spray" color="#1e7e56" transform="translate(70 34) rotate(-38) scale(1.0)"/>
+    <use href="#spray" color="#1e7e56" transform="translate(70 34) rotate(2) scale(1.0)"/>
+
+    <use href="#spray" color="#1e7e56" transform="translate(110 56) rotate(-35) scale(1.05)"/>
+    <use href="#spray" color="#1e7e56" transform="translate(110 56) rotate(5) scale(1.05)"/>
+
+    <use href="#spray" color="#1e7e56" transform="translate(150 82) rotate(-32) scale(1.05)"/>
+    <use href="#spray" color="#1e7e56" transform="translate(150 82) rotate(8) scale(1.05)"/>
+
+    <use href="#spray" color="#1e7e56" transform="translate(190 114) rotate(-30) scale(1.02)"/>
+    <use href="#spray" color="#1e7e56" transform="translate(190 114) rotate(10) scale(1.02)"/>
+
+    <use href="#spray" color="#1e7e56" transform="translate(228 150) rotate(-28) scale(1.0)"/>
+    <use href="#spray" color="#1e7e56" transform="translate(228 150) rotate(12) scale(1.0)"/>
+
+    <use href="#spray" color="#1e7e56" transform="translate(262 190) rotate(-25) scale(.95)"/>
+    <use href="#spray" color="#1e7e56" transform="translate(262 190) rotate(15) scale(.95)"/>
+
+
+    <use href="#snowTip" transform="translate(45 -30) rotate(-55)"/>
+    <use href="#snowTip" transform="translate(20 -18) rotate(-30)"/>
+    <use href="#snowTip" transform="translate(95 8) rotate(-40)"/>
+    <use href="#snowTip" transform="translate(140 -2) rotate(-15)"/>
+    <use href="#snowTip" transform="translate(190 45) rotate(-30)"/>
+    <use href="#snowTip" transform="translate(230 72) rotate(-10)"/>
+    <use href="#snowTip" transform="translate(280 130) rotate(0)"/>
+    <use href="#snowTip" transform="translate(325 195) rotate(10)"/>
+    <use href="#snowTip" transform="translate(160 35) rotate(-25)"/>
+    <use href="#snowTip" transform="translate(110 20) rotate(-15)"/>
+
+
+    <use href="#ornRedG" transform="translate(105 105)"/>
+    <use href="#ornGoldG" transform="translate(200 165)"/>
+    <use href="#ornTiffanyG" transform="translate(268 220)"/>
+
+</svg>
+
+
+<!-- =========================================================
+     МОРОЗНЫЙ ИНЕЙ В НИЖНИХ УГЛАХ
+     ========================================================= -->
+
+<svg
+    class="frost frost-left"
+    viewBox="0 0 220 220"
+    aria-hidden="true"
+    focusable="false"
+>
+
+    <g
+        stroke="rgba(180,255,250,.32)"
+        stroke-width="1"
+        fill="none"
+        stroke-linecap="round"
     >
 
-        <path d="M30 9 Q 16 -10 0 -18"/>
-        <path d="M30 9 Q 32 -14 30 -34"/>
-        <path d="M30 9 Q 48 -6 62 -14"/>
-        <path d="M30 9 Q 10 18 -6 26"/>
-        <path d="M30 9 Q 50 26 64 38"/>
+        <path d="M0 220 L60 160"/>
+        <path d="M60 160 L90 130"/>
+        <path d="M90 130 L120 100"/>
 
-        <path d="M72 35 Q 56 16 38 8"/>
-        <path d="M72 35 Q 72 12 70 -10"/>
-        <path d="M72 35 Q 90 14 106 4"/>
-        <path d="M72 35 Q 52 42 36 50"/>
-        <path d="M72 35 Q 94 50 110 62"/>
+        <path d="M30 190 L18 170"/>
+        <path d="M30 190 L48 178"/>
 
-        <path d="M114 67 Q 96 48 76 40"/>
-        <path d="M114 67 Q 114 44 112 22"/>
-        <path d="M114 67 Q 132 46 150 36"/>
-        <path d="M114 67 Q 94 74 78 82"/>
-        <path d="M114 67 Q 136 82 152 94"/>
+        <path d="M50 172 L36 152"/>
+        <path d="M50 172 L68 158"/>
 
-        <path d="M156 105 Q 138 86 118 78"/>
-        <path d="M156 105 Q 156 82 154 60"/>
-        <path d="M156 105 Q 174 84 192 74"/>
-        <path d="M156 105 Q 136 112 120 120"/>
-        <path d="M156 105 Q 178 120 194 132"/>
+        <path d="M75 148 L60 128"/>
+        <path d="M75 148 L92 134"/>
 
-        <path d="M196 148 Q 186 130 174 120"/>
-        <path d="M196 148 Q 198 128 200 110"/>
-        <path d="M196 148 Q 210 134 222 124"/>
-        <path d="M196 148 Q 186 160 176 170"/>
+        <path d="M100 122 L86 104"/>
+        <path d="M100 122 L118 108"/>
 
-        <path d="M52 22 Q 40 6 26 -2"/>
-        <path d="M52 22 Q 66 4 80 -6"/>
-        <path d="M94 50 Q 80 36 64 30"/>
-        <path d="M94 50 Q 110 34 126 26"/>
-        <path d="M136 86 Q 122 72 106 64"/>
-        <path d="M136 86 Q 152 70 168 62"/>
-        <path d="M176 126 Q 162 112 146 104"/>
-        <path d="M176 126 Q 192 112 208 104"/>
+        <path d="M45 180 L30 195"/>
+        <path d="M70 156 L55 172"/>
+        <path d="M95 130 L82 148"/>
+
+        <path d="M8 210 L20 196"/>
+        <path d="M20 196 L32 200"/>
+
+        <path d="M110 112 L124 96"/>
+        <path d="M124 96 L136 100"/>
+        <path d="M124 96 L128 80"/>
+
+        <circle cx="60" cy="160" r="2" fill="rgba(200,255,250,.5)" stroke="none"/>
+        <circle cx="90" cy="130" r="1.6" fill="rgba(200,255,250,.45)" stroke="none"/>
+        <circle cx="30" cy="190" r="1.4" fill="rgba(200,255,250,.4)" stroke="none"/>
 
     </g>
 
-    <g>
-
-        <line
-            x1="58" y1="25" x2="58" y2="48"
-            stroke="rgba(255,255,255,.28)"
-            stroke-width="1"
-        />
-
-        <circle
-            cx="58" cy="58" r="16"
-            fill="#efc963"
-            opacity=".3"
-            filter="url(#glowBlur)"
-        />
-
-        <circle
-            cx="58" cy="58" r="10"
-            fill="url(#goldOrn)"
-        />
-
-        <ellipse
-            cx="54" cy="54" rx="3" ry="2"
-            fill="#ffffff" opacity=".7"
-        />
+</svg>
 
 
-        <line
-            x1="120" y1="74" x2="120" y2="96"
-            stroke="rgba(255,255,255,.28)"
-            stroke-width="1"
-        />
+<svg
+    class="frost frost-right"
+    viewBox="0 0 220 220"
+    aria-hidden="true"
+    focusable="false"
+>
 
-        <circle
-            cx="120" cy="104" r="14"
-            fill="#4cd5d3"
-            opacity=".3"
-            filter="url(#glowBlur)"
-        />
+    <g
+        stroke="rgba(180,255,250,.32)"
+        stroke-width="1"
+        fill="none"
+        stroke-linecap="round"
+    >
 
-        <circle
-            cx="120" cy="104" r="8.5"
-            fill="url(#tiffanyOrn)"
-        />
+        <path d="M0 220 L60 160"/>
+        <path d="M60 160 L90 130"/>
+        <path d="M90 130 L120 100"/>
 
-        <ellipse
-            cx="117" cy="101" rx="2.5" ry="1.6"
-            fill="#ffffff" opacity=".75"
-        />
+        <path d="M30 190 L18 170"/>
+        <path d="M30 190 L48 178"/>
 
+        <path d="M50 172 L36 152"/>
+        <path d="M50 172 L68 158"/>
 
-        <line
-            x1="157" y1="107" x2="157" y2="128"
-            stroke="rgba(255,255,255,.28)"
-            stroke-width="1"
-        />
+        <path d="M75 148 L60 128"/>
+        <path d="M75 148 L92 134"/>
 
-        <circle
-            cx="157" cy="138" r="17"
-            fill="#efc963"
-            opacity=".28"
-            filter="url(#glowBlur)"
-        />
+        <path d="M100 122 L86 104"/>
+        <path d="M100 122 L118 108"/>
 
-        <circle
-            cx="157" cy="138" r="11"
-            fill="url(#goldOrn)"
-        />
+        <path d="M45 180 L30 195"/>
+        <path d="M70 156 L55 172"/>
+        <path d="M95 130 L82 148"/>
 
-        <ellipse
-            cx="153" cy="134" rx="3.2" ry="2.2"
-            fill="#ffffff" opacity=".7"
-        />
+        <path d="M8 210 L20 196"/>
+        <path d="M20 196 L32 200"/>
+
+        <path d="M110 112 L124 96"/>
+        <path d="M124 96 L136 100"/>
+        <path d="M124 96 L128 80"/>
+
+        <circle cx="60" cy="160" r="2" fill="rgba(200,255,250,.5)" stroke="none"/>
+        <circle cx="90" cy="130" r="1.6" fill="rgba(200,255,250,.45)" stroke="none"/>
+        <circle cx="30" cy="190" r="1.4" fill="rgba(200,255,250,.4)" stroke="none"/>
 
     </g>
 
@@ -3683,16 +4398,8 @@ body {
         <div class="top">
 
 
-            <!-- =================================================
-                 DECORATIVE ORBIT
-                 ================================================= -->
-
             <div class="orbit"></div>
 
-
-            <!-- =================================================
-                 LOGO + ШАПКА САНТЫ
-                 ================================================= -->
 
             <div
                 class="logo-slot"
@@ -3707,48 +4414,79 @@ body {
 
                 <svg
                     class="santa-hat"
-                    viewBox="0 0 120 110"
+                    viewBox="0 0 140 130"
                     aria-hidden="true"
                     focusable="false"
                 >
 
+                    <defs>
+
+                        <linearGradient id="hatVelvetTop" x1="0" y1="0" x2="1" y2="1">
+
+                            <stop offset="0%" stop-color="#ff6a6a"/>
+
+                            <stop offset="38%" stop-color="#e02424"/>
+
+                            <stop offset="100%" stop-color="#7a060d"/>
+
+                        </linearGradient>
+
+                    </defs>
+
+                    <ellipse
+                        cx="62" cy="106" rx="46" ry="6"
+                        fill="#000" opacity=".28"
+                    />
+
                     <path
-                        d="M16 78 C 22 46 44 18 92 14 C 84 34 80 56 86 78 Z"
-                        fill="url(#hatRed)"
+                        d="M22 92 C 22 58 52 26 100 16 C 108 52 108 74 108 92 Z"
+                        fill="url(#hatVelvetTop)"
                     />
 
-                    <rect
-                        x="8" y="72" width="82" height="17" rx="8.5"
-                        fill="#ffffff"
+                    <path
+                        d="M30 88 C 34 62 58 42 92 32"
+                        stroke="#a80f16"
+                        stroke-width="2"
+                        fill="none"
+                        opacity=".45"
                     />
 
-                    <circle
-                        cx="96" cy="12" r="11"
-                        fill="#ffffff"
+                    <path
+                        d="M42 90 C 46 68 66 50 94 40"
+                        stroke="#ff8888"
+                        stroke-width="1.2"
+                        fill="none"
+                        opacity=".3"
                     />
 
                     <ellipse
-                        cx="93" cy="9" rx="4" ry="2.6"
-                        fill="#ffffff" opacity=".9"
+                        cx="62" cy="92" rx="48" ry="13"
+                        fill="url(#hatFur)"
                     />
+
+                    <ellipse
+                        cx="62" cy="92" rx="48" ry="13"
+                        fill="none"
+                        stroke="#ffffff"
+                        stroke-width="1.4"
+                        opacity=".55"
+                    />
+
+                    <circle cx="108" cy="18" r="17" fill="url(#hatFur)"/>
+
+                    <circle cx="104" cy="14" r="4.5" fill="#ffffff"/>
+
+                    <circle cx="112" cy="20" r="2.6" fill="#dffaff" opacity=".9"/>
 
                 </svg>
 
             </div>
 
 
-            <!-- =================================================
-                 LINE
-                 ================================================= -->
-
             <div class="line location-line">
                 <span>Санкт-Петербург</span>
             </div>
 
-
-            <!-- =================================================
-                 TITLE
-                 ================================================= -->
 
             <h1 class="title">
 
@@ -3763,20 +4501,12 @@ body {
             </h1>
 
 
-            <!-- =================================================
-                 SUBTITLE
-                 ================================================= -->
-
             <p class="subtitle">
 
                 ❄️ НОВОГОДНИЕ НАКЛЕЙКИ • ХОЛСТЫ • ПОДАРКИ ❄️
 
             </p>
 
-
-            <!-- =================================================
-                 MARQUEE
-                 ================================================= -->
 
             <div class="marquee-wrap">
 
@@ -3852,14 +4582,8 @@ body {
             </div>
 
 
-            <!-- =================================================
-                 BUTTONS
-                 ================================================= -->
-
             <div class="buttons">
 
-
-                <!-- VK GROUP -->
 
                 <a
                     href="https://vk.ru/metiz_project"
@@ -3898,8 +4622,6 @@ body {
                 </a>
 
 
-                <!-- VK MESSAGE -->
-
                 <a
                     href="https://vk.ru/im?sel=-10150150"
                     target="_blank"
@@ -3928,8 +4650,6 @@ body {
 
                 </a>
 
-
-                <!-- TELEGRAM -->
 
                 <a
                     href="https://t.me/metizproject"
@@ -3960,8 +4680,6 @@ body {
                 </a>
 
 
-                <!-- WHATSAPP -->
-
                 <a
                     href="https://wa.me/message/RDHE3F4PU2D3L1"
                     target="_blank"
@@ -3991,8 +4709,6 @@ body {
                 </a>
 
 
-                <!-- САМОВЫВОЗ -->
-
                 <a
                     href="test.html"
                     class="button pickup-outline magnetic"
@@ -4019,8 +4735,6 @@ body {
 
                 </a>
 
-
-                <!-- ПОДЕЛИТЬСЯ САЙТОМ -->
 
                 <button
                     type="button"
@@ -4053,10 +4767,6 @@ body {
             </div>
 
 
-            <!-- =================================================
-                 STATUS
-                 ================================================= -->
-
             <div class="status">
 
                 <span class="status-dot"></span>
@@ -4065,10 +4775,6 @@ body {
 
             </div>
 
-
-            <!-- =================================================
-                 SMALL LABEL
-                 ================================================= -->
 
             <div class="small">
 
@@ -4079,10 +4785,6 @@ body {
 
         </div>
 
-
-        <!-- =================================================
-             FOOTER
-             ================================================= -->
 
         <footer class="footer">
 
@@ -4097,7 +4799,7 @@ body {
 
 
 <!-- =========================================================
-     СНЕГОПАД (CANVAS) И СЛОЙ ИСКР
+     СНЕГОПАД И СЛОЙ ИСКР
      ========================================================= -->
 
 <canvas id="snowfall" aria-hidden="true"></canvas>
@@ -4132,10 +4834,6 @@ document.addEventListener(
     () => {
 
 
-        /* =====================================================
-           ELEMENTS
-           ===================================================== */
-
         const intro =
             document.getElementById("intro");
 
@@ -4167,9 +4865,9 @@ document.addEventListener(
             ).matches;
 
 
-        /* =====================================================
+        /* ---------------------------------------------------
            INTRO
-           ===================================================== */
+           --------------------------------------------------- */
 
         function startIntro() {
 
@@ -4333,9 +5031,9 @@ document.addEventListener(
         );
 
 
-        /* =====================================================
+        /* ---------------------------------------------------
            CURSOR TIFFANY LIGHT
-           ===================================================== */
+           --------------------------------------------------- */
 
         if (
             !reducedMotion &&
@@ -4413,9 +5111,9 @@ document.addEventListener(
         }
 
 
-        /* =====================================================
+        /* ---------------------------------------------------
            3D CARD
-           ===================================================== */
+           --------------------------------------------------- */
 
         if (
             !reducedMotion &&
@@ -4477,9 +5175,9 @@ document.addEventListener(
         }
 
 
-        /* =====================================================
+        /* ---------------------------------------------------
            MAGNETIC BUTTONS
-           ===================================================== */
+           --------------------------------------------------- */
 
         if (
             !reducedMotion &&
@@ -4570,9 +5268,9 @@ document.addEventListener(
         }
 
 
-        /* =====================================================
+        /* ---------------------------------------------------
            SHARE SITE
-           ===================================================== */
+           --------------------------------------------------- */
 
         const shareButton =
             document.getElementById("shareButton");
@@ -4677,9 +5375,9 @@ document.addEventListener(
         }
 
 
-        /* =====================================================
+        /* ---------------------------------------------------
            PARTICLES
-           ===================================================== */
+           --------------------------------------------------- */
 
         let particles = [];
 
@@ -4999,9 +5697,9 @@ document.addEventListener(
         );
 
 
-        /* =====================================================
+        /* ---------------------------------------------------
            DEVICE ORIENTATION
-           ===================================================== */
+           --------------------------------------------------- */
 
         if (
             !reducedMotion &&
@@ -5066,9 +5764,9 @@ document.addEventListener(
         }
 
 
-        /* =====================================================
+        /* ---------------------------------------------------
            ORIENTATION CHANGE
-           ===================================================== */
+           --------------------------------------------------- */
 
         window.addEventListener(
             "orientationchange",
@@ -5156,11 +5854,9 @@ document.addEventListener(
 <script>
 
 /* =========================================================
-   НОВОГОДНИЙ СНЕГОПАД
-   Многослойный Canvas:
-   — мелкие, средние и крупные снежинки;
-   — лёгкое покачивание;
-   — реакция на курсор и на прокрутку.
+   БОГАТЫЙ СНЕГОПАД
+   Мелкие точки, средние точки, объёмные снежинки,
+   золотые искры. Реагирует на курсор и скролл.
    ================================================= */
 
 (function () {
@@ -5184,17 +5880,6 @@ document.addEventListener(
         window.matchMedia(
             "(prefers-reduced-motion: reduce)"
         ).matches;
-
-
-    const layers = [
-
-        { n: 70, rMin: .5,  rMax: 1.5, sMin: .15, sMax: .50, aMin: .20, aMax: .45, wMin: .20, wMax: .70 },
-
-        { n: 42, rMin: 1.3, rMax: 2.6, sMin: .40, sMax: .90, aMin: .35, aMax: .65, wMin: .40, wMax: 1.00 },
-
-        { n: 18, rMin: 2.4, rMax: 4.2, sMin: .80, sMax: 1.50, aMin: .50, aMax: .85, wMin: .60, wMax: 1.30 }
-
-    ];
 
 
     let flakes = [];
@@ -5223,46 +5908,101 @@ document.addEventListener(
         flakes = [];
 
 
-        const scale =
-            Math.min(
-                1.6,
-                Math.max(.45, W / 1200)
+        const base =
+            Math.round(
+                Math.min(
+                    260,
+                    Math.max(80, (W * H) / 9000)
+                )
             );
 
 
-        for (let i = 0; i < layers.length; i++) {
+        const smallCount =
+            Math.round(base * 0.55);
 
-            const cfg = layers[i];
+        const midCount =
+            Math.round(base * 0.32);
 
-            const count =
-                Math.max(
-                    6,
-                    Math.round(cfg.n * scale)
-                );
+        const bigCount =
+            Math.round(base * 0.13);
 
 
-            for (let k = 0; k < count; k++) {
+        for (let i = 0; i < smallCount; i++) {
 
-                flakes.push({
+            flakes.push({
 
-                    x: Math.random() * W,
-                    y: Math.random() * H,
+                kind: "dot",
+                x: Math.random() * W,
+                y: Math.random() * H,
+                r: rand(0.5, 1.4),
+                a: rand(0.25, 0.55),
+                vy: rand(0.15, 0.45),
+                vx: rand(-0.1, 0.1),
+                sway: rand(0.2, 0.6),
+                phase: Math.random() * Math.PI * 2
 
-                    r: rand(cfg.rMin, cfg.rMax),
+            });
 
-                    vy: rand(cfg.sMin, cfg.sMax),
-                    vx: rand(-.12, .12),
+        }
 
-                    a: rand(cfg.aMin, cfg.aMax),
 
-                    sway: rand(cfg.wMin, cfg.wMax),
-                    phase: Math.random() * Math.PI * 2,
+        for (let i = 0; i < midCount; i++) {
 
-                    layer: i
+            flakes.push({
 
-                });
+                kind: "dot",
+                x: Math.random() * W,
+                y: Math.random() * H,
+                r: rand(1.4, 2.6),
+                a: rand(0.4, 0.7),
+                vy: rand(0.4, 0.85),
+                vx: rand(-0.15, 0.15),
+                sway: rand(0.4, 0.9),
+                phase: Math.random() * Math.PI * 2
 
-            }
+            });
+
+        }
+
+
+        for (let i = 0; i < bigCount; i++) {
+
+            flakes.push({
+
+                kind: "flake",
+                x: Math.random() * W,
+                y: Math.random() * H,
+                r: rand(3.5, 6.5),
+                a: rand(0.45, 0.75),
+                vy: rand(0.35, 0.7),
+                vx: rand(-0.2, 0.2),
+                sway: rand(0.5, 1.1),
+                phase: Math.random() * Math.PI * 2
+
+            });
+
+        }
+
+
+        const goldCount =
+            Math.round(base * 0.08);
+
+
+        for (let i = 0; i < goldCount; i++) {
+
+            flakes.push({
+
+                kind: "gold",
+                x: Math.random() * W,
+                y: Math.random() * H,
+                r: rand(1.5, 2.8),
+                a: rand(0.35, 0.65),
+                vy: rand(0.15, 0.4),
+                vx: rand(-0.1, 0.1),
+                sway: rand(0.4, 0.9),
+                phase: Math.random() * Math.PI * 2
+
+            });
 
         }
 
@@ -5292,6 +6032,57 @@ document.addEventListener(
     }
 
 
+    function drawFlakeShape(x, y, r, a) {
+
+        ctx.save();
+
+        ctx.translate(x, y);
+
+        ctx.strokeStyle = "rgba(230,252,255," + a + ")";
+
+        ctx.lineWidth = 0.9;
+
+        ctx.lineCap = "round";
+
+        ctx.beginPath();
+
+        for (let i = 0; i < 6; i++) {
+
+            const ang = (i * Math.PI * 2) / 6;
+
+            const ex = Math.cos(ang) * r;
+            const ey = Math.sin(ang) * r;
+
+            ctx.moveTo(0, 0);
+            ctx.lineTo(ex, ey);
+
+            const bx = Math.cos(ang) * r * 0.55;
+            const by = Math.sin(ang) * r * 0.55;
+
+            const b1 = ang + Math.PI / 3;
+            const b2 = ang - Math.PI / 3;
+
+            ctx.moveTo(bx, by);
+            ctx.lineTo(
+                bx + Math.cos(b1) * r * 0.32,
+                by + Math.sin(b1) * r * 0.32
+            );
+
+            ctx.moveTo(bx, by);
+            ctx.lineTo(
+                bx + Math.cos(b2) * r * 0.32,
+                by + Math.sin(b2) * r * 0.32
+            );
+
+        }
+
+        ctx.stroke();
+
+        ctx.restore();
+
+    }
+
+
     function draw() {
 
         ctx.clearRect(0, 0, W, H);
@@ -5313,12 +6104,12 @@ document.addEventListener(
 
             if (!reduce) {
 
-                f.y += f.vy * (1 + f.layer * 0.35);
+                f.y += f.vy;
 
                 f.x +=
                     f.vx +
-                    Math.sin(time * f.sway + f.phase) * (0.25 + f.layer * 0.25) +
-                    wind * (0.4 + f.layer * 0.35);
+                    Math.sin(time * f.sway + f.phase) * 0.35 +
+                    wind * 0.6;
 
 
                 const dx = f.x - pointerX;
@@ -5326,84 +6117,166 @@ document.addEventListener(
 
                 const dist2 = dx * dx + dy * dy;
 
-                if (dist2 < 16000) {
+                if (dist2 < 18000 && dist2 > 1) {
 
-                    const d = Math.sqrt(dist2) || 1;
+                    const d = Math.sqrt(dist2);
 
                     const force =
-                        (1 - d / 126) * 1.1;
+                        (1 - d / 134) * 1.4;
 
-                    f.x += (dx / d) * force;
-                    f.y += (dy / d) * force;
+                    if (force > 0) {
+
+                        f.x += (dx / d) * force;
+                        f.y += (dy / d) * force;
+
+                    }
 
                 }
 
             }
 
 
-            if (f.y > H + 8) {
+            if (f.y > H + 10) {
 
-                f.y = -8;
+                f.y = -10;
                 f.x = Math.random() * W;
 
             }
 
-            if (f.y < -12) {
+            if (f.y < -20) {
 
-                f.y = H + 8;
-
-            }
-
-            if (f.x > W + 10) {
-
-                f.x = -10;
+                f.y = H + 10;
 
             }
 
-            if (f.x < -10) {
+            if (f.x > W + 12) {
 
-                f.x = W + 10;
+                f.x = -12;
+
+            }
+
+            if (f.x < -12) {
+
+                f.x = W + 12;
 
             }
 
 
-            if (f.layer === 2) {
+            if (f.kind === "dot") {
+
+                if (f.r > 1.6) {
+
+                    const halo =
+                        ctx.createRadialGradient(
+                            f.x, f.y, 0,
+                            f.x, f.y, f.r * 3.4
+                        );
+
+                    halo.addColorStop(
+                        0,
+                        "rgba(255,255,255," + (f.a * 0.32) + ")"
+                    );
+
+                    halo.addColorStop(
+                        1,
+                        "rgba(255,255,255,0)"
+                    );
+
+                    ctx.fillStyle = halo;
+
+                    ctx.beginPath();
+
+                    ctx.arc(f.x, f.y, f.r * 3.4, 0, Math.PI * 2);
+
+                    ctx.fill();
+
+                }
+
+
+                ctx.beginPath();
+
+                ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+
+                ctx.fillStyle =
+                    "rgba(255,255,255," + f.a + ")";
+
+                ctx.fill();
+
+            }
+            else if (f.kind === "flake") {
 
                 const halo =
                     ctx.createRadialGradient(
                         f.x, f.y, 0,
-                        f.x, f.y, f.r * 3.6
+                        f.x, f.y, f.r * 2.6
                     );
 
                 halo.addColorStop(
                     0,
-                    "rgba(255,255,255," + (f.a * 0.32) + ")"
+                    "rgba(200,250,255," + (f.a * 0.28) + ")"
                 );
 
                 halo.addColorStop(
                     1,
-                    "rgba(255,255,255,0)"
+                    "rgba(200,250,255,0)"
                 );
 
                 ctx.fillStyle = halo;
 
                 ctx.beginPath();
 
-                ctx.arc(f.x, f.y, f.r * 3.6, 0, Math.PI * 2);
+                ctx.arc(f.x, f.y, f.r * 2.6, 0, Math.PI * 2);
+
+                ctx.fill();
+
+                drawFlakeShape(f.x, f.y, f.r, f.a);
+
+            }
+            else if (f.kind === "gold") {
+
+                const twinkle =
+                    Math.sin(time * 2 + f.phase) * 0.35 + 0.65;
+
+                const halo =
+                    ctx.createRadialGradient(
+                        f.x, f.y, 0,
+                        f.x, f.y, f.r * 4.5
+                    );
+
+                halo.addColorStop(
+                    0,
+                    "rgba(255,232,150," + (f.a * 0.5 * twinkle) + ")"
+                );
+
+                halo.addColorStop(
+                    0.5,
+                    "rgba(255,210,110," + (f.a * 0.15 * twinkle) + ")"
+                );
+
+                halo.addColorStop(
+                    1,
+                    "rgba(255,200,90,0)"
+                );
+
+                ctx.fillStyle = halo;
+
+                ctx.beginPath();
+
+                ctx.arc(f.x, f.y, f.r * 4.5, 0, Math.PI * 2);
+
+                ctx.fill();
+
+
+                ctx.beginPath();
+
+                ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+
+                ctx.fillStyle =
+                    "rgba(255,246,208," + (f.a * twinkle) + ")";
 
                 ctx.fill();
 
             }
-
-
-            ctx.beginPath();
-
-            ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
-
-            ctx.fillStyle =
-                "rgba(255,255,255," + f.a + ")";
-
-            ctx.fill();
 
         }
 
@@ -5506,7 +6379,7 @@ document.addEventListener(
 <script>
 
 /* =========================================================
-   МОРОЗНЫЕ ИСКРЫ ПРИ НАВЕДЕНИИ / НАЖАТИИ НА КНОПКУ
+   ЛЕДЯНЫЕ ИСКРЫ ПРИ НАВЕДЕНИИ / ФЕЙЕРВЕРК ПРИ КЛИКЕ
    ================================================= */
 
 (function () {
@@ -5528,23 +6401,14 @@ document.addEventListener(
         ).matches;
 
 
-    let lastSpawn = 0;
+    let lastHover = 0;
 
 
-    function spawn(x, y, count) {
+    function spawn(x, y, count, big) {
 
         if (reduce) {
             return;
         }
-
-
-        const now = Date.now();
-
-        if (now - lastSpawn < 60) {
-            return;
-        }
-
-        lastSpawn = now;
 
 
         for (let i = 0; i < count; i++) {
@@ -5552,25 +6416,34 @@ document.addEventListener(
             const s =
                 document.createElement("span");
 
-            s.className = "spark";
+            const isGold =
+                Math.random() < 0.4;
+
+            s.className =
+                "spark " + (isGold ? "g" : "t");
 
 
             const angle =
                 Math.random() * Math.PI * 2;
 
+            const distMin = big ? 40 : 16;
+            const distMax = big ? 110 : 55;
+
             const dist =
-                18 + Math.random() * 48;
+                distMin +
+                Math.random() * (distMax - distMin);
 
 
             const size =
-                (3 + Math.random() * 4).toFixed(1);
+                (big ? 4 : 3) +
+                Math.random() * (big ? 6 : 4);
 
 
             s.style.left = x + "px";
             s.style.top = y + "px";
 
-            s.style.width = size + "px";
-            s.style.height = size + "px";
+            s.style.width = size.toFixed(1) + "px";
+            s.style.height = size.toFixed(1) + "px";
 
             s.style.setProperty(
                 "--dx",
@@ -5579,11 +6452,11 @@ document.addEventListener(
 
             s.style.setProperty(
                 "--dy",
-                (Math.sin(angle) * dist - 14).toFixed(1) + "px"
+                (Math.sin(angle) * dist - 18).toFixed(1) + "px"
             );
 
             s.style.animationDuration =
-                (0.7 + Math.random() * 0.5).toFixed(2) + "s";
+                (0.75 + Math.random() * 0.6).toFixed(2) + "s";
 
 
             layer.appendChild(s);
@@ -5605,7 +6478,7 @@ document.addEventListener(
                         s.remove();
                     }
                 },
-                1600
+                1800
             );
 
         }
@@ -5624,12 +6497,27 @@ document.addEventListener(
             "pointerenter",
             function () {
 
+                if (reduce) {
+                    return;
+                }
+
+
+                const now = Date.now();
+
+                if (now - lastHover < 140) {
+                    return;
+                }
+
+                lastHover = now;
+
+
                 const r = btn.getBoundingClientRect();
 
                 spawn(
                     r.left + Math.random() * r.width,
-                    r.top + 10,
-                    10
+                    r.top + 8,
+                    8,
+                    false
                 );
 
             }
@@ -5645,7 +6533,8 @@ document.addEventListener(
                 spawn(
                     r.left + r.width / 2,
                     r.top + r.height / 2,
-                    14
+                    22,
+                    true
                 );
 
             }
