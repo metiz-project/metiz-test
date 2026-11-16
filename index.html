@@ -881,6 +881,8 @@ body {
 
 .logo-slot {
 
+    position: relative;
+
     width:
         min(
             310px,
@@ -2588,12 +2590,689 @@ body {
 
 }
 
+
+/* =========================================================
+   =========================================================
+   NEW YEAR 2026 — ДЕКОР
+   =========================================================
+   ========================================================= */
+
+.svg-defs {
+
+    position: absolute;
+
+    width: 0;
+    height: 0;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+}
+
+
+/* ---------------------------------------------------------
+   1. СНЕЖНЫЕ ШАПКИ НА КНОПКАХ
+   --------------------------------------------------------- */
+
+.button {
+
+    overflow: clip;
+    overflow-clip-margin: 16px;
+
+}
+
+
+.snow-cap {
+
+    position: absolute;
+
+    top: -9px;
+    left: 5%;
+    right: 5%;
+
+    height: 20px;
+
+    pointer-events: none;
+    z-index: 2;
+
+    background:
+
+        radial-gradient(
+            ellipse 44% 100% at 15% 100%,
+            #ffffff 0%,
+            #eefcff 56%,
+            rgba(238,252,255,0) 74%
+        ),
+
+        radial-gradient(
+            ellipse 52% 112% at 46% 100%,
+            #ffffff 0%,
+            #f6feff 58%,
+            rgba(246,254,255,0) 76%
+        ),
+
+        radial-gradient(
+            ellipse 44% 100% at 79% 100%,
+            #ffffff 0%,
+            #eefcff 56%,
+            rgba(238,252,255,0) 74%
+        );
+
+    filter:
+
+        drop-shadow(
+            0 4px 7px
+            rgba(76,213,211,.45)
+        )
+
+        drop-shadow(
+            0 1px 2px
+            rgba(76,213,211,.35)
+        );
+
+    opacity: .96;
+
+    transition: transform .45s var(--ease);
+
+}
+
+
+.button:hover .snow-cap {
+
+    transform: translateY(-1px);
+
+}
+
+
+/* ---------------------------------------------------------
+   2. ЁЛОВЫЕ ВЕТКИ С ИГРУШКАМИ
+   --------------------------------------------------------- */
+
+.xmas-branch {
+
+    position: fixed;
+
+    top: 0;
+
+    width:
+        clamp(
+            150px,
+            20vw,
+            260px
+        );
+
+    height: auto;
+
+    pointer-events: none;
+
+    z-index: 9980;
+
+    opacity: .92;
+
+    filter:
+        drop-shadow(
+            0 12px 30px
+            rgba(0,0,0,.5)
+        );
+
+}
+
+
+.branch-left {
+
+    left: 0;
+
+}
+
+
+.branch-right {
+
+    right: 0;
+
+    transform: scaleX(-1);
+
+}
+
+
+@media (max-width: 600px) {
+
+    .xmas-branch {
+
+        width:
+            clamp(
+                72px,
+                18vw,
+                130px
+            );
+
+        top: -10px;
+
+        opacity: .72;
+
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   3. СВЕТЯЩАЯСЯ ГИРЛЯНДА
+   --------------------------------------------------------- */
+
+.garland {
+
+    position: fixed;
+
+    top: -6px;
+    left: 0;
+
+    width: 100%;
+    height: 60px;
+
+    pointer-events: none;
+
+    z-index: 9985;
+
+    opacity: .95;
+
+}
+
+
+.garland-wire {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+}
+
+
+.garland .bulb {
+
+    position: absolute;
+
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    animation:
+        bulbGlow 2.8s ease-in-out infinite;
+
+    will-change: opacity;
+
+}
+
+
+.garland .bulb.t {
+
+    background: #a9fffb;
+
+    box-shadow:
+        0 0 8px 2px rgba(76,213,211,.85),
+        0 0 22px 8px rgba(76,213,211,.38);
+
+}
+
+
+.garland .bulb.g {
+
+    background: #ffe9a8;
+
+    box-shadow:
+        0 0 8px 2px rgba(255,214,120,.85),
+        0 0 22px 8px rgba(255,196,70,.32);
+
+}
+
+
+.garland .bulb.w {
+
+    background: #ffffff;
+
+    box-shadow:
+        0 0 8px 2px rgba(255,255,255,.85),
+        0 0 22px 8px rgba(210,245,255,.32);
+
+}
+
+
+.garland .bulb:nth-of-type(3n) {
+
+    animation-delay: -.45s;
+
+}
+
+
+.garland .bulb:nth-of-type(3n+1) {
+
+    animation-delay: -1.15s;
+
+}
+
+
+.garland .bulb:nth-of-type(3n+2) {
+
+    animation-delay: -1.9s;
+
+}
+
+
+@keyframes bulbGlow {
+
+    0%,100% {
+
+        opacity: .42;
+
+    }
+
+    50% {
+
+        opacity: 1;
+
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   4. ШАПКА САНТЫ НА ЛОГОТИПЕ
+   --------------------------------------------------------- */
+
+.santa-hat {
+
+    position: absolute;
+
+    top: -16px;
+    right: 2%;
+
+    width:
+        clamp(
+            44px,
+            13vw,
+            64px
+        );
+
+    height: auto;
+
+    transform:
+        rotate(-7deg);
+
+    pointer-events: none;
+
+    z-index: 3;
+
+    filter:
+
+        drop-shadow(
+            0 6px 10px
+            rgba(0,0,0,.5)
+        )
+
+        drop-shadow(
+            0 0 14px
+            rgba(255,90,90,.18)
+        );
+
+}
+
+
+/* ---------------------------------------------------------
+   5. СНЕГОПАД (CANVAS)
+   --------------------------------------------------------- */
+
+#snowfall {
+
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    pointer-events: none;
+
+    z-index: 9999;
+
+}
+
+
+/* ---------------------------------------------------------
+   6. МОРОЗНЫЕ ИСКРЫ НА КНОПКАХ
+   --------------------------------------------------------- */
+
+#sparkLayer {
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 10000;
+
+}
+
+
+.spark {
+
+    position: absolute;
+
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            circle,
+            #ffffff 0%,
+            #d9fffc 42%,
+            rgba(76,213,211,0) 74%
+        );
+
+    box-shadow:
+        0 0 8px
+        rgba(76,213,211,.9);
+
+    animation:
+        sparkFly .9s cubic-bezier(.16,1,.3,1) forwards;
+
+}
+
+
+@keyframes sparkFly {
+
+    0% {
+
+        transform:
+            translate(0, 0)
+            scale(1);
+
+        opacity: 1;
+
+    }
+
+    100% {
+
+        transform:
+            translate(var(--dx, 0px), var(--dy, 0px))
+            scale(.15);
+
+        opacity: 0;
+
+    }
+
+}
+
+
+/* Морозное ледяное сияние при наведении */
+
+.button:hover {
+
+    box-shadow:
+
+        0 16px 42px
+        rgba(0,0,0,.28),
+
+        0 0 30px
+        rgba(76,213,211,.20),
+
+        0 0 60px
+        rgba(76,213,211,.10),
+
+        inset
+        0 0 26px
+        rgba(76,213,211,.18),
+
+        inset
+        0 1px 0
+        rgba(255,255,255,.16);
+
+}
+
+
+.button:hover::after {
+
+    background:
+
+        radial-gradient(
+            circle at
+            var(--mx, 50%)
+            var(--my, 50%),
+            rgba(255,255,255,.2) 0%,
+            rgba(76,213,211,.16) 22%,
+            transparent 42%
+        );
+
+}
+
+
+/* ---------------------------------------------------------
+   7. БЕЙДЖ ОБРАТНОГО ОТСЧЁТА
+   --------------------------------------------------------- */
+
+.countdown {
+
+    position: fixed;
+
+    left: 50%;
+
+    bottom:
+        max(
+            14px,
+            env(safe-area-inset-bottom)
+        );
+
+    transform:
+        translateX(-50%);
+
+    z-index: 9990;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding:
+        9px 18px;
+
+    border-radius: 999px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.14);
+
+    background:
+
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.09),
+            rgba(255,255,255,.03)
+        );
+
+    backdrop-filter:
+        blur(16px);
+
+    -webkit-backdrop-filter:
+        blur(16px);
+
+    box-shadow:
+
+        0 10px 30px
+        rgba(0,0,0,.35),
+
+        0 0 24px
+        rgba(76,213,211,.12),
+
+        inset
+        0 1px 0
+        rgba(255,255,255,.10);
+
+    color:
+        #dff7f6;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: .14em;
+
+    text-transform: uppercase;
+
+    white-space: nowrap;
+
+    pointer-events: none;
+
+    opacity: 0;
+
+    transition:
+        opacity .9s ease 1.4s;
+
+}
+
+
+.loaded .countdown {
+
+    opacity: 1;
+
+}
+
+
+.cd-ico {
+
+    font-size: 12px;
+
+    color: #9ff8f5;
+
+    text-shadow:
+        0 0 10px
+        rgba(76,213,211,.8);
+
+}
+
+
+.cd-time {
+
+    color: #ffffff;
+
+    font-variant-numeric:
+        tabular-nums;
+
+    letter-spacing: .10em;
+
+}
+
+
+@media (max-width: 420px) {
+
+    .countdown {
+
+        font-size: 9px;
+
+        padding: 8px 14px;
+
+        gap: 7px;
+
+    }
+
+    .countdown .cd-label {
+
+        display: none;
+
+    }
+
+}
+
+
+/* Отступ снизу, чтобы бейдж не перекрывал футер */
+
+.card {
+
+    padding-bottom:
+        max(
+            86px,
+            calc(env(safe-area-inset-bottom) + 72px)
+        );
+
+}
+
 </style>
 
 </head>
 
 
 <body>
+
+
+<!-- =========================================================
+     SVG DEFS — ГРАДИЕНТЫ И ФИЛЬТРЫ ДЛЯ ВЕТОК
+     ========================================================= -->
+
+<svg class="svg-defs" aria-hidden="true" focusable="false">
+
+    <defs>
+
+        <radialGradient id="goldOrn" cx="35%" cy="28%" r="78%">
+
+            <stop offset="0%" stop-color="#fff6d0"/>
+
+            <stop offset="42%" stop-color="#efc963"/>
+
+            <stop offset="100%" stop-color="#8a6516"/>
+
+        </radialGradient>
+
+
+        <radialGradient id="tiffanyOrn" cx="35%" cy="28%" r="78%">
+
+            <stop offset="0%" stop-color="#d8fffd"/>
+
+            <stop offset="45%" stop-color="#4cd5d3"/>
+
+            <stop offset="100%" stop-color="#0d6b6a"/>
+
+        </radialGradient>
+
+
+        <linearGradient id="hatRed" x1="0" y1="0" x2="1" y2="1">
+
+            <stop offset="0%" stop-color="#ff5f5f"/>
+
+            <stop offset="55%" stop-color="#e02020"/>
+
+            <stop offset="100%" stop-color="#a80f16"/>
+
+        </linearGradient>
+
+
+        <filter id="softBlur" x="-40%" y="-40%" width="180%" height="180%">
+
+            <feGaussianBlur stdDeviation="9"/>
+
+        </filter>
+
+
+        <filter id="glowBlur" x="-140%" y="-140%" width="380%" height="380%">
+
+            <feGaussianBlur stdDeviation="6"/>
+
+        </filter>
+
+    </defs>
+
+</svg>
 
 
 <!-- =========================================================
@@ -2646,6 +3325,351 @@ body {
 
 
 <!-- =========================================================
+     НОВОГОДНЯЯ ГИРЛЯНДА СВЕРХУ
+     ========================================================= -->
+
+<div class="garland" aria-hidden="true">
+
+    <svg
+        class="garland-wire"
+        viewBox="0 0 1200 60"
+        preserveAspectRatio="none"
+        focusable="false"
+    >
+
+        <path
+            d="M0 10 Q600 50 1200 10"
+            fill="none"
+            stroke="rgba(180,255,250,.20)"
+            stroke-width="1.4"
+        />
+
+    </svg>
+
+    <span class="bulb t" style="left:8.333%; top:16px;"></span>
+    <span class="bulb g" style="left:16.667%; top:21px;"></span>
+    <span class="bulb w" style="left:25%; top:25px;"></span>
+    <span class="bulb t" style="left:33.333%; top:28px;"></span>
+    <span class="bulb g" style="left:41.667%; top:29px;"></span>
+    <span class="bulb w" style="left:50%; top:30px;"></span>
+    <span class="bulb t" style="left:58.333%; top:29px;"></span>
+    <span class="bulb g" style="left:66.667%; top:28px;"></span>
+    <span class="bulb w" style="left:75%; top:25px;"></span>
+    <span class="bulb t" style="left:83.333%; top:21px;"></span>
+    <span class="bulb g" style="left:91.667%; top:16px;"></span>
+
+</div>
+
+
+<!-- =========================================================
+     ЁЛОВАЯ ВЕТКА — ЛЕВЫЙ ВЕРХНИЙ УГОЛ
+     ========================================================= -->
+
+<svg
+    class="xmas-branch branch-left"
+    viewBox="0 0 240 210"
+    aria-hidden="true"
+    focusable="false"
+>
+
+    <path
+        d="M-12 -14 Q 86 28 196 148"
+        stroke="#0a2a1e"
+        stroke-width="46"
+        stroke-linecap="round"
+        fill="none"
+        opacity=".5"
+        filter="url(#softBlur)"
+    />
+
+    <path
+        d="M-12 -14 Q 86 28 196 148"
+        stroke="#0c3325"
+        stroke-width="5"
+        stroke-linecap="round"
+        fill="none"
+    />
+
+    <g
+        stroke="#0f4534"
+        stroke-width="3.2"
+        stroke-linecap="round"
+        fill="none"
+    >
+
+        <path d="M30 9 Q 16 -10 0 -18"/>
+        <path d="M30 9 Q 32 -14 30 -34"/>
+        <path d="M30 9 Q 48 -6 62 -14"/>
+        <path d="M30 9 Q 10 18 -6 26"/>
+        <path d="M30 9 Q 50 26 64 38"/>
+
+        <path d="M72 35 Q 56 16 38 8"/>
+        <path d="M72 35 Q 72 12 70 -10"/>
+        <path d="M72 35 Q 90 14 106 4"/>
+        <path d="M72 35 Q 52 42 36 50"/>
+        <path d="M72 35 Q 94 50 110 62"/>
+
+        <path d="M114 67 Q 96 48 76 40"/>
+        <path d="M114 67 Q 114 44 112 22"/>
+        <path d="M114 67 Q 132 46 150 36"/>
+        <path d="M114 67 Q 94 74 78 82"/>
+        <path d="M114 67 Q 136 82 152 94"/>
+
+        <path d="M156 105 Q 138 86 118 78"/>
+        <path d="M156 105 Q 156 82 154 60"/>
+        <path d="M156 105 Q 174 84 192 74"/>
+        <path d="M156 105 Q 136 112 120 120"/>
+        <path d="M156 105 Q 178 120 194 132"/>
+
+        <path d="M196 148 Q 186 130 174 120"/>
+        <path d="M196 148 Q 198 128 200 110"/>
+        <path d="M196 148 Q 210 134 222 124"/>
+        <path d="M196 148 Q 186 160 176 170"/>
+
+        <path d="M52 22 Q 40 6 26 -2"/>
+        <path d="M52 22 Q 66 4 80 -6"/>
+        <path d="M94 50 Q 80 36 64 30"/>
+        <path d="M94 50 Q 110 34 126 26"/>
+        <path d="M136 86 Q 122 72 106 64"/>
+        <path d="M136 86 Q 152 70 168 62"/>
+        <path d="M176 126 Q 162 112 146 104"/>
+        <path d="M176 126 Q 192 112 208 104"/>
+
+    </g>
+
+    <g>
+
+        <line
+            x1="58" y1="25" x2="58" y2="48"
+            stroke="rgba(255,255,255,.28)"
+            stroke-width="1"
+        />
+
+        <circle
+            cx="58" cy="58" r="16"
+            fill="#efc963"
+            opacity=".3"
+            filter="url(#glowBlur)"
+        />
+
+        <circle
+            cx="58" cy="58" r="10"
+            fill="url(#goldOrn)"
+        />
+
+        <ellipse
+            cx="54" cy="54" rx="3" ry="2"
+            fill="#ffffff" opacity=".7"
+        />
+
+
+        <line
+            x1="120" y1="74" x2="120" y2="96"
+            stroke="rgba(255,255,255,.28)"
+            stroke-width="1"
+        />
+
+        <circle
+            cx="120" cy="104" r="14"
+            fill="#4cd5d3"
+            opacity=".3"
+            filter="url(#glowBlur)"
+        />
+
+        <circle
+            cx="120" cy="104" r="8.5"
+            fill="url(#tiffanyOrn)"
+        />
+
+        <ellipse
+            cx="117" cy="101" rx="2.5" ry="1.6"
+            fill="#ffffff" opacity=".75"
+        />
+
+
+        <line
+            x1="157" y1="107" x2="157" y2="128"
+            stroke="rgba(255,255,255,.28)"
+            stroke-width="1"
+        />
+
+        <circle
+            cx="157" cy="138" r="17"
+            fill="#efc963"
+            opacity=".28"
+            filter="url(#glowBlur)"
+        />
+
+        <circle
+            cx="157" cy="138" r="11"
+            fill="url(#goldOrn)"
+        />
+
+        <ellipse
+            cx="153" cy="134" rx="3.2" ry="2.2"
+            fill="#ffffff" opacity=".7"
+        />
+
+    </g>
+
+</svg>
+
+
+<!-- =========================================================
+     ЁЛОВАЯ ВЕТКА — ПРАВЫЙ ВЕРХНИЙ УГОЛ
+     ========================================================= -->
+
+<svg
+    class="xmas-branch branch-right"
+    viewBox="0 0 240 210"
+    aria-hidden="true"
+    focusable="false"
+>
+
+    <path
+        d="M-12 -14 Q 86 28 196 148"
+        stroke="#0a2a1e"
+        stroke-width="46"
+        stroke-linecap="round"
+        fill="none"
+        opacity=".5"
+        filter="url(#softBlur)"
+    />
+
+    <path
+        d="M-12 -14 Q 86 28 196 148"
+        stroke="#0c3325"
+        stroke-width="5"
+        stroke-linecap="round"
+        fill="none"
+    />
+
+    <g
+        stroke="#0f4534"
+        stroke-width="3.2"
+        stroke-linecap="round"
+        fill="none"
+    >
+
+        <path d="M30 9 Q 16 -10 0 -18"/>
+        <path d="M30 9 Q 32 -14 30 -34"/>
+        <path d="M30 9 Q 48 -6 62 -14"/>
+        <path d="M30 9 Q 10 18 -6 26"/>
+        <path d="M30 9 Q 50 26 64 38"/>
+
+        <path d="M72 35 Q 56 16 38 8"/>
+        <path d="M72 35 Q 72 12 70 -10"/>
+        <path d="M72 35 Q 90 14 106 4"/>
+        <path d="M72 35 Q 52 42 36 50"/>
+        <path d="M72 35 Q 94 50 110 62"/>
+
+        <path d="M114 67 Q 96 48 76 40"/>
+        <path d="M114 67 Q 114 44 112 22"/>
+        <path d="M114 67 Q 132 46 150 36"/>
+        <path d="M114 67 Q 94 74 78 82"/>
+        <path d="M114 67 Q 136 82 152 94"/>
+
+        <path d="M156 105 Q 138 86 118 78"/>
+        <path d="M156 105 Q 156 82 154 60"/>
+        <path d="M156 105 Q 174 84 192 74"/>
+        <path d="M156 105 Q 136 112 120 120"/>
+        <path d="M156 105 Q 178 120 194 132"/>
+
+        <path d="M196 148 Q 186 130 174 120"/>
+        <path d="M196 148 Q 198 128 200 110"/>
+        <path d="M196 148 Q 210 134 222 124"/>
+        <path d="M196 148 Q 186 160 176 170"/>
+
+        <path d="M52 22 Q 40 6 26 -2"/>
+        <path d="M52 22 Q 66 4 80 -6"/>
+        <path d="M94 50 Q 80 36 64 30"/>
+        <path d="M94 50 Q 110 34 126 26"/>
+        <path d="M136 86 Q 122 72 106 64"/>
+        <path d="M136 86 Q 152 70 168 62"/>
+        <path d="M176 126 Q 162 112 146 104"/>
+        <path d="M176 126 Q 192 112 208 104"/>
+
+    </g>
+
+    <g>
+
+        <line
+            x1="58" y1="25" x2="58" y2="48"
+            stroke="rgba(255,255,255,.28)"
+            stroke-width="1"
+        />
+
+        <circle
+            cx="58" cy="58" r="16"
+            fill="#efc963"
+            opacity=".3"
+            filter="url(#glowBlur)"
+        />
+
+        <circle
+            cx="58" cy="58" r="10"
+            fill="url(#goldOrn)"
+        />
+
+        <ellipse
+            cx="54" cy="54" rx="3" ry="2"
+            fill="#ffffff" opacity=".7"
+        />
+
+
+        <line
+            x1="120" y1="74" x2="120" y2="96"
+            stroke="rgba(255,255,255,.28)"
+            stroke-width="1"
+        />
+
+        <circle
+            cx="120" cy="104" r="14"
+            fill="#4cd5d3"
+            opacity=".3"
+            filter="url(#glowBlur)"
+        />
+
+        <circle
+            cx="120" cy="104" r="8.5"
+            fill="url(#tiffanyOrn)"
+        />
+
+        <ellipse
+            cx="117" cy="101" rx="2.5" ry="1.6"
+            fill="#ffffff" opacity=".75"
+        />
+
+
+        <line
+            x1="157" y1="107" x2="157" y2="128"
+            stroke="rgba(255,255,255,.28)"
+            stroke-width="1"
+        />
+
+        <circle
+            cx="157" cy="138" r="17"
+            fill="#efc963"
+            opacity=".28"
+            filter="url(#glowBlur)"
+        />
+
+        <circle
+            cx="157" cy="138" r="11"
+            fill="url(#goldOrn)"
+        />
+
+        <ellipse
+            cx="153" cy="134" rx="3.2" ry="2.2"
+            fill="#ffffff" opacity=".7"
+        />
+
+    </g>
+
+</svg>
+
+
+<!-- =========================================================
      MAIN
      ========================================================= -->
 
@@ -2667,7 +3691,7 @@ body {
 
 
             <!-- =================================================
-                 LOGO
+                 LOGO + ШАПКА САНТЫ
                  ================================================= -->
 
             <div
@@ -2680,6 +3704,35 @@ body {
                     alt="METIZ PROJECT"
                     class="logo"
                 >
+
+                <svg
+                    class="santa-hat"
+                    viewBox="0 0 120 110"
+                    aria-hidden="true"
+                    focusable="false"
+                >
+
+                    <path
+                        d="M16 78 C 22 46 44 18 92 14 C 84 34 80 56 86 78 Z"
+                        fill="url(#hatRed)"
+                    />
+
+                    <rect
+                        x="8" y="72" width="82" height="17" rx="8.5"
+                        fill="#ffffff"
+                    />
+
+                    <circle
+                        cx="96" cy="12" r="11"
+                        fill="#ffffff"
+                    />
+
+                    <ellipse
+                        cx="93" cy="9" rx="4" ry="2.6"
+                        fill="#ffffff" opacity=".9"
+                    />
+
+                </svg>
 
             </div>
 
@@ -2716,7 +3769,7 @@ body {
 
             <p class="subtitle">
 
-                Наклейки • Холсты • Реклама
+                ❄️ НОВОГОДНИЕ НАКЛЕЙКИ • ХОЛСТЫ • ПОДАРКИ ❄️
 
             </p>
 
@@ -2815,6 +3868,8 @@ body {
                     class="button primary magnetic"
                 >
 
+                    <span class="snow-cap" aria-hidden="true"></span>
+
                     <span class="social-icon">
 
                         <svg
@@ -2852,6 +3907,8 @@ body {
                     class="button primary magnetic"
                 >
 
+                    <span class="snow-cap" aria-hidden="true"></span>
+
                     <span class="social-icon">
 
                         <svg
@@ -2880,6 +3937,8 @@ body {
                     rel="noopener noreferrer"
                     class="button primary magnetic"
                 >
+
+                    <span class="snow-cap" aria-hidden="true"></span>
 
                     <span class="social-icon">
 
@@ -2910,6 +3969,8 @@ body {
                     class="button primary magnetic"
                 >
 
+                    <span class="snow-cap" aria-hidden="true"></span>
+
                     <span class="social-icon">
 
                         <svg
@@ -2936,6 +3997,8 @@ body {
                     href="test.html"
                     class="button pickup-outline magnetic"
                 >
+
+                    <span class="snow-cap" aria-hidden="true"></span>
 
                     <span class="social-icon">
 
@@ -2964,6 +4027,8 @@ body {
                     class="button share-outline magnetic"
                     id="shareButton"
                 >
+
+                    <span class="snow-cap" aria-hidden="true"></span>
 
                     <span class="social-icon">
 
@@ -3029,6 +4094,30 @@ body {
     </section>
 
 </main>
+
+
+<!-- =========================================================
+     СНЕГОПАД (CANVAS) И СЛОЙ ИСКР
+     ========================================================= -->
+
+<canvas id="snowfall" aria-hidden="true"></canvas>
+
+<div id="sparkLayer" aria-hidden="true"></div>
+
+
+<!-- =========================================================
+     БЕЙДЖ ОБРАТНОГО ОТСЧЁТА
+     ========================================================= -->
+
+<div class="countdown" id="countdown" aria-hidden="true">
+
+    <span class="cd-ico">❄</span>
+
+    <span class="cd-label">До Нового года</span>
+
+    <span class="cd-time" id="cdTime">--д --:--:--</span>
+
+</div>
 
 
 <script>
@@ -3501,7 +4590,7 @@ document.addEventListener(
                             "METIZ PROJECT",
 
                         text:
-                            "METIZ PROJECT — наклейки, хосты, реклама",
+                            "METIZ PROJECT — наклейки, холсты, реклама",
 
                         url:
                             window.location.href
@@ -4064,348 +5153,581 @@ document.addEventListener(
 </script>
 
 
-<!-- =========================================================
-     SNOWFALL
-     Лёгкий автономный снегопад поверх экрана.
-     Не зависит от остальных скриптов страницы.
-     ========================================================= -->
-
 <script>
+
+/* =========================================================
+   НОВОГОДНИЙ СНЕГОПАД
+   Многослойный Canvas:
+   — мелкие, средние и крупные снежинки;
+   — лёгкое покачивание;
+   — реакция на курсор и на прокрутку.
+   ================================================= */
 
 (function () {
 
-    /* -----------------------------------------------------
-       CANVAS
-       ----------------------------------------------------- */
-
-    const snowCanvas =
-        document.createElement("canvas");
-
-    const snowCtx =
-        snowCanvas.getContext("2d");
+    "use strict";
 
 
-    snowCanvas.setAttribute(
-        "aria-hidden",
-        "true"
-    );
+    const canvas =
+        document.getElementById("snowfall");
+
+    if (!canvas) {
+        return;
+    }
 
 
-    snowCanvas.style.position =
-        "fixed";
-
-    snowCanvas.style.left =
-        "0";
-
-    snowCanvas.style.top =
-        "0";
-
-    snowCanvas.style.width =
-        "100%";
-
-    snowCanvas.style.height =
-        "100%";
-
-    snowCanvas.style.pointerEvents =
-        "none";
-
-    snowCanvas.style.zIndex =
-        "9999";
+    const ctx =
+        canvas.getContext("2d");
 
 
-    document.body.appendChild(
-        snowCanvas
-    );
-
-
-    /* -----------------------------------------------------
-       SETTINGS
-       ----------------------------------------------------- */
-
-    const motionQuery =
+    const reduce =
         window.matchMedia(
             "(prefers-reduced-motion: reduce)"
-        );
+        ).matches;
+
+
+    const layers = [
+
+        { n: 70, rMin: .5,  rMax: 1.5, sMin: .15, sMax: .50, aMin: .20, aMax: .45, wMin: .20, wMax: .70 },
+
+        { n: 42, rMin: 1.3, rMax: 2.6, sMin: .40, sMax: .90, aMin: .35, aMax: .65, wMin: .40, wMax: 1.00 },
+
+        { n: 18, rMin: 2.4, rMax: 4.2, sMin: .80, sMax: 1.50, aMin: .50, aMax: .85, wMin: .60, wMax: 1.30 }
+
+    ];
 
 
     let flakes = [];
 
-    let snowWidth = 0;
-    let snowHeight = 0;
+    let W = 0;
+    let H = 0;
+    let DPR = 1;
 
-    let snowDpr =
-        Math.min(
-            window.devicePixelRatio || 1,
-            2
-        );
+    let pointerX = -9999;
+    let pointerY = -9999;
 
-    let snowTime = 0;
+    let wind = 0;
+    let lastScroll = window.scrollY || 0;
+    let time = 0;
 
 
-    /* -----------------------------------------------------
-       CREATE
-       ----------------------------------------------------- */
+    function rand(min, max) {
 
-    function createFlakes() {
+        return min + Math.random() * (max - min);
 
+    }
+
+
+    function build() {
 
         flakes = [];
 
 
-        const count =
+        const scale =
             Math.min(
-                140,
+                1.6,
+                Math.max(.45, W / 1200)
+            );
+
+
+        for (let i = 0; i < layers.length; i++) {
+
+            const cfg = layers[i];
+
+            const count =
                 Math.max(
-                    40,
-                    Math.round(
-                        (
-                            snowWidth *
-                            snowHeight
-                        ) / 14000
-                    )
-                )
-            );
+                    6,
+                    Math.round(cfg.n * scale)
+                );
 
 
-        for (
-            let i = 0;
-            i < count;
-            i++
-        ) {
+            for (let k = 0; k < count; k++) {
 
+                flakes.push({
 
-            flakes.push({
+                    x: Math.random() * W,
+                    y: Math.random() * H,
 
-                x:
-                    Math.random() *
-                    snowWidth,
+                    r: rand(cfg.rMin, cfg.rMax),
 
-                y:
-                    Math.random() *
-                    snowHeight,
+                    vy: rand(cfg.sMin, cfg.sMax),
+                    vx: rand(-.12, .12),
 
-                r:
-                    Math.random() *
-                    1.5 +
-                    .4,
+                    a: rand(cfg.aMin, cfg.aMax),
 
-                alpha:
-                    Math.random() *
-                    .55 +
-                    .2,
+                    sway: rand(cfg.wMin, cfg.wMax),
+                    phase: Math.random() * Math.PI * 2,
 
-                speedY:
-                    Math.random() *
-                    .5 +
-                    .18,
+                    layer: i
 
-                speedX:
-                    (
-                        Math.random() -
-                        .5
-                    ) * .22,
+                });
 
-                sway:
-                    Math.random() *
-                    .6 +
-                    .18,
-
-                phase:
-                    Math.random() *
-                    Math.PI *
-                    2
-
-            });
+            }
 
         }
 
     }
 
 
-    /* -----------------------------------------------------
-       RESIZE
-       ----------------------------------------------------- */
+    function resize() {
 
-    function resizeSnow() {
+        W = window.innerWidth;
+        H = window.innerHeight;
 
-
-        snowWidth =
-            window.innerWidth;
-
-        snowHeight =
-            window.innerHeight;
-
-
-        snowDpr =
-            Math.min(
-                window.devicePixelRatio || 1,
-                2
-            );
-
-
-        snowCanvas.width =
-            snowWidth * snowDpr;
-
-        snowCanvas.height =
-            snowHeight * snowDpr;
-
-
-        snowCtx.setTransform(
-            snowDpr,
-            0,
-            0,
-            snowDpr,
-            0,
-            0
+        DPR = Math.min(
+            window.devicePixelRatio || 1,
+            2
         );
 
+        canvas.width = Math.floor(W * DPR);
+        canvas.height = Math.floor(H * DPR);
 
-        createFlakes();
+        canvas.style.width = W + "px";
+        canvas.style.height = H + "px";
+
+        ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+
+        build();
 
     }
 
 
-    /* -----------------------------------------------------
-       DRAW
-       ----------------------------------------------------- */
+    function draw() {
 
-    function drawSnow() {
+        ctx.clearRect(0, 0, W, H);
 
 
-        snowCtx.clearRect(
-            0,
-            0,
-            snowWidth,
-            snowHeight
-        );
+        if (!reduce) {
 
+            time += 0.016;
 
-        const still =
-            motionQuery.matches;
-
-
-        if (!still) {
-
-            snowTime += .016;
+            wind *= 0.94;
 
         }
 
 
-        for (
-            const f of flakes
-        ) {
+        for (let i = 0; i < flakes.length; i++) {
+
+            const f = flakes[i];
 
 
-            if (!still) {
+            if (!reduce) {
 
-
-                f.y +=
-                    f.speedY;
-
+                f.y += f.vy * (1 + f.layer * 0.35);
 
                 f.x +=
-                    f.speedX +
-                    Math.sin(
-                        snowTime * f.sway +
-                        f.phase
-                    ) * .22;
+                    f.vx +
+                    Math.sin(time * f.sway + f.phase) * (0.25 + f.layer * 0.25) +
+                    wind * (0.4 + f.layer * 0.35);
+
+
+                const dx = f.x - pointerX;
+                const dy = f.y - pointerY;
+
+                const dist2 = dx * dx + dy * dy;
+
+                if (dist2 < 16000) {
+
+                    const d = Math.sqrt(dist2) || 1;
+
+                    const force =
+                        (1 - d / 126) * 1.1;
+
+                    f.x += (dx / d) * force;
+                    f.y += (dy / d) * force;
+
+                }
 
             }
 
 
-            if (
-                f.y >
-                snowHeight + 6
-            ) {
+            if (f.y > H + 8) {
 
-                f.y = -6;
+                f.y = -8;
+                f.x = Math.random() * W;
 
-                f.x =
-                    Math.random() *
-                    snowWidth;
+            }
+
+            if (f.y < -12) {
+
+                f.y = H + 8;
+
+            }
+
+            if (f.x > W + 10) {
+
+                f.x = -10;
+
+            }
+
+            if (f.x < -10) {
+
+                f.x = W + 10;
 
             }
 
 
-            if (
-                f.y < -12
-            ) {
+            if (f.layer === 2) {
 
-                f.y =
-                    snowHeight + 6;
+                const halo =
+                    ctx.createRadialGradient(
+                        f.x, f.y, 0,
+                        f.x, f.y, f.r * 3.6
+                    );
+
+                halo.addColorStop(
+                    0,
+                    "rgba(255,255,255," + (f.a * 0.32) + ")"
+                );
+
+                halo.addColorStop(
+                    1,
+                    "rgba(255,255,255,0)"
+                );
+
+                ctx.fillStyle = halo;
+
+                ctx.beginPath();
+
+                ctx.arc(f.x, f.y, f.r * 3.6, 0, Math.PI * 2);
+
+                ctx.fill();
 
             }
 
 
-            if (
-                f.x >
-                snowWidth + 6
-            ) {
+            ctx.beginPath();
 
-                f.x = -6;
+            ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
 
-            }
+            ctx.fillStyle =
+                "rgba(255,255,255," + f.a + ")";
 
-
-            if (
-                f.x < -6
-            ) {
-
-                f.x =
-                    snowWidth + 6;
-
-            }
-
-
-            snowCtx.beginPath();
-
-
-            snowCtx.arc(
-                f.x,
-                f.y,
-                f.r,
-                0,
-                Math.PI * 2
-            );
-
-
-            snowCtx.fillStyle =
-                "rgba(255,255,255," +
-                f.alpha +
-                ")";
-
-
-            snowCtx.fill();
+            ctx.fill();
 
         }
 
 
-        requestAnimationFrame(
-            drawSnow
-        );
+        if (!reduce) {
+
+            requestAnimationFrame(draw);
+
+        }
 
     }
 
 
-    /* -----------------------------------------------------
-       START
-       ----------------------------------------------------- */
+    let resizeTimer = null;
 
-    resizeSnow();
 
-    requestAnimationFrame(
-        drawSnow
+    window.addEventListener(
+
+        "resize",
+
+        function () {
+
+            clearTimeout(resizeTimer);
+
+            resizeTimer = setTimeout(resize, 150);
+
+        },
+
+        { passive: true }
+
     );
 
 
     window.addEventListener(
-        "resize",
-        resizeSnow,
-        {
-            passive: true
-        }
+
+        "pointermove",
+
+        function (e) {
+
+            pointerX = e.clientX;
+            pointerY = e.clientY;
+
+        },
+
+        { passive: true }
+
     );
 
+
+    document.addEventListener(
+
+        "pointerleave",
+
+        function () {
+
+            pointerX = -9999;
+            pointerY = -9999;
+
+        },
+
+        { passive: true }
+
+    );
+
+
+    window.addEventListener(
+
+        "scroll",
+
+        function () {
+
+            const s = window.scrollY || 0;
+
+            const delta = s - lastScroll;
+
+            wind +=
+                Math.max(
+                    -2.5,
+                    Math.min(2.5, delta * 0.05)
+                );
+
+            lastScroll = s;
+
+        },
+
+        { passive: true }
+
+    );
+
+
+    resize();
+
+    draw();
+
+})();
+
+</script>
+
+
+<script>
+
+/* =========================================================
+   МОРОЗНЫЕ ИСКРЫ ПРИ НАВЕДЕНИИ / НАЖАТИИ НА КНОПКУ
+   ================================================= */
+
+(function () {
+
+    "use strict";
+
+
+    const layer =
+        document.getElementById("sparkLayer");
+
+    if (!layer) {
+        return;
+    }
+
+
+    const reduce =
+        window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        ).matches;
+
+
+    let lastSpawn = 0;
+
+
+    function spawn(x, y, count) {
+
+        if (reduce) {
+            return;
+        }
+
+
+        const now = Date.now();
+
+        if (now - lastSpawn < 60) {
+            return;
+        }
+
+        lastSpawn = now;
+
+
+        for (let i = 0; i < count; i++) {
+
+            const s =
+                document.createElement("span");
+
+            s.className = "spark";
+
+
+            const angle =
+                Math.random() * Math.PI * 2;
+
+            const dist =
+                18 + Math.random() * 48;
+
+
+            const size =
+                (3 + Math.random() * 4).toFixed(1);
+
+
+            s.style.left = x + "px";
+            s.style.top = y + "px";
+
+            s.style.width = size + "px";
+            s.style.height = size + "px";
+
+            s.style.setProperty(
+                "--dx",
+                (Math.cos(angle) * dist).toFixed(1) + "px"
+            );
+
+            s.style.setProperty(
+                "--dy",
+                (Math.sin(angle) * dist - 14).toFixed(1) + "px"
+            );
+
+            s.style.animationDuration =
+                (0.7 + Math.random() * 0.5).toFixed(2) + "s";
+
+
+            layer.appendChild(s);
+
+
+            s.addEventListener(
+                "animationend",
+                function () {
+                    if (s.parentNode) {
+                        s.remove();
+                    }
+                }
+            );
+
+
+            setTimeout(
+                function () {
+                    if (s.parentNode) {
+                        s.remove();
+                    }
+                },
+                1600
+            );
+
+        }
+
+    }
+
+
+    const buttons =
+        document.querySelectorAll(".button");
+
+
+    buttons.forEach(function (btn) {
+
+
+        btn.addEventListener(
+            "pointerenter",
+            function () {
+
+                const r = btn.getBoundingClientRect();
+
+                spawn(
+                    r.left + Math.random() * r.width,
+                    r.top + 10,
+                    10
+                );
+
+            }
+        );
+
+
+        btn.addEventListener(
+            "click",
+            function () {
+
+                const r = btn.getBoundingClientRect();
+
+                spawn(
+                    r.left + r.width / 2,
+                    r.top + r.height / 2,
+                    14
+                );
+
+            }
+        );
+
+
+    });
+
+})();
+
+</script>
+
+
+<script>
+
+/* =========================================================
+   ОБРАТНЫЙ ОТСЧЁТ ДО НОВОГО ГОДА
+   ================================================= */
+
+(function () {
+
+    "use strict";
+
+
+    const out =
+        document.getElementById("cdTime");
+
+    if (!out) {
+        return;
+    }
+
+
+    function pad(n) {
+
+        return n < 10 ? "0" + n : String(n);
+
+    }
+
+
+    function tick() {
+
+        const now = new Date();
+
+
+        let year = now.getFullYear();
+
+        let target =
+            new Date(year + 1, 0, 1, 0, 0, 0);
+
+
+        if (target - now < 0) {
+
+            target =
+                new Date(year + 2, 0, 1, 0, 0, 0);
+
+        }
+
+
+        const diff = target - now;
+
+
+        const d = Math.floor(diff / 86400000);
+
+        const h = Math.floor(diff / 3600000) % 24;
+
+        const m = Math.floor(diff / 60000) % 60;
+
+        const s = Math.floor(diff / 1000) % 60;
+
+
+        out.textContent =
+            d + "д " +
+            pad(h) + ":" +
+            pad(m) + ":" +
+            pad(s);
+
+    }
+
+
+    tick();
+
+    setInterval(tick, 1000);
 
 })();
 
