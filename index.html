@@ -46,6 +46,8 @@ html {
 }
 
 body {
+    display: flex;
+    flex-direction: column;
     min-height: 100svh;
     overflow-x: hidden;
     color: var(--text);
@@ -282,12 +284,12 @@ body {
 
 .page {
     position: relative;
-    min-height: 100svh;
+    flex: 1 0 auto;
     width: 100%;
     display: flex;
     justify-content: center;
     padding-top: 160px;
-    padding-bottom: 40px;
+    padding-bottom: 0;
 }
 
 .card {
@@ -296,18 +298,18 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-bottom: 160px;
+    padding-bottom: 24px;
     z-index: 5;
 }
 
 @media (max-width: 900px) {
     .page { padding-top: 130px; }
-    .card { padding-bottom: 140px; }
+    .card { padding-bottom: 24px; }
 }
 
 @media (max-width: 600px) {
     .page { padding-top: 110px; }
-    .card { width: calc(100% - 24px); padding-bottom: 130px; }
+    .card { width: calc(100% - 24px); padding-bottom: 24px; }
 }
 
 /* =========================================================
@@ -472,6 +474,33 @@ body.loaded .title {
 }
 
 /* =========================================================
+   COUNTDOWN CAPTION
+   ========================================================= */
+
+.cd-caption {
+    margin-top: 28px;
+    color: var(--dim);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.6;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 1s var(--ease) .4s, transform 1s var(--ease) .4s;
+}
+
+body.loaded .cd-caption {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (max-width: 600px) {
+    .cd-caption { font-size: 9px; letter-spacing: .2em; }
+}
+
+/* =========================================================
    COUNTDOWN CARDS
    ========================================================= */
 
@@ -480,7 +509,7 @@ body.loaded .title {
     align-items: flex-start;
     justify-content: center;
     gap: 6px;
-    margin-top: 28px;
+    margin-top: 12px;
     opacity: 0;
     transform: translateY(18px);
     transition: opacity 1s var(--ease) .45s, transform 1s var(--ease) .45s;
@@ -1163,18 +1192,18 @@ body.loaded .status-row { opacity: 1; }
 body.loaded .footer { opacity: 1; }
 
 /* =========================================================
-   SNOW DRIFT (bottom)
+   SNOW DRIFT (bottom of page, in normal document flow)
    ========================================================= */
 
 .snow-drift {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    position: relative;
+    flex: 0 0 auto;
+    width: 100%;
     height: clamp(120px, 16vh, 180px);
+    margin-top: 0;
     pointer-events: none;
-    z-index: 40;
-    filter: drop-shadow(0 -6px 24px rgba(180, 235, 240, .35));
+    z-index: 2;
+    overflow: hidden;
 }
 
 .snow-drift svg {
@@ -1628,6 +1657,9 @@ body.loaded .footer { opacity: 1; }
                 <span class="accent">ПОД ВАШИ ЗАДАЧИ</span>
             </h1>
 
+            <!-- COUNTDOWN CAPTION -->
+            <div class="cd-caption">ДО НОВОГО 2027 ГОДА ОСТАЛОСЬ</div>
+
             <!-- COUNTDOWN CARDS -->
             <div class="countdown-cards" aria-hidden="true">
                 <div class="cd-card">
@@ -1835,7 +1867,7 @@ body.loaded .footer { opacity: 1; }
     </section>
 </main>
 
-<!-- SNOW DRIFT -->
+<!-- SNOW DRIFT (в самом низу страницы, в обычном потоке документа) -->
 <div class="snow-drift" aria-hidden="true">
     <svg viewBox="0 0 1440 220" preserveAspectRatio="none">
         <defs>
