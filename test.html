@@ -120,8 +120,8 @@ body::before{
 .copyright{text-align:center;margin-top:42px;font-size:8px;letter-spacing:1.5px;color:rgba(137,163,159,.18)}
 
 /* ===== СУГРОБ ВНИЗУ (в потоке документа) ===== */
-.drift{position:relative;z-index:1;display:block;width:100%;line-height:0;margin-top:6px}
-.drift svg{display:block;width:100%;height:clamp(110px,18vw,170px)}
+.drift{position:relative;z-index:1;display:block;width:100%;line-height:0;margin-top:16px;overflow:visible}
+.drift svg{display:block;width:100%;height:clamp(125px,16vw,300px);overflow:visible}
 
 /* ===== МОБИЛЬНАЯ ВЕРСИЯ ===== */
 @media (max-width:600px){
@@ -361,7 +361,7 @@ body::before{
 
 <!-- Сугроб с елочками (в потоке документа, под нижней плашкой) -->
 <div class="drift" aria-hidden="true">
-    <svg viewBox="0 0 1200 170" preserveAspectRatio="xMidYMax slice">
+    <svg viewBox="0 0 1200 190" preserveAspectRatio="xMidYMax slice">
         <defs>
             <linearGradient id="dr1" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0" stop-color="#ffffff"/>
@@ -387,6 +387,7 @@ body::before{
             </g>
         </defs>
 
+        <g transform="translate(0 20)">
         <!-- дальний сугроб -->
         <path fill="url(#dr2)" d="M0 82C150 52 300 72 450 62C620 50 760 76 900 64C1030 54 1120 68 1200 60L1200 170L0 170Z"/>
         <use href="#tree" transform="translate(70 80) scale(.8)"/>
@@ -405,6 +406,7 @@ body::before{
         <!-- передний сугроб -->
         <path fill="#fff" d="M0 138C120 118 260 134 400 128C540 122 640 142 780 134C920 126 1040 116 1200 130L1200 170L0 170Z"/>
         <path fill="#e3f4f3" opacity=".7" d="M0 154C160 144 300 156 460 150C620 144 760 158 920 150C1040 144 1130 150 1200 148L1200 170L0 170Z"/>
+        </g>
     </svg>
 </div>
 
