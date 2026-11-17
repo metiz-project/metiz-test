@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#030605">
-<title>METIZ PROJECT — наклейки, холсты, реклама | Санкт-Петербург</title>
-<meta name="description" content="METIZ PROJECT — печать, плоттерная резка, брендирование. Наклейки, холсты, реклама. Санкт-Петербург.">
+<title>METIZ PROJECT — новогодние наклейки, холсты, реклама | Санкт-Петербург</title>
+<meta name="description" content="METIZ PROJECT — печать, плоттерная резка, брендирование. Наклейки, холсты, реклама. Санкт-Петербург. Новогоднее настроение и подарки.">
 <link rel="icon" type="image/png" href="metiz-ico-browse.png">
 
 <style>
 /* =========================================================
-   METIZ PROJECT — Winter Edition
+   METIZ PROJECT — Winter Wonderland Edition
    Premium single-page business card
    ========================================================= */
 
@@ -19,22 +19,18 @@
     --tiffany-bright: #72fff6;
     --tiffany-deep: #159c9b;
     --gold: #ffd970;
-    --gold-soft: rgba(255, 215, 120, .55);
+    --gold-bright: #ffeaa5;
+    --red: #ff5a5a;
 
-    --bg: #030605;
-    --bg-2: #07100e;
+    --bg: #02060a;
+    --bg-2: #071018;
 
     --white: #ffffff;
-    --text: rgba(255, 255, 255, .92);
-    --muted: rgba(255, 255, 255, .5);
-    --dim: rgba(255, 255, 255, .32);
-
-    --glass: rgba(255, 255, 255, .05);
-    --glass-hi: rgba(255, 255, 255, .09);
-    --border: rgba(255, 255, 255, .1);
+    --text: rgba(255, 255, 255, .94);
+    --muted: rgba(255, 255, 255, .55);
+    --dim: rgba(255, 255, 255, .34);
 
     --ease: cubic-bezier(.16, 1, .3, 1);
-    --ease-out: cubic-bezier(.22, 1, .36, 1);
 }
 
 * {
@@ -55,17 +51,16 @@ body {
     color: var(--text);
     font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, Helvetica, sans-serif;
     background:
-        radial-gradient(circle at 50% 30%, rgba(76, 213, 211, .12), transparent 30%),
-        radial-gradient(circle at 8% 8%, rgba(76, 213, 211, .05), transparent 25%),
-        radial-gradient(circle at 92% 88%, rgba(76, 213, 211, .04), transparent 30%),
+        radial-gradient(circle at 50% 22%, rgba(76, 213, 211, .13), transparent 28%),
+        radial-gradient(circle at 8% 6%, rgba(76, 213, 211, .06), transparent 24%),
+        radial-gradient(circle at 92% 90%, rgba(255, 217, 112, .05), transparent 30%),
         linear-gradient(160deg, var(--bg), var(--bg-2));
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
-    font-feature-settings: "ss01", "cv01";
 }
 
 /* =========================================================
-   BACKGROUND — grid + aurora
+   BACKGROUND
    ========================================================= */
 
 .bg-grid {
@@ -73,13 +68,13 @@ body {
     inset: 0;
     pointer-events: none;
     z-index: -10;
-    opacity: .4;
+    opacity: .38;
     background:
         linear-gradient(rgba(255, 255, 255, .02) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255, 255, 255, .02) 1px, transparent 1px);
-    background-size: 60px 60px;
-    mask-image: radial-gradient(ellipse 90% 70% at 50% 40%, black, transparent 85%);
-    -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 40%, black, transparent 85%);
+    background-size: 58px 58px;
+    mask-image: radial-gradient(ellipse 90% 70% at 50% 40%, black, transparent 88%);
+    -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 40%, black, transparent 88%);
 }
 
 .aurora {
@@ -94,50 +89,44 @@ body {
     position: absolute;
     border-radius: 50%;
     filter: blur(90px);
-    opacity: .55;
     will-change: transform, opacity;
 }
 
 .aurora-a {
-    width: 75vw; height: 55vh;
-    top: -10%; left: -25%;
+    width: 80vw; height: 55vh;
+    top: -12%; left: -25%;
     background: radial-gradient(ellipse at 40% 50%,
-        rgba(76, 213, 211, .55) 0%,
-        rgba(30, 126, 86, .2) 42%,
-        transparent 72%);
+        rgba(76, 213, 211, .6) 0%, rgba(30, 126, 86, .22) 42%, transparent 72%);
     animation: auroraA 22s ease-in-out infinite alternate;
 }
 
 .aurora-b {
     width: 65vw; height: 45vh;
-    top: 10%; right: -22%;
+    top: 8%; right: -22%;
     background: radial-gradient(ellipse at 55% 50%,
-        rgba(30, 126, 86, .5) 0%,
-        rgba(76, 213, 211, .2) 44%,
-        transparent 70%);
+        rgba(255, 217, 112, .18) 0%, rgba(76, 213, 211, .18) 44%, transparent 70%);
     animation: auroraB 28s ease-in-out infinite alternate;
 }
 
 .aurora-c {
-    width: 55vw; height: 32vh;
-    bottom: 0%; left: 20%;
+    width: 60vw; height: 35vh;
+    bottom: 2%; left: 18%;
     background: radial-gradient(ellipse at 50% 50%,
-        rgba(76, 213, 211, .35) 0%,
-        transparent 66%);
+        rgba(76, 213, 211, .38) 0%, transparent 66%);
     animation: auroraC 32s ease-in-out infinite alternate;
 }
 
 @keyframes auroraA {
-    0%   { transform: translate(0, 0) scale(1) rotate(0); opacity: .35; }
+    0% { transform: translate(0, 0) scale(1) rotate(0); opacity: .35; }
     100% { transform: translate(28%, 18%) scale(1.3) rotate(16deg); opacity: .7; }
 }
 @keyframes auroraB {
-    0%   { transform: translate(0, 0) scale(1); opacity: .3; }
-    100% { transform: translate(-22%, -14%) scale(1.28) rotate(-12deg); opacity: .65; }
+    0% { transform: translate(0, 0) scale(1); opacity: .35; }
+    100% { transform: translate(-22%, -14%) scale(1.28) rotate(-12deg); opacity: .7; }
 }
 @keyframes auroraC {
-    0%   { transform: translate(-6%, -4%) scale(1); opacity: .25; }
-    100% { transform: translate(14%, -8%) scale(1.4); opacity: .5; }
+    0% { transform: translate(-6%, -4%) scale(1); opacity: .28; }
+    100% { transform: translate(14%, -8%) scale(1.4); opacity: .55; }
 }
 
 /* =========================================================
@@ -150,40 +139,38 @@ body {
     z-index: 9999;
     display: grid;
     place-items: center;
-    background: #030605;
+    background: #02060a;
     pointer-events: none;
     transition: opacity .8s var(--ease);
 }
 
-.intro.fade {
-    opacity: 0;
-}
+.intro.fade { opacity: 0; }
 
 .intro-logo {
     width: min(240px, 62vw);
     height: auto;
-    filter: drop-shadow(0 0 40px rgba(76, 213, 211, .25));
+    filter: drop-shadow(0 0 40px rgba(76, 213, 211, .3));
     opacity: 0;
     transform: scale(.9);
-    animation: introAppear 1s var(--ease) forwards;
+    animation: introAppear 1.1s var(--ease) forwards;
 }
 
 @keyframes introAppear {
-    0%   { opacity: 0; transform: scale(.88); filter: blur(12px); }
-    60%  { opacity: 1; transform: scale(1.02); filter: blur(0); }
+    0% { opacity: 0; transform: scale(.86); filter: blur(14px); }
+    55% { opacity: 1; transform: scale(1.03); filter: blur(0); }
     100% { opacity: 1; transform: scale(1); filter: blur(0); }
 }
 
 /* =========================================================
-   GARLAND — top of page
+   GARLAND — multi-tier, interactive bulbs
    ========================================================= */
 
 .garland {
     position: fixed;
-    top: -4px;
+    top: 0;
     left: 0;
     right: 0;
-    height: 70px;
+    height: 140px;
     pointer-events: none;
     z-index: 30;
     overflow: hidden;
@@ -199,60 +186,94 @@ body {
 
 .garland .bulb {
     position: absolute;
-    width: 9px;
-    height: 12px;
-    border-radius: 50% 50% 45% 45% / 55% 55% 45% 45%;
+    width: 14px;
+    height: 20px;
+    border-radius: 50% 50% 46% 46% / 58% 58% 42% 42%;
     transform: translate(-50%, -50%);
     pointer-events: auto;
     cursor: pointer;
     transition: filter .35s ease, box-shadow .35s ease, transform .35s var(--ease);
     animation: bulbPulse 3.2s ease-in-out infinite;
+    z-index: 1;
+}
+
+.garland .bulb::before {
+    content: "";
+    position: absolute;
+    inset: -12px;
+    border-radius: 50%;
+}
+
+.garland .bulb::after {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    width: 5px;
+    height: 6px;
+    transform: translateX(-50%);
+    border-radius: 1.5px;
+    background: linear-gradient(#3d4a48, #1a2220);
+    box-shadow: 0 0 3px rgba(0, 0, 0, .8);
 }
 
 .garland .bulb.t {
-    background: radial-gradient(ellipse at 38% 30%, #fff, #a9fffb 26%, #4cd5d3 62%, #0a5554 100%);
+    background: radial-gradient(ellipse at 38% 30%, #fff, #a9fffb 26%, #4cd5d3 60%, #0a5554 100%);
     box-shadow:
-        0 0 8px 2px rgba(76, 213, 211, .75),
-        0 0 22px 8px rgba(76, 213, 211, .35);
+        0 0 10px 3px rgba(76, 213, 211, .8),
+        0 0 28px 10px rgba(76, 213, 211, .38),
+        0 0 60px 20px rgba(76, 213, 211, .14);
 }
 
 .garland .bulb.g {
     background: radial-gradient(ellipse at 38% 30%, #fff, #ffeec2 28%, #ffd35c 60%, #8a6516 100%);
     box-shadow:
-        0 0 8px 2px rgba(255, 214, 120, .8),
-        0 0 22px 8px rgba(255, 196, 70, .35);
+        0 0 10px 3px rgba(255, 214, 120, .85),
+        0 0 28px 10px rgba(255, 196, 70, .4),
+        0 0 60px 20px rgba(255, 180, 60, .15);
 }
 
 .garland .bulb.w {
     background: radial-gradient(ellipse at 38% 30%, #fff, #fff 40%, #dffcff 100%);
     box-shadow:
-        0 0 8px 2px rgba(255, 255, 255, .8),
-        0 0 22px 8px rgba(210, 250, 255, .35);
+        0 0 10px 3px rgba(255, 255, 255, .85),
+        0 0 28px 10px rgba(210, 250, 255, .4),
+        0 0 60px 20px rgba(200, 240, 255, .15);
+}
+
+.garland .bulb.r {
+    background: radial-gradient(ellipse at 38% 30%, #fff, #ffd0d0 26%, #ff5252 60%, #8a0a12 100%);
+    box-shadow:
+        0 0 10px 3px rgba(255, 90, 90, .85),
+        0 0 28px 10px rgba(255, 60, 60, .4),
+        0 0 60px 20px rgba(255, 50, 50, .15);
 }
 
 .garland .bulb.lit {
     animation: none;
-    transform: translate(-50%, -50%) scale(1.35);
-    filter: brightness(1.3) saturate(1.4);
+    transform: translate(-50%, -50%) scale(1.5);
+    filter: brightness(1.4) saturate(1.5);
 }
 
-.garland .bulb.t.lit { box-shadow: 0 0 14px 4px rgba(76, 213, 211, 1), 0 0 40px 16px rgba(76, 213, 211, .5); }
-.garland .bulb.g.lit { box-shadow: 0 0 14px 4px rgba(255, 214, 120, 1), 0 0 40px 16px rgba(255, 196, 70, .5); }
-.garland .bulb.w.lit { box-shadow: 0 0 14px 4px rgba(255, 255, 255, 1), 0 0 40px 16px rgba(210, 250, 255, .5); }
+.garland .bulb.t.lit { box-shadow: 0 0 18px 6px rgba(76, 213, 211, 1), 0 0 50px 20px rgba(76, 213, 211, .55); }
+.garland .bulb.g.lit { box-shadow: 0 0 18px 6px rgba(255, 214, 120, 1), 0 0 50px 20px rgba(255, 196, 70, .55); }
+.garland .bulb.w.lit { box-shadow: 0 0 18px 6px rgba(255, 255, 255, 1), 0 0 50px 20px rgba(210, 250, 255, .55); }
+.garland .bulb.r.lit { box-shadow: 0 0 18px 6px rgba(255, 90, 90, 1), 0 0 50px 20px rgba(255, 60, 60, .55); }
 
-.garland .bulb:nth-of-type(4n)   { animation-delay: -.5s; }
-.garland .bulb:nth-of-type(4n+1) { animation-delay: -1.2s; }
-.garland .bulb:nth-of-type(4n+2) { animation-delay: -2s; }
-.garland .bulb:nth-of-type(4n+3) { animation-delay: -2.7s; }
+.garland .bulb:nth-of-type(5n)   { animation-delay: -.5s; }
+.garland .bulb:nth-of-type(5n+1) { animation-delay: -1.2s; }
+.garland .bulb:nth-of-type(5n+2) { animation-delay: -1.9s; }
+.garland .bulb:nth-of-type(5n+3) { animation-delay: -2.6s; }
+.garland .bulb:nth-of-type(5n+4) { animation-delay: -3.1s; }
 
 @keyframes bulbPulse {
     0%, 100% { opacity: .55; filter: brightness(.8); }
-    50%      { opacity: 1;   filter: brightness(1.15); }
+    50% { opacity: 1; filter: brightness(1.2); }
 }
 
 @media (max-width: 600px) {
-    .garland { height: 56px; }
-    .garland .bulb { width: 7px; height: 10px; }
+    .garland { height: 100px; }
+    .garland .bulb { width: 10px; height: 15px; }
 }
 
 /* =========================================================
@@ -265,7 +286,8 @@ body {
     width: 100%;
     display: flex;
     justify-content: center;
-    padding-top: 48px;
+    padding-top: 160px;
+    padding-bottom: 40px;
 }
 
 .card {
@@ -274,15 +296,92 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding:
-        max(24px, env(safe-area-inset-top))
-        0
-        max(110px, calc(env(safe-area-inset-bottom) + 96px));
+    padding-bottom: 160px;
     z-index: 5;
 }
 
+@media (max-width: 900px) {
+    .page { padding-top: 130px; }
+    .card { padding-bottom: 140px; }
+}
+
+@media (max-width: 600px) {
+    .page { padding-top: 110px; }
+    .card { width: calc(100% - 24px); padding-bottom: 130px; }
+}
+
 /* =========================================================
-   TOP BLOCK
+   TREE HERO
+   ========================================================= */
+
+.tree-hero {
+    position: relative;
+    width: min(200px, 48vw);
+    height: 230px;
+    margin: 0 auto 4px;
+    display: grid;
+    place-items: center;
+}
+
+.tree-hero::before {
+    content: "";
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(76, 213, 211, .22) 0%, rgba(76, 213, 211, .06) 40%, transparent 72%);
+    filter: blur(24px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.neon-tree {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    filter: drop-shadow(0 8px 24px rgba(0, 0, 0, .6));
+}
+
+.tree-falling-stars {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 3;
+}
+
+.tstar {
+    position: absolute;
+    top: -12px;
+    left: var(--x, 50%);
+    width: 4px;
+    height: 4px;
+    background: radial-gradient(circle, #fff5b0, #ffd970 55%, transparent 100%);
+    border-radius: 50%;
+    box-shadow: 0 0 8px #ffd970, 0 0 16px rgba(255, 215, 120, .55);
+    animation: tstarFall var(--d, 5s) linear infinite;
+    animation-delay: var(--dl, 0s);
+    opacity: 0;
+}
+
+@keyframes tstarFall {
+    0% { transform: translateY(0) rotate(0); opacity: 0; }
+    15% { opacity: 1; }
+    85% { opacity: 1; }
+    100% { transform: translateY(240px) rotate(360deg); opacity: 0; }
+}
+
+@media (max-width: 600px) {
+    .tree-hero { width: min(150px, 42vw); height: 180px; }
+    .tree-hero::before { width: 200px; height: 200px; }
+}
+
+/* =========================================================
+   BRAND CONTENT
    ========================================================= */
 
 .brand {
@@ -291,12 +390,11 @@ body {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding-top: 8px;
 }
 
 .logo-wrap {
     position: relative;
-    width: min(310px, 72vw);
+    width: min(290px, 68vw);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -314,11 +412,11 @@ body.loaded .logo-wrap {
     display: block;
     width: 100%;
     height: auto;
-    filter: drop-shadow(0 0 24px rgba(76, 213, 211, .16));
+    filter: drop-shadow(0 0 24px rgba(76, 213, 211, .18));
 }
 
 .location {
-    margin-top: 20px;
+    margin-top: 18px;
     display: inline-flex;
     align-items: center;
     gap: 10px;
@@ -343,13 +441,13 @@ body.loaded .location {
     display: block;
     width: 22px;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(76, 213, 211, .4), transparent);
+    background: linear-gradient(90deg, transparent, rgba(76, 213, 211, .45), transparent);
 }
 
 .title {
     margin-top: 22px;
     max-width: 520px;
-    font-size: clamp(28px, 6.4vw, 42px);
+    font-size: clamp(28px, 6.4vw, 44px);
     font-weight: 900;
     line-height: 1.02;
     letter-spacing: -.045em;
@@ -366,24 +464,115 @@ body.loaded .title {
 
 .title .accent {
     display: inline-block;
-    color: var(--tiffany);
     background: linear-gradient(120deg, var(--tiffany-bright) 0%, var(--tiffany) 55%, var(--tiffany-deep) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 40px rgba(76, 213, 211, .28);
+    text-shadow: 0 0 60px rgba(76, 213, 211, .35);
 }
 
+/* =========================================================
+   COUNTDOWN CARDS
+   ========================================================= */
+
+.countdown-cards {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 28px;
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 1s var(--ease) .45s, transform 1s var(--ease) .45s;
+}
+
+body.loaded .countdown-cards {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.cd-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    min-width: 62px;
+    padding: 12px 8px 10px;
+    border-radius: 14px;
+    border: 1px solid rgba(76, 213, 211, .28);
+    background: linear-gradient(160deg, rgba(255, 255, 255, .09), rgba(76, 213, 211, .05));
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .12),
+        inset 0 0 22px rgba(76, 213, 211, .06),
+        0 8px 20px rgba(0, 0, 0, .25),
+        0 0 26px rgba(76, 213, 211, .08);
+    position: relative;
+    overflow: hidden;
+}
+
+.cd-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, transparent 40%, rgba(76, 213, 211, .18) 100%);
+    pointer-events: none;
+}
+
+.cd-num {
+    position: relative;
+    font-size: 26px;
+    font-weight: 900;
+    line-height: 1;
+    color: var(--tiffany-bright);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -.02em;
+    text-shadow:
+        0 0 14px rgba(76, 213, 211, .6),
+        0 0 32px rgba(76, 213, 211, .25);
+}
+
+.cd-lbl {
+    position: relative;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, .5);
+}
+
+.cd-sep {
+    align-self: center;
+    font-size: 20px;
+    font-weight: 900;
+    color: rgba(76, 213, 211, .45);
+    line-height: 1;
+    padding: 0 1px;
+    text-shadow: 0 0 10px rgba(76, 213, 211, .4);
+}
+
+@media (max-width: 600px) {
+    .cd-card { min-width: 54px; padding: 10px 6px 8px; }
+    .cd-num { font-size: 22px; }
+    .cd-lbl { font-size: 7px; letter-spacing: .18em; }
+    .cd-sep { font-size: 16px; }
+}
+
+/* =========================================================
+   SUBTITLE
+   ========================================================= */
+
 .subtitle {
-    margin-top: 16px;
+    margin-top: 20px;
     color: var(--muted);
     font-size: 13px;
     font-weight: 500;
-    letter-spacing: .02em;
+    letter-spacing: .04em;
     text-align: center;
     opacity: 0;
     transform: translateY(14px);
-    transition: opacity 1s var(--ease) .45s, transform 1s var(--ease) .45s;
+    transition: opacity 1s var(--ease) .55s, transform 1s var(--ease) .55s;
 }
 
 body.loaded .subtitle {
@@ -399,7 +588,7 @@ body.loaded .subtitle {
     position: relative;
     width: 100vw;
     margin-left: calc(50% - 50vw);
-    margin-top: 28px;
+    margin-top: 26px;
     padding: 14px 0;
     overflow: hidden;
     border-top: 1px solid rgba(255, 255, 255, .05);
@@ -407,17 +596,15 @@ body.loaded .subtitle {
     mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
     -webkit-mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
     opacity: 0;
-    transition: opacity 1s var(--ease) .55s;
+    transition: opacity 1s var(--ease) .65s;
 }
 
-body.loaded .marquee-wrap {
-    opacity: 1;
-}
+body.loaded .marquee-wrap { opacity: 1; }
 
 .marquee {
     display: flex;
     width: max-content;
-    animation: marquee 42s linear infinite;
+    animation: marquee 46s linear infinite;
     will-change: transform;
 }
 
@@ -431,12 +618,12 @@ body.loaded .marquee-wrap {
 .marquee-item {
     display: inline-flex;
     align-items: center;
-    color: rgba(255, 255, 255, .34);
+    color: rgba(255, 255, 255, .38);
     font-size: 10px;
     font-weight: 700;
     letter-spacing: .26em;
     text-transform: uppercase;
-    padding: 0 18px;
+    padding: 0 16px;
 }
 
 .marquee-star {
@@ -456,7 +643,7 @@ body.loaded .marquee-wrap {
 
 @keyframes starTwinkle {
     0%, 100% { opacity: .55; transform: scale(.85); }
-    50%      { opacity: 1;   transform: scale(1.15); }
+    50% { opacity: 1; transform: scale(1.15); }
 }
 
 @keyframes marquee {
@@ -464,23 +651,83 @@ body.loaded .marquee-wrap {
 }
 
 /* =========================================================
-   BUTTONS
+   BUTTONS + SNOW CAPS
    ========================================================= */
 
 .buttons {
     width: 100%;
-    margin-top: 26px;
+    margin-top: 22px;
     display: flex;
     flex-direction: column;
-    gap: 11px;
+    gap: 24px;
+    padding: 12px 0 4px;
     opacity: 0;
     transform: translateY(24px);
-    transition: opacity 1s var(--ease) .65s, transform 1.1s var(--ease) .65s;
+    transition: opacity 1s var(--ease) .75s, transform 1.1s var(--ease) .75s;
 }
 
 body.loaded .buttons {
     opacity: 1;
     transform: translateY(0);
+}
+
+.btn-shell {
+    position: relative;
+    width: 100%;
+}
+
+.snow-cap {
+    position: absolute;
+    top: -14px;
+    left: -1%;
+    right: -1%;
+    height: 24px;
+    pointer-events: none;
+    z-index: 4;
+    background:
+        radial-gradient(ellipse 20% 100% at 5% 100%, #fff 0%, #f0faff 50%, transparent 70%),
+        radial-gradient(ellipse 26% 115% at 22% 100%, #fff 0%, #f5fdff 55%, transparent 75%),
+        radial-gradient(ellipse 30% 105% at 45% 100%, #fff 0%, #f0faff 58%, transparent 78%),
+        radial-gradient(ellipse 28% 120% at 68% 100%, #fff 0%, #f5fdff 55%, transparent 76%),
+        radial-gradient(ellipse 24% 100% at 88% 100%, #fff 0%, #f0faff 55%, transparent 74%),
+        radial-gradient(ellipse 18% 100% at 98% 100%, #fff 0%, #f0faff 52%, transparent 72%);
+    filter:
+        drop-shadow(0 4px 9px rgba(76, 213, 211, .55))
+        drop-shadow(0 1px 3px rgba(76, 213, 211, .4));
+    transition: transform .45s var(--ease);
+}
+
+.snow-cap::before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 4%;
+    right: 4%;
+    height: 8px;
+    background: linear-gradient(180deg, #fff 0%, rgba(233, 250, 255, .8) 55%, transparent 100%);
+    clip-path: polygon(0% 0%, 6% 100%, 14% 22%, 22% 100%, 30% 0%, 38% 100%, 46% 20%, 54% 100%, 62% 0%, 70% 100%, 78% 22%, 86% 100%, 94% 0%, 100% 60%, 100% 0%);
+    opacity: .9;
+    filter: drop-shadow(0 2px 3px rgba(76, 213, 211, .45));
+}
+
+.snow-cap::after {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 24%;
+    width: 5px;
+    height: 4px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse, #fff 0%, rgba(255, 255, 255, 0) 72%);
+    box-shadow:
+        52px 3px 5px -2px rgba(255, 255, 255, .9),
+        100px -1px 4px -1px rgba(255, 255, 255, .85),
+        148px 4px 6px -2px rgba(255, 255, 255, .9);
+    opacity: .8;
+}
+
+.btn-shell:hover .snow-cap {
+    transform: translateY(-1px);
 }
 
 .btn {
@@ -495,8 +742,7 @@ body.loaded .buttons {
     gap: 13px;
     border-radius: 16px;
     border: 1px solid rgba(255, 255, 255, .09);
-    background:
-        linear-gradient(135deg, rgba(255, 255, 255, .06) 0%, rgba(255, 255, 255, .02) 100%);
+    background: linear-gradient(135deg, rgba(255, 255, 255, .06) 0%, rgba(255, 255, 255, .02) 100%);
     backdrop-filter: blur(20px) saturate(140%);
     -webkit-backdrop-filter: blur(20px) saturate(140%);
     color: var(--text);
@@ -510,7 +756,7 @@ body.loaded .buttons {
     box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, .1),
         inset 0 -1px 0 rgba(76, 213, 211, .1),
-        0 8px 24px rgba(0, 0, 0, .28);
+        0 8px 24px rgba(0, 0, 0, .3);
     transition:
         transform .5s var(--ease),
         border-color .35s ease,
@@ -526,14 +772,14 @@ body.loaded .buttons {
     background: linear-gradient(110deg,
         transparent 32%,
         rgba(255, 255, 255, .35) 46%,
-        rgba(180, 255, 250, .75) 50%,
+        rgba(180, 255, 250, .8) 50%,
         rgba(255, 255, 255, .35) 54%,
         transparent 68%);
     transform: translateX(-150%);
     transition: transform 1s var(--ease);
     pointer-events: none;
     mix-blend-mode: screen;
-    opacity: .6;
+    opacity: .65;
 }
 
 .btn::after {
@@ -553,17 +799,17 @@ body.loaded .buttons {
 
 .btn:hover {
     transform: translateY(-2px);
-    border-color: rgba(76, 213, 211, .45);
+    border-color: rgba(76, 213, 211, .5);
     box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, .16),
-        inset 0 0 22px rgba(76, 213, 211, .12),
-        0 12px 40px rgba(0, 0, 0, .38),
-        0 0 30px rgba(76, 213, 211, .22),
-        0 0 60px rgba(255, 215, 120, .08);
+        inset 0 1px 0 rgba(255, 255, 255, .18),
+        inset 0 0 24px rgba(76, 213, 211, .14),
+        0 14px 42px rgba(0, 0, 0, .4),
+        0 0 34px rgba(76, 213, 211, .3),
+        0 0 70px rgba(255, 215, 120, .1);
 }
 
 .btn:hover::before { transform: translateX(150%); }
-.btn:hover::after  { opacity: 1; }
+.btn:hover::after { opacity: 1; }
 
 .btn:active {
     transform: translateY(0) scale(.99);
@@ -571,7 +817,7 @@ body.loaded .buttons {
 
 .btn:focus-visible {
     outline: 2px solid var(--tiffany);
-    outline-offset: 3px;
+    outline-offset: 4px;
 }
 
 .btn.primary {
@@ -580,7 +826,8 @@ body.loaded .buttons {
     border-color: rgba(111, 249, 240, .55);
     box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, .5),
-        0 10px 30px rgba(76, 213, 211, .18);
+        0 10px 30px rgba(76, 213, 211, .2),
+        0 0 24px rgba(76, 213, 211, .1);
 }
 
 .btn.primary:hover {
@@ -588,39 +835,39 @@ body.loaded .buttons {
     border-color: var(--tiffany-bright);
     box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, .6),
-        0 14px 40px rgba(76, 213, 211, .28),
-        0 0 40px rgba(76, 213, 211, .18),
-        0 0 70px rgba(255, 215, 120, .12);
+        0 14px 42px rgba(76, 213, 211, .3),
+        0 0 44px rgba(76, 213, 211, .2),
+        0 0 80px rgba(255, 215, 120, .14);
 }
 
 .btn.primary::before {
     background: linear-gradient(110deg,
         transparent 30%,
         rgba(255, 255, 255, .7) 48%,
-        rgba(255, 255, 255, .9) 52%,
+        rgba(255, 255, 255, .95) 52%,
         rgba(255, 255, 255, .7) 54%,
         transparent 70%);
 }
 
 .btn.outline {
     color: var(--tiffany);
-    background: transparent;
+    background: rgba(76, 213, 211, .02);
     border-color: rgba(76, 213, 211, .55);
     box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, .04),
+        inset 0 1px 0 rgba(255, 255, 255, .05),
         inset 0 0 18px rgba(76, 213, 211, .04),
-        0 8px 24px rgba(0, 0, 0, .22);
+        0 8px 24px rgba(0, 0, 0, .25);
 }
 
 .btn.outline:hover {
-    background: rgba(76, 213, 211, .04);
+    background: rgba(76, 213, 211, .05);
     border-color: var(--tiffany-bright);
     box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, .1),
-        inset 0 0 24px rgba(76, 213, 211, .1),
-        0 12px 40px rgba(0, 0, 0, .3),
-        0 0 34px rgba(76, 213, 211, .25),
-        0 0 60px rgba(255, 215, 120, .08);
+        inset 0 0 24px rgba(76, 213, 211, .12),
+        0 12px 42px rgba(0, 0, 0, .32),
+        0 0 34px rgba(76, 213, 211, .28),
+        0 0 70px rgba(255, 215, 120, .1);
 }
 
 .btn-icon {
@@ -635,7 +882,7 @@ body.loaded .buttons {
 }
 
 .btn:hover .btn-icon {
-    transform: scale(1.08) rotate(-5deg);
+    transform: scale(1.1) rotate(-5deg);
 }
 
 .btn-icon svg {
@@ -666,54 +913,218 @@ body.loaded .buttons {
     opacity: .62;
 }
 
-.btn-text-single {
-    z-index: 2;
+.btn-text-single { z-index: 2; }
+
+/* =========================================================
+   GIFT SURPRISE
+   ========================================================= */
+
+.gift-surprise {
+    width: 100%;
+    margin-top: 28px;
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border-radius: 20px;
+    border: 1px dashed rgba(255, 215, 120, .4);
+    background:
+        linear-gradient(135deg, rgba(255, 215, 120, .07), rgba(76, 213, 211, .04));
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .1),
+        0 10px 30px rgba(0, 0, 0, .25),
+        0 0 30px rgba(255, 215, 120, .08);
+    position: relative;
+    overflow: hidden;
+    transition: all .5s var(--ease);
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+body.loaded .gift-surprise {
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+        opacity 1s var(--ease) .9s,
+        transform 1s var(--ease) .9s,
+        background .5s ease,
+        border-color .5s ease;
+}
+
+.gift-box {
+    flex: 0 0 60px;
+    width: 60px;
+    height: 60px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    position: relative;
+    transition: transform .3s var(--ease);
+    animation: giftIdle 3s ease-in-out infinite;
+    outline: none;
+}
+
+.gift-box:hover {
+    animation-play-state: paused;
+    transform: scale(1.1) rotate(-3deg);
+}
+
+.gift-box:active {
+    transform: scale(.94);
+}
+
+.gift-box.shake {
+    animation: giftShake .5s var(--ease) !important;
+}
+
+@keyframes giftIdle {
+    0%, 100% { transform: rotate(0); }
+    50% { transform: rotate(-3deg); }
+}
+
+@keyframes giftShake {
+    0% { transform: rotate(0) scale(1); }
+    20% { transform: rotate(-14deg) scale(1.08); }
+    40% { transform: rotate(12deg) scale(1.08); }
+    60% { transform: rotate(-9deg) scale(1.04); }
+    80% { transform: rotate(6deg) scale(1.02); }
+    100% { transform: rotate(0) scale(1); }
+}
+
+.gift-svg {
+    width: 100%;
+    height: 100%;
+    filter:
+        drop-shadow(0 4px 12px rgba(255, 90, 90, .55))
+        drop-shadow(0 0 20px rgba(255, 215, 120, .35));
+}
+
+.gift-copy {
+    flex: 1;
+    min-width: 0;
+    text-align: left;
+}
+
+.gift-title {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--gold);
+    letter-spacing: -.005em;
+    margin-bottom: 3px;
+}
+
+.gift-hint {
+    font-size: 10px;
+    color: rgba(255, 255, 255, .55);
+    letter-spacing: .04em;
+}
+
+.gift-promo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    opacity: 0;
+    transform: scale(.9);
+    pointer-events: none;
+    transition: all .55s var(--ease);
+    text-align: left;
+}
+
+.gift-promo.show {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+}
+
+.gift-surprise.revealed .gift-box,
+.gift-surprise.revealed .gift-copy {
+    display: none;
+}
+
+.gift-surprise.revealed {
+    border-style: solid;
+    border-color: rgba(255, 215, 120, .55);
+    background:
+        linear-gradient(135deg, rgba(255, 215, 120, .14), rgba(76, 213, 211, .1));
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .15),
+        0 10px 34px rgba(0, 0, 0, .3),
+        0 0 40px rgba(255, 215, 120, .2),
+        0 0 80px rgba(76, 213, 211, .1);
+}
+
+.promo-badge {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .12em;
+    color: var(--tiffany-bright);
+    text-transform: uppercase;
+    margin-bottom: 2px;
+}
+
+.promo-text {
+    font-size: 12px;
+    color: var(--text);
+    line-height: 1.4;
+}
+
+.promo-text b {
+    color: var(--gold);
+    font-weight: 900;
+    font-size: 14px;
+}
+
+.promo-code {
+    display: inline-block;
+    padding: 6px 13px;
+    border-radius: 8px;
+    background: rgba(255, 215, 120, .16);
+    border: 1px dashed rgba(255, 215, 120, .55);
+    color: var(--gold);
+    font-family: "JetBrains Mono", "Courier New", monospace;
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: .16em;
+    align-self: flex-start;
+    margin-top: 4px;
+    text-shadow: 0 0 10px rgba(255, 215, 120, .55);
 }
 
 /* =========================================================
-   BOTTOM BAR — status + slogan + timer
+   STATUS ROW
    ========================================================= */
 
-.bottom-bar {
-    position: fixed;
-    left: 50%;
-    bottom: max(16px, env(safe-area-inset-bottom));
-    transform: translateX(-50%);
-    z-index: 90;
+.status-row {
     display: inline-flex;
     align-items: center;
-    gap: 14px;
-    padding: 10px 20px;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 28px;
+    padding: 8px 18px;
     border-radius: 999px;
     border: 1px solid rgba(255, 255, 255, .1);
-    background: linear-gradient(135deg, rgba(255, 255, 255, .07), rgba(255, 255, 255, .02));
-    backdrop-filter: blur(20px) saturate(140%);
-    -webkit-backdrop-filter: blur(20px) saturate(140%);
+    background: linear-gradient(135deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .02));
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
     box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, .08),
-        0 10px 30px rgba(0, 0, 0, .4),
-        0 0 24px rgba(76, 213, 211, .1);
+        inset 0 1px 0 rgba(255, 255, 255, .06),
+        0 6px 20px rgba(0, 0, 0, .25);
     color: var(--text);
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 700;
-    letter-spacing: .14em;
+    letter-spacing: .16em;
     text-transform: uppercase;
-    white-space: nowrap;
-    pointer-events: none;
     opacity: 0;
-    transition: opacity 1s var(--ease) 1.1s;
+    transition: opacity 1s var(--ease) 1s;
 }
 
-body.loaded .bottom-bar { opacity: 1; }
+body.loaded .status-row { opacity: 1; }
 
-.bottom-status {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    color: #63ff3f;
-}
-
-.bottom-dot {
+.status-dot {
     width: 6px;
     height: 6px;
     border-radius: 50%;
@@ -724,45 +1135,14 @@ body.loaded .bottom-bar { opacity: 1; }
 
 @keyframes statusPulse {
     0%, 100% { opacity: .6; transform: scale(.85); }
-    50%      { opacity: 1;   transform: scale(1); }
+    50% { opacity: 1; transform: scale(1); }
 }
 
-.bottom-slogan {
-    color: var(--dim);
-    font-size: 9px;
-    letter-spacing: .24em;
-}
+.status-text-online { color: #63ff3f; }
 
-.bottom-timer {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    color: var(--tiffany);
-    font-variant-numeric: tabular-nums;
-    letter-spacing: .1em;
-}
+.status-slogan { color: var(--dim); }
 
-.bottom-timer-icon {
-    color: var(--gold);
-    font-size: 11px;
-    line-height: 1;
-    text-shadow: 0 0 10px rgba(255, 215, 120, .7);
-}
-
-@media (max-width: 620px) {
-    .bottom-bar {
-        font-size: 9px;
-        gap: 10px;
-        padding: 9px 15px;
-        letter-spacing: .1em;
-    }
-    .bottom-slogan { display: none; }
-}
-
-@media (max-width: 380px) {
-    .bottom-bar { gap: 8px; padding: 8px 12px; }
-    .bottom-status span:not(.bottom-dot) { display: none; }
-}
+.status-sep { color: var(--dim); opacity: .5; }
 
 /* =========================================================
    FOOTER
@@ -770,20 +1150,45 @@ body.loaded .bottom-bar { opacity: 1; }
 
 .footer {
     width: 100%;
-    margin-top: 28px;
+    margin-top: 24px;
     text-align: center;
-    color: rgba(255, 255, 255, .18);
+    color: rgba(255, 255, 255, .2);
     font-size: 9px;
     letter-spacing: .22em;
     text-transform: uppercase;
     opacity: 0;
-    transition: opacity 1s var(--ease) 1.2s;
+    transition: opacity 1s var(--ease) 1.1s;
 }
 
 body.loaded .footer { opacity: 1; }
 
 /* =========================================================
-   MODAL — Самовывоз
+   SNOW DRIFT (bottom)
+   ========================================================= */
+
+.snow-drift {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: clamp(120px, 16vh, 180px);
+    pointer-events: none;
+    z-index: 40;
+    filter: drop-shadow(0 -6px 24px rgba(180, 235, 240, .35));
+}
+
+.snow-drift svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+@media (max-width: 600px) {
+    .snow-drift { height: clamp(90px, 14vh, 140px); }
+}
+
+/* =========================================================
+   MODAL
    ========================================================= */
 
 .modal {
@@ -806,7 +1211,7 @@ body.loaded .footer { opacity: 1; }
 .modal-backdrop {
     position: absolute;
     inset: 0;
-    background: rgba(2, 5, 4, .72);
+    background: rgba(2, 5, 4, .75);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 }
@@ -823,7 +1228,7 @@ body.loaded .footer { opacity: 1; }
     -webkit-backdrop-filter: blur(30px) saturate(160%);
     box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, .14),
-        0 30px 80px rgba(0, 0, 0, .5),
+        0 30px 80px rgba(0, 0, 0, .55),
         0 0 60px rgba(76, 213, 211, .1);
     transform: translateY(24px) scale(.95);
     transition: transform .45s var(--ease);
@@ -961,8 +1366,8 @@ body.loaded .footer { opacity: 1; }
     text-transform: uppercase;
     box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, .15),
-        0 10px 30px rgba(0, 0, 0, .4),
-        0 0 30px rgba(76, 213, 211, .25);
+        0 10px 30px rgba(0, 0, 0, .45),
+        0 0 30px rgba(76, 213, 211, .28);
     opacity: 0;
     pointer-events: none;
     transition: opacity .35s var(--ease), transform .35s var(--ease);
@@ -975,7 +1380,7 @@ body.loaded .footer { opacity: 1; }
 }
 
 /* =========================================================
-   CANVASES + SPARK LAYER
+   CANVASES
    ========================================================= */
 
 #snow {
@@ -1024,64 +1429,13 @@ body.loaded .footer { opacity: 1; }
 }
 
 @keyframes sparkFly {
-    0%   { transform: translate(0, 0) scale(1); opacity: 1; }
+    0% { transform: translate(0, 0) scale(1); opacity: 1; }
     100% { transform: translate(var(--dx, 0), var(--dy, 0)) scale(.1); opacity: 0; }
 }
 
 /* =========================================================
-   RESPONSIVE
+   REDUCED MOTION
    ========================================================= */
-
-@media (max-width: 600px) {
-    .card {
-        width: calc(100% - 28px);
-        padding-top: max(20px, env(safe-area-inset-top));
-    }
-
-    .title {
-        font-size: clamp(26px, 8vw, 36px);
-    }
-
-    .subtitle {
-        font-size: 12px;
-    }
-
-    .btn {
-        min-height: 58px;
-        padding: 0 18px;
-        border-radius: 14px;
-        font-size: 13px;
-    }
-
-    .btn-label .t1 { font-size: 13px; }
-    .btn-label .t2 { font-size: 8px; }
-
-    .marquee-item {
-        font-size: 9px;
-        padding: 0 14px;
-        letter-spacing: .22em;
-    }
-}
-
-@media (max-width: 380px) {
-    .card { width: calc(100% - 22px); }
-    .title { font-size: 24px; }
-    .subtitle { font-size: 11px; }
-    .btn { min-height: 54px; font-size: 12px; }
-}
-
-@media (max-height: 720px) {
-    .page { padding-top: 20px; }
-    .card { padding-top: 14px; }
-    .logo-wrap { width: min(240px, 62vw); }
-    .location { margin-top: 14px; }
-    .title { margin-top: 16px; }
-    .subtitle { margin-top: 12px; }
-    .marquee-wrap { margin-top: 20px; }
-    .buttons { margin-top: 18px; gap: 9px; }
-    .btn { min-height: 54px; }
-    .footer { margin-top: 20px; }
-}
 
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
@@ -1089,19 +1443,19 @@ body.loaded .footer { opacity: 1; }
         animation-iteration-count: 1 !important;
         transition-duration: .01ms !important;
     }
-    #snow, #fx, #sparkLayer { display: none; }
+    #snow, #fx, #sparkLayer, .tree-falling-stars { display: none; }
 }
 </style>
 </head>
 
 <body>
 
-<!-- ========== INTRO ========== -->
+<!-- INTRO -->
 <div class="intro" id="intro" aria-hidden="true">
     <img class="intro-logo" src="metiz-project-logo.png" alt="METIZ PROJECT">
 </div>
 
-<!-- ========== BACKGROUND ========== -->
+<!-- BACKGROUND -->
 <div class="bg-grid" aria-hidden="true"></div>
 <div class="aurora" aria-hidden="true">
     <div class="aurora-band aurora-a"></div>
@@ -1109,32 +1463,198 @@ body.loaded .footer { opacity: 1; }
     <div class="aurora-band aurora-c"></div>
 </div>
 
-<!-- ========== GARLAND ========== -->
+<!-- GARLAND -->
 <div class="garland" id="garland" aria-hidden="true">
-    <svg class="garland-wire" viewBox="0 0 1200 70" preserveAspectRatio="none">
-        <path d="M0 18 Q600 90 1200 18" fill="none" stroke="rgba(120,220,210,.28)" stroke-width="1.6"/>
-        <path d="M0 18 Q600 90 1200 18" fill="none" stroke="rgba(120,220,210,.08)" stroke-width="5"/>
+    <svg class="garland-wire" viewBox="0 0 1440 140" preserveAspectRatio="none">
+        <path d="M0 20 Q 360 90 720 80 Q 1080 70 1440 20"
+              fill="none" stroke="rgba(120, 220, 210, .32)" stroke-width="2.2"/>
+        <path d="M0 20 Q 360 90 720 80 Q 1080 70 1440 20"
+              fill="none" stroke="rgba(120, 220, 210, .08)" stroke-width="6"/>
+        <path d="M0 70 Q 360 140 720 130 Q 1080 120 1440 70"
+              fill="none" stroke="rgba(120, 220, 210, .22)" stroke-width="1.8"/>
     </svg>
 </div>
 
-<!-- ========== MAIN ========== -->
+<!-- SNOWFALL -->
+<canvas id="snow" aria-hidden="true"></canvas>
+
+<!-- MAIN -->
 <main class="page">
     <section class="card">
 
         <div class="brand">
+
+            <!-- NEON TREE HERO -->
+            <div class="tree-hero" aria-hidden="true">
+                <div class="tree-falling-stars">
+                    <span class="tstar" style="--x:12%; --d:4s; --dl:0s;"></span>
+                    <span class="tstar" style="--x:24%; --d:5.5s; --dl:-1.8s;"></span>
+                    <span class="tstar" style="--x:38%; --d:4.8s; --dl:-3.2s;"></span>
+                    <span class="tstar" style="--x:52%; --d:6s; --dl:-2.5s;"></span>
+                    <span class="tstar" style="--x:68%; --d:4.4s; --dl:-.9s;"></span>
+                    <span class="tstar" style="--x:82%; --d:5.2s; --dl:-3.8s;"></span>
+                    <span class="tstar" style="--x:92%; --d:4.6s; --dl:-1.4s;"></span>
+                </div>
+
+                <svg class="neon-tree" viewBox="0 0 220 300" fill="none">
+                    <defs>
+                        <linearGradient id="treeTier" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="rgba(76, 213, 211, .55)"/>
+                            <stop offset="100%" stop-color="rgba(76, 213, 211, .08)"/>
+                        </linearGradient>
+                        <linearGradient id="treeStroke" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#a9fffb"/>
+                            <stop offset="100%" stop-color="#159c9b"/>
+                        </linearGradient>
+                        <linearGradient id="giftTeal" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#72fff6"/>
+                            <stop offset="100%" stop-color="#159c9b"/>
+                        </linearGradient>
+                        <linearGradient id="giftRed" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#ff9090"/>
+                            <stop offset="100%" stop-color="#a80f16"/>
+                        </linearGradient>
+                        <filter id="treeGlow" x="-50%" y="-50%" width="200%" height="200%">
+                            <feGaussianBlur stdDeviation="2"/>
+                        </filter>
+                        <filter id="bigGlow" x="-100%" y="-100%" width="300%" height="300%">
+                            <feGaussianBlur stdDeviation="6"/>
+                        </filter>
+                    </defs>
+
+                    <!-- base glow -->
+                    <ellipse cx="110" cy="272" rx="85" ry="10" fill="rgba(76, 213, 211, .45)" filter="url(#bigGlow)"/>
+
+                    <!-- trunk -->
+                    <rect x="102" y="228" width="16" height="34" fill="rgba(70, 45, 30, .85)" rx="1"/>
+                    <rect x="102" y="228" width="16" height="34" fill="none" stroke="rgba(255, 255, 255, .15)" stroke-width=".8" rx="1"/>
+
+                    <!-- tier 3 (bottom, largest) -->
+                    <path d="M110 118 L182 235 L38 235 Z"
+                          fill="url(#treeTier)" stroke="url(#treeStroke)" stroke-width="1.8" filter="url(#treeGlow)"/>
+
+                    <!-- tier 2 (middle) -->
+                    <path d="M110 72 L168 162 L52 162 Z"
+                          fill="url(#treeTier)" stroke="url(#treeStroke)" stroke-width="1.8" filter="url(#treeGlow)"/>
+
+                    <!-- tier 1 (top, smallest) -->
+                    <path d="M110 30 L156 112 L64 112 Z"
+                          fill="url(#treeTier)" stroke="url(#treeStroke)" stroke-width="1.8" filter="url(#treeGlow)"/>
+
+                    <!-- star top -->
+                    <g filter="url(#bigGlow)">
+                        <polygon points="110,10 116,26 134,26 120,37 125,54 110,44 95,54 100,37 86,26 104,26" fill="#ffd970"/>
+                    </g>
+                    <polygon points="110,10 116,26 134,26 120,37 125,54 110,44 95,54 100,37 86,26 104,26" fill="#fff5b0" opacity=".9"/>
+
+                    <!-- garland bulbs on tier 1 -->
+                    <circle cx="90" cy="85" r="3.2" fill="#4cd5d3" filter="url(#treeGlow)">
+                        <animate attributeName="opacity" values="1;.35;1" dur="2s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="130" cy="85" r="3.2" fill="#ffd970" filter="url(#treeGlow)">
+                        <animate attributeName="opacity" values=".35;1;.35" dur="2s" repeatCount="indefinite"/>
+                    </circle>
+
+                    <!-- garland bulbs on tier 2 -->
+                    <circle cx="76" cy="136" r="3.6" fill="#4cd5d3" filter="url(#treeGlow)">
+                        <animate attributeName="opacity" values="1;.3;1" dur="2.4s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="110" cy="142" r="3.6" fill="#ff5a5a" filter="url(#treeGlow)">
+                        <animate attributeName="opacity" values=".3;1;.3" dur="2.4s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="144" cy="136" r="3.6" fill="#ffd970" filter="url(#treeGlow)">
+                        <animate attributeName="opacity" values=".55;1;.55" dur="2.4s" repeatCount="indefinite"/>
+                    </circle>
+
+                    <!-- garland bulbs on tier 3 -->
+                    <circle cx="58" cy="192" r="4" fill="#ffd970" filter="url(#treeGlow)">
+                        <animate attributeName="opacity" values="1;.3;1" dur="3s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="86" cy="202" r="4" fill="#4cd5d3" filter="url(#treeGlow)">
+                        <animate attributeName="opacity" values=".3;1;.3" dur="3s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="118" cy="206" r="4" fill="#ff5a5a" filter="url(#treeGlow)">
+                        <animate attributeName="opacity" values=".5;1;.5" dur="3s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="150" cy="202" r="4" fill="#ffd970" filter="url(#treeGlow)">
+                        <animate attributeName="opacity" values="1;.4;1" dur="3s" repeatCount="indefinite"/>
+                    </circle>
+
+                    <!-- small snow highlights on tree -->
+                    <circle cx="92" cy="100" r="1.4" fill="#ffffff" opacity=".8"/>
+                    <circle cx="126" cy="108" r="1.2" fill="#ffffff" opacity=".7"/>
+                    <circle cx="80" cy="150" r="1.6" fill="#ffffff" opacity=".75"/>
+                    <circle cx="140" cy="155" r="1.4" fill="#ffffff" opacity=".7"/>
+
+                    <!-- gifts at base -->
+                    <g transform="translate(38 240)">
+                        <rect width="30" height="24" fill="url(#giftTeal)" rx="1"/>
+                        <line x1="0" y1="12" x2="30" y2="12" stroke="#ffd970" stroke-width="2"/>
+                        <line x1="15" y1="0" x2="15" y2="24" stroke="#ffd970" stroke-width="2"/>
+                        <rect width="30" height="24" fill="none" stroke="rgba(255, 255, 255, .4)" stroke-width=".7" rx="1"/>
+                    </g>
+                    <g transform="translate(150 242)">
+                        <rect width="28" height="22" fill="url(#giftRed)" rx="1"/>
+                        <line x1="0" y1="11" x2="28" y2="11" stroke="#ffd970" stroke-width="2"/>
+                        <line x1="14" y1="0" x2="14" y2="22" stroke="#ffd970" stroke-width="2"/>
+                        <rect width="28" height="22" fill="none" stroke="rgba(255, 255, 255, .35)" stroke-width=".7" rx="1"/>
+                    </g>
+                    <g transform="translate(88 244)">
+                        <rect width="22" height="20" fill="#ffd970" rx="1"/>
+                        <line x1="0" y1="10" x2="22" y2="10" stroke="#a80f16" stroke-width="1.5"/>
+                        <line x1="11" y1="0" x2="11" y2="20" stroke="#a80f16" stroke-width="1.5"/>
+                        <rect width="22" height="20" fill="none" stroke="rgba(255, 255, 255, .5)" stroke-width=".7" rx="1"/>
+                    </g>
+                    <g transform="translate(120 242)">
+                        <rect width="20" height="20" fill="#8b5cf6" rx="1"/>
+                        <line x1="0" y1="10" x2="20" y2="10" stroke="#ffd970" stroke-width="1.5"/>
+                        <line x1="10" y1="0" x2="10" y2="20" stroke="#ffd970" stroke-width="1.5"/>
+                        <rect width="20" height="20" fill="none" stroke="rgba(255, 255, 255, .35)" stroke-width=".7" rx="1"/>
+                    </g>
+                </svg>
+            </div>
+
+            <!-- LOGO -->
             <div class="logo-wrap">
                 <img src="metiz-project-logo.png" alt="METIZ PROJECT">
             </div>
 
+            <!-- LOCATION -->
             <div class="location">Санкт-Петербург</div>
 
+            <!-- TITLE -->
             <h1 class="title">
                 ПЕЧАТАЕМ И РЕЖЕМ<br>
                 <span class="accent">ПОД ВАШИ ЗАДАЧИ</span>
             </h1>
 
+            <!-- COUNTDOWN CARDS -->
+            <div class="countdown-cards" aria-hidden="true">
+                <div class="cd-card">
+                    <div class="cd-num" id="cdDays">00</div>
+                    <div class="cd-lbl">Дней</div>
+                </div>
+                <div class="cd-sep">:</div>
+                <div class="cd-card">
+                    <div class="cd-num" id="cdHours">00</div>
+                    <div class="cd-lbl">Часов</div>
+                </div>
+                <div class="cd-sep">:</div>
+                <div class="cd-card">
+                    <div class="cd-num" id="cdMins">00</div>
+                    <div class="cd-lbl">Минут</div>
+                </div>
+                <div class="cd-sep">:</div>
+                <div class="cd-card">
+                    <div class="cd-num" id="cdSecs">00</div>
+                    <div class="cd-lbl">Секунд</div>
+                </div>
+            </div>
+
+            <!-- SUBTITLE -->
             <p class="subtitle">Наклейки • Холсты • Реклама</p>
 
+            <!-- MARQUEE -->
             <div class="marquee-wrap">
                 <div class="marquee" id="marquee">
                     <div class="marquee-content">
@@ -1176,93 +1696,217 @@ body.loaded .footer { opacity: 1; }
                 </div>
             </div>
 
+            <!-- BUTTONS -->
             <div class="buttons">
 
                 <!-- ЗАМЕНИТЕ href НА СВОЮ ССЫЛКУ -->
-                <a class="btn primary magnetic" href="https://vk.ru/metiz_project" target="_blank" rel="noopener noreferrer">
-                    <span class="btn-icon">
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M13.07 18.75h1.56s.47-.05.71-.31c.22-.25.21-.72.21-.72s-.03-2.2.99-2.52c1-.31 2.28 2.13 3.64 3.07.98.68 1.73.53 1.73.53l3.47-.05s1.82-.11.96-1.55c-.07-.12-.51-1.06-2.64-3-2.23-2.03-1.93-1.7.76-5.21 1.64-2.15 2.3-3.46 2.09-4.02-.2-.54-1.43-.4-1.43-.4l-3.9.02s-.29-.04-.5.09c-.21.13-.34.43-.34.43s-.62 1.65-1.44 3.05c-1.74 2.96-2.44 3.12-2.73 2.93-.67-.43-.5-1.72-.5-2.64 0-2.87.43-4.07-.84-4.38-.42-.1-.73-.17-1.8-.18-1.37-.01-2.53.01-3.19.33-.44.21-.78.68-.57.71.26.03.86.16 1.18.59.41.55.4 1.78.4 1.78s.24 3.39-.55 3.81c-.54.29-1.28-.3-2.87-2.99-.81-1.38-1.42-2.9-1.42-2.9s-.12-.29-.33-.44c-.26-.19-.62-.25-.62-.25l-3.71.02s-.56.02-.77.26c-.18.21-.01.65-.01.65s2.9 6.79 6.19 10.22c3.02 3.15 6.45 2.94 6.45 2.94h1.56z"/>
-                        </svg>
-                    </span>
-                    <span class="btn-label">
-                        <span class="t1">Примеры работ и новости</span>
-                        <span class="t2">Фото • Посты • Новинки • Обновления</span>
-                    </span>
-                </a>
+                <div class="btn-shell">
+                    <span class="snow-cap" aria-hidden="true"></span>
+                    <a class="btn primary magnetic" href="https://vk.ru/metiz_project" target="_blank" rel="noopener noreferrer">
+                        <span class="btn-icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M13.07 18.75h1.56s.47-.05.71-.31c.22-.25.21-.72.21-.72s-.03-2.2.99-2.52c1-.31 2.28 2.13 3.64 3.07.98.68 1.73.53 1.73.53l3.47-.05s1.82-.11.96-1.55c-.07-.12-.51-1.06-2.64-3-2.23-2.03-1.93-1.7.76-5.21 1.64-2.15 2.3-3.46 2.09-4.02-.2-.54-1.43-.4-1.43-.4l-3.9.02s-.29-.04-.5.09c-.21.13-.34.43-.34.43s-.62 1.65-1.44 3.05c-1.74 2.96-2.44 3.12-2.73 2.93-.67-.43-.5-1.72-.5-2.64 0-2.87.43-4.07-.84-4.38-.42-.1-.73-.17-1.8-.18-1.37-.01-2.53.01-3.19.33-.44.21-.78.68-.57.71.26.03.86.16 1.18.59.41.55.4 1.78.4 1.78s.24 3.39-.55 3.81c-.54.29-1.28-.3-2.87-2.99-.81-1.38-1.42-2.9-1.42-2.9s-.12-.29-.33-.44c-.26-.19-.62-.25-.62-.25l-3.71.02s-.56.02-.77.26c-.18.21-.01.65-.01.65s2.9 6.79 6.19 10.22c3.02 3.15 6.45 2.94 6.45 2.94h1.56z"/>
+                            </svg>
+                        </span>
+                        <span class="btn-label">
+                            <span class="t1">Примеры работ и новости</span>
+                            <span class="t2">Фото • Посты • Новинки • Обновления</span>
+                        </span>
+                    </a>
+                </div>
 
                 <!-- ЗАМЕНИТЕ href НА СВОЮ ССЫЛКУ -->
-                <a class="btn primary magnetic" href="https://vk.ru/im?sel=-10150150" target="_blank" rel="noopener noreferrer">
-                    <span class="btn-icon">
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M13.07 18.75h1.56s.47-.05.71-.31.21-.72.21-.72-.03-2.2.99-2.52c1-.31 2.28 2.13 3.64 3.07.98.68 1.73.53 1.73.53l3.47-.05s1.82-.11.96-1.55c-.07-.12-.51-1.06-2.64-3-2.23-2.03-1.93-1.7.76-5.21 1.64-2.15 2.3-3.46 2.09-4.02-.2-.54-1.43-.4-1.43-.4l-3.9.02s-.29-.04-.5.09c-.21.13-.34.43-.34.43s-.62 1.65-1.44 3.05c-1.74 2.96-2.44 3.12-2.73 2.93-.67-.43-.5-1.72-.5-2.64 0-2.87.43-4.07-.84-4.38-.42-.1-.73-.17-1.8-.18-1.37-.01-2.53.01-3.19.33-.44.21-.78.68-.57.71.26.03.86.16 1.18.59.41.55.4 1.78.4 1.78s.24 3.39-.55 3.81c-.54.29-1.28-.3-2.87-2.99-.81-1.38-1.42-2.9-1.42-2.9s-.12-.29-.33-.44c-.26-.19-.62-.25-.62-.25l-3.71.02s-.56.02-.77.26c-.18.21-.01.65-.01.65s2.9 6.79 6.19 10.22c3.02 3.15 6.45 2.94 6.45 2.94h1.56z"/>
-                        </svg>
-                    </span>
-                    <span class="btn-text-single">Написать ВКонтакте</span>
-                </a>
+                <div class="btn-shell">
+                    <span class="snow-cap" aria-hidden="true"></span>
+                    <a class="btn primary magnetic" href="https://vk.ru/im?sel=-10150150" target="_blank" rel="noopener noreferrer">
+                        <span class="btn-icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M13.07 18.75h1.56s.47-.05.71-.31.21-.72.21-.72-.03-2.2.99-2.52c1-.31 2.28 2.13 3.64 3.07.98.68 1.73.53 1.73.53l3.47-.05s1.82-.11.96-1.55c-.07-.12-.51-1.06-2.64-3-2.23-2.03-1.93-1.7.76-5.21 1.64-2.15 2.3-3.46 2.09-4.02-.2-.54-1.43-.4-1.43-.4l-3.9.02s-.29-.04-.5.09c-.21.13-.34.43-.34.43s-.62 1.65-1.44 3.05c-1.74 2.96-2.44 3.12-2.73 2.93-.67-.43-.5-1.72-.5-2.64 0-2.87.43-4.07-.84-4.38-.42-.1-.73-.17-1.8-.18-1.37-.01-2.53.01-3.19.33-.44.21-.78.68-.57.71.26.03.86.16 1.18.59.41.55.4 1.78.4 1.78s.24 3.39-.55 3.81c-.54.29-1.28-.3-2.87-2.99-.81-1.38-1.42-2.9-1.42-2.9s-.12-.29-.33-.44c-.26-.19-.62-.25-.62-.25l-3.71.02s-.56.02-.77.26c-.18.21-.01.65-.01.65s2.9 6.79 6.19 10.22c3.02 3.15 6.45 2.94 6.45 2.94h1.56z"/>
+                            </svg>
+                        </span>
+                        <span class="btn-text-single">Написать ВКонтакте</span>
+                    </a>
+                </div>
 
                 <!-- ЗАМЕНИТЕ href НА СВОЮ ССЫЛКУ -->
-                <a class="btn primary magnetic" href="https://t.me/metizproject" target="_blank" rel="noopener noreferrer">
-                    <span class="btn-icon">
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M21.7 3.25 2.95 10.48c-1.28.51-1.27 1.22-.23 1.54l4.81 1.5 1.84 5.63c.22.61.11.85.74.85.49 0 .71-.22.98-.48l2.34-2.27 4.86 3.59c.89.49 1.53.23 1.75-.83l3.12-14.69c.33-1.31-.5-1.9-1.46-1.57ZM8.26 13.15l10.94-6.9c.55-.34 1.06-.16.64.21l-8.9 8.04-.35 3.75-2.33-5.1Z"/>
-                        </svg>
-                    </span>
-                    <span class="btn-text-single">Написать в Telegram</span>
-                </a>
+                <div class="btn-shell">
+                    <span class="snow-cap" aria-hidden="true"></span>
+                    <a class="btn primary magnetic" href="https://t.me/metizproject" target="_blank" rel="noopener noreferrer">
+                        <span class="btn-icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M21.7 3.25 2.95 10.48c-1.28.51-1.27 1.22-.23 1.54l4.81 1.5 1.84 5.63c.22.61.11.85.74.85.49 0 .71-.22.98-.48l2.34-2.27 4.86 3.59c.89.49 1.53.23 1.75-.83l3.12-14.69c.33-1.31-.5-1.9-1.46-1.57ZM8.26 13.15l10.94-6.9c.55-.34 1.06-.16.64.21l-8.9 8.04-.35 3.75-2.33-5.1Z"/>
+                            </svg>
+                        </span>
+                        <span class="btn-text-single">Написать в Telegram</span>
+                    </a>
+                </div>
 
                 <!-- ЗАМЕНИТЕ href НА СВОЮ ССЫЛКУ -->
-                <a class="btn primary magnetic" href="https://wa.me/message/RDHE3F4PU2D3L1" target="_blank" rel="noopener noreferrer">
-                    <span class="btn-icon">
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M20.52 3.48A11.83 11.83 0 0 0 12.1 0C5.55 0 .22 5.33.22 11.88c0 2.09.55 4.13 1.6 5.93L.12 24l6.33-1.66a11.86 11.86 0 0 0 5.65 1.44h.01c6.54 0 11.87-5.33 11.87-11.88 0-3.17-1.23-6.14-3.46-8.42ZM12.11 21.76h-.01a9.84 9.84 0 0 1-5.02-1.37l-.36-.21-3.76.98 1-3.67-.23-.38a9.84 9.84 0 0 1-1.51-5.23C2.22 6.44 6.66 2 12.11 2c2.64 0 5.12 1.03 6.99 2.9a9.84 9.84 0 0 1 2.89 7c0 5.45-4.43 9.86-9.88 9.86Zm5.42-7.39c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.76-1.67-2.06-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.49 0 1.47 1.07 2.89 1.22 3.09.15.2 2.1 3.21 5.09 4.5.71.31 1.26.49 1.69.63.71.23 1.35.2 1.86.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35Z"/>
-                        </svg>
-                    </span>
-                    <span class="btn-text-single">Написать в WhatsApp</span>
-                </a>
+                <div class="btn-shell">
+                    <span class="snow-cap" aria-hidden="true"></span>
+                    <a class="btn primary magnetic" href="https://wa.me/message/RDHE3F4PU2D3L1" target="_blank" rel="noopener noreferrer">
+                        <span class="btn-icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M20.52 3.48A11.83 11.83 0 0 0 12.1 0C5.55 0 .22 5.33.22 11.88c0 2.09.55 4.13 1.6 5.93L.12 24l6.33-1.66a11.86 11.86 0 0 0 5.65 1.44h.01c6.54 0 11.87-5.33 11.87-11.88 0-3.17-1.23-6.14-3.46-8.42ZM12.11 21.76h-.01a9.84 9.84 0 0 1-5.02-1.37l-.36-.21-3.76.98 1-3.67-.23-.38a9.84 9.84 0 0 1-1.51-5.23C2.22 6.44 6.66 2 12.11 2c2.64 0 5.12 1.03 6.99 2.9a9.84 9.84 0 0 1 2.89 7c0 5.45-4.43 9.86-9.88 9.86Zm5.42-7.39c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.76-1.67-2.06-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.49 0 1.47 1.07 2.89 1.22 3.09.15.2 2.1 3.21 5.09 4.5.71.31 1.26.49 1.69.63.71.23 1.35.2 1.86.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35Z"/>
+                            </svg>
+                        </span>
+                        <span class="btn-text-single">Написать в WhatsApp</span>
+                    </a>
+                </div>
 
-                <!-- КНОПКА САМОВЫВОЗА — ОТКРЫВАЕТ МОДАЛКУ -->
-                <button type="button" class="btn outline magnetic" id="pickupBtn">
-                    <span class="btn-icon">
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5Z"/>
-                        </svg>
-                    </span>
-                    <span class="btn-text-single">Самовывоз</span>
-                </button>
+                <div class="btn-shell">
+                    <span class="snow-cap" aria-hidden="true"></span>
+                    <button type="button" class="btn outline magnetic" id="pickupBtn">
+                        <span class="btn-icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5Z"/>
+                            </svg>
+                        </span>
+                        <span class="btn-text-single">Самовывоз</span>
+                    </button>
+                </div>
 
-                <!-- ПОДЕЛИТЬСЯ -->
-                <button type="button" class="btn outline magnetic" id="shareBtn">
-                    <span class="btn-icon">
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.03-.47-.09-.7l7.05-4.11A2.99 2.99 0 1 0 15 5c0 .24.03.47.09.7L8.04 9.81A3 3 0 1 0 8 14.19l7.12 4.16c-.05.21-.08.43-.08.65a3 3 0 1 0 2.96-2.92Z"/>
-                        </svg>
-                    </span>
-                    <span class="btn-text-single">Поделиться сайтом</span>
-                </button>
+                <div class="btn-shell">
+                    <span class="snow-cap" aria-hidden="true"></span>
+                    <button type="button" class="btn outline magnetic" id="shareBtn">
+                        <span class="btn-icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.03-.47-.09-.7l7.05-4.11A2.99 2.99 0 1 0 15 5c0 .24.03.47.09.7L8.04 9.81A3 3 0 1 0 8 14.19l7.12 4.16c-.05.21-.08.43-.08.65a3 3 0 1 0 2.96-2.92Z"/>
+                            </svg>
+                        </span>
+                        <span class="btn-text-single">Поделиться сайтом</span>
+                    </button>
+                </div>
 
             </div>
 
-            <footer class="footer">© METIZ PROJECT 2010–2026</footer>
-        </div>
+            <!-- GIFT SURPRISE -->
+            <div class="gift-surprise" id="giftSurprise">
+                <button class="gift-box" id="giftBox" type="button" aria-label="Открыть новогодний сюрприз">
+                    <svg class="gift-svg" viewBox="0 0 100 100" aria-hidden="true">
+                        <defs>
+                            <linearGradient id="giftBody" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#ff7a7a"/>
+                                <stop offset="100%" stop-color="#c01818"/>
+                            </linearGradient>
+                            <linearGradient id="giftLid" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#ff5a5a"/>
+                                <stop offset="100%" stop-color="#a80f16"/>
+                            </linearGradient>
+                        </defs>
+                        <!-- body -->
+                        <rect x="18" y="42" width="64" height="50" rx="4" fill="url(#giftBody)"/>
+                        <!-- lid -->
+                        <rect x="12" y="34" width="76" height="14" rx="3" fill="url(#giftLid)"/>
+                        <!-- ribbons -->
+                        <rect x="44" y="34" width="12" height="58" fill="#ffd970"/>
+                        <rect x="12" y="56" width="76" height="10" fill="#ffd970"/>
+                        <!-- bows -->
+                        <ellipse cx="36" cy="28" rx="14" ry="9" fill="#ffd970" transform="rotate(-15 36 28)"/>
+                        <ellipse cx="64" cy="28" rx="14" ry="9" fill="#ffd970" transform="rotate(15 64 28)"/>
+                        <circle cx="50" cy="30" r="6" fill="#ffeaaa"/>
+                        <!-- highlight -->
+                        <ellipse cx="32" cy="50" rx="4" ry="2" fill="#fff" opacity=".5"/>
+                    </svg>
+                </button>
+                <div class="gift-copy">
+                    <div class="gift-title">🎁 Новогодний сюрприз</div>
+                    <div class="gift-hint" id="giftHint">Кликните 3 раза по подарку</div>
+                </div>
+                <div class="gift-promo" id="giftPromo" aria-hidden="true">
+                    <div class="promo-badge">🎉 Поздравляем!</div>
+                    <div class="promo-text">Скидка <b>10%</b> на печать наклеек или холста</div>
+                    <div class="promo-code">ЗИМА2027</div>
+                </div>
+            </div>
 
+            <!-- STATUS ROW -->
+            <div class="status-row">
+                <span class="status-dot"></span>
+                <span class="status-text-online">Online</span>
+                <span class="status-sep">·</span>
+                <span class="status-slogan">Из идеи — в реальность</span>
+            </div>
+
+            <!-- FOOTER -->
+            <footer class="footer">© METIZ PROJECT 2010–2026</footer>
+
+        </div>
     </section>
 </main>
 
-<!-- ========== BOTTOM BAR ========== -->
-<div class="bottom-bar" aria-hidden="true">
-    <span class="bottom-status">
-        <span class="bottom-dot"></span>
-        <span>ONLINE</span>
-    </span>
-    <span class="bottom-slogan">Из идеи — в реальность</span>
-    <span class="bottom-timer">
-        <span class="bottom-timer-icon">❄</span>
-        <span id="timerText">--д --:--:--</span>
-    </span>
+<!-- SNOW DRIFT -->
+<div class="snow-drift" aria-hidden="true">
+    <svg viewBox="0 0 1440 220" preserveAspectRatio="none">
+        <defs>
+            <linearGradient id="driftBack" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="rgba(180, 235, 240, .32)"/>
+                <stop offset="100%" stop-color="rgba(180, 235, 240, 0)"/>
+            </linearGradient>
+            <linearGradient id="driftMid" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="rgba(230, 250, 255, .88)"/>
+                <stop offset="100%" stop-color="rgba(200, 235, 240, .35)"/>
+            </linearGradient>
+            <linearGradient id="driftFront" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#ffffff"/>
+                <stop offset="100%" stop-color="#dfeff5"/>
+            </linearGradient>
+        </defs>
+
+        <!-- back glow layer -->
+        <path d="M0 130 Q 200 90 400 110 Q 600 130 800 115 Q 1000 100 1200 120 Q 1320 135 1440 120 L 1440 220 L 0 220 Z"
+              fill="url(#driftBack)" filter="blur(10px)" opacity=".75"/>
+
+        <!-- mid layer -->
+        <path d="M0 155 Q 220 120 440 145 Q 660 170 880 150 Q 1100 130 1320 155 L 1440 145 L 1440 220 L 0 220 Z"
+              fill="url(#driftMid)"/>
+
+        <!-- front layer -->
+        <path d="M0 175 Q 180 155 360 170 Q 540 185 720 172 Q 900 158 1080 175 Q 1260 190 1440 172 L 1440 220 L 0 220 Z"
+              fill="url(#driftFront)"/>
+
+        <!-- small pines on drift -->
+        <g transform="translate(140 162)">
+            <path d="M0 -22 L-11 0 L-4 0 L-13 13 L13 13 L4 0 L11 0 Z"
+                  fill="#0f4534" stroke="#1e7e56" stroke-width=".8"/>
+            <path d="M0 -14 L-6 -3 L0 -3 L-7 6 L7 6 L0 -3 L6 -3 Z"
+                  fill="#145a3e" opacity=".7"/>
+        </g>
+        <g transform="translate(1300 162)">
+            <path d="M0 -22 L-11 0 L-4 0 L-13 13 L13 13 L4 0 L11 0 Z"
+                  fill="#0f4534" stroke="#1e7e56" stroke-width=".8"/>
+            <path d="M0 -14 L-6 -3 L0 -3 L-7 6 L7 6 L0 -3 L6 -3 Z"
+                  fill="#145a3e" opacity=".7"/>
+        </g>
+        <g transform="translate(360 168)">
+            <path d="M0 -16 L-8 0 L-3 0 L-9 9 L9 9 L3 0 L8 0 Z"
+                  fill="#0f4534" stroke="#1e7e56" stroke-width=".7"/>
+        </g>
+        <g transform="translate(1100 168)">
+            <path d="M0 -16 L-8 0 L-3 0 L-9 9 L9 9 L3 0 L8 0 Z"
+                  fill="#0f4534" stroke="#1e7e56" stroke-width=".7"/>
+        </g>
+
+        <!-- small gifts on drift -->
+        <g transform="translate(660 168)">
+            <rect width="22" height="17" fill="#4cd5d3" stroke="#72fff6" stroke-width=".7"/>
+            <line x1="11" y1="0" x2="11" y2="17" stroke="#ffd970" stroke-width="1.3"/>
+            <line x1="0" y1="8.5" x2="22" y2="8.5" stroke="#ffd970" stroke-width="1.3"/>
+        </g>
+        <g transform="translate(760 172)">
+            <rect width="18" height="14" fill="#ff5a5a" stroke="#ff9090" stroke-width=".7"/>
+            <line x1="9" y1="0" x2="9" y2="14" stroke="#ffd970" stroke-width="1.1"/>
+            <line x1="0" y1="7" x2="18" y2="7" stroke="#ffd970" stroke-width="1.1"/>
+        </g>
+        <g transform="translate(880 170)">
+            <rect width="16" height="13" fill="#ffd970" stroke="#fff5b0" stroke-width=".7"/>
+            <line x1="8" y1="0" x2="8" y2="13" stroke="#a80f16" stroke-width="1"/>
+            <line x1="0" y1="6.5" x2="16" y2="6.5" stroke="#a80f16" stroke-width="1"/>
+        </g>
+    </svg>
 </div>
 
-<!-- ========== MODAL ========== -->
+<!-- MODAL -->
 <div class="modal" id="pickupModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="modal-backdrop" data-close></div>
     <div class="modal-content">
@@ -1279,17 +1923,16 @@ body.loaded .footer { opacity: 1; }
     </div>
 </div>
 
-<!-- ========== TOAST ========== -->
+<!-- TOAST -->
 <div class="toast" id="toast">Ссылка скопирована!</div>
 
-<!-- ========== CANVASES ========== -->
-<canvas id="snow" aria-hidden="true"></canvas>
+<!-- FX CANVAS + SPARKS -->
 <canvas id="fx" aria-hidden="true"></canvas>
 <div id="sparkLayer" aria-hidden="true"></div>
 
 <script>
 /* =========================================================
-   METIZ PROJECT — Winter Edition
+   METIZ PROJECT — Winter Wonderland
    ======================================================= */
 (function () {
     "use strict";
@@ -1309,14 +1952,11 @@ body.loaded .footer { opacity: 1; }
         }
     }
 
-    if (reduceMotion) {
-        endIntro();
-    } else {
-        setTimeout(endIntro, 1200);
-    }
+    if (reduceMotion) endIntro();
+    else setTimeout(endIntro, 1100);
 
     /* =====================================================
-       MARQUEE — duplicate content for seamless loop
+       MARQUEE — duplicate for seamless loop
        ===================================================== */
     const marquee = document.getElementById("marquee");
     if (marquee) {
@@ -1329,29 +1969,150 @@ body.loaded .footer { opacity: 1; }
     }
 
     /* =====================================================
-       GARLAND — generate bulbs + interactive hover
+       SHARED: FIREWORKS / BURST
+       ===================================================== */
+    const fxCanvas = document.getElementById("fx");
+    let fxCtx = null, fw = 0, fh = 0, fdpr = 1;
+    let fxParticles = [];
+    let fxRunning = false;
+
+    function initFx() {
+        if (!fxCanvas || reduceMotion) return;
+        fxCtx = fxCanvas.getContext("2d");
+        fw = window.innerWidth;
+        fh = window.innerHeight;
+        fdpr = Math.min(window.devicePixelRatio || 1, 2);
+        fxCanvas.width = Math.floor(fw * fdpr);
+        fxCanvas.height = Math.floor(fh * fdpr);
+        fxCanvas.style.width = fw + "px";
+        fxCanvas.style.height = fh + "px";
+        fxCtx.setTransform(fdpr, 0, 0, fdpr, 0, 0);
+    }
+
+    const FX_PALETTE = [
+        { r: 76, g: 213, b: 211 },
+        { r: 255, g: 217, b: 112 },
+        { r: 255, g: 255, b: 255 },
+        { r: 120, g: 255, b: 250 },
+    ];
+
+    function burst(x, y, count) {
+        if (!fxCtx || reduceMotion) return;
+        count = count || 42;
+
+        for (let i = 0; i < count; i++) {
+            const angle = Math.random() * Math.PI * 2;
+            const speed = 1.8 + Math.random() * 4.6;
+            const c = FX_PALETTE[Math.floor(Math.random() * FX_PALETTE.length)];
+            fxParticles.push({
+                x, y,
+                vx: Math.cos(angle) * speed,
+                vy: Math.sin(angle) * speed - 0.6,
+                r: 1.3 + Math.random() * 2.3,
+                life: 1,
+                decay: 0.008 + Math.random() * 0.01,
+                color: c
+            });
+        }
+        if (!fxRunning) {
+            fxRunning = true;
+            requestAnimationFrame(fxLoop);
+        }
+    }
+
+    function fxLoop() {
+        if (!fxCtx) return;
+        fxCtx.clearRect(0, 0, fw, fh);
+        fxCtx.globalCompositeOperation = "lighter";
+
+        for (let i = fxParticles.length - 1; i >= 0; i--) {
+            const p = fxParticles[i];
+            p.x += p.vx;
+            p.y += p.vy;
+            p.vx *= 0.975;
+            p.vy *= 0.975;
+            p.vy += 0.045;
+            p.life -= p.decay;
+
+            if (p.life <= 0) {
+                fxParticles.splice(i, 1);
+                continue;
+            }
+
+            const a = p.life;
+            const g = fxCtx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 4);
+            g.addColorStop(0, "rgba(" + p.color.r + "," + p.color.g + "," + p.color.b + "," + (a * 0.5) + ")");
+            g.addColorStop(1, "rgba(" + p.color.r + "," + p.color.g + "," + p.color.b + ",0)");
+            fxCtx.fillStyle = g;
+            fxCtx.beginPath();
+            fxCtx.arc(p.x, p.y, p.r * 4, 0, Math.PI * 2);
+            fxCtx.fill();
+
+            fxCtx.fillStyle = "rgba(" + p.color.r + "," + p.color.g + "," + p.color.b + "," + a + ")";
+            fxCtx.beginPath();
+            fxCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            fxCtx.fill();
+        }
+
+        fxCtx.globalCompositeOperation = "source-over";
+
+        if (fxParticles.length > 0) {
+            requestAnimationFrame(fxLoop);
+        } else {
+            fxRunning = false;
+        }
+    }
+
+    initFx();
+    window.addEventListener("resize", initFx, { passive: true });
+
+    // Click on empty area triggers fireworks
+    if (!reduceMotion) {
+        document.addEventListener("pointerdown", function (e) {
+            if (e.target.closest("a, button, input, textarea, select, .modal, .garland .bulb, .gift-box")) return;
+            burst(e.clientX, e.clientY, 46);
+        }, { passive: true });
+    }
+
+    /* =====================================================
+       GARLAND — generate bulbs
        ===================================================== */
     const garland = document.getElementById("garland");
     if (garland) {
-        const colors = ["t", "g", "w"];
-        const total = 14;
-        const bulbs = [];
-        const positions = [
-            [4, 22], [11, 30], [18, 36], [25, 41], [32, 45], [39, 47],
-            [46, 48], [54, 48], [61, 47], [68, 45], [75, 41], [82, 36],
-            [89, 30], [96, 22]
+        const colors = ["t", "g", "w", "r"];
+        // Tier 1 positions (% left, top % of container height)
+        const tier1 = [
+            [0, 14.3], [12.5, 35.7], [25, 50], [37.5, 57.1],
+            [50, 57.1], [62.5, 51.4], [75, 42.9], [87.5, 30], [100, 14.3]
         ];
-        positions.forEach(([xPct, yPx], i) => {
+        // Tier 2 positions
+        const tier2 = [
+            [6.25, 61.4], [18.75, 79.3], [31.25, 90], [43.75, 93.6],
+            [56.25, 90.7], [68.75, 83.6], [81.25, 72.9], [93.75, 58.6]
+        ];
+
+        const allPositions = [];
+        tier1.forEach((p, i) => allPositions.push({ x: p[0], y: p[1], tier: 1, idx: i }));
+        tier2.forEach((p, i) => allPositions.push({ x: p[0], y: p[1], tier: 2, idx: i }));
+
+        allPositions.forEach(function (pos, i) {
             const b = document.createElement("span");
             b.className = "bulb " + colors[i % colors.length];
-            b.style.left = xPct + "%";
-            b.style.top = yPx + "px";
-            b.addEventListener("pointerenter", () => {
+            b.style.left = pos.x + "%";
+            b.style.top = pos.y + "%";
+            b.dataset.tier = pos.tier;
+
+            b.addEventListener("pointerenter", function () {
+                if (b.classList.contains("lit")) return;
                 b.classList.add("lit");
-                setTimeout(() => b.classList.remove("lit"), 500);
+                setTimeout(() => b.classList.remove("lit"), 520);
+
+                // small spark at bulb
+                const r = b.getBoundingClientRect();
+                spawnSparksAt(r.left + r.width / 2, r.top + r.height / 2, 4);
             });
+
             garland.appendChild(b);
-            bulbs.push(b);
         });
     }
 
@@ -1371,7 +2132,7 @@ body.loaded .footer { opacity: 1; }
     }
 
     if (shareBtn) {
-        shareBtn.addEventListener("click", async () => {
+        shareBtn.addEventListener("click", async function () {
             const data = {
                 title: "METIZ PROJECT",
                 text: "METIZ PROJECT — наклейки, холсты, реклама",
@@ -1414,75 +2175,57 @@ body.loaded .footer { opacity: 1; }
 
     if (pickupBtn) pickupBtn.addEventListener("click", openModal);
     if (pickupModal) {
-        pickupModal.querySelectorAll("[data-close]").forEach(el => {
+        pickupModal.querySelectorAll("[data-close]").forEach(function (el) {
             el.addEventListener("click", closeModal);
         });
-        document.addEventListener("keydown", e => {
+        document.addEventListener("keydown", function (e) {
             if (e.key === "Escape") closeModal();
         });
     }
 
     /* =====================================================
-       TIMER — countdown to New Year
+       COUNTDOWN
        ===================================================== */
-    const timerText = document.getElementById("timerText");
+    const cdDays = document.getElementById("cdDays");
+    const cdHours = document.getElementById("cdHours");
+    const cdMins = document.getElementById("cdMins");
+    const cdSecs = document.getElementById("cdSecs");
 
-    function pad(n) { return n < 10 ? "0" + n : String(n); }
+    function pad2(n) { return n < 10 ? "0" + n : String(n); }
 
     function updateTimer() {
-        if (!timerText) return;
+        if (!cdDays) return;
         const now = new Date();
         let target = new Date(now.getFullYear() + 1, 0, 1, 0, 0, 0);
-        if (target - now < 0) {
-            target = new Date(now.getFullYear() + 2, 0, 1, 0, 0, 0);
-        }
+        if (target - now < 0) target = new Date(now.getFullYear() + 2, 0, 1, 0, 0, 0);
         const diff = target - now;
         const d = Math.floor(diff / 86400000);
         const h = Math.floor(diff / 3600000) % 24;
         const m = Math.floor(diff / 60000) % 60;
         const s = Math.floor(diff / 1000) % 60;
-        timerText.textContent = d + "д " + pad(h) + ":" + pad(m) + ":" + pad(s);
+        cdDays.textContent = pad2(d);
+        cdHours.textContent = pad2(h);
+        cdMins.textContent = pad2(m);
+        cdSecs.textContent = pad2(s);
     }
 
     updateTimer();
     setInterval(updateTimer, 1000);
 
     /* =====================================================
-       MAGNETIC BUTTONS
-       ===================================================== */
-    if (!reduceMotion && window.matchMedia("(pointer:fine)").matches) {
-        document.querySelectorAll(".magnetic").forEach(btn => {
-            btn.addEventListener("pointermove", e => {
-                const r = btn.getBoundingClientRect();
-                const x = e.clientX - r.left;
-                const y = e.clientY - r.top;
-                btn.style.setProperty("--mx", x + "px");
-                btn.style.setProperty("--my", y + "px");
-                const moveX = (x - r.width / 2) * 0.035;
-                const moveY = (y - r.height / 2) * 0.035;
-                btn.style.transform =
-                    `translate(${moveX}px, ${moveY}px) translateY(-2px)`;
-            });
-            btn.addEventListener("pointerleave", () => {
-                btn.style.transform = "";
-            });
-        });
-    }
-
-    /* =====================================================
-       SPARKS on button hover
+       MAGNETIC BUTTONS + SPARKS
        ===================================================== */
     const sparkLayer = document.getElementById("sparkLayer");
     let lastHover = 0;
 
-    function spawnSparks(x, y, count) {
+    function spawnSparksAt(x, y, count) {
         if (!sparkLayer || reduceMotion) return;
         for (let i = 0; i < count; i++) {
             const s = document.createElement("span");
             const isGold = Math.random() < 0.45;
             s.className = "spark " + (isGold ? "g" : "t");
             const angle = Math.random() * Math.PI * 2;
-            const dist = 14 + Math.random() * 42;
+            const dist = 14 + Math.random() * 46;
             const size = 3 + Math.random() * 3;
             s.style.left = x + "px";
             s.style.top = y + "px";
@@ -1492,33 +2235,89 @@ body.loaded .footer { opacity: 1; }
             s.style.setProperty("--dy", (Math.sin(angle) * dist - 12).toFixed(1) + "px");
             s.style.animationDuration = (0.7 + Math.random() * 0.5).toFixed(2) + "s";
             sparkLayer.appendChild(s);
-            s.addEventListener("animationend", () => s.remove());
+            s.addEventListener("animationend", function () { s.remove(); });
         }
     }
 
     if (!reduceMotion && window.matchMedia("(pointer:fine)").matches) {
-        document.querySelectorAll(".btn").forEach(btn => {
-            btn.addEventListener("pointerenter", e => {
+        document.querySelectorAll(".magnetic").forEach(function (btn) {
+            btn.addEventListener("pointermove", function (e) {
+                const r = btn.getBoundingClientRect();
+                const x = e.clientX - r.left;
+                const y = e.clientY - r.top;
+                btn.style.setProperty("--mx", x + "px");
+                btn.style.setProperty("--my", y + "px");
+                const moveX = (x - r.width / 2) * 0.035;
+                const moveY = (y - r.height / 2) * 0.035;
+                btn.style.transform = "translate(" + moveX + "px, " + moveY + "px) translateY(-2px)";
+            });
+            btn.addEventListener("pointerleave", function () {
+                btn.style.transform = "";
+            });
+
+            btn.addEventListener("pointerenter", function (e) {
                 const now = Date.now();
-                if (now - lastHover < 120) return;
+                if (now - lastHover < 130) return;
                 lastHover = now;
                 const r = btn.getBoundingClientRect();
-                spawnSparks(
-                    r.left + Math.random() * r.width,
-                    r.top + 6,
-                    7
-                );
+                spawnSparksAt(r.left + Math.random() * r.width, r.top + 6, 8);
             });
         });
     }
 
     /* =====================================================
-       SNOW CANVAS — multi-layer with parallax
+       GIFT SURPRISE
+       ===================================================== */
+    const giftBox = document.getElementById("giftBox");
+    const giftSurprise = document.getElementById("giftSurprise");
+    const giftPromo = document.getElementById("giftPromo");
+    const giftHint = document.getElementById("giftHint");
+    let giftClicks = 0;
+
+    if (giftBox) {
+        giftBox.addEventListener("click", function () {
+            if (giftSurprise.classList.contains("revealed")) return;
+
+            giftClicks++;
+
+            giftBox.classList.add("shake");
+            setTimeout(() => giftBox.classList.remove("shake"), 500);
+
+            const r = giftBox.getBoundingClientRect();
+            burst(r.left + r.width / 2, r.top + r.height / 2, 16);
+            spawnSparksAt(r.left + r.width / 2, r.top + r.height / 2, 10);
+
+            if (giftClicks === 1) giftHint.textContent = "Ещё 2 клика...";
+            if (giftClicks === 2) giftHint.textContent = "Ещё 1 клик!";
+            if (giftClicks >= 3) giftHint.textContent = "Открываем...";
+
+            if (giftClicks >= 3) {
+                setTimeout(function () {
+                    giftSurprise.classList.add("revealed");
+                    giftPromo.classList.add("show");
+                    giftPromo.setAttribute("aria-hidden", "false");
+
+                    // BIG celebration fireworks
+                    const rr = giftSurprise.getBoundingClientRect();
+                    const cx = rr.left + rr.width / 2;
+                    const cy = rr.top + rr.height / 2;
+                    burst(cx, cy, 70);
+                    setTimeout(() => burst(cx - 60, cy - 20, 40), 120);
+                    setTimeout(() => burst(cx + 60, cy - 20, 40), 240);
+                    setTimeout(() => burst(cx, cy - 50, 50), 360);
+                    spawnSparksAt(cx, cy, 24);
+                }, 350);
+            }
+        });
+    }
+
+    /* =====================================================
+       SNOW CANVAS (multi-layer with parallax)
        ===================================================== */
     const snowCanvas = document.getElementById("snow");
 
     if (snowCanvas && !reduceMotion) {
-        const ctx = snowCanvas.getContext("2d");
+        const sctx = snowCanvas.getContext("2d");
         let W = 0, H = 0, DPR = 1;
         let flakes = [];
         let mouseX = -9999, mouseY = -9999;
@@ -1537,14 +2336,13 @@ body.loaded .footer { opacity: 1; }
             snowCanvas.height = Math.floor(H * DPR);
             snowCanvas.style.width = W + "px";
             snowCanvas.style.height = H + "px";
-            ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+            sctx.setTransform(DPR, 0, 0, DPR, 0, 0);
             build();
         }
 
         function build() {
             flakes = [];
             const base = Math.round(Math.min(240, Math.max(70, (W * H) / 11000)));
-
             const small = Math.round(base * 0.55);
             const mid = Math.round(base * 0.32);
             const bokeh = Math.round(base * 0.10);
@@ -1553,74 +2351,58 @@ body.loaded .footer { opacity: 1; }
             for (let i = 0; i < small; i++) {
                 flakes.push({
                     kind: "dot",
-                    x: Math.random() * W,
-                    y: Math.random() * H,
-                    r: rand(0.5, 1.3),
-                    a: rand(0.25, 0.55),
-                    vy: rand(0.15, 0.4),
-                    vx: rand(-0.08, 0.08),
-                    sway: rand(0.2, 0.6),
-                    phase: Math.random() * Math.PI * 2,
+                    x: Math.random() * W, y: Math.random() * H,
+                    r: rand(0.5, 1.3), a: rand(0.25, 0.55),
+                    vy: rand(0.15, 0.4), vx: rand(-0.08, 0.08),
+                    sway: rand(0.2, 0.6), phase: Math.random() * Math.PI * 2,
                     depth: 0.15
                 });
             }
             for (let i = 0; i < mid; i++) {
                 flakes.push({
                     kind: "dot",
-                    x: Math.random() * W,
-                    y: Math.random() * H,
-                    r: rand(1.3, 2.4),
-                    a: rand(0.4, 0.75),
-                    vy: rand(0.4, 0.85),
-                    vx: rand(-0.12, 0.12),
-                    sway: rand(0.4, 0.9),
-                    phase: Math.random() * Math.PI * 2,
+                    x: Math.random() * W, y: Math.random() * H,
+                    r: rand(1.3, 2.4), a: rand(0.4, 0.75),
+                    vy: rand(0.4, 0.85), vx: rand(-0.12, 0.12),
+                    sway: rand(0.4, 0.9), phase: Math.random() * Math.PI * 2,
                     depth: 0.4
                 });
             }
             for (let i = 0; i < bokeh; i++) {
                 flakes.push({
                     kind: "bokeh",
-                    x: Math.random() * W,
-                    y: Math.random() * H,
-                    r: rand(4, 9),
-                    a: rand(0.08, 0.18),
-                    vy: rand(0.15, 0.35),
-                    vx: rand(-0.1, 0.1),
-                    sway: rand(0.5, 1.1),
-                    phase: Math.random() * Math.PI * 2,
+                    x: Math.random() * W, y: Math.random() * H,
+                    r: rand(4, 9), a: rand(0.08, 0.18),
+                    vy: rand(0.15, 0.35), vx: rand(-0.1, 0.1),
+                    sway: rand(0.5, 1.1), phase: Math.random() * Math.PI * 2,
                     depth: 0.85
                 });
             }
             for (let i = 0; i < gold; i++) {
                 flakes.push({
                     kind: "gold",
-                    x: Math.random() * W,
-                    y: Math.random() * H,
-                    r: rand(1.2, 2.2),
-                    a: rand(0.35, 0.6),
-                    vy: rand(0.15, 0.4),
-                    vx: rand(-0.1, 0.1),
-                    sway: rand(0.4, 0.9),
-                    phase: Math.random() * Math.PI * 2,
+                    x: Math.random() * W, y: Math.random() * H,
+                    r: rand(1.2, 2.2), a: rand(0.35, 0.6),
+                    vy: rand(0.15, 0.4), vx: rand(-0.1, 0.1),
+                    sway: rand(0.4, 0.9), phase: Math.random() * Math.PI * 2,
                     depth: 0.25
                 });
             }
         }
 
         function draw() {
-            ctx.clearRect(0, 0, W, H);
+            sctx.clearRect(0, 0, W, H);
             time += 0.016;
             wind *= 0.94;
 
             const offsetX = (mouseX - W / 2) * 0.03;
             const offsetY = (mouseY - H / 2) * 0.02 - scrollY * 0.02;
 
-            for (const f of flakes) {
+            for (let i = 0; i < flakes.length; i++) {
+                const f = flakes[i];
                 f.y += f.vy;
                 f.x += f.vx + Math.sin(time * f.sway + f.phase) * 0.3 + wind * 0.5;
 
-                // mouse repel
                 const dx = f.x - mouseX;
                 const dy = f.y - mouseY;
                 const d2 = dx * dx + dy * dy;
@@ -1643,41 +2425,41 @@ body.loaded .footer { opacity: 1; }
 
                 if (f.kind === "dot") {
                     if (f.r > 1.5) {
-                        const g = ctx.createRadialGradient(px, py, 0, px, py, f.r * 3.2);
+                        const g = sctx.createRadialGradient(px, py, 0, px, py, f.r * 3.2);
                         g.addColorStop(0, "rgba(255,255,255," + (f.a * 0.3) + ")");
                         g.addColorStop(1, "rgba(255,255,255,0)");
-                        ctx.fillStyle = g;
-                        ctx.beginPath();
-                        ctx.arc(px, py, f.r * 3.2, 0, Math.PI * 2);
-                        ctx.fill();
+                        sctx.fillStyle = g;
+                        sctx.beginPath();
+                        sctx.arc(px, py, f.r * 3.2, 0, Math.PI * 2);
+                        sctx.fill();
                     }
-                    ctx.beginPath();
-                    ctx.arc(px, py, f.r, 0, Math.PI * 2);
-                    ctx.fillStyle = "rgba(255,255,255," + f.a + ")";
-                    ctx.fill();
+                    sctx.beginPath();
+                    sctx.arc(px, py, f.r, 0, Math.PI * 2);
+                    sctx.fillStyle = "rgba(255,255,255," + f.a + ")";
+                    sctx.fill();
                 } else if (f.kind === "bokeh") {
-                    const g = ctx.createRadialGradient(px, py, 0, px, py, f.r);
+                    const g = sctx.createRadialGradient(px, py, 0, px, py, f.r);
                     g.addColorStop(0, "rgba(180,250,255," + (f.a * 1.5) + ")");
                     g.addColorStop(0.6, "rgba(150,235,240," + (f.a * 0.5) + ")");
                     g.addColorStop(1, "rgba(120,220,230,0)");
-                    ctx.fillStyle = g;
-                    ctx.beginPath();
-                    ctx.arc(px, py, f.r, 0, Math.PI * 2);
-                    ctx.fill();
+                    sctx.fillStyle = g;
+                    sctx.beginPath();
+                    sctx.arc(px, py, f.r, 0, Math.PI * 2);
+                    sctx.fill();
                 } else if (f.kind === "gold") {
                     const tw = Math.sin(time * 2 + f.phase) * 0.3 + 0.7;
-                    const g = ctx.createRadialGradient(px, py, 0, px, py, f.r * 4);
+                    const g = sctx.createRadialGradient(px, py, 0, px, py, f.r * 4);
                     g.addColorStop(0, "rgba(255,235,160," + (f.a * 0.7 * tw) + ")");
                     g.addColorStop(0.5, "rgba(255,210,100," + (f.a * 0.2 * tw) + ")");
                     g.addColorStop(1, "rgba(255,200,80,0)");
-                    ctx.fillStyle = g;
-                    ctx.beginPath();
-                    ctx.arc(px, py, f.r * 4, 0, Math.PI * 2);
-                    ctx.fill();
-                    ctx.beginPath();
-                    ctx.arc(px, py, f.r, 0, Math.PI * 2);
-                    ctx.fillStyle = "rgba(255,246,208," + (f.a * tw) + ")";
-                    ctx.fill();
+                    sctx.fillStyle = g;
+                    sctx.beginPath();
+                    sctx.arc(px, py, f.r * 4, 0, Math.PI * 2);
+                    sctx.fill();
+                    sctx.beginPath();
+                    sctx.arc(px, py, f.r, 0, Math.PI * 2);
+                    sctx.fillStyle = "rgba(255,246,208," + (f.a * tw) + ")";
+                    sctx.fill();
                 }
             }
 
@@ -1685,24 +2467,23 @@ body.loaded .footer { opacity: 1; }
         }
 
         window.addEventListener("resize", resize, { passive: true });
-        window.addEventListener("pointermove", e => {
+        window.addEventListener("pointermove", function (e) {
             mouseX = e.clientX;
             mouseY = e.clientY;
         }, { passive: true });
-        document.addEventListener("pointerleave", () => {
+        document.addEventListener("pointerleave", function () {
             mouseX = -9999;
             mouseY = -9999;
         }, { passive: true });
-        window.addEventListener("scroll", () => {
+        window.addEventListener("scroll", function () {
             const s = window.scrollY || 0;
             wind += Math.max(-2, Math.min(2, (s - lastScroll) * 0.04));
             scrollY = s;
             lastScroll = s;
         }, { passive: true });
 
-        // Device orientation parallax (mobile)
         if (window.matchMedia("(pointer:coarse)").matches) {
-            window.addEventListener("deviceorientation", e => {
+            window.addEventListener("deviceorientation", function (e) {
                 if (e.gamma === null || e.beta === null) return;
                 mouseX = W / 2 + (e.gamma / 25) * (W / 2);
                 mouseY = H / 2 + ((e.beta - 45) / 25) * (H / 2);
@@ -1711,117 +2492,6 @@ body.loaded .footer { opacity: 1; }
 
         resize();
         requestAnimationFrame(draw);
-    }
-
-    /* =====================================================
-       FIREWORKS on empty click
-       ===================================================== */
-    const fxCanvas = document.getElementById("fx");
-
-    if (fxCanvas && !reduceMotion) {
-        const fxCtx = fxCanvas.getContext("2d");
-        let fw = 0, fh = 0, fdpr = 1;
-        let particles = [];
-        let running = false;
-
-        function fxResize() {
-            fw = window.innerWidth;
-            fh = window.innerHeight;
-            fdpr = Math.min(window.devicePixelRatio || 1, 2);
-            fxCanvas.width = Math.floor(fw * fdpr);
-            fxCanvas.height = Math.floor(fh * fdpr);
-            fxCanvas.style.width = fw + "px";
-            fxCanvas.style.height = fh + "px";
-            fxCtx.setTransform(fdpr, 0, 0, fdpr, 0, 0);
-        }
-
-        function burst(x, y) {
-            const palette = [
-                { r: 76, g: 213, b: 211 },   // tiffany
-                { r: 255, g: 217, b: 112 },  // gold
-                { r: 255, g: 255, b: 255 },  // white
-                { r: 120, g: 255, b: 250 },  // mint
-            ];
-            const count = 34 + Math.floor(Math.random() * 18);
-            for (let i = 0; i < count; i++) {
-                const angle = Math.random() * Math.PI * 2;
-                const speed = 1.6 + Math.random() * 4.2;
-                const c = palette[Math.floor(Math.random() * palette.length)];
-                particles.push({
-                    x, y,
-                    vx: Math.cos(angle) * speed,
-                    vy: Math.sin(angle) * speed - 0.6,
-                    r: 1.3 + Math.random() * 2.2,
-                    life: 1,
-                    decay: 0.008 + Math.random() * 0.01,
-                    color: c
-                });
-            }
-            if (!running) {
-                running = true;
-                requestAnimationFrame(fxLoop);
-            }
-        }
-
-        function fxLoop() {
-            fxCtx.clearRect(0, 0, fw, fh);
-            fxCtx.globalCompositeOperation = "lighter";
-
-            for (let i = particles.length - 1; i >= 0; i--) {
-                const p = particles[i];
-                p.x += p.vx;
-                p.y += p.vy;
-                p.vx *= 0.975;
-                p.vy *= 0.975;
-                p.vy += 0.045;
-                p.life -= p.decay;
-
-                if (p.life <= 0) {
-                    particles.splice(i, 1);
-                    continue;
-                }
-
-                const alpha = p.life;
-                const col = `rgba(${p.color.r},${p.color.g},${p.color.b},${alpha})`;
-
-                // glow halo
-                const g = fxCtx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 4);
-                g.addColorStop(0, `rgba(${p.color.r},${p.color.g},${p.color.b},${alpha * 0.5})`);
-                g.addColorStop(1, `rgba(${p.color.r},${p.color.g},${p.color.b},0)`);
-                fxCtx.fillStyle = g;
-                fxCtx.beginPath();
-                fxCtx.arc(p.x, p.y, p.r * 4, 0, Math.PI * 2);
-                fxCtx.fill();
-
-                // core
-                fxCtx.fillStyle = col;
-                fxCtx.beginPath();
-                fxCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-                fxCtx.fill();
-            }
-
-            fxCtx.globalCompositeOperation = "source-over";
-
-            if (particles.length > 0) {
-                requestAnimationFrame(fxLoop);
-            } else {
-                running = false;
-            }
-        }
-
-        // Click on empty area triggers fireworks
-        document.addEventListener("pointerdown", e => {
-            // ignore interactive elements
-            if (e.target.closest("a, button, input, textarea, select, .modal, .garland .bulb")) return;
-            if (e.target === fxCanvas || e.target === snowCanvas) {
-                burst(e.clientX, e.clientY);
-            } else {
-                burst(e.clientX, e.clientY);
-            }
-        }, { passive: true });
-
-        window.addEventListener("resize", fxResize, { passive: true });
-        fxResize();
     }
 
 })();
